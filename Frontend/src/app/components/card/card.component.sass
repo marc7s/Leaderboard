@@ -1,0 +1,64 @@
+.card 
+    all: unset
+    border-radius: 4px
+    border: 1px solid #eee
+    background-color: #fafafa
+    margin: 5px 8px 0
+    padding: 6px 14px
+    transition: all 0.2s ease-in-out
+    cursor: pointer
+    color: black
+    display: table
+    .cardContainer
+        display: flex
+        flex-direction: row
+        justify-content: center
+        align-items: center
+        height: 100%
+
+.x-small
+    height: 15px
+    width: 70px
+
+.small
+    height: 15px
+    width: 90px
+
+.medium
+    height: 30px
+    width: 150px
+    
+.large
+    height: 40px
+    width: 200px
+
+.textContent
+    margin: 5px
+    white-space: nowrap
+
+.card:not(:last-child)
+    margin-right: 0
+
+.card:hover
+    transform: translateY(-3px)
+    box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35)
+
+.card.selected
+    background-color: var(--main-green)
+    color: white
+
+a,
+a:visited,
+a:hover
+    color: #1976d2
+    text-decoration: none
+
+.card:hover
+    background-color: var(--main-blue-lighter)
+    color: white
+
+/* Responsive Styles */
+@media screen and (max-width: 767px)
+    .card
+      height: 20px
+      margin: 8px 8px

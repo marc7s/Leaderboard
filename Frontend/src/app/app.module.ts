@@ -19,6 +19,9 @@ import { UserComponent } from './pages/user/user.component';
 import { LeaderboardEntryComponent } from './components/leaderboard-entry/leaderboard-entry.component';
 import { LeaderboardComponent } from './components/leaderboard/leaderboard.component';
 import { TimePipe } from './time.pipe';
+import { CardComponent } from './components/card/card.component';
+import { IconPipe } from './icon.pipe';
+import { IconComponent } from './components/icon/icon.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,10 @@ import { TimePipe } from './time.pipe';
     UserComponent,
     LeaderboardEntryComponent,
     LeaderboardComponent,
-    TimePipe
+    TimePipe,
+    CardComponent,
+    IconPipe,
+    IconComponent
   ],
   imports: [
     BrowserModule,

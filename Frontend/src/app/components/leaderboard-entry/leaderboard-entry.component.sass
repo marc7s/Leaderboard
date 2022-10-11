@@ -1,14 +1,28 @@
 .entry
     display: flex
     flex-direction: row
-    justify-content: space-between
+    justify-content: flex-start
     background-color: #808080
     color: white
     padding: 0.3rem
     margin: 0.3rem 0
     width: 100%
+
+    .timeContainer
+        display: flex
+        flex-direction: row
+        margin-left: auto
     
     #time
         margin: 0 0.5rem
     #position
         width: 2rem
+
+    #valid
+        min-width: 2rem
+        min-height: 1.2rem
+    #valid.invalid
+        background-image: url("/assets/BlackAndWhiteFlag.png")
+        background-size: contain
+        background-position: center
+        background-repeat: no-repeat

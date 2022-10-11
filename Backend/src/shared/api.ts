@@ -129,5 +129,6 @@ export interface DBTime {
     Username: string,
     ConfigID: number,
     Valid: boolean,
+    Weather: string,
     AddedAt: Date
 }

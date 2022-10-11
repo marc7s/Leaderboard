@@ -1,3 +1,12 @@
-<div class="container">
-    <app-leaderboard-entry *ngFor="let time of times; let i = index" [time]="time" [position]="i + 1"></app-leaderboard-entry>
+<div class="splits" *ngIf="splitSettings.length > 0">
+    <div id="splitBy">Split by</div>
+    <app-card *ngIf="includes(ValidSplit)" [selected]="ValidSplitSetting.selected" (click)="splitBy(ValidSplit)">Valid</app-card>
+    <app-card *ngIf="includes(WeatherSplit)" [selected]="WeatherSplitSetting.selected" (click)="splitBy(WeatherSplit)">Weather</app-card>
 </div>
+<div class="leaderboards">
+    <div class="leaderboard" *ngFor="let leaderboard of leaderboards">
+        <div class="title">{{leaderboard.name == '' ? 'Leaderboard' : leaderboard.name}}</div>
+        <app-leaderboard-entry *ngFor="let time of leaderboard.times; let i = index" [time]="time" [position]="i + 1"></app-leaderboard-entry>
+    </div>
+</div>
+

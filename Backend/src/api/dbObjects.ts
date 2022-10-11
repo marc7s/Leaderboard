@@ -52,5 +52,6 @@ export const _TIME_: DBTime = {
     Username: '',
     ConfigID: -1,
     Valid: false,
+    Weather: '',
     AddedAt: new Date()
 }

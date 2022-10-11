@@ -4,6 +4,7 @@ import { Track } from '@shared/api';
 import { TimeSummary } from '@shared/dataStructures';
 import { ApiService } from 'src/app/api.service';
 import { Color, FerrariRed } from 'src/app/color';
+import { Split } from 'src/Split';
 import { Size } from 'src/styleSettings';
 
 @Component({
@@ -18,12 +19,11 @@ export class TrackComponent implements OnInit {
 
   track: Track | null = null;
   times: TimeSummary[] = [];
+  splits: Split[] = [Split.Weather, Split.Valid];
 
   constructor(private route: ActivatedRoute, private api: ApiService) {
     this.route.params.subscribe(params => {
-      console.log(params);
       this.api.getTrackSummary(params.shortName).subscribe(summary => {
-        console.log(summary);
         this.track = summary.track;
         this.times = summary.times;
       });

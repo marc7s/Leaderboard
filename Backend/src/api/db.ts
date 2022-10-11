@@ -358,7 +358,9 @@ function dbToTimeSummary(dbTime: DBTime): TimeSummary {
         id: dbTime.ID,
         time: dbTime.Time,
         millis: dbTime.Millis,
-        username: dbTime.Username
+        username: dbTime.Username,
+        weather: dbTime.Weather,
+        valid: dbTime.Valid
     }
 }
 

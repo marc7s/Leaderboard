@@ -1,0 +1,17 @@
+<a *ngIf="href; else noLink" class="['card', size]" [class.selected]="selected" target="_blank" href={{href}} [style.background]="getColor()">
+    <ng-container *ngTemplateOutlet="content"></ng-container>
+</a>
+
+<ng-template #noLink>
+    <div [class]="['card', size]" [class.selected]="selected" [style.background]="getColor()">
+        <ng-container *ngTemplateOutlet="content"></ng-container>
+    </div>
+</ng-template>
+
+<ng-template #content>
+    <div class="cardContainer">
+        <app-icon *ngIf="iconBefore" [icon]="iconBefore" class="iconBefore"></app-icon>
+        <span class="textContent"><ng-content></ng-content></span>
+        <app-icon *ngIf="iconAfter" [icon]="iconAfter" class="iconAfter"></app-icon>
+    </div>
+</ng-template>
