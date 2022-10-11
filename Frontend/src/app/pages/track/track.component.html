@@ -1,0 +1,13 @@
+<ng-container *ngIf="track; else default">
+    <app-highlight [size]="Large" [color]="FerrariRed">
+        <div class="trackInfo">
+            <div id="name">{{track.shortName}}</div>
+            <div>{{track.country.shortName}}</div>
+        </div>
+    </app-highlight>
+    <app-leaderboard [times]="times"></app-leaderboard>
+</ng-container>
+
+<ng-template #default>
+    <app-highlight>N/A</app-highlight>
+</ng-template>
