@@ -4,7 +4,7 @@ import { Track } from '@shared/api';
 import { TimeSummary } from '@shared/dataStructures';
 import { ApiService } from 'src/app/api.service';
 import { Color, FerrariRed } from 'src/app/color';
-import { Split } from 'src/Split';
+import { Split } from 'src/split';
 import { Size } from 'src/styleSettings';
 
 @Component({
@@ -28,7 +28,7 @@ export class TrackComponent implements OnInit {
         this.times = summary.times;
       });
     });
-   }
+  }
 
   ngOnInit(): void {
   }

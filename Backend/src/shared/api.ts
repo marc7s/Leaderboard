@@ -3,13 +3,13 @@ export interface Token {
     expires: number
 }
 
-export interface User {
-    username: string
-}
-
 export interface Login {
     username: string,
     password: string
+}
+
+export interface User {
+    username: string
 }
 
 export interface DBUser {

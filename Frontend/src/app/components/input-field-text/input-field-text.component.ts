@@ -9,6 +9,7 @@ export class InputFieldTextComponent implements OnInit {
 
   @Input() placeholder: string = '';
   @Input() text: string | null = null;
+  @Input() type: string = 'text';
   @Output() textChange = new EventEmitter<string | null>();
 
   constructor() { }

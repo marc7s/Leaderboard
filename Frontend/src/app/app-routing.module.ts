@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthguardService } from './authguard.service';
-import { AddEntryComponent } from './pages/add-entry/add-entry.component';
+import { AddTimeComponent } from './pages/add-time/add-time.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { ErrorComponent } from './pages/error/error.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'user/:username', component: UserComponent },
   { path: '', canActivate: [AuthguardService], children: [
     { path: 'admin', component: AdminComponent },
-    { path: 'add-entry', component: AddEntryComponent }
+    { path: 'add-time', component: AddTimeComponent }
   ]}
 ];
 

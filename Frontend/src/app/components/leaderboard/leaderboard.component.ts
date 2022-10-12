@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { Leaderboard, Pair, TimeSummary } from '@shared/dataStructures';
-import { Split, SplitSetting } from 'src/Split';
+import { Split, SplitSetting } from 'src/split';
 
 @Component({
   selector: 'app-leaderboard',

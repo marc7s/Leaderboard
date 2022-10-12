@@ -37,14 +37,18 @@ router.get('/me', authenticateToken, (req: any, res: Response) => {
     res.json(user);
 });
 
-router.get('/get-user-times', /*authenticateToken*/usernameParam, (req: any, res: Response, next: NextFunction) => {
+router.get('/get-user-times', usernameParam, (req: any, res: Response, next: NextFunction) => {
     const user: User = req.user;
     getUserTimes(user).then(times => res.json(times)).catch(next);
 });
 
-router.get('/get-track-summary', /*authenticateToken*/shortNameParam, (req: any, res: Response, next: NextFunction) => {
+router.get('/get-track-summary', shortNameParam, (req: any, res: Response, next: NextFunction) => {
     const shortName: string = req.query.shortName;
     getTrackSummary(shortName).then(summary => res.json(summary)).catch(next);
+});
+
+router.get('/get-tracks', (req: any, res: Response, next: NextFunction) => {
+    getTracks().then(tracks => res.json(tracks)).catch(next);
 });
 
 router.post('/add-time', /*authenticateToken,*/ usernameParam, timeParam, async (req: any, res: Response, next: NextFunction) => {
@@ -120,13 +124,35 @@ async function getTrackTimes(track: Track): Promise<TimeSummary[]> {
     });
 }
 
+async function getTracks(): Promise<Track[]> {
+    return new Promise((resolve, reject) => {
+        let tracks: Track[] = [];
+        const query = "SELECT * FROM GetTracks()";
+        const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
+            if(err) reject(err);
+        });
+        getDBConnection()
+        .then(conn => {
+            conn.execSql(req);
+            req.on('row', cols => {
+                let data: any = {};
+                cols.map(col => { data[col.metadata.colName] = col.value });
+                const dbTrack: DBTrack = parseIntoInterface(data, _TRACK_);
+                const dbCountry: DBCountry = parseIntoInterface(data, _COUNTRY_, 'Country');
+                tracks.push(dbToTrack(dbTrack, dbCountry));
+            });
+            req.on('requestCompleted', () => { resolve(tracks) });
+        })
+        .catch(reject);
+    });
+}
+
 async function getTrackSummary(shortName: string): Promise<TrackSummary> {
     return new Promise(async (resolve, reject) => {
         let track: Track | null = await getTrackFromShortName(shortName);
         if(track == null) 
             return reject(new Error("Track not found"));
 
-        console.log(track);
         let times: TimeSummary[] = await getTrackTimes(track);
         resolve({
             track: track,

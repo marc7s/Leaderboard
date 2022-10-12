@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, from, Observable, of, Subject } from 'rxjs';
-import { Token,  User } from '@shared/api';
+import { Token,  Track,  User } from '@shared/api';
 import { finalize } from 'rxjs/operators';
 import { Time } from '@shared/api';
 import { TimeSummary, TrackSummary } from '@shared/dataStructures';
@@ -120,6 +120,14 @@ export class ApiService {
       relativePath: 'db/get-track-summary',
       waitFor: true,
       params: reqParams
+    };
+    return this.get(config);
+  }
+
+  getTracks(): Observable<Track[]> {
+    const config = {
+      relativePath: 'db/get-tracks',
+      waitFor: true
     };
     return this.get(config);
   }
