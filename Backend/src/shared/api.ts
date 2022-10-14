@@ -99,6 +99,7 @@ export interface Config {
     track: Track,
     car: Car,
     weather: Weather,
+    tyre: Tyre,
     customSetup: boolean
 }
 
@@ -109,6 +110,7 @@ export interface DBConfig {
     TrackID: number,
     CarID: number,
     WeatherID: number,
+    TyreID: number,
     CustomSetup: boolean,
     AddedAt: Date
 }

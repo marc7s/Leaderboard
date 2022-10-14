@@ -1,16 +1,26 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'mat-override'
+    
 :root
     --main-green: rgb(73, 130, 1)
+    --main-dark: #595959
+    --main-light-grey: #c9c9c9
     --main-green-lighter: #186903c0
-    --main-blue-lighter: rgb(116, 163, 237)
+    --main-blue: rgb(83, 133, 214)
+    --main-blue-lighter: rgb(151, 189, 250)
     --main-font: "F1 Regular", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"
     --main-font-bold: "F1 Bold", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"
     --main-font-wide: "F1 Wide", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"
     --main-font-black: "F1 Black", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"
+    --time-font: "Time", "Courier", monospace
     --input-font-size: 2rem
 
 body
-    font-family: var(--main-font)
+    background-color: #202020
+    color: white
+
+@font-face
+    font-family: "Time"
+    src: "Courier", monospace
 
 @font-face
     font-family: "F1 Black"

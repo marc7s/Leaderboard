@@ -15,7 +15,7 @@ export class TimePipe implements PipeTransform {
   }
 
   padM(num: number) {
-    return num.toString().padEnd(3, '0');
+    return num.toString().padStart(3, '0');
   }
 
 }

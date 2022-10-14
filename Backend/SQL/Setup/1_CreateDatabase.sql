@@ -65,6 +65,7 @@ CREATE TABLE Configs(
     TrackID int FOREIGN KEY REFERENCES Tracks(ID),
     CarID int FOREIGN KEY REFERENCES Cars(ID),
     WeatherID int FOREIGN KEY REFERENCES Weathers(ID),
+    TyreID int FOREIGN KEY REFERENCES Tyres(ID),
     CustomSetup bit NOT NULL,
     AddedAt datetime NOT NULL DEFAULT GETDATE()
 );

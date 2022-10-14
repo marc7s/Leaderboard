@@ -1,4 +1,8 @@
-import { DBCar, DBConfig, DBGame, DBTime, DBTrack } from "@shared/api";
+import { DBCar, DBConfig, DBGame, DBTime, DBTrack, DBTyre, DBUser, DBWeather } from "@shared/api";
+
+export const _USER_: DBUser = {
+    Username: ''
+}
 
 export const _CONFIG_: DBConfig = {
     ID: -1,
@@ -7,6 +11,7 @@ export const _CONFIG_: DBConfig = {
     TrackID: -1,
     CarID: -1,
     WeatherID: -1,
+    TyreID: -1,
     CustomSetup: false,
     AddedAt: new Date()
 }
@@ -32,9 +37,16 @@ export const _CAR_: DBCar = {
     AddedAt: new Date()
 }
 
-export const _WEATHER_ = {
+export const _WEATHER_: DBWeather = {
     ID: -1,
     Name: '',
+    AddedAt: new Date()
+}
+
+export const _TYRE_: DBTyre = {
+    ID: -1,
+    FullName: '',
+    ShortName: '',
     AddedAt: new Date()
 }
 

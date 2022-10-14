@@ -4,6 +4,7 @@ CREATE OR ALTER PROCEDURE AddConfig
     @TrackID int,
     @CarID int,
     @WeatherID int,
+    @TyreID int,
     @CustomSetup bit
 AS
 BEGIN
@@ -41,6 +42,13 @@ BEGIN
     IF @WeatherID IS NULL
     BEGIN
         RAISERROR(N'Weather ID not supplied', 11, 1);
+        RETURN
+    END
+
+    --CHECK TYREID PARAM
+    IF @TyreID IS NULL
+    BEGIN
+        RAISERROR(N'Tyre ID not supplied', 11, 1);
         RETURN
     END
 
@@ -96,7 +104,16 @@ BEGIN
         RETURN
     END
 
+    --CHECK THAT WEATHER EXISTS
+    DECLARE @TyreID_db int
+    SELECT @TyreID_db = ID FROM Tyres WHERE ID = @TyreID
+    IF @TyreID_db IS NULL
+    BEGIN
+        RAISERROR(N'Tyre does not exist', 11, 1);
+        RETURN
+    END
+
     --ALL GOOD, ADD CONFIG
-    INSERT INTO Configs(Description, GameID, TrackID, CarID, WeatherID, CustomSetup) VALUES (@Description, @GameID, @TrackID, @CarID, @WeatherID, @CustomSetup);
+    INSERT INTO Configs(Description, GameID, TrackID, CarID, WeatherID, TyreID, CustomSetup) VALUES (@Description, @GameID, @TrackID, @CarID, @WeatherID, @TyreID, @CustomSetup);
 END
 GO

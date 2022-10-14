@@ -39,13 +39,18 @@
 .card:not(:last-child)
     margin-right: 0
 
-.card:hover
+.card:hover:not(.disabled)
     transform: translateY(-3px)
     box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35)
 
-.card.selected
+.card.selected:not(.disabled)
     background-color: var(--main-green)
     color: white
+
+.card.disabled
+    background-color: var(--main-light-grey)
+    color: white
+    cursor: not-allowed
 
 a,
 a:visited,
@@ -53,8 +58,8 @@ a:hover
     color: #1976d2
     text-decoration: none
 
-.card:hover
-    background-color: var(--main-blue-lighter)
+.card:hover:not(.disabled)
+    background-color: var(--main-blue)
     color: white
 
 /* Responsive Styles */

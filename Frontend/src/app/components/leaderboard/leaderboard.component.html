@@ -5,7 +5,7 @@
 </div>
 <div class="leaderboards">
     <div class="leaderboard" *ngFor="let leaderboard of leaderboards">
-        <div class="title">{{leaderboard.name == '' ? 'Leaderboard' : leaderboard.name}}</div>
+        <div class="title">{{leaderboard.name == '' ? title : leaderboard.name}}</div>
         <app-leaderboard-entry *ngFor="let time of leaderboard.times; let i = index" [time]="time" [position]="i + 1"></app-leaderboard-entry>
     </div>
 </div>

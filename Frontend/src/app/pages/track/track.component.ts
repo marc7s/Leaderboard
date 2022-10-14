@@ -26,6 +26,7 @@ export class TrackComponent implements OnInit {
       this.api.getTrackSummary(params.shortName).subscribe(summary => {
         this.track = summary.track;
         this.times = summary.times;
+        console.log(this.times);
       });
     });
   }

@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, from, Observable, of, Subject } from 'rxjs';
-import { Token,  Track,  User } from '@shared/api';
+import { Config, Game, Token,  Track,  Tyre,  User, Weather } from '@shared/api';
 import { finalize } from 'rxjs/operators';
 import { Time } from '@shared/api';
 import { TimeSummary, TrackSummary } from '@shared/dataStructures';
@@ -124,9 +124,57 @@ export class ApiService {
     return this.get(config);
   }
 
+  getUsers(): Observable<User[]> {
+    const config = {
+      relativePath: 'db/get-users',
+      waitFor: true
+    };
+    return this.get(config);
+  }
+
+  getConfigs(): Observable<Config[]> {
+    const config = {
+      relativePath: 'db/get-configs',
+      waitFor: true
+    };
+    return this.get(config);
+  }
+
+  getGames(): Observable<Game[]> {
+    const config = {
+      relativePath: 'db/get-games',
+      waitFor: true
+    };
+    return this.get(config);
+  }
+
   getTracks(): Observable<Track[]> {
     const config = {
       relativePath: 'db/get-tracks',
+      waitFor: true
+    };
+    return this.get(config);
+  }
+
+  getCars(): Observable<Track[]> {
+    const config = {
+      relativePath: 'db/get-cars',
+      waitFor: true
+    };
+    return this.get(config);
+  }
+
+  getWeathers(): Observable<Weather[]> {
+    const config = {
+      relativePath: 'db/get-weathers',
+      waitFor: true
+    };
+    return this.get(config);
+  }
+
+  getTyres(): Observable<Tyre[]> {
+    const config = {
+      relativePath: 'db/get-tyres',
       waitFor: true
     };
     return this.get(config);

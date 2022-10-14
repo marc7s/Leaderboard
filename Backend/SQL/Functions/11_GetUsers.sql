@@ -1,0 +1,8 @@
+CREATE OR ALTER FUNCTION GetUsers() 
+RETURNS TABLE 
+AS
+RETURN 
+SELECT
+	Username,
+	AddedAt
+FROM Users

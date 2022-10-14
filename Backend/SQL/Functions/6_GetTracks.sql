@@ -10,7 +10,6 @@ SELECT
 	t.AddedAt,
 	c.ID AS CountryCountryID,
 	c.FullName AS CountryFullName,
-	c.ShortName AS CountryShortName,
-	c.AddedAt AS CountryAddedAt
+	c.ShortName AS CountryShortName
 FROM Tracks t
 INNER JOIN Countries c ON t.CountryID = c.ID

@@ -15,6 +15,7 @@ export class CardComponent implements OnInit {
 
   @Input() iconBefore?: Icon;
   @Input() selected?: boolean;
+  @Input() disabled?: boolean;
   @Input() href?: string;
   @Input() iconAfter?: Icon;
 

@@ -1,5 +1,13 @@
-<mat-select [placeholder]="placeholder" class="mat-select-container input" #el (selectionChange)="updateValue(el)">
-    <mat-option *ngFor="let option of options" [value]="option.value">
+<mat-select *ngIf="optionsNumber.length > 0; else string" [placeholder]="placeholder" class="mat-select-container input" #el (selectionChange)="updateValueNumber(el)" [style.width]="width" [ngModel]="valueNumber">
+    <mat-option *ngFor="let option of optionsNumber" [value]="option.value" [style.fontSize]="fontSize">
      {{ option.display }}
     </mat-option>
 </mat-select>
+
+<ng-template #string>
+    <mat-select *ngIf="optionsString.length > 0" [placeholder]="placeholder" class="mat-select-container input" #el (selectionChange)="updateValueString(el)" [style.width]="width" [ngModel]="valueString">
+        <mat-option *ngFor="let option of optionsString" [value]="option.value" [style.fontSize]="fontSize">
+         {{ option.display }}
+        </mat-option>
+    </mat-select>
+</ng-template>

@@ -23,6 +23,7 @@ import { CardComponent } from './components/card/card.component';
 import { IconPipe } from './icon.pipe';
 import { IconComponent } from './components/icon/icon.component';
 import { InputFieldSelectComponent } from './components/input-field-select/input-field-select.component';
+import { InputFieldTimeComponent } from './components/input-field-time/input-field-time.component';
 
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
@@ -30,6 +31,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 
 const materialModules = [
   MatAutocompleteModule,
@@ -59,14 +61,16 @@ const materialModules = [
     CardComponent,
     IconPipe,
     IconComponent,
-    InputFieldSelectComponent
+    InputFieldSelectComponent,
+    InputFieldTimeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ...materialModules,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule
   ],
   providers: [
     {

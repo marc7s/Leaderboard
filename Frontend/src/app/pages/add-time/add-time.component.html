@@ -1,1 +1,93 @@
-<app-input-field-select class="input" placeholder="Track" (optionChange)="updateTrack($event)" [(value)]="trackID" [options]="tracks"></app-input-field-select>
+<div class="configs box">
+    <div class="title">Predefined configs</div>
+    <app-input-field-select 
+        class="input"
+        fontSize="small"
+        width="30rem"
+        placeholder="Config" 
+        (optionNumberChange)="selectConfig()" 
+        [(valueNumber)]="configID" 
+        [optionsNumber]="configOptions">
+    </app-input-field-select>
+    <app-card (click)="clearConfig()" [disabled]="!configID">Clear</app-card>
+</div>
+
+<form class="timeForm box">
+    <div class="title">Config</div>
+
+    <app-input-field-select 
+        class="input" 
+        placeholder="Game" 
+        (optionNumberChange)="update()" 
+        [(valueNumber)]="gameID" 
+        [optionsNumber]="games">
+    </app-input-field-select>
+    
+    <app-input-field-select 
+        class="input" 
+        placeholder="Track" 
+        (optionNumberChange)="update()" 
+        [(valueNumber)]="trackID" 
+        [optionsNumber]="tracks">
+    </app-input-field-select>
+    
+    <app-input-field-select 
+        class="input" 
+        placeholder="Car" 
+        (optionNumberChange)="update()" 
+        [(valueNumber)]="carID" 
+        [optionsNumber]="cars">
+    </app-input-field-select>
+
+    <app-input-field-select 
+        class="input" 
+        placeholder="Weather" 
+        (optionNumberChange)="update()" 
+        [(valueNumber)]="weatherID" 
+        [optionsNumber]="weathers">
+    </app-input-field-select>
+
+    <app-input-field-select 
+        class="input" 
+        placeholder="Tyre" 
+        (optionNumberChange)="update()" 
+        [(valueNumber)]="tyreID" 
+        [optionsNumber]="tyres">
+    </app-input-field-select>
+</form>
+
+<div class="lap box">
+    <div class="title">Time</div>
+
+    <app-input-field-select 
+        class="input" 
+        placeholder="Driver" 
+        (optionStringChange)="update()" 
+        [(valueString)]="username" 
+        [optionsString]="users">
+    </app-input-field-select>
+
+    <app-input-field-time 
+        class="input" 
+        placeholder="Time" 
+        [(time)]="time"
+        (change)="update()">
+    </app-input-field-time>
+
+    <div class="checkboxInputContainer">
+        <div class="checkboxInput">
+            <input type="checkbox" [(ngModel)]="customSetup" name="customSetup" (change)="update()"> Custom Setup
+        </div>
+        <div class="checkboxInput">
+            <input type="checkbox" [(ngModel)]="invalid" name="invalid" (change)="update()"> Invalid Lap Time
+        </div>
+    </div>
+</div>
+
+<div class="submitContainer">
+    <ng-container *ngIf="placeholderTimes.length > 0">
+        <app-leaderboard  [times]="placeholderTimes" title="Time Preview"></app-leaderboard>
+        <app-card (click)="addTime()">Add Time</app-card>
+    </ng-container>
+</div>
+
