@@ -54,6 +54,10 @@
         [(valueNumber)]="tyreID" 
         [optionsNumber]="tyres">
     </app-input-field-select>
+
+    <div class="checkboxInput">
+        <input type="checkbox" [(ngModel)]="customSetup" name="customSetup" (change)="update()"> Custom Setup
+    </div>
 </form>
 
 <div class="lap box">
@@ -76,9 +80,6 @@
 
     <div class="checkboxInputContainer">
         <div class="checkboxInput">
-            <input type="checkbox" [(ngModel)]="customSetup" name="customSetup" (change)="update()"> Custom Setup
-        </div>
-        <div class="checkboxInput">
             <input type="checkbox" [(ngModel)]="invalid" name="invalid" (change)="update()"> Invalid Lap Time
         </div>
     </div>
@@ -91,3 +92,8 @@
     </ng-container>
 </div>
 
+<ng-container *ngIf="lastAddedTime.length > 0">
+    <div class="lastAddedTimeContainer">
+        <app-leaderboard [times]="lastAddedTime" title="Last Added Time"></app-leaderboard>
+    </div>
+</ng-container>

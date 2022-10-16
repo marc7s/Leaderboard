@@ -1,5 +1,5 @@
 CREATE OR ALTER PROCEDURE AddTime
-    @Time Time(3),
+    @Time nvarchar(12),
     @Username nvarchar(255),
     @ConfigID int,
     @Valid bit
@@ -53,7 +53,9 @@ BEGIN
         RETURN
     END
 
+    DECLARE @TimeConverted Time(3)
+    SELECT @TimeConverted = CONVERT(Time(3), @Time)
     --ALL GOOD, ADD TIME
-    INSERT INTO Times(Time, Millis, Username, ConfigID, Valid) VALUES (@Time, DATEDIFF(MILLISECOND, 0, @Time), @Username, @ConfigID, @Valid);
+    INSERT INTO Times(Time, Millis, Username, ConfigID, Valid) VALUES (@TimeConverted, DATEDIFF(MILLISECOND, 0, @TimeConverted), @Username, @ConfigID, @Valid);
 END
 GO

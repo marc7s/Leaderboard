@@ -10,13 +10,6 @@ AS
 BEGIN
     --ERROR HANDLING
 
-    --CHECK DESCRIPTION PARAM
-    IF @Description IS NULL
-    BEGIN
-        RAISERROR(N'Description not supplied', 11, 1);
-        RETURN
-    END
-
     --CHECK GAMEID PARAM
     IF @GameID IS NULL
     BEGIN
@@ -61,7 +54,7 @@ BEGIN
 
     --CHECK THAT DESCRIPTION DOES NOT EXIST
     DECLARE @Description_db nvarchar(255)
-    SELECT @Description_db = Description FROM Configs WHERE Description = @Description
+    SELECT @Description_db = Description FROM Configs WHERE Description = @Description AND Description IS NOT NULL
     IF @Description_db IS NOT NULL
     BEGIN
         RAISERROR(N'Description already exists', 11, 1);
@@ -114,6 +107,11 @@ BEGIN
     END
 
     --ALL GOOD, ADD CONFIG
-    INSERT INTO Configs(Description, GameID, TrackID, CarID, WeatherID, TyreID, CustomSetup) VALUES (@Description, @GameID, @TrackID, @CarID, @WeatherID, @TyreID, @CustomSetup);
+    DECLARE @InsertedTable TABLE(ID int)
+    INSERT INTO Configs(Description, GameID, TrackID, CarID, WeatherID, TyreID, CustomSetup) 
+    OUTPUT INSERTED.ID INTO @InsertedTable
+    VALUES (@Description, @GameID, @TrackID, @CarID, @WeatherID, @TyreID, @CustomSetup);
+
+    SELECT ID FROM @InsertedTable;
 END
 GO

@@ -11,6 +11,9 @@
     align-items: center
     background-color: var(--main-blue-lighter)
 
+.box
+    font-size: large
+
 .timeForm
     @include box
     display: flex
@@ -18,21 +21,18 @@
     justify-content: center
     align-items: center
     
-    .checkboxInputContainer
-        display: flex
-        flex-direction: row
-        justify-content: center
-        .checkboxInput
-            display: flex
-            flex-direction: row
-            justify-content: center
-            align-items: center
-            input
-                margin: 0 0.5rem 0 0.5rem
-                height: 2rem
-                width: 2rem
+.checkboxInput
+    display: flex
+    flex-direction: row
+    justify-content: center
+    align-items: center
+    input
+        height: 2rem
+        width: 2rem
+        margin: 0 0.5rem 0 0.5rem
+        
     
-.box:not(:last-child)
+.box:not(:last-child), .lastAddedTimeContainer
     margin-bottom: 2rem
 
 .lap

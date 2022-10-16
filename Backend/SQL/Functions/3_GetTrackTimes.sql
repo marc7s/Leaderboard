@@ -9,8 +9,9 @@ SELECT
 	t.Username,
 	t.ConfigID,
 	t.Valid,
+	t.AddedAt,
 	w.Name AS Weather,
-	t.AddedAt
+	c.CustomSetup AS ConfigCustomSetup
 FROM Times t
 INNER JOIN Configs c ON t.ConfigID = c.ID
 INNER JOIN Weathers w ON c.WeatherID = w.ID

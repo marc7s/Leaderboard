@@ -14,7 +14,8 @@ SELECT
 	tr.ShortName AS TrackShortName,
 	car.FullName AS CarFullName,
 	car.ShortName AS CarShortName,
-	w.Name AS Weather
+	w.Name AS Weather,
+	c.CustomSetup AS ConfigCustomSetup
 FROM Times t
 INNER JOIN Configs c ON t.ConfigID = c.ID
 INNER JOIN Tracks tr ON c.TrackID = tr.ID

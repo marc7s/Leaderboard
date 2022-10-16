@@ -42,9 +42,12 @@ export class AddTimeComponent implements OnInit {
   @Output() invalidChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   
   placeholderTimes: TimeSummary[] = [];
+  lastAddedTime: TimeSummary[] = [];
 
   update() {
     const parsedTime = this.time ? this.time.substring(3) : null;
+    this.configID = this.findConfig()?.id ?? null;
+
     if(parsedTime?.length == 9 && this.username && this.gameID && this.trackID && this.carID && this.weatherID && this.tyreID) {
       this.placeholderTimes = [
         {
@@ -53,7 +56,8 @@ export class AddTimeComponent implements OnInit {
           millis: 0,
           username: this.username ?? '',
           weather: '',
-          valid: !this.invalid
+          valid: !this.invalid,
+          customSetup: this.customSetup
         }
       ];
     } else {
@@ -61,10 +65,35 @@ export class AddTimeComponent implements OnInit {
     }
   }
 
-  addTime(): void {
-    
-    // Reset invalid for next time
+  async addTime(): Promise<void> {
+    if(this.configID !== null && this.username !== null && this.time !== null) {
+      await this.api.addTimeWithConfig(this.configID, this.username, this.time, !this.invalid).toPromise();
+      this.lastAddedTime = this.placeholderTimes;
+    } else if(this.username !== null && this.gameID !== null && this.trackID !== null && this.carID !== null && this.weatherID !== null && this.tyreID !== null && this.time !== null) {
+      await this.api.addTime(this.username, this.gameID, this.trackID, this.carID, this.weatherID, this.tyreID, this.time, this.customSetup, !this.invalid).toPromise();
+      this.lastAddedTime = this.placeholderTimes;
+    } else {
+      console.error("Could not add time, incorrect parameters");
+      return;
+    }
+    // Reset for next time
+    this.username = null;
+    this.time = null;
     this.invalid = false;
+    
+    // Update the form
+    this.update();
+  }
+
+  findConfig(): Config | undefined {
+    return this.configs.find(c => 
+      c.game.id == this.gameID && 
+      c.track.id == this.trackID && 
+      c.car.id == this.carID && 
+      c.weather.id == this.weatherID && 
+      c.tyre.id == this.tyreID &&
+      c.customSetup == this.customSetup
+    );
   }
 
   selectConfig(): void {
@@ -75,6 +104,7 @@ export class AddTimeComponent implements OnInit {
       this.carID = config.car.id;
       this.weatherID = config.weather.id;
       this.tyreID = config.tyre.id;
+      this.customSetup = config.customSetup;
       this.update();
     }
   }
@@ -86,11 +116,12 @@ export class AddTimeComponent implements OnInit {
     this.carID = null;
     this.weatherID = null;
     this.tyreID = null;
+    this.customSetup = false;
     this.update();
   }
 
   constructor(private api: ApiService) {
-    this.api.getConfigs().subscribe(configs => {
+    this.api.getUserConfigs().subscribe(configs => {
       this.configs = configs;
       this.configOptions = configs.map(c => ({ value: c.id, display: c.description }));
     });

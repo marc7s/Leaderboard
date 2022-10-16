@@ -132,9 +132,9 @@ export class ApiService {
     return this.get(config);
   }
 
-  getConfigs(): Observable<Config[]> {
+  getUserConfigs(): Observable<Config[]> {
     const config = {
-      relativePath: 'db/get-configs',
+      relativePath: 'db/get-user-configs',
       waitFor: true
     };
     return this.get(config);
@@ -187,5 +187,38 @@ export class ApiService {
       headers: this.getAuthHeader(token)
     };
     return this.get(config);
+  }
+
+  addTimeWithConfig(configID: number, username: string, time: string, valid: boolean): Observable<boolean> {
+    const config = {
+      relativePath: 'db/add-time',
+      waitFor: true,
+      payload: {
+        configID: configID,
+        username: username,
+        time: time,
+        valid: valid
+      }
+    };
+    return this.post(config);
+  }
+
+  addTime(username: string, gameID: number, trackID: number, carID: number, weatherID: number, tyreID: number, time: string, customSetup: boolean, valid: boolean): Observable<boolean> {
+    const config = {
+      relativePath: 'db/add-time',
+      waitFor: true,
+      payload: {
+        username: username,
+        gameID: gameID,
+        trackID: trackID,
+        carID: carID,
+        weatherID: weatherID,
+        tyreID: tyreID,
+        time: time,
+        customSetup: customSetup,
+        valid: valid
+      }
+    };
+    return this.post(config);
   }
 }

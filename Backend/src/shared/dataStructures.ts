@@ -6,7 +6,8 @@ export interface TimeSummary {
     millis: number,
     username: string,
     weather: string,
-    valid: boolean
+    valid: boolean,
+    customSetup: boolean
 }
 
 export interface TrackSummary {

@@ -60,7 +60,7 @@ CREATE TABLE Tracks(
 
 CREATE TABLE Configs(
     ID int IDENTITY(1, 1) NOT NULL PRIMARY KEY,
-    Description nvarchar(255) NOT NULL,
+    Description nvarchar(255) DEFAULT NULL,
     GameID int FOREIGN KEY REFERENCES Games(ID),
     TrackID int FOREIGN KEY REFERENCES Tracks(ID),
     CarID int FOREIGN KEY REFERENCES Cars(ID),
