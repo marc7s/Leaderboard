@@ -8,7 +8,9 @@ import { HomeComponent } from './_pages/home/home.component';
 import { LoginComponent } from './_pages/login/login.component';
 import { RecordsComponent } from './_pages/records/records.component';
 import { TrackComponent } from './_pages/track/track.component';
+import { TracksComponent } from './_pages/tracks/tracks.component';
 import { UserComponent } from './_pages/user/user.component';
+import { UsersComponent } from './_pages/users/users.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -16,11 +18,14 @@ const routes: Routes = [
   { path: 'error', component: ErrorComponent },
   { path: 'records', component: RecordsComponent },
   { path: 'track/:shortName', component: TrackComponent },
+  { path: 'tracks', component: TracksComponent },
   { path: 'user/:username', component: UserComponent },
+  { path: 'users', component: UsersComponent },
   { path: '', canActivate: [AuthguardService], children: [
     { path: 'admin', component: AdminComponent },
     { path: 'add-time', component: AddTimeComponent }
-  ]}
+  ]},
+  { path: '**', redirectTo: '', pathMatch: 'full'}
 ];
 
 @NgModule({

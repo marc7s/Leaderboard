@@ -1,4 +1,4 @@
-<a *ngIf="href; else noLink" class="['card', size]" [class.disabled]="disabled" [class.selected]="selected" target="_blank" href={{href}} [style.background]="getColor()">
+<a *ngIf="href; else noLink" [class]="['card', size]" [class.disabled]="disabled" [class.selected]="selected" href="{{ href }}" [style.background]="getColor()">
     <ng-container *ngTemplateOutlet="content"></ng-container>
 </a>
 

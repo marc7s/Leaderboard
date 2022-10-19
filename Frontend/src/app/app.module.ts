@@ -14,7 +14,7 @@ import { ErrorComponent } from './_pages/error/error.component';
 import { HighlightComponent } from './components/highlight/highlight.component';
 import { InfoPanelComponent } from './components/info-panel/info-panel.component';
 import { TrackComponent } from './_pages/track/track.component';
-import { TrackListComponent } from './_pages/track-list/track-list.component';
+import { TracksComponent } from './_pages/tracks/tracks.component';
 import { UserComponent } from './_pages/user/user.component';
 import { LeaderboardEntryComponent } from './components/leaderboard-entry/leaderboard-entry.component';
 import { LeaderboardComponent } from './components/leaderboard/leaderboard.component';
@@ -34,6 +34,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { RecordsComponent } from './_pages/records/records.component';
 import { RecordEntryComponent } from './record-entry/record-entry.component';
+import { UsersComponent } from './_pages/users/users.component';
+import { PagelinkPipe } from './pagelink.pipe';
 
 const materialModules = [
   MatAutocompleteModule,
@@ -55,7 +57,7 @@ const materialModules = [
     HighlightComponent,
     InfoPanelComponent,
     TrackComponent,
-    TrackListComponent,
+    TracksComponent,
     UserComponent,
     LeaderboardEntryComponent,
     LeaderboardComponent,
@@ -66,7 +68,9 @@ const materialModules = [
     InputFieldSelectComponent,
     InputFieldTimeComponent,
     RecordsComponent,
-    RecordEntryComponent
+    RecordEntryComponent,
+    UsersComponent,
+    PagelinkPipe
   ],
   imports: [
     BrowserModule,
