@@ -1,4 +1,4 @@
-import { Track } from "./api";
+import { Config, Time, Track } from "./api";
 
 export interface TimeSummary {
     id: number,
@@ -20,6 +20,11 @@ export interface Leaderboard {
     times: TimeSummary[],
     weatherCondition?: string,
     validCondition?: boolean
+}
+
+export interface LapRecord {
+    config: Config,
+    time: Time
 }
 
 export interface Pair {

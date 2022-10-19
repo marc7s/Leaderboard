@@ -1,0 +1,10 @@
+<div class="pageTitle">Records</div>
+<div class="container">
+    <div class="trackRecord" *ngFor="let lapRecords of trackRecords | keyvalue">
+        <div class="track">{{ lapRecords.key }}</div>
+        <div class="lapRecord" *ngFor="let record of lapRecords.value">
+            <app-record-entry [config]="record.config" [time]="record.time"></app-record-entry>
+        </div>
+    </div>
+</div>
+

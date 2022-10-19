@@ -51,7 +51,6 @@ export class LeaderboardComponent implements OnInit {
     this.leaderboards = this.removeDuplicates(this.leaderboards);
     
     this.addDefaultLeaderboardIfEmpty();
-    console.log(this.leaderboards);
   }
 
   removeDuplicates(leaderboards: Leaderboard[]): Leaderboard[] { 

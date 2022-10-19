@@ -131,7 +131,6 @@ export interface DBTime {
     Username: string,
     ConfigID: number,
     Valid: boolean,
-    CustomSetup: boolean,
     Weather: string,
     AddedAt: Date
 }

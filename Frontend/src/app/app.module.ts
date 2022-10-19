@@ -3,19 +3,19 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AdminComponent } from './pages/admin/admin.component';
-import { HomeComponent } from './pages/home/home.component';
-import { AddTimeComponent } from './pages/add-time/add-time.component';
-import { LoginComponent } from './pages/login/login.component';
+import { AdminComponent } from './_pages/admin/admin.component';
+import { HomeComponent } from './_pages/home/home.component';
+import { AddTimeComponent } from './_pages/add-time/add-time.component';
+import { LoginComponent } from './_pages/login/login.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpErrorInterceptor } from './httpInterceptor';
 import { InputFieldTextComponent } from './components/input-field-text/input-field-text.component';
-import { ErrorComponent } from './pages/error/error.component';
+import { ErrorComponent } from './_pages/error/error.component';
 import { HighlightComponent } from './components/highlight/highlight.component';
 import { InfoPanelComponent } from './components/info-panel/info-panel.component';
-import { TrackComponent } from './pages/track/track.component';
-import { TrackListComponent } from './pages/track-list/track-list.component';
-import { UserComponent } from './pages/user/user.component';
+import { TrackComponent } from './_pages/track/track.component';
+import { TrackListComponent } from './_pages/track-list/track-list.component';
+import { UserComponent } from './_pages/user/user.component';
 import { LeaderboardEntryComponent } from './components/leaderboard-entry/leaderboard-entry.component';
 import { LeaderboardComponent } from './components/leaderboard/leaderboard.component';
 import { TimePipe } from './time.pipe';
@@ -32,6 +32,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { RecordsComponent } from './_pages/records/records.component';
+import { RecordEntryComponent } from './record-entry/record-entry.component';
 
 const materialModules = [
   MatAutocompleteModule,
@@ -62,7 +64,9 @@ const materialModules = [
     IconPipe,
     IconComponent,
     InputFieldSelectComponent,
-    InputFieldTimeComponent
+    InputFieldTimeComponent,
+    RecordsComponent,
+    RecordEntryComponent
   ],
   imports: [
     BrowserModule,

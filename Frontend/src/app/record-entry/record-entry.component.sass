@@ -1,0 +1,26 @@
+#valid
+    min-width: 2rem
+    min-height: 1.2rem
+
+#valid.invalid
+    background-image: url("/assets/img/BlackAndWhiteFlag.png")
+    background-size: contain
+    background-position: center
+    background-repeat: no-repeat
+
+#username
+    font-family: var(--main-font-bold)
+    color: gold
+
+.recordContainer
+    display: grid
+    grid-auto-flow: column
+    $game: 6rem
+    $car: 8rem
+    $weather: 4rem
+    $tyres: 7rem
+    $setup: 6rem
+    $username: 6rem
+    $time: 6rem
+    $valid: 2rem
+    grid-template-columns: $username $game $car $weather $tyres $setup $time $valid

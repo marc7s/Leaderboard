@@ -5,7 +5,7 @@ import { BehaviorSubject, from, Observable, of, Subject } from 'rxjs';
 import { Config, Game, Token,  Track,  Tyre,  User, Weather } from '@shared/api';
 import { finalize } from 'rxjs/operators';
 import { Time } from '@shared/api';
-import { TimeSummary, TrackSummary } from '@shared/dataStructures';
+import { LapRecord, TimeSummary, TrackSummary } from '@shared/dataStructures';
 
 interface RequestConfigParam {
   relativePath: string,
@@ -175,6 +175,14 @@ export class ApiService {
   getTyres(): Observable<Tyre[]> {
     const config = {
       relativePath: 'db/get-tyres',
+      waitFor: true
+    };
+    return this.get(config);
+  }
+
+  getRecords(): Observable<LapRecord[]> {
+    const config = {
+      relativePath: 'db/get-records',
       waitFor: true
     };
     return this.get(config);

@@ -9,7 +9,7 @@ import { AuthenticationError, DatabaseConnectionError, JwtToken, JwtTokenBody } 
 import { Token, User, Time, DBTime, Config, DBConfig, DBGame, DBWeather, DBTrack, DBCar, Game, DBCountry, Country, Track, Car, Weather, Login, Tyre, DBTyre, DBUser } from '@shared/api';
 
 import { _CAR_, _CONFIG_, _COUNTRY_, _GAME_, _TIME_, _TRACK_, _TYRE_, _USER_, _WEATHER_ } from './dbObjects';
-import { TimeSummary, TrackSummary } from '@shared/dataStructures';
+import { LapRecord, TimeSummary, TrackSummary } from '@shared/dataStructures';
 import { equal } from 'assert';
 
 const router: Router = express.Router();
@@ -74,6 +74,10 @@ router.get('/get-weathers', (req: any, res: Response, next: NextFunction) => {
 
 router.get('/get-tyres', (req: any, res: Response, next: NextFunction) => {
     getTyres().then(tyres => res.json(tyres)).catch(next);
+});
+
+router.get('/get-records', (req: any, res: Response, next: NextFunction) => {
+    getRecords().then(records => res.json(records)).catch(next);
 });
 
 router.post('/add-time', /*authenticateToken,*/ timeParam, usernameParam, validParam, addTimeParam, async (req: any, res: Response, next: NextFunction) => {
@@ -334,6 +338,47 @@ async function getTyres(): Promise<Tyre[]> {
                 tyres.push(dbToTyre(dbTyre));
             });
             req.on('requestCompleted', () => { resolve(tyres) });
+        })
+        .catch(reject);
+    });
+}
+
+async function getRecords(): Promise<LapRecord[]> {
+    return new Promise((resolve, reject) => {
+        const records: LapRecord[] = [];
+        const query = "SELECT * FROM GetRecords()";
+        const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
+            if(err) reject(err);
+        });
+        getDBConnection()
+        .then(conn => {
+            conn.execSql(req);
+            req.on('error', err => { reject(err) });
+            req.on('row', cols => {
+                const data: any = {};
+                cols.map(col => { data[col.metadata.colName] = col.value });
+                const dbTime: DBTime = parseIntoInterface(data, _TIME_);
+                const dbConfig: DBConfig = parseIntoInterface(data, _CONFIG_, 'Config');
+                const dbGame: DBGame = parseIntoInterface(data, _GAME_, 'Game');
+                const dbTrack: DBTrack = parseIntoInterface(data, _TRACK_, 'Track');
+                const dbCar: DBCar = parseIntoInterface(data, _CAR_, 'Car');
+                const dbWeather: DBWeather = parseIntoInterface(data, _WEATHER_, 'Weather');
+                const dbTyre: DBTyre = parseIntoInterface(data, _TYRE_, 'Tyre');
+                const dbCountry: DBCountry = parseIntoInterface(data, _COUNTRY_, 'Country');
+
+                const config: Config = dbToConfig(dbConfig, dbGame, dbTrack, dbCar, dbWeather, dbTyre, dbCountry);
+                const time: Time = {
+                  id: dbTime.ID,
+                  time: dbTime.Time,
+                  millis: dbTime.Millis,
+                  username: dbTime.Username,
+                  config: config,
+                  valid: dbTime.Valid  
+                };
+
+                records.push({ config: config, time: time });
+            });
+            req.on('requestCompleted', () => { resolve(records) });
         })
         .catch(reject);
     });

@@ -1,18 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthguardService } from './authguard.service';
-import { AddTimeComponent } from './pages/add-time/add-time.component';
-import { AdminComponent } from './pages/admin/admin.component';
-import { ErrorComponent } from './pages/error/error.component';
-import { HomeComponent } from './pages/home/home.component';
-import { LoginComponent } from './pages/login/login.component';
-import { TrackComponent } from './pages/track/track.component';
-import { UserComponent } from './pages/user/user.component';
+import { AddTimeComponent } from './_pages/add-time/add-time.component';
+import { AdminComponent } from './_pages/admin/admin.component';
+import { ErrorComponent } from './_pages/error/error.component';
+import { HomeComponent } from './_pages/home/home.component';
+import { LoginComponent } from './_pages/login/login.component';
+import { RecordsComponent } from './_pages/records/records.component';
+import { TrackComponent } from './_pages/track/track.component';
+import { UserComponent } from './_pages/user/user.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'error', component: ErrorComponent },
+  { path: 'records', component: RecordsComponent },
   { path: 'track/:shortName', component: TrackComponent },
   { path: 'user/:username', component: UserComponent },
   { path: '', canActivate: [AuthguardService], children: [
