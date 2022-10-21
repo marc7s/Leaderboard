@@ -1,6 +1,7 @@
 import { DBCar, DBConfig, DBGame, DBTime, DBTrack, DBTyre, DBUser, DBWeather } from "@shared/api";
 
 export const _USER_: DBUser = {
+    ID: -1,
     Username: ''
 }
 

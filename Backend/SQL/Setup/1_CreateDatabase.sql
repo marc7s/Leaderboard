@@ -11,7 +11,8 @@ USE Leaderboard;
 GO
 
 CREATE TABLE Users(
-    Username nvarchar(255) NOT NULL PRIMARY KEY,
+    ID int IDENTITY(1, 1) NOT NULL PRIMARY KEY,
+    Username nvarchar(255) NOT NULL UNIQUE,
     Password varbinary(500) DEFAULT NULL,
     Admin bit DEFAULT 0,
     AddedAt datetime NOT NULL DEFAULT GETDATE()
@@ -19,41 +20,41 @@ CREATE TABLE Users(
 
 CREATE TABLE Games(
     ID int IDENTITY(1, 1) NOT NULL PRIMARY KEY,
-    Name nvarchar(255) NOT NULL,
+    Name nvarchar(255) NOT NULL UNIQUE,
     AddedAt datetime NOT NULL DEFAULT GETDATE()
 );
 
 CREATE TABLE Cars(
     ID int IDENTITY(1, 1) NOT NULL PRIMARY KEY,
-    FullName nvarchar(255) NOT NULL,
-    ShortName nvarchar(100) NOT NULL,
+    FullName nvarchar(255) NOT NULL UNIQUE,
+    ShortName nvarchar(100) NOT NULL UNIQUE,
     AddedAt datetime NOT NULL DEFAULT GETDATE()
 );
 
 CREATE TABLE Weathers(
     ID int IDENTITY(1, 1) NOT NULL PRIMARY KEY,
-    Name nvarchar(255) NOT NULL,
+    Name nvarchar(255) NOT NULL UNIQUE,
     AddedAt datetime NOT NULL DEFAULT GETDATE()
 );
 
 CREATE TABLE Tyres(
     ID int IDENTITY(1, 1) NOT NULL PRIMARY KEY,
-    FullName nvarchar(255) NOT NULL,
-    ShortName nvarchar(255) NOT NULL,
+    FullName nvarchar(255) NOT NULL UNIQUE,
+    ShortName nvarchar(255) NOT NULL UNIQUE,
     AddedAt datetime NOT NULL DEFAULT GETDATE()
 );
 
 CREATE TABLE Countries(
     ID int IDENTITY(1, 1) NOT NULL PRIMARY KEY,
-    FullName nvarchar(255) NOT NULL,
-    ShortName nvarchar(255) NOT NULL,
+    FullName nvarchar(255) NOT NULL UNIQUE,
+    ShortName nvarchar(255) NOT NULL UNIQUE,
     AddedAt datetime NOT NULL DEFAULT GETDATE()
 );
 
 CREATE TABLE Tracks(
     ID int IDENTITY(1, 1) NOT NULL PRIMARY KEY,
-    FullName nvarchar(255) NOT NULL,
-    ShortName nvarchar(255) NOT NULL,
+    FullName nvarchar(255) NOT NULL UNIQUE,
+    ShortName nvarchar(255) NOT NULL UNIQUE,
     CountryID int FOREIGN KEY REFERENCES Countries(ID),
     AddedAt datetime NOT NULL DEFAULT GETDATE()
 );
@@ -74,7 +75,7 @@ CREATE TABLE Times(
     ID int IDENTITY(1, 1) NOT NULL PRIMARY KEY,
     Time Time(3) NOT NULL,
     Millis bigint NOT NULL,
-    Username nvarchar(255) FOREIGN KEY REFERENCES Users(Username),
+    UserID int FOREIGN KEY REFERENCES Users(ID),
     ConfigID int FOREIGN KEY REFERENCES Configs(ID),
     Valid bit NOT NULL,
     AddedAt datetime NOT NULL DEFAULT GETDATE()

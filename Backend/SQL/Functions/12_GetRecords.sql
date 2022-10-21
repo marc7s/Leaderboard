@@ -6,8 +6,9 @@ SELECT
 	times.ID,
 	times.Time,
 	times.Millis,
-	times.Username,
+	times.UserID,
 	times.Valid,
+	u.Username,
 	c.ID AS ConfigID,
 	c.Description as ConfigDescription,
 	c.GameID AS ConfigGameID,
@@ -33,8 +34,9 @@ SELECT
 	countries.FullName AS CountryFullName,
 	countries.ShortName AS CountryShortName
 FROM (
-	SELECT ID, Time, Millis, Username, ConfigID, Valid, ROW_NUMBER() OVER (PARTITION BY ConfigID, Valid ORDER BY Time ASC) TimeRank FROM Times
+	SELECT ID, Time, Millis, UserID, ConfigID, Valid, ROW_NUMBER() OVER (PARTITION BY ConfigID, Valid ORDER BY Time ASC) TimeRank FROM Times
 ) times
+INNER JOIN Users u ON times.UserID = u.ID
 INNER JOIN Configs c ON times.ConfigID = c.ID
 INNER JOIN Games g ON c.GameID = g.ID
 INNER JOIN Tracks t ON c.TrackID = t.ID

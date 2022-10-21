@@ -10,7 +10,7 @@ export class UserService {
 
   constructor(private api: ApiService) { }
 
-  getUser(token: Token): Observable<User>{
-    return this.api.getUser(token);
+  getUser(): Observable<User> {
+    return this.api.getUser();
   }
 }

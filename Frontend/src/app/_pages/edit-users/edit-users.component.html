@@ -1,0 +1,23 @@
+<div class="box">
+    <div class="title">Existing users</div>
+
+    <app-input-field-select 
+        class="input" 
+        placeholder="Users" 
+        (optionNumberChange)="selectUser()"
+        [(valueNumber)]="userID" 
+        [optionsNumber]="userOptions">
+    </app-input-field-select>
+    <app-card (click)="clear()" [disabled]="!userID">Clear</app-card>
+</div>
+
+<div class="box">
+    <div class="title">{{ !userID ? 'Add' : 'Edit' }} user</div>
+    <app-input-field-text 
+        class="input" 
+        placeholder="Username" 
+        [(text)]="name">
+    </app-input-field-text>
+</div>
+
+<app-card class="save" (click)="save()" [disabled]="!name">{{ !userID ? 'Add' : 'Update' }} user</app-card>

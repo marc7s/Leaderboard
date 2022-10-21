@@ -1,11 +1,11 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, from, Observable, of, Subject } from 'rxjs';
-import { Config, Game, Token,  Track,  Tyre,  User, Weather } from '@shared/api';
+import { Config, Country, Game, Token,  Track,  Tyre,  User, Weather } from '@shared/api';
 import { finalize } from 'rxjs/operators';
-import { Time } from '@shared/api';
 import { LapRecord, TimeSummary, TrackSummary } from '@shared/dataStructures';
+import { AuthService } from './auth.service';
 
 interface RequestConfigParam {
   relativePath: string,
@@ -31,7 +31,7 @@ enum HttpRequestTypes { GET, POST };
 
 export class ApiService {
 
-  constructor(private router: Router, private http: HttpClient) {
+  constructor(private http: HttpClient) {
   }
 
   private loadingSubject: Subject<boolean> = new BehaviorSubject<boolean>(false);
@@ -39,6 +39,18 @@ export class ApiService {
   private waitingList: any[] = [];
 
   private apiEndpoint: string = 'http://localhost:5000/api/';
+
+  public getLocalToken(): Token | null {
+    const token: string | null = localStorage.getItem('token');
+    const exp: string | null = localStorage.getItem('expires');
+    if(token && exp){
+      return {
+        jwt: token,
+        expires: parseInt(exp)
+      }
+    }
+    return null;
+  }
 
   private addToWaitingList(entry: any) {
     this.waitingList.push(entry);
@@ -52,12 +64,16 @@ export class ApiService {
 
   private _get(config: RequestConfig): Observable<any> {
     const url = new URL(config.relativePath, this.apiEndpoint);
-    return this.http.get(url.href, { headers: config.headers, params: config.params, responseType: 'json' });
+    const token: Token | null = this.getLocalToken();
+    const headers = token ? config.headers.set('authorization', `Bearer ${token.jwt}`) : config.headers;
+    return this.http.get(url.href, { headers: headers, params: config.params, responseType: 'json' });
   }
 
   private _post(config: RequestConfig): Observable<any> {
     const url = new URL(config.relativePath, this.apiEndpoint);
-    return this.http.post(url.href, config.payload, { headers: config.headers.set('Content-Type', 'application/json'), params: config.params, responseType: 'json' });
+    const token: Token | null = this.getLocalToken();
+    const headers = token ? config.headers.set('authorization', `Bearer ${token.jwt}`) : config.headers;
+    return this.http.post(url.href, config.payload, { headers: headers.set('Content-Type', 'application/json'), params: config.params, responseType: 'json' });
   }
 
   private request(rt: HttpRequestTypes, config: RequestConfigParam): Observable<any> {
@@ -87,11 +103,6 @@ export class ApiService {
     return this.request(HttpRequestTypes.POST, config);
   }
 
-  private getAuthHeader(token: Token): HttpHeaders {
-    const headers: HttpHeaders = new HttpHeaders().set('authorization', `Bearer ${token.jwt}`);
-    return headers;
-  }
-
   getToken(username: string, password: string): Observable<Token> {
     const config = {
       relativePath: 'db/get-token',
@@ -104,8 +115,8 @@ export class ApiService {
     return this.post(config);
   }
 
-  getUserTimes(username: string): Observable<TimeSummary[]> {
-    const reqParams: HttpParams = new HttpParams().set('username', username);
+  getUserTimesFromUsername(username: string): Observable<TimeSummary[]> {
+    const reqParams: HttpParams = new HttpParams().set('name', username);
     const config = {
       relativePath: 'db/get-user-times',
       waitFor: true,
@@ -180,6 +191,14 @@ export class ApiService {
     return this.get(config);
   }
 
+  getCountries(): Observable<Country[]> {
+    const config = {
+      relativePath: 'db/get-countries',
+      waitFor: true
+    };
+    return this.get(config);
+  }
+
   getRecords(): Observable<LapRecord[]> {
     const config = {
       relativePath: 'db/get-records',
@@ -188,22 +207,21 @@ export class ApiService {
     return this.get(config);
   }
 
-  getUser(token: Token): Observable<User> {
+  getUser(): Observable<User> {
     const config = {
       relativePath: 'db/me',
-      waitFor: true,
-      headers: this.getAuthHeader(token)
+      waitFor: true
     };
     return this.get(config);
   }
 
-  addTimeWithConfig(configID: number, username: string, time: string, valid: boolean): Observable<boolean> {
+  addTimeWithConfig(configID: number, userID: number, time: string, valid: boolean): Observable<boolean> {
     const config = {
       relativePath: 'db/add-time',
       waitFor: true,
       payload: {
         configID: configID,
-        username: username,
+        userID: userID,
         time: time,
         valid: valid
       }
@@ -211,12 +229,12 @@ export class ApiService {
     return this.post(config);
   }
 
-  addTime(username: string, gameID: number, trackID: number, carID: number, weatherID: number, tyreID: number, time: string, customSetup: boolean, valid: boolean): Observable<boolean> {
+  addTime(userID: number, gameID: number, trackID: number, carID: number, weatherID: number, tyreID: number, time: string, customSetup: boolean, valid: boolean): Observable<boolean> {
     const config = {
       relativePath: 'db/add-time',
       waitFor: true,
       payload: {
-        username: username,
+        userID: userID,
         gameID: gameID,
         trackID: trackID,
         carID: carID,
@@ -225,6 +243,187 @@ export class ApiService {
         time: time,
         customSetup: customSetup,
         valid: valid
+      }
+    };
+    return this.post(config);
+  }
+
+  updateCar(carID: number, shortName: string, fullName: string): Observable<boolean> {
+    const config = {
+      relativePath: 'db/update-car',
+      waitFor: true,
+      payload: {
+        carID: carID,
+        shortName: shortName,
+        fullName: fullName
+      }
+    };
+    return this.post(config);
+  }
+
+  createCar(shortName: string, fullName: string): Observable<boolean> {
+    const config = {
+      relativePath: 'db/create-car',
+      waitFor: true,
+      payload: {
+        shortName: shortName,
+        fullName: fullName
+      }
+    };
+    return this.post(config);
+  }
+
+  updateGame(gameID: number, name: string): Observable<boolean> {
+    const config = {
+      relativePath: 'db/update-game',
+      waitFor: true,
+      payload: {
+        gameID: gameID,
+        name: name
+      }
+    };
+    return this.post(config);
+  }
+
+  createGame(name: string): Observable<boolean> {
+    const config = {
+      relativePath: 'db/create-game',
+      waitFor: true,
+      payload: {
+        name: name
+      }
+    };
+    return this.post(config);
+  }
+
+  updateTyre(tyreID: number, shortName: string, fullName: string): Observable<boolean> {
+    const config = {
+      relativePath: 'db/update-tyre',
+      waitFor: true,
+      payload: {
+        tyreID: tyreID,
+        shortName: shortName,
+        fullName: fullName
+      }
+    };
+    return this.post(config);
+  }
+
+  createTyre(shortName: string, fullName: string): Observable<boolean> {
+    const config = {
+      relativePath: 'db/create-tyre',
+      waitFor: true,
+      payload: {
+        shortName: shortName,
+        fullName: fullName
+      }
+    };
+    return this.post(config);
+  }
+
+  updateUser(userID: number, username: string): Observable<boolean> {
+    const config = {
+      relativePath: 'db/update-user',
+      waitFor: true,
+      payload: {
+        userID: userID,
+        name: username
+      }
+    };
+    return this.post(config);
+  }
+
+  createUser(username: string): Observable<boolean> {
+    const config = {
+      relativePath: 'db/create-user',
+      waitFor: true,
+      payload: {
+        name: username
+      }
+    };
+    return this.post(config);
+  }
+
+  updateWeather(weatherID: number, name: string): Observable<boolean> {
+    const config = {
+      relativePath: 'db/update-weather',
+      waitFor: true,
+      payload: {
+        weatherID: weatherID,
+        name: name
+      }
+    };
+    return this.post(config);
+  }
+
+  createWeather(name: string): Observable<boolean> {
+    const config = {
+      relativePath: 'db/create-weather',
+      waitFor: true,
+      payload: {
+        name: name
+      }
+    };
+    return this.post(config);
+  }
+
+  updateTrack(trackID: number, countryID: number, shortName: string, fullName: string): Observable<boolean> {
+    const config = {
+      relativePath: 'db/update-track',
+      waitFor: true,
+      payload: {
+        trackID: trackID,
+        countryID: countryID,
+        shortName: shortName,
+        fullName: fullName
+      }
+    };
+    return this.post(config);
+  }
+
+  createTrack(countryID: number, shortName: string, fullName: string): Observable<boolean> {
+    const config = {
+      relativePath: 'db/create-track',
+      waitFor: true,
+      payload: {
+        countryID: countryID,
+        shortName: shortName,
+        fullName: fullName
+      }
+    };
+    return this.post(config);
+  }
+
+  updateConfig(configID: number, description: string, gameID: number, trackID: number, carID: number, weatherID: number, tyreID: number, customSetup: boolean): Observable<boolean> {
+    const config = {
+      relativePath: 'db/update-config',
+      waitFor: true,
+      payload: {
+        configID: configID,
+        description: description,
+        gameID: gameID,
+        trackID: trackID,
+        carID: carID,
+        weatherID: weatherID,
+        tyreID: tyreID,
+        customSetup: customSetup
+      }
+    };
+    return this.post(config);
+  }
+
+  createConfig(description: string, gameID: number, trackID: number, carID: number, weatherID: number, tyreID: number, customSetup: boolean): Observable<boolean> {
+    const config = {
+      relativePath: 'db/create-config',
+      waitFor: true,
+      payload: {
+        description: description,
+        gameID: gameID,
+        trackID: trackID,
+        carID: carID,
+        weatherID: weatherID,
+        tyreID: tyreID,
+        customSetup: customSetup
       }
     };
     return this.post(config);

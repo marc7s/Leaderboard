@@ -1,0 +1,23 @@
+<div class="box">
+    <div class="title">Existing games</div>
+
+    <app-input-field-select 
+        class="input" 
+        placeholder="Games" 
+        (optionNumberChange)="selectGame()"
+        [(valueNumber)]="gameID" 
+        [optionsNumber]="gameOptions">
+    </app-input-field-select>
+    <app-card (click)="clear()" [disabled]="!gameID">Clear</app-card>
+</div>
+
+<div class="box">
+    <div class="title">{{ !gameID ? 'Add' : 'Edit' }} game</div>
+    <app-input-field-text 
+        class="input" 
+        placeholder="Name" 
+        [(text)]="name">
+    </app-input-field-text>
+</div>
+
+<app-card class="save" (click)="save()" [disabled]="!name">{{ !gameID ? 'Add' : 'Update' }} game</app-card>

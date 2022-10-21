@@ -1,4 +1,3 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Token } from '@shared/api';
@@ -12,7 +11,7 @@ import { LogoutReason } from './auth';
 })
 export class AuthService {
 
-  constructor(private router: Router, private http: HttpClient, private api: ApiService) {}
+  constructor(private router: Router, private api: ApiService) {}
 
   private setSession(token: Token): void {
     localStorage.setItem('token', token.jwt);
@@ -32,18 +31,6 @@ export class AuthService {
     );
   }
 
-  getToken(): Token | null {
-    let token: string | null = localStorage.getItem('token');
-    let exp: string | null = localStorage.getItem('expires');
-    if(token && exp){
-      return {
-        jwt: token,
-        expires: parseInt(exp)
-      }
-    }
-    return null;
-  }
-
   logout(logoutReason?: LogoutReason): void {
     localStorage.removeItem('token');
     localStorage.removeItem('expires');
@@ -51,9 +38,9 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    let exp: string | null = localStorage.getItem('expires');
+    const exp: string | null = localStorage.getItem('expires');
     if(exp !== null){
-      let expDate: number = parseInt(exp);
+      const expDate: number = parseInt(exp);
 
       if(expDate !== NaN)
         return Date.now() < expDate;

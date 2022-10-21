@@ -1,1 +1,9 @@
-<p>admin works!</p>
+<div class="title">
+    Admin Pages
+</div>
+<div class="container">
+    <ng-container *ngFor="let page of pages">
+        <app-card [href]="page.link">{{ page.name }}</app-card>
+    </ng-container>
+</div>
+<app-card [color]="redColor" (click)="logout()">Logout</app-card>

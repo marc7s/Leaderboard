@@ -1,7 +1,7 @@
 CREATE OR ALTER PROCEDURE AddTrack
+    @CountryID int,
     @FullName nvarchar(255),
-    @ShortName nvarchar(100),
-    @CountryID int
+    @ShortName nvarchar(100)
 AS
 BEGIN
     --ERROR HANDLING

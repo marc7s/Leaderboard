@@ -15,7 +15,6 @@ import { Size } from 'src/styleSettings';
 export class TrackComponent implements OnInit {
 
   Large: Size = Size.Large;
-  FerrariRed: Color = FerrariRed;
 
   track: Track | null = null;
   times: TimeSummary[] = [];

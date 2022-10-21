@@ -1,9 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
 import { Config } from '@shared/api';
 import { TimeSummary } from '@shared/dataStructures';
 import { ApiService } from 'src/app/api.service';
-import { OptionNumber, OptionString } from 'src/app/option';
+import { OptionNumber } from 'src/app/option';
 
 @Component({
   selector: 'app-add-time',
@@ -15,8 +14,9 @@ export class AddTimeComponent implements OnInit {
   configOptions: OptionNumber[] = [];
   configs: Config[] = [];
   
+  userID: number | null = null;
   username: string | null = null;
-  users: OptionString[] = [];
+  users: OptionNumber[] = [];
 
   gameID: number | null = null;
   games: OptionNumber[] = [];
@@ -48,7 +48,7 @@ export class AddTimeComponent implements OnInit {
     const parsedTime = this.time ? this.time.substring(3) : null;
     this.configID = this.findConfig()?.id ?? null;
 
-    if(parsedTime?.length == 9 && this.username && this.gameID && this.trackID && this.carID && this.weatherID && this.tyreID) {
+    if(parsedTime?.length == 9 && this.userID && this.gameID && this.trackID && this.carID && this.weatherID && this.tyreID) {
       this.placeholderTimes = [
         {
           id: -1,
@@ -65,19 +65,25 @@ export class AddTimeComponent implements OnInit {
     }
   }
 
+  updateUser(): void {
+    const username = this.userID ? this.users.find(u => u.value == this.userID)?.display : null;
+    this.username = username ?? null;
+    this.update();
+  }
+
   async addTime(): Promise<void> {
-    if(this.configID !== null && this.username !== null && this.time !== null) {
-      await this.api.addTimeWithConfig(this.configID, this.username, this.time, !this.invalid).toPromise();
+    if(this.configID !== null && this.userID !== null && this.username !== null && this.time !== null) {
+      await this.api.addTimeWithConfig(this.configID, this.userID, this.time, !this.invalid).toPromise();
       this.lastAddedTime = this.placeholderTimes;
-    } else if(this.username !== null && this.gameID !== null && this.trackID !== null && this.carID !== null && this.weatherID !== null && this.tyreID !== null && this.time !== null) {
-      await this.api.addTime(this.username, this.gameID, this.trackID, this.carID, this.weatherID, this.tyreID, this.time, this.customSetup, !this.invalid).toPromise();
+    } else if(this.userID !== null && this.gameID !== null && this.trackID !== null && this.carID !== null && this.weatherID !== null && this.tyreID !== null && this.time !== null) {
+      await this.api.addTime(this.userID, this.gameID, this.trackID, this.carID, this.weatherID, this.tyreID, this.time, this.customSetup, !this.invalid).toPromise();
       this.lastAddedTime = this.placeholderTimes;
     } else {
       console.error("Could not add time, incorrect parameters");
       return;
     }
     // Reset for next time
-    this.username = null;
+    this.userID = null;
     this.time = null;
     this.invalid = false;
     
@@ -126,7 +132,7 @@ export class AddTimeComponent implements OnInit {
       this.configOptions = configs.map(c => ({ value: c.id, display: c.description }));
     });
     this.api.getUsers().subscribe(users => {
-      this.users = users.map(u => ({ value: u.username, display: u.username }));
+      this.users = users.map(u => ({ value: u.id, display: u.username }));
     });
     this.api.getGames().subscribe(games => {
       this.games = games.map(g => ({ value: g.id, display: g.name }));

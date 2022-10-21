@@ -9,10 +9,12 @@ export interface Login {
 }
 
 export interface User {
+    id: number,
     username: string
 }
 
 export interface DBUser {
+    ID: number,
     Username: string
 }
 

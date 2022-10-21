@@ -1,6 +1,6 @@
 CREATE OR ALTER PROCEDURE AddTime
     @Time nvarchar(12),
-    @Username nvarchar(255),
+    @UserID int,
     @ConfigID int,
     @Valid bit
 AS
@@ -14,10 +14,10 @@ BEGIN
         RETURN
     END
 
-    --CHECK USERNAME PARAM
-    IF @Username IS NULL
+    --CHECK USER PARAM
+    IF @UserID IS NULL
     BEGIN
-        RAISERROR(N'Username not supplied', 11, 1);
+        RAISERROR(N'User not supplied', 11, 1);
         RETURN
     END
 
@@ -36,9 +36,9 @@ BEGIN
     END
 
     --CHECK THAT USER EXISTS
-    DECLARE @Username_db nvarchar(255)
-    SELECT @Username_db = Username FROM Users WHERE Username = @Username
-    IF @Username_db IS NULL
+    DECLARE @UserID_db int
+    SELECT @UserID_db = ID FROM Users WHERE ID = @UserID
+    IF @UserID_db IS NULL
     BEGIN
         RAISERROR(N'User does not exist', 11, 1);
         RETURN
@@ -56,6 +56,6 @@ BEGIN
     DECLARE @TimeConverted Time(3)
     SELECT @TimeConverted = CONVERT(Time(3), @Time)
     --ALL GOOD, ADD TIME
-    INSERT INTO Times(Time, Millis, Username, ConfigID, Valid) VALUES (@TimeConverted, DATEDIFF(MILLISECOND, 0, @TimeConverted), @Username, @ConfigID, @Valid);
+    INSERT INTO Times(Time, Millis, UserID, ConfigID, Valid) VALUES (@TimeConverted, DATEDIFF(MILLISECOND, 0, @TimeConverted), @UserID, @ConfigID, @Valid);
 END
 GO

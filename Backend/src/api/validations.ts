@@ -1,21 +1,20 @@
 import { Response, NextFunction } from 'express';
-import { nextTick } from 'process';
 import { ApiRequestMalformedError } from '../utils';
 
 function isValidUsername(username: string){return username === username.replace(/\W/g, '')}
 function isValidTime(time: any){return time === time.toString()}
 function isValidShortName(shortName: any){return shortName === shortName.toString()}
-function isValidConfigID(configID: any){return Number.isInteger(configID)}
-function isValidTimeID(configID: any){return Number.isInteger(configID)}
+function isValidID(id: any){return Number.isInteger(id)}
+function isValidString(string: any){return string === string.toString()}
 
-function missing(arr: any) {
+function missing(arr: any) : boolean {
     return Array.isArray(arr) ? arr.some(val => val === MISSING) : arr === MISSING;
 }
 
 enum MissingParam { MISSING };
 const MISSING = MissingParam.MISSING;
 
-export async function loginParam(req: any, res: Response, next: NextFunction) {
+export async function loginParam(req: any, res: Response, next: NextFunction): Promise<void> {
     const username = req.body.username ?? MISSING;
     const password = req.body.password ?? MISSING;
     req.login = null;
@@ -32,17 +31,17 @@ export async function loginParam(req: any, res: Response, next: NextFunction) {
     next();
 }
 
-export async function usernameParam(req: any, res: Response, next: NextFunction) {
-    req.user = null;
-    const username = req.body.username ?? req.query.username ?? MISSING;
-    const check = checkParameter(username, 'username', isValidUsername, 'is invalid');
+export async function userIDParam(req: any, res: Response, next: NextFunction): Promise<void> {
+    req.userID = null;
+    const userID = req.body.userID ?? req.query.userID ?? MISSING;
+    const check = checkParameter(userID, 'userID', isValidID, 'is invalid');
     if(check !== null) return next(check);
 
-    req.user = {username: username};
+    req.userID = userID;
     next();
 }
 
-export async function shortNameParam(req: any, res: Response, next: NextFunction) {
+export async function shortNameParam(req: any, res: Response, next: NextFunction): Promise<void> {
     const shortName = req.body.shortName ?? req.query.shortName ?? MISSING;
     const check = checkParameter(shortName, 'shortName', isValidShortName, 'is invalid');
     if(check !== null) return next(check);
@@ -99,7 +98,7 @@ export async function addTimeParam(req: any, res: Response, next: NextFunction):
         req.customSetup = customSetup;
     } else {
         // ConfigID is present so we just need to check that it is valid
-        const check = checkParameter(configID, 'configID', isValidConfigID, 'is not a valid configID');
+        const check = checkParameter(configID, 'configID', isValidID, 'is not a valid configID');
         if(check !== null) return next(check);
         req.configID = configID;
     }
@@ -109,7 +108,7 @@ export async function addTimeParam(req: any, res: Response, next: NextFunction):
 
 export async function timeIDParam(req: any, res: Response, next: NextFunction): Promise<void> {
     const timeID = req.body.timeID ?? req.query.timeID ?? MISSING;
-    const check = checkParameter(timeID, 'timeID', isValidTimeID, 'is not a valid timeID');
+    const check = checkParameter(timeID, 'timeID', isValidID, 'is not a valid timeID');
     if(check !== null) return next(check);
 
     req.timeID = timeID;
@@ -118,7 +117,7 @@ export async function timeIDParam(req: any, res: Response, next: NextFunction): 
 
 export async function configIDParam(req: any, res: Response, next: NextFunction): Promise<void> {
     const configID = req.body.configID ?? req.query.configID ?? MISSING;
-    const check = checkParameter(configID, 'configID', isValidConfigID, 'is not a valid configID');
+    const check = checkParameter(configID, 'configID', isValidID, 'is not a valid configID');
     if(check !== null) return next(check);
 
     req.configID = configID;
@@ -143,6 +142,91 @@ export async function customSetupParam(req: any, res: Response, next: NextFuncti
     next();
 }
 
+export async function carIDParam(req: any, res: Response, next: NextFunction): Promise<void> {
+    const carID = req.body.carID ?? req.query.carID ?? MISSING;
+    const check = checkParameter(carID, 'carID', isValidID, 'is not a valid carID');
+    if(check !== null) return next(check);
+
+    req.carID = carID;
+    next();
+}
+
+export async function shortAndFullNameParam(req: any, res: Response, next: NextFunction): Promise<void> {
+    const shortName = req.body.shortName ?? req.query.shortName ?? MISSING;
+    const fullName = req.body.fullName ?? req.query.fullName ?? MISSING;
+    const check1 = checkParameter(shortName, 'shortName', isValidString, 'is not a valid short name');
+    const check2 = checkParameter(fullName, 'fullName', isValidString, 'is not a valid full name');
+    if(check1 !== null) return next(check1);
+    if(check2 !== null) return next(check2);
+
+    req.shortName = shortName;
+    req.fullName = fullName;
+    next();
+}
+
+export async function nameParam(req: any, res: Response, next: NextFunction): Promise<void> {
+    const name = req.body.name ?? req.query.name ?? MISSING;
+    const check = checkParameter(name, 'name', isValidString, 'is not a valid name');
+    if(check !== null) return next(check);
+
+    req.name = name;
+    next();
+}
+
+export async function descriptionParam(req: any, res: Response, next: NextFunction): Promise<void> {
+    const description = req.body.description ?? req.query.description ?? MISSING;
+    const check = checkParameter(description, 'description', isValidString, 'is not a valid description');
+    if(check !== null) return next(check);
+
+    req.description = description;
+    next();
+}
+
+export async function gameIDParam(req: any, res: Response, next: NextFunction): Promise<void> {
+    const gameID = req.body.gameID ?? req.query.gameID ?? MISSING;
+    const check = checkParameter(gameID, 'gameID', isValidID, 'is not a valid gameID');
+    if(check !== null) return next(check);
+
+    req.gameID = gameID;
+    next();
+}
+
+export async function tyreIDParam(req: any, res: Response, next: NextFunction): Promise<void> {
+    const tyreID = req.body.tyreID ?? req.query.tyreID ?? MISSING;
+    const check = checkParameter(tyreID, 'tyreID', isValidID, 'is not a valid tyreID');
+    if(check !== null) return next(check);
+
+    req.tyreID = tyreID;
+    next();
+}
+
+export async function weatherIDParam(req: any, res: Response, next: NextFunction): Promise<void> {
+    const weatherID = req.body.weatherID ?? req.query.weatherID ?? MISSING;
+    const check = checkParameter(weatherID, 'weatherID', isValidID, 'is not a valid weatherID');
+    if(check !== null) return next(check);
+
+    req.weatherID = weatherID;
+    next();
+}
+
+export async function trackIDParam(req: any, res: Response, next: NextFunction): Promise<void> {
+    const trackID = req.body.trackID ?? req.query.trackID ?? MISSING;
+    const check = checkParameter(trackID, 'trackID', isValidID, 'is not a valid trackID');
+    if(check !== null) return next(check);
+
+    req.trackID = trackID;
+    next();
+}
+
+export async function countryIDParam(req: any, res: Response, next: NextFunction): Promise<void> {
+    const countryID = req.body.countryID ?? req.query.countryID ?? MISSING;
+    const check = checkParameter(countryID, 'countryID', isValidID, 'is not a valid countryID');
+    if(check !== null) return next(check);
+
+    req.countryID = countryID;
+    next();
+}
+
 function checkParameter(value: any, name: string, checker: Function, errorMessage: string): Error | null {
     if(missing(value))
         return new ApiRequestMalformedError(`'${name}' parameter missing`);
@@ -152,5 +236,3 @@ function checkParameter(value: any, name: string, checker: Function, errorMessag
     
     return null;
 }
-
-

@@ -36,6 +36,13 @@ import { RecordsComponent } from './_pages/records/records.component';
 import { RecordEntryComponent } from './record-entry/record-entry.component';
 import { UsersComponent } from './_pages/users/users.component';
 import { PagelinkPipe } from './pagelink.pipe';
+import { EditUsersComponent } from './_pages/edit-users/edit-users.component';
+import { EditGamesComponent } from './_pages/edit-games/edit-games.component';
+import { EditCarsComponent } from './_pages/edit-cars/edit-cars.component';
+import { EditWeathersComponent } from './_pages/edit-weathers/edit-weathers.component';
+import { EditTyresComponent } from './_pages/edit-tyres/edit-tyres.component';
+import { EditTracksComponent } from './_pages/edit-tracks/edit-tracks.component';
+import { EditConfigsComponent } from './_pages/edit-configs/edit-configs.component';
 
 const materialModules = [
   MatAutocompleteModule,
@@ -70,7 +77,14 @@ const materialModules = [
     RecordsComponent,
     RecordEntryComponent,
     UsersComponent,
-    PagelinkPipe
+    PagelinkPipe,
+    EditUsersComponent,
+    EditGamesComponent,
+    EditCarsComponent,
+    EditWeathersComponent,
+    EditTyresComponent,
+    EditTracksComponent,
+    EditConfigsComponent
   ],
   imports: [
     BrowserModule,

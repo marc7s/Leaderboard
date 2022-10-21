@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-interface Page {
-  link: string,
-  name: string
-}
+import { Page } from 'src/app/page';
 
 @Component({
   selector: 'app-home',

@@ -1,0 +1,49 @@
+@import 'mixins'
+
+.title
+    font-size: x-large
+    margin-bottom: 1rem
+
+.configs
+    @include box
+    display: flex
+    flex-direction: column
+    align-items: center
+    background-color: var(--main-blue-lighter)
+
+.box
+    font-size: large
+
+.timeForm
+    @include box
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    
+.checkboxInput
+    display: flex
+    flex-direction: row
+    justify-content: center
+    align-items: center
+    input
+        height: 2rem
+        width: 2rem
+        margin: 0 0.5rem 0 0.5rem
+        
+    
+.box:not(:last-child)
+    margin-bottom: 2rem
+
+.input:not(:last-child)
+    margin-bottom: 1rem
+
+.submitContainer
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+
+.save
+    display: flex
+    justify-content: center

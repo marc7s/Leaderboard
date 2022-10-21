@@ -66,9 +66,9 @@
     <app-input-field-select 
         class="input" 
         placeholder="Driver" 
-        (optionStringChange)="update()" 
-        [(valueString)]="username" 
-        [optionsString]="users">
+        (optionNumberChange)="updateUser()" 
+        [(valueNumber)]="userID" 
+        [optionsNumber]="users">
     </app-input-field-select>
 
     <app-input-field-time 

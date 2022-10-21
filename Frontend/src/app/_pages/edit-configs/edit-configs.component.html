@@ -1,0 +1,69 @@
+<div class="configs box">
+    <div class="title">Existing configs</div>
+    <app-input-field-select 
+        class="input"
+        fontSize="small"
+        width="30rem"
+        placeholder="Config" 
+        (optionNumberChange)="selectConfig()" 
+        [(valueNumber)]="configID" 
+        [optionsNumber]="configOptions">
+    </app-input-field-select>
+    <app-card (click)="clear()" [disabled]="!configID">Clear</app-card>
+</div>
+
+<form class="timeForm box">
+    <div class="title">Config</div>
+
+    <app-input-field-select 
+        class="input" 
+        placeholder="Game" 
+        (optionNumberChange)="update()"
+        [(valueNumber)]="gameID" 
+        [optionsNumber]="games">
+    </app-input-field-select>
+    
+    <app-input-field-select 
+        class="input" 
+        placeholder="Track" 
+        (optionNumberChange)="update()"
+        [(valueNumber)]="trackID" 
+        [optionsNumber]="tracks">
+    </app-input-field-select>
+    
+    <app-input-field-select 
+        class="input" 
+        placeholder="Car" 
+        (optionNumberChange)="update()"
+        [(valueNumber)]="carID" 
+        [optionsNumber]="cars">
+    </app-input-field-select>
+
+    <app-input-field-select 
+        class="input" 
+        placeholder="Weather" 
+        (optionNumberChange)="update()"
+        [(valueNumber)]="weatherID" 
+        [optionsNumber]="weathers">
+    </app-input-field-select>
+
+    <app-input-field-select 
+        class="input" 
+        placeholder="Tyre" 
+        (optionNumberChange)="update()"
+        [(valueNumber)]="tyreID" 
+        [optionsNumber]="tyres">
+    </app-input-field-select>
+
+    <app-input-field-text 
+        class="input" 
+        placeholder="Description" 
+        [(text)]="description">
+    </app-input-field-text>
+
+    <div class="checkboxInput">
+        <input type="checkbox" [(ngModel)]="customSetup" name="customSetup" (optionNumberChange)="update()"> Custom Setup
+    </div>
+</form>
+
+<app-card class="save" (click)="save()" [disabled]="!description || !gameID || !trackID || !carID || !weatherID || !tyreID">{{ !configID ? 'Add' : 'Update' }} config</app-card>

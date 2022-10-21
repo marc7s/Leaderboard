@@ -6,10 +6,11 @@ SELECT
 	t.ID,
 	t.Time,
 	t.Millis,
-	t.Username,
+	t.UserID,
 	t.ConfigID,
 	t.Valid,
 	t.AddedAt,
+	u.Username,
 	tr.FullName AS TrackFullName,
 	tr.ShortName AS TrackShortName,
 	car.FullName AS CarFullName,
@@ -17,6 +18,7 @@ SELECT
 	w.Name AS Weather,
 	c.CustomSetup AS ConfigCustomSetup
 FROM Times t
+INNER JOIN Users u ON t.UserID = u.ID
 INNER JOIN Configs c ON t.ConfigID = c.ID
 INNER JOIN Tracks tr ON c.TrackID = tr.ID
 INNER JOIN Cars car ON c.CarID = car.ID

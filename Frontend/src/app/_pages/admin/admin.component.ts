@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/auth.service';
+import { Color, Red } from 'src/app/color';
+import { Page } from 'src/app/page';
 
 @Component({
   selector: 'app-admin',
@@ -7,9 +10,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminComponent implements OnInit {
 
-  constructor() { }
+  pages: Page[] = [
+    { link: '/add-time', name: 'Add time' }, 
+    { link: '/edit-cars', name: 'Edit cars' },
+    { link: '/edit-configs', name: 'Edit configs' },
+    { link: '/edit-games', name: 'Edit games' },
+    { link: '/edit-tracks', name: 'Edit tracks' },
+    { link: '/edit-tyres', name: 'Edit tyres' },
+    { link: '/edit-users', name: 'Edit users' },
+    { link: '/edit-weathers', name: 'Edit weathers' }
+  ];
+
+  redColor: Color = Red;
+
+  constructor(private auth: AuthService) { }
 
   ngOnInit(): void {
+  }
+
+  logout(): void {
+    this.auth.logout();
   }
 
 }
