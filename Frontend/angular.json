@@ -44,6 +44,11 @@
           },
           "configurations": {
             "production": {
+              "assets": [
+                "src/favicon.ico",
+                "src/assets",
+                "src/web.config"
+              ],
               "budgets": [
                 {
                   "type": "initial",
@@ -65,6 +70,11 @@
               "outputHashing": "all"
             },
             "development": {
+              "assets": [
+                "src/favicon.ico",
+                "src/assets",
+                "src/web.config"
+              ],
               "buildOptimizer": false,
               "optimization": false,
               "vendorChunk": true,
