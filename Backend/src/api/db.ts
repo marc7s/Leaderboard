@@ -10,6 +10,7 @@ import { Token, User, Time, DBTime, Config, DBConfig, DBGame, DBWeather, DBTrack
 
 import { _CAR_, _CONFIG_, _COUNTRY_, _GAME_, _TIME_, _TRACK_, _TYRE_, _USER_, _WEATHER_ } from './dbObjects';
 import { LapRecord, TimeSummary, TrackSummary } from '@shared/dataStructures';
+import { log } from '../server';
 
 const router: Router = express.Router();
 
@@ -1158,10 +1159,6 @@ function dbToTimeSummary(dbTime: DBTime, dbConfig: DBConfig): TimeSummary {
         valid: dbTime.Valid,
         customSetup: dbConfig.CustomSetup
     }
-}
-
-function log(message: string): void {
-    console.log(`[${new Date().toLocaleString()}] ${message}`);
 }
 
 module.exports = router;

@@ -1,2 +1,2 @@
-EXEC AddTrack @FullName = @CountryID = 1, N'Suzuka International Racing Course', @ShortName = N'Suzuka'
-EXEC AddTrack @FullName = @CountryID = 2, N'Autodromo Nazionale di Monza', @ShortName = N'Monza'
+EXEC AddTrack @CountryID = 1, @FullName = N'Suzuka International Racing Course', @ShortName = N'Suzuka'
+EXEC AddTrack @CountryID = 2, @FullName = N'Autodromo Nazionale di Monza', @ShortName = N'Monza'

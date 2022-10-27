@@ -9,6 +9,10 @@ import { AuthenticationError, ErrorMessage, NotFoundError, ApiRequestMalformedEr
 const app: Application = express();
 const cors = require('cors');
 
+export function log(message: string) {
+    console.log(`[${new Date().toLocaleString()}] ${message}`);
+}
+
 app.use(cors({
     origin: app.get('env') === 'development' ? 'http://localhost:4200' : 'http://old.schagerberg.com/Leaderboard'
 }));
@@ -41,7 +45,7 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
 });
 
 app.listen(process.env.port, () => {
-    console.info(`Running on port ${process.env.port}`);
+    log(`Running on port ${process.env.port}. Environment: ${app.get('env')}`);
 });
 
 function sendError(res: Response, statusCode: number, message: string, errorDetails?: Error) {
