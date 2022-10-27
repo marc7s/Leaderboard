@@ -10,7 +10,7 @@ const app: Application = express();
 const cors = require('cors');
 
 app.use(cors({
-    origin: 'http://localhost:4200'
+    origin: 'http://old.schagerberg.com/Leaderboard'
 }));
 
 app.use(express.json());
