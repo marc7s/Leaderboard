@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, isDevMode } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, from, Observable, of, Subject } from 'rxjs';
 import { Config, Country, Game, Token,  Track,  Tyre,  User, Weather } from '@shared/api';
@@ -38,7 +38,7 @@ export class ApiService {
   public LOADING = this.loadingSubject.asObservable();
   private waitingList: any[] = [];
 
-  private apiEndpoint: string = 'http://localhost:5000/api/';
+  private apiEndpoint: string = isDevMode() ? 'http://localhost:5000/api/' : 'http://old.schagerberg.com/api/';
 
   public getLocalToken(): Token | null {
     const token: string | null = localStorage.getItem('token');
