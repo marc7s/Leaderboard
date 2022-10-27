@@ -22,7 +22,7 @@ export class TrackComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private api: ApiService) {
     this.route.params.subscribe(params => {
-      this.api.getTrackSummary(params.shortName).subscribe(summary => {
+      this.api.getTrackSummary(decodeURI(params.shortName)).subscribe(summary => {
         this.track = summary.track;
         this.times = summary.times;
       });

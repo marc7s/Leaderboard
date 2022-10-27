@@ -1,3 +1,3 @@
 <ng-container *ngFor="let user of users">
-    <app-card [href]="'user/' + user.username | pagelink">{{ user.username }}</app-card>
+    <app-card [routerLink]="'user/' + user.link">{{ user.username }}</app-card>
 </ng-container>

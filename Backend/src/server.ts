@@ -14,7 +14,7 @@ export function log(message: string) {
 }
 
 app.use(cors({
-    origin: app.get('env') === 'development' ? 'http://localhost:4200' : 'http://old.schagerberg.com/Leaderboard'
+    origin: app.get('env') === 'development' ? 'http://localhost:4200' : 'http://old.schagerberg.com'
 }));
 
 app.use(express.json());

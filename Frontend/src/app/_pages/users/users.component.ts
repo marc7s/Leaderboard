@@ -1,19 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '@shared/api';
 import { ApiService } from 'src/app/api.service';
+
+interface UserAndLink {
+  username: string;
+  link: string;
+};
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.sass']
 })
+
+
+
 export class UsersComponent implements OnInit {
 
-  users: User[] = [];
+  users: UserAndLink[] = [];
 
   constructor(private api: ApiService) { 
     this.api.getUsers().subscribe(users => {
-      this.users = users;
+      const usersAndLinks: UserAndLink[] = users.map(user => {return { username: user.username, link: encodeURI(user.username) }});
+      this.users = usersAndLinks;
     });
   }
 

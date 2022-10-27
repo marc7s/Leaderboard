@@ -1,7 +1,7 @@
 {
   "scripts": {
     "start": "node dist/server.js",
-    "dev": "nodemon src/server.ts",
+    "dev": "set NODE_ENV=development && nodemon src/server.ts",
     "build": "tsc -p .",
     "prod": "set NODE_ENV=production && npm run build && pm2 start dist/server.js --name leaderboard-backend && pm2 logs leaderboard-backend",
     "stop": "pm2 stop leaderboard-backend"
