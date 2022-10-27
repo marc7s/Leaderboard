@@ -1,6 +1,6 @@
 <nav>
-  <a href="/" class="webpageName">Leaderboard</a>
-  <a href="/login" class="profile"><app-icon [icon]="profileIcon"></app-icon></a>
+  <a [routerLink]="['/']" class="webpageName">Leaderboard</a>
+  <a [routerLink]="['/login']" class="profile"><app-icon [icon]="profileIcon"></app-icon></a>
 </nav>
 <div class="content" role="main">
   <router-outlet></router-outlet>

@@ -9,7 +9,7 @@ import { Icon, IconShape, IconType, IconWithAbsPath, IconWithRelPath } from './i
 export class IconComponent implements OnInit {
 
   @Input() icon?: Icon;
-  assetsPath: string = '../assets/';
+  assetsPath: string = 'assets/';
   path: string = '';
 
   types = IconType;
