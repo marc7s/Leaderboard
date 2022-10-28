@@ -17,9 +17,10 @@ export class UserComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private api: ApiService) {
     this.route.params.subscribe(params => {
-      this.api.getUserTimesFromUsername(decodeURI(params.username)).subscribe(times => {
+      const paramUsername = decodeURI(params.username);
+      this.api.getUserTimesFromUsername(paramUsername).subscribe(times => {
         // Grab the username from the first time if it exists
-        this.username = times.length > 0 ? times[0].username : params.username;
+        this.username = times.length > 0 ? times[0].username : paramUsername;
         this.times = times;
       });
     });
