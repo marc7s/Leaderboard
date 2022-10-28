@@ -1,4 +1,4 @@
-CREATE OR ALTER FUNCTION GetUserTimes(@Username nvarchar(255)) 
+CREATE OR ALTER FUNCTION GetUserTimes(@UserID int) 
 RETURNS TABLE 
 AS
 RETURN 
@@ -23,4 +23,4 @@ INNER JOIN Configs c ON t.ConfigID = c.ID
 INNER JOIN Tracks tr ON c.TrackID = tr.ID
 INNER JOIN Cars car ON c.CarID = car.ID
 INNER JOIN Weathers w ON c.WeatherID = w.ID
-WHERE Username = @Username
+WHERE UserID = @UserID

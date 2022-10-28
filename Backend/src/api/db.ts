@@ -39,9 +39,9 @@ router.get('/me', authenticateToken, (req: any, res: Response) => {
 });
 
 router.get('/get-user-times', nameParam, (req: any, res: Response, next: NextFunction) => {
-    log('Getting user times...');
     const username: string = req.name;
-    getUserTimesFromUsername(username).then(times => res.json(times)).catch(next);
+    log(`Getting user times for user '${username}'...`);
+    getUserSummary(username).then(times => res.json(times)).catch(next);
 });
 
 router.get('/get-track-summary', shortNameParam, (req: any, res: Response, next: NextFunction) => {
@@ -306,14 +306,14 @@ async function getDBConnection(): Promise<sql.Connection> {
     });
 }
 
-async function getUserTimesFromUsername(username: string): Promise<TimeSummary[]> {
+async function getUserTimes(userID: number): Promise<TimeSummary[]> {
     return new Promise((resolve, reject) => {
         const query = "SELECT * FROM GetUserTimes(@UserID) ORDER BY Time ASC";
         const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
             if(err) reject(err);
         });
         req.on('error', err => { reject(err) });
-        req.addParameter('Username', sql.TYPES.VarChar, username);
+        req.addParameter('UserID', sql.TYPES.Int, userID);
         resolve(getTimes(req));
     });
 }
@@ -583,6 +583,17 @@ async function getTrackSummary(shortName: string): Promise<TrackSummary> {
     });
 }
 
+async function getUserSummary(username: string): Promise<TimeSummary[]> {
+    return new Promise(async (resolve, reject) => {
+        const user: User | null = await getUserFromUsername(username);
+        if(user == null) 
+            return reject(new Error("User not found"));
+
+        const times: TimeSummary[] = await getUserTimes(user.id);
+        resolve(times)
+    });
+}
+
 async function getTimes(req: sql.Request): Promise<TimeSummary[]> {
     return new Promise((resolve, reject) => {
         const times: TimeSummary[] = [];
@@ -626,6 +637,32 @@ async function getTrackFromShortName(shortName: string): Promise<Track | null> {
             });
             req.on('error', err => { reject(err) });
             req.on('requestCompleted', () => { resolve(track) });
+        })
+        .catch(reject);
+    });
+}
+
+async function getUserFromUsername(username: string): Promise<User | null> {
+    return new Promise((resolve, reject) => {
+        getDBConnection()
+        .then(conn => {
+            const query = "SELECT * FROM GetUserFromUsername(@Username)";
+            const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
+                if(err) reject(err);
+            });
+
+            req.addParameter('Username', sql.TYPES.VarChar, username);
+            let user: User | null = null;
+            conn.execSql(req);
+            req.on('row', cols => {
+                const data: any = {};
+                cols.map(col => { data[col.metadata.colName] = col.value });
+                const dbUser: DBUser = parseIntoInterface(data, _USER_);
+                
+                user = dbToUser(dbUser);
+            });
+            req.on('error', err => { reject(err) });
+            req.on('requestCompleted', () => { resolve(user) });
         })
         .catch(reject);
     });
