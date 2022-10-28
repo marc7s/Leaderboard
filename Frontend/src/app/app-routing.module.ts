@@ -5,6 +5,7 @@ import { AddTimeComponent } from './_pages/add-time/add-time.component';
 import { AdminComponent } from './_pages/admin/admin.component';
 import { EditCarsComponent } from './_pages/edit-cars/edit-cars.component';
 import { EditConfigsComponent } from './_pages/edit-configs/edit-configs.component';
+import { EditCountriesComponent } from './_pages/edit-countries/edit-countries.component';
 import { EditGamesComponent } from './_pages/edit-games/edit-games.component';
 import { EditTracksComponent } from './_pages/edit-tracks/edit-tracks.component';
 import { EditTyresComponent } from './_pages/edit-tyres/edit-tyres.component';
@@ -37,7 +38,8 @@ const routes: Routes = [
     { path: 'edit-tracks', component: EditTracksComponent },
     { path: 'edit-tyres', component: EditTyresComponent },
     { path: 'edit-users', component: EditUsersComponent },
-    { path: 'edit-weathers', component: EditWeathersComponent }
+    { path: 'edit-weathers', component: EditWeathersComponent },
+    { path: 'edit-countries', component: EditCountriesComponent }
   ]},
   { path: '**', redirectTo: '', pathMatch: 'full'}
 ];

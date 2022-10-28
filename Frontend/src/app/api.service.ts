@@ -392,6 +392,31 @@ export class ApiService {
     return this.post(config);
   }
 
+  updateCountry(countryID: number, shortName: string, fullName: string): Observable<boolean> {
+    const config = {
+      relativePath: 'db/update-country',
+      waitFor: true,
+      payload: {
+        countryID: countryID,
+        shortName: shortName,
+        fullName: fullName
+      }
+    };
+    return this.post(config);
+  }
+
+  createCountry(shortName: string, fullName: string): Observable<boolean> {
+    const config = {
+      relativePath: 'db/create-country',
+      waitFor: true,
+      payload: {
+        shortName: shortName,
+        fullName: fullName
+      }
+    };
+    return this.post(config);
+  }
+
   updateConfig(configID: number, description: string, gameID: number, trackID: number, carID: number, weatherID: number, tyreID: number, customSetup: boolean): Observable<boolean> {
     const config = {
       relativePath: 'db/update-config',

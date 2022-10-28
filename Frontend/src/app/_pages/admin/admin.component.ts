@@ -18,7 +18,8 @@ export class AdminComponent implements OnInit {
     { link: '/edit-tracks', name: 'Edit tracks' },
     { link: '/edit-tyres', name: 'Edit tyres' },
     { link: '/edit-users', name: 'Edit users' },
-    { link: '/edit-weathers', name: 'Edit weathers' }
+    { link: '/edit-weathers', name: 'Edit weathers' },
+    { link: '/edit-countries', name: 'Edit countries' }
   ];
 
   redColor: Color = Red;

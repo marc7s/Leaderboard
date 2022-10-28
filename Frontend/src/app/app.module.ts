@@ -42,6 +42,7 @@ import { EditWeathersComponent } from './_pages/edit-weathers/edit-weathers.comp
 import { EditTyresComponent } from './_pages/edit-tyres/edit-tyres.component';
 import { EditTracksComponent } from './_pages/edit-tracks/edit-tracks.component';
 import { EditConfigsComponent } from './_pages/edit-configs/edit-configs.component';
+import { EditCountriesComponent } from './_pages/edit-countries/edit-countries.component';
 
 const materialModules = [
   MatAutocompleteModule,
@@ -82,7 +83,8 @@ const materialModules = [
     EditWeathersComponent,
     EditTyresComponent,
     EditTracksComponent,
-    EditConfigsComponent
+    EditConfigsComponent,
+    EditCountriesComponent
   ],
   imports: [
     BrowserModule,

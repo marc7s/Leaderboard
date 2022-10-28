@@ -226,6 +226,23 @@ router.post('/create-track', authenticateToken, countryIDParam, shortAndFullName
     createTrack(countryID, fullName, shortName).then(success => res.json(success)).catch(next);
 });
 
+router.post('/update-country', authenticateToken, countryIDParam, shortAndFullNameParam, async (req: any, res: Response, next: NextFunction) => {
+    log('Updating country...');
+    const countryID: number = req.countryID;
+    const shortName: string = req.shortName;
+    const fullName: string = req.fullName;
+    
+    updateCountry(countryID, fullName, shortName).then(success => res.json(success)).catch(next);
+});
+
+router.post('/create-country', authenticateToken, shortAndFullNameParam, async (req: any, res: Response, next: NextFunction) => {
+    log('Creating country...');
+    const shortName: string = req.shortName;
+    const fullName: string = req.fullName;
+    
+    createCountry(fullName, shortName).then(success => res.json(success)).catch(next);
+});
+
 router.post('/update-config', 
         authenticateToken, 
         configIDParam, 
@@ -940,6 +957,47 @@ async function createTrack(countryID: number, fullName: string, shortName: strin
             });
 
             req.addParameter('CountryID', sql.TYPES.Int, countryID);
+            req.addParameter('ShortName', sql.TYPES.VarChar, shortName);
+            req.addParameter('FullName', sql.TYPES.VarChar, fullName);
+
+            conn.execSql(req);
+            req.on('error', err => { reject(err) });
+            req.on('requestCompleted', () => { resolve(true) });
+        })
+        .catch(reject);
+    });
+}
+
+async function updateCountry(countryID: number, newFullName: string, newShortName: string): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+        getDBConnection()
+        .then(conn => {
+            const query = "EXECUTE UpdateCountry @CountryID, @NewFullName, @NewShortName";
+            const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
+                if(err) reject(err);
+            });
+
+            req.addParameter('CountryID', sql.TYPES.Int, countryID);
+            req.addParameter('NewShortName', sql.TYPES.VarChar, newShortName);
+            req.addParameter('NewFullName', sql.TYPES.VarChar, newFullName);
+
+            conn.execSql(req);
+            req.on('error', err => { reject(err) });
+            req.on('requestCompleted', () => { resolve(true) });
+        })
+        .catch(reject);
+    });
+}
+
+async function createCountry(fullName: string, shortName: string): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+        getDBConnection()
+        .then(conn => {
+            const query = "EXECUTE AddCountry @FullName, @ShortName";
+            const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
+                if(err) reject(err);
+            });
+
             req.addParameter('ShortName', sql.TYPES.VarChar, shortName);
             req.addParameter('FullName', sql.TYPES.VarChar, fullName);
 
