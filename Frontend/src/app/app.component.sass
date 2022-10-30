@@ -1,3 +1,5 @@
+@import 'mixins'
+    
 .content
     display: flex
     margin: 62px auto 32px
@@ -18,7 +20,7 @@ nav
         right: 0
 
 .webpageName
-    font-size: xxx-large
+    @include font-size-1
     font-family: var(--main-font-bold)
     justify-self: center
     align-self: center

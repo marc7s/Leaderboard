@@ -1,13 +1,16 @@
+@import 'mixins'
+    
 .entry
+    @include font-size-6
     display: flex
     flex-direction: row
     justify-content: flex-start
+    align-items: center
     background-color: #808080
     color: white
     padding: 0.3rem
     margin: 0.3rem 0
     width: 100%
-    font-size: 1rem
 
     .timeContainer
         display: flex
@@ -19,9 +22,9 @@
         font-family: var(--time-font)
         font-weight: bolder
         letter-spacing: -0.07rem
-        font-size: 1.1rem
+        margin-top: 0.1rem
     #position
-        width: 2rem
+        min-width: 2rem
 
     #valid, #customSetup
         min-width: 2rem

@@ -1,9 +1,11 @@
+@import 'mixins'
+    
 .card 
+    @include margin-1
     all: unset
     border-radius: 4px
     border: 1px solid #eee
     background-color: #fafafa
-    margin: 5px 8px 0
     padding: 6px 14px
     transition: all 0.2s ease-in-out
     cursor: pointer
@@ -60,9 +62,3 @@ a:hover
 .card:hover:not(.disabled)
     background-color: var(--main-blue)
     color: white
-
-/* Responsive Styles */
-@media screen and (max-width: 767px)
-    .card
-      height: 20px
-      margin: 8px 8px

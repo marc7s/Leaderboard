@@ -1,10 +1,10 @@
 @import 'mixins'
     
 .pageTitle
+    @include font-size-1
     display: flex
     justify-content: center
-    font-size: xxx-large
-    margin-bottom: 2rem
+    margin-bottom: 3rem
 
 .container
     display: flex
@@ -12,12 +12,20 @@
     justify-content: center
     flex-wrap: wrap
 
+@media (max-width: 1000px)
+    .container
+        flex-direction: column
+        width: 100%
+
 .trackRecord
     @include box
-    margin: 0.5rem
+    @include margin-2
+    @media (max-width: 600px)
+        padding: 1rem
 
 .track
+    @include font-size-3
     display: flex
     justify-content: center
-    font-size: x-large
-    margin-bottom: 1rem
+    margin-bottom: 2rem
+    text-align: center

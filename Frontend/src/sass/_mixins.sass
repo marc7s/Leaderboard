@@ -2,3 +2,131 @@
     background-color: var(--main-dark)
     padding: 2rem
     border-radius: 1rem
+
+$mobile: 600px
+$tablet: 1000px
+$desktop: 1200px
+
+@mixin margin-1
+    @media (max-width: $mobile)
+        margin: 0.2rem
+    @media (min-width: $mobile) and (max-width: $tablet)
+        margin: 0.4rem
+    @media (min-width: $tablet)
+        margin: 0.5rem
+
+@mixin margin-2
+    @media (max-width: $mobile)
+        margin: 0.4rem
+    @media (min-width: $mobile) and (max-width: $tablet)
+        margin: 0.6rem
+    @media (min-width: $tablet)
+        margin: 0.8rem
+
+
+
+@mixin padding-1
+    @media (max-width: $mobile)
+        padding: 0.2rem
+    @media (min-width: $mobile) and (max-width: $tablet)
+        padding: 0.4rem
+    @media (min-width: $tablet)
+        padding: 0.5rem
+
+@mixin padding-2
+    @media (max-width: $mobile)
+        padding: 0.4rem
+    @media (min-width: $mobile) and (max-width: $tablet)
+        padding: 0.6rem
+    @media (min-width: $tablet)
+        padding: 0.8rem
+
+@mixin padding-3
+    @media (max-width: $mobile)
+        padding: 0.6rem
+    @media (min-width: $mobile) and (max-width: $tablet)
+        padding: 0.8rem
+    @media (min-width: $tablet)
+        padding: 1rem
+
+@mixin padding-4
+    @media (max-width: $mobile)
+        padding: 0.8rem
+    @media (min-width: $mobile) and (max-width: $tablet)
+        padding: 1rem
+    @media (min-width: $tablet)
+        padding: 1.2rem
+
+@mixin padding-5
+    @media (max-width: $mobile)
+        padding: 1rem
+    @media (min-width: $mobile) and (max-width: $tablet)
+        padding: 1.2rem
+    @media (min-width: $tablet)
+        padding: 1.4rem
+
+@mixin padding-6
+    @media (max-width: $mobile)
+        padding: 1.2rem
+    @media (min-width: $mobile) and (max-width: $tablet)
+        padding: 1.4rem
+    @media (min-width: $tablet)
+        padding: 1.6rem
+
+@mixin padding-7
+    @media (max-width: $mobile)
+        padding: 1.4rem
+    @media (min-width: $mobile) and (max-width: $tablet)
+        padding: 1.6rem
+    @media (min-width: $tablet)
+        padding: 1.8rem
+
+
+
+@mixin font-size-1
+    @media (max-width: $mobile)
+        font-size: 2rem
+    @media (min-width: $mobile) and (max-width: $tablet)
+        font-size: 2.5rem
+    @media (min-width: $tablet)
+        font-size: 3rem
+
+@mixin font-size-2
+    @media (max-width: $mobile)
+        font-size: 1.8rem
+    @media (min-width: $mobile) and (max-width: $tablet)
+        font-size: 2rem
+    @media (min-width: $tablet)
+        font-size: 2.2rem
+
+@mixin font-size-3
+    @media (max-width: $mobile)
+        font-size: 1.5rem
+    @media (min-width: $mobile) and (max-width: $tablet)
+        font-size: 1.7rem
+    @media (min-width: $tablet)
+        font-size: 1.9rem
+
+@mixin font-size-4
+    @media (max-width: $mobile)
+        font-size: 1.3rem
+    @media (min-width: $mobile) and (max-width: $tablet)
+        font-size: 1.5rem
+    @media (min-width: $tablet)
+        font-size: 1.7rem
+
+@mixin font-size-5
+    @media (max-width: $mobile)
+        font-size: 1rem
+    @media (min-width: $mobile) and (max-width: $tablet)
+        font-size: 1.2rem
+    @media (min-width: $tablet)
+        font-size: 1.5rem
+
+@mixin font-size-6
+    @media (max-width: $mobile)
+        font-size: 0.8rem
+    @media (min-width: $mobile) and (max-width: $tablet)
+        font-size: 1rem
+    @media (min-width: $tablet)
+        font-size: 1.3rem
