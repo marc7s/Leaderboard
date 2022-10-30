@@ -1,1 +1,10 @@
-EXEC AddCar @FullName = N'Ferrari SF21', @ShortName = N'Ferrari SF21'
+EXEC AddCar @FullName = N'Mercedes AMG W12', @ShortName = N'Mercedes W12';
+EXEC AddCar @FullName = N'Williams FW43B', @ShortName = N'Williams FW43B';
+EXEC AddCar @FullName = N'Ferrari SF21', @ShortName = N'Ferrari SF21';
+EXEC AddCar @FullName = N'Aston Martin AMR21', @ShortName = N'Aston Martin AMR21';
+EXEC AddCar @FullName = N'Alpine A521', @ShortName = N'Alpine A521';
+EXEC AddCar @FullName = N'McLaren MCL35M', @ShortName = N'McLaren MCL35M';
+EXEC AddCar @FullName = N'Red Bull Racing RB16B', @ShortName = N'Red Bull RB16B';
+EXEC AddCar @FullName = N'Alfa Romeo C41', @ShortName = N'Alfa Romeo C41';
+EXEC AddCar @FullName = N'AlphaTauri AT02', @ShortName = N'AlphaTauri AT02';
+EXEC AddCar @FullName = N'Haas VF-21', @ShortName = N'Haas VF-21';

@@ -7,3 +7,4 @@ SELECT
 	Name,
 	AddedAt
 FROM Games
+WHERE Authentic = 0

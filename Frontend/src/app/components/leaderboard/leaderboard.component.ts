@@ -34,8 +34,18 @@ export class LeaderboardComponent implements OnInit {
     this.addDefaultLeaderboardIfEmpty();
   }
 
-  ngOnChanges(changes: SimpleChanges): void{
+  timeSummaryCompare(a: TimeSummary, b: TimeSummary): number {
+    return a.millis - b.millis;
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
     this.addDefaultLeaderboardIfEmpty();
+  }
+
+  sort(): void {
+    this.leaderboards.forEach(leaderboard => {
+      leaderboard.times.sort(this.timeSummaryCompare);
+    });
   }
 
   splitBy(split: Split): void {
@@ -51,6 +61,7 @@ export class LeaderboardComponent implements OnInit {
     this.leaderboards = this.removeDuplicates(this.leaderboards);
     
     this.addDefaultLeaderboardIfEmpty();
+    this.sort();
   }
 
   removeDuplicates(leaderboards: Leaderboard[]): Leaderboard[] { 

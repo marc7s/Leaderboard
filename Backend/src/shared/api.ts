@@ -136,3 +136,47 @@ export interface DBTime {
     Weather: string,
     AddedAt: Date
 }
+
+export interface DBClass {
+    ID: number,
+    Name: string
+}
+
+export interface Class {
+    id: number,
+    name: string
+}
+
+export interface DBDriver {
+    ID: number,
+    FirstName: string,
+    LastName: string,
+    ShortName: string,
+    Number: number,
+    ClassID: number,
+    CountryID: number
+}
+
+export interface Driver {
+    firstName: string,
+    lastName: string,
+    shortName: string,
+    number: number,
+    country: Country
+}
+
+export interface DBAuthenticTrackRecord {
+    ID: number,
+    Time: string,
+    Millis: number,
+    ClassName: string,
+    DriverFirstName: string,
+    DriverLastName: string,
+    DriverShortName: string,
+    DriverNumber: number,
+    CarShortName: string,
+    WeatherName: string,
+    TyreShortName: string,
+    CustomSetup: boolean,
+    Valid: boolean
+}

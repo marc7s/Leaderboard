@@ -21,6 +21,7 @@ CREATE TABLE Users(
 CREATE TABLE Games(
     ID int IDENTITY(1, 1) NOT NULL PRIMARY KEY,
     Name nvarchar(255) NOT NULL UNIQUE,
+    Authentic bit NOT NULL DEFAULT 0,
     AddedAt datetime NOT NULL DEFAULT GETDATE()
 );
 
@@ -68,14 +69,62 @@ CREATE TABLE Configs(
     WeatherID int FOREIGN KEY REFERENCES Weathers(ID),
     TyreID int FOREIGN KEY REFERENCES Tyres(ID),
     CustomSetup bit NOT NULL,
+    Authentic bit NOT NULL DEFAULT 0,
     AddedAt datetime NOT NULL DEFAULT GETDATE()
 );
 
 CREATE TABLE Times(
     ID int IDENTITY(1, 1) NOT NULL PRIMARY KEY,
     Time Time(3) NOT NULL,
-    Millis bigint NOT NULL,
+    Millis int NOT NULL,
     UserID int FOREIGN KEY REFERENCES Users(ID),
+    ConfigID int FOREIGN KEY REFERENCES Configs(ID),
+    Valid bit NOT NULL,
+    AddedAt datetime NOT NULL DEFAULT GETDATE()
+);
+
+CREATE TABLE AuthenticClasses(
+    ID int IDENTITY(1, 1) NOT NULL PRIMARY KEY,
+    Name nvarchar(255) NOT NULL UNIQUE
+);
+
+CREATE TABLE AuthenticDrivers(
+    ID int IDENTITY(1, 1) NOT NULL PRIMARY KEY,
+    FirstName nvarchar(255) NOT NULL,
+    LastName nvarchar(255) NOT NULL,
+    ShortName nvarchar(3) NOT NULL,
+    Number int NOT NULL,
+    ClassID int FOREIGN KEY REFERENCES AuthenticClasses(ID),
+    CountryID int FOREIGN KEY REFERENCES Countries(ID),
+    AddedAt datetime NOT NULL DEFAULT GETDATE()
+);
+
+CREATE TABLE AuthenticTeams(
+    ID int IDENTITY(1, 1) NOT NULL PRIMARY KEY,
+    FullName nvarchar(255) NOT NULL UNIQUE,
+    ShortName nvarchar(255) NOT NULL UNIQUE,
+    ClassID int FOREIGN KEY REFERENCES AuthenticClasses(ID),
+    CountryID int FOREIGN KEY REFERENCES Countries(ID),
+    AddedAt datetime NOT NULL DEFAULT GETDATE()
+);
+
+CREATE TABLE AuthenticSeasons(
+    ID int IDENTITY(1, 1) NOT NULL PRIMARY KEY,
+    Year int NOT NULL UNIQUE,
+    NumberOfRaces int NOT NULL,
+    ClassID int FOREIGN KEY REFERENCES AuthenticClasses(ID),
+    DriversChampionID int FOREIGN KEY REFERENCES AuthenticDrivers(ID),
+    ConstructorsChampionID int FOREIGN KEY REFERENCES AuthenticTeams(ID),
+    AddedAt datetime NOT NULL DEFAULT GETDATE()
+);
+
+CREATE TABLE AuthenticTimes(
+    ID int IDENTITY(1, 1) NOT NULL PRIMARY KEY,
+    Time Time(3) NOT NULL,
+    Millis int NOT NULL,
+    ClassID int FOREIGN KEY REFERENCES AuthenticClasses(ID),
+    DriverID int FOREIGN KEY REFERENCES AuthenticDrivers(ID),
+    TeamID int FOREIGN KEY REFERENCES AuthenticTeams(ID),
     ConfigID int FOREIGN KEY REFERENCES Configs(ID),
     Valid bit NOT NULL,
     AddedAt datetime NOT NULL DEFAULT GETDATE()

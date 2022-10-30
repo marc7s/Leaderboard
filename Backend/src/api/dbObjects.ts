@@ -1,4 +1,4 @@
-import { DBCar, DBConfig, DBGame, DBTime, DBTrack, DBTyre, DBUser, DBWeather } from "@shared/api";
+import { DBAuthenticTrackRecord, DBCar, DBClass, DBConfig, DBCountry, DBDriver, DBGame, DBTime, DBTrack, DBTyre, DBUser, DBWeather } from "@shared/api";
 
 export const _USER_: DBUser = {
     ID: -1,
@@ -51,7 +51,7 @@ export const _TYRE_: DBTyre = {
     AddedAt: new Date()
 }
 
-export const _COUNTRY_ = {
+export const _COUNTRY_: DBCountry = {
     ID: -1,
     FullName: '',
     ShortName: '',
@@ -67,4 +67,35 @@ export const _TIME_: DBTime = {
     Valid: false,
     Weather: '',
     AddedAt: new Date()
+}
+
+export const _AUTHENTICTRACKRECORD_: DBAuthenticTrackRecord = {
+    ID: -1,
+    Time: '',
+    Millis: -1,
+    ClassName: '',
+    DriverFirstName: '',
+    DriverLastName: '',
+    DriverShortName: '',
+    DriverNumber: -1,
+    CarShortName: '',
+    WeatherName: '',
+    TyreShortName: '',
+    CustomSetup: false,
+    Valid: false
+}
+
+export const _DRIVER_: DBDriver = {
+    ID: -1,
+    FirstName: '',
+    LastName: '',
+    ShortName: '',
+    Number: -1,
+    ClassID: -1,
+    CountryID: -1
+}
+
+export const _CLASS_: DBClass = {
+    ID: -1,
+    Name: ''
 }

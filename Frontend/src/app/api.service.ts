@@ -3,7 +3,7 @@ import { Injectable, isDevMode } from '@angular/core';
 import { BehaviorSubject, from, Observable, of, Subject } from 'rxjs';
 import { Config, Country, Game, Token,  Track,  Tyre,  User, Weather } from '@shared/api';
 import { finalize } from 'rxjs/operators';
-import { LapRecord, TimeSummary, TrackSummary } from '@shared/dataStructures';
+import { AuthenticTrackRecord, LapRecord, TimeSummary, TrackSummary } from '@shared/dataStructures';
 
 interface RequestConfigParam {
   relativePath: string,
@@ -113,7 +113,7 @@ export class ApiService {
     return this.post(config);
   }
 
-  getUserTimesFromUsername(username: string): Observable<TimeSummary[]> {
+  getUserTimesFromUsername(username: string): Observable<TrackSummary[]> {
     const reqParams: HttpParams = new HttpParams().set('name', username);
     const config = {
       relativePath: 'db/get-user-times',
@@ -211,6 +211,17 @@ export class ApiService {
       waitFor: true
     };
     return this.get(config);
+  }
+
+  getAuthenticTrackRecord(trackID: number): Observable<AuthenticTrackRecord | null> {
+    const config = {
+      relativePath: 'db/get-authentic-track-record',
+      waitFor: true,
+      payload: {
+        trackID: trackID
+      }
+    };
+    return this.post(config);
   }
 
   addTimeWithConfig(configID: number, userID: number, time: string, valid: boolean): Observable<boolean> {

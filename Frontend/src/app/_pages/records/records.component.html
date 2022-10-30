@@ -3,7 +3,7 @@
     <div class="trackRecord" *ngFor="let lapRecords of trackRecords | keyvalue">
         <div class="track">{{ lapRecords.key }}</div>
         <div class="lapRecord" *ngFor="let record of lapRecords.value">
-            <app-record-entry [config]="record.config" [time]="record.time"></app-record-entry>
+            <app-record-entry [config]="record.config" [timeSummary]="record.timeSummary" [authentic]="!!record.authentic"></app-record-entry>
         </div>
     </div>
 </div>

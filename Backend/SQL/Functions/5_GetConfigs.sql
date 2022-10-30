@@ -26,3 +26,4 @@ INNER JOIN Tracks t ON c.TrackID = t.ID
 INNER JOIN Cars car on c.CarID = car.ID
 INNER JOIN Weathers w ON c.WeatherID = w.ID
 INNER JOIN Tyres tyre ON c.TyreID = tyre.ID
+WHERE c.Authentic = 0

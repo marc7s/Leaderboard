@@ -4,6 +4,8 @@ import { Track } from '@shared/api';
 import { TimeSummary } from '@shared/dataStructures';
 import { ApiService } from 'src/app/api.service';
 import { Color, FerrariRed } from 'src/app/color';
+import { timeSummarySorting } from 'src/app/sorting-functions';
+import { getUserNameFromDriver } from 'src/app/user';
 import { Split } from 'src/split';
 import { Size } from 'src/styleSettings';
 
@@ -25,6 +27,15 @@ export class TrackComponent implements OnInit {
       this.api.getTrackSummary(decodeURI(params.shortName)).subscribe(summary => {
         this.track = summary.track;
         this.times = summary.times;
+        this.api.getAuthenticTrackRecord(this.track.id).subscribe(trackRecord => {
+          if(trackRecord == null)
+            return;
+          const authenticRecord: TimeSummary = trackRecord.timeSummary;
+          authenticRecord.username = getUserNameFromDriver(trackRecord.driver);
+
+          this.times.push(authenticRecord);
+          this.times.sort(timeSummarySorting);
+        });
       });
     });
   }

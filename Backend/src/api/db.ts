@@ -6,10 +6,10 @@ import * as sql from 'tedious';
 import { randomBytes } from 'crypto';
 import { timeParam, timeIDParam, loginParam, shortNameParam, validParam, customSetupParam, addTimeParam, carIDParam, gameIDParam, shortAndFullNameParam, nameParam, tyreIDParam, weatherIDParam, trackIDParam, countryIDParam, userIDParam, configIDParam, descriptionParam } from './validations';
 import { AuthenticationError, DatabaseConnectionError, JwtToken, JwtTokenBody } from '../utils';
-import { Token, User, Time, DBTime, Config, DBConfig, DBGame, DBWeather, DBTrack, DBCar, Game, DBCountry, Country, Track, Car, Weather, Login, Tyre, DBTyre, DBUser } from '@shared/api';
+import { Token, User, Time, DBTime, Config, DBConfig, DBGame, DBWeather, DBTrack, DBCar, Game, DBCountry, Country, Track, Car, Weather, Login, Tyre, DBTyre, DBUser, DBDriver, Driver, DBClass, Class } from '@shared/api';
 
-import { _CAR_, _CONFIG_, _COUNTRY_, _GAME_, _TIME_, _TRACK_, _TYRE_, _USER_, _WEATHER_ } from './dbObjects';
-import { LapRecord, TimeSummary, TrackSummary } from '@shared/dataStructures';
+import { _CAR_, _CLASS_, _CONFIG_, _COUNTRY_, _DRIVER_, _GAME_, _TIME_, _TRACK_, _TYRE_, _USER_, _WEATHER_ } from './dbObjects';
+import { AuthenticTrackRecord, LapRecord, TimeSummary, TrackSummary } from '@shared/dataStructures';
 import { log } from '../server';
 
 const router: Router = express.Router();
@@ -45,8 +45,8 @@ router.get('/get-user-times', nameParam, (req: any, res: Response, next: NextFun
 });
 
 router.get('/get-track-summary', shortNameParam, (req: any, res: Response, next: NextFunction) => {
-    log('Getting track summary...');
     const shortName: string = req.query.shortName;
+    log(`Getting track summary for ${shortName}...`);
     getTrackSummary(shortName).then(summary => res.json(summary)).catch(next);
 });
 
@@ -95,11 +95,18 @@ router.get('/get-records', (req: any, res: Response, next: NextFunction) => {
     getRecords().then(records => res.json(records)).catch(next);
 });
 
+router.post('/get-authentic-track-record', trackIDParam, async (req: any, res: Response, next: NextFunction) => {
+    const trackID: number = req.trackID;
+    log(`Getting authentic record for track ID ${trackID}...`);
+    
+    getAuthenticRecord(trackID).then(record => res.json(record)).catch(next);
+});
+
 router.post('/add-time', authenticateToken, timeParam, userIDParam, validParam, addTimeParam, async (req: any, res: Response, next: NextFunction) => {
-    log('Adding time...');
     const userID: number = req.userID;
     const time: string = req.time;
     const valid: boolean = req.valid;
+    log(`Adding time: ${time} for user ${userID}...`);
     
     let configID: number | null = req.configID;
     
@@ -122,123 +129,123 @@ router.post('/add-time', authenticateToken, timeParam, userIDParam, validParam, 
 });
 
 router.post('/remove-time', authenticateToken, timeIDParam, async (req: any, res: Response, next: NextFunction) => {
-    log('Removing time...');
     const timeID: number = req.timeID;
+    log(`Removing time ${timeID}...`);
     
     removeTime(timeID).then(product => res.json(product)).catch(next);
 });
 
 router.post('/update-car', authenticateToken, carIDParam, shortAndFullNameParam, async (req: any, res: Response, next: NextFunction) => {
-    log('Updating car...');
     const carID: number = req.carID;
     const shortName: string = req.shortName;
     const fullName: string = req.fullName;
+    log(`Updating car ${carID}...`);
     
     updateCar(carID, fullName, shortName).then(success => res.json(success)).catch(next);
 });
 
 router.post('/create-car', authenticateToken, shortAndFullNameParam, async (req: any, res: Response, next: NextFunction) => {
-    log('Creating car...');
     const shortName: string = req.shortName;
     const fullName: string = req.fullName;
+    log(`Creating car ${shortName}...`);
     
     createCar(fullName, shortName).then(success => res.json(success)).catch(next);
 });
 
 router.post('/update-game', authenticateToken, gameIDParam, nameParam, async (req: any, res: Response, next: NextFunction) => {
-    log('Updating game...');
     const gameID: number = req.gameID;
     const name: string = req.name;
+    log(`Updating game ${gameID}...`);
     
     updateGame(gameID, name).then(success => res.json(success)).catch(next);
 });
 
 router.post('/create-game', authenticateToken, nameParam, async (req: any, res: Response, next: NextFunction) => {
-    log('Creating game...');
     const name: string = req.name;
+    log(`Creating game ${name}...`);
     
     createGame(name).then(success => res.json(success)).catch(next);
 });
 
 router.post('/update-tyre', authenticateToken, tyreIDParam, shortAndFullNameParam, async (req: any, res: Response, next: NextFunction) => {
-    log('Updating tyre...');
     const tyreID: number = req.tyreID;
     const shortName: string = req.shortName;
     const fullName: string = req.fullName;
+    log(`Updating tyre ${tyreID}...`);
     
     updateTyre(tyreID, fullName, shortName).then(success => res.json(success)).catch(next);
 });
 
 router.post('/create-tyre', authenticateToken, shortAndFullNameParam, async (req: any, res: Response, next: NextFunction) => {
-    log('Creating tyre...');
     const shortName: string = req.shortName;
     const fullName: string = req.fullName;
+    log(`Creating tyre ${shortName}...`);
     
     createTyre(fullName, shortName).then(success => res.json(success)).catch(next);
 });
 
 router.post('/update-user', authenticateToken, userIDParam, nameParam, async (req: any, res: Response, next: NextFunction) => {
-    log('Updating user...');
     const userID: number = req.userID;
     const newUsername: string = req.name;
+    log(`Updating user ${userID}...`);
     
     updateUser(userID, newUsername).then(success => res.json(success)).catch(next);
 });
 
 router.post('/create-user', authenticateToken, nameParam, async (req: any, res: Response, next: NextFunction) => {
-    log('Creating user...');
     const username: string = req.name;
+    log(`Creating user ${username}...`);
     
     createUser(username).then(success => res.json(success)).catch(next);
 });
 
 router.post('/update-weather', authenticateToken, weatherIDParam, nameParam, async (req: any, res: Response, next: NextFunction) => {
-    log('Updating weather...');
     const weatherID: number = req.weatherID;
     const name: string = req.name;
+    log(`Updating weather ${weatherID}...`);
     
     updateWeather(weatherID, name).then(success => res.json(success)).catch(next);
 });
 
 router.post('/create-weather', authenticateToken, nameParam, async (req: any, res: Response, next: NextFunction) => {
-    log('Creating weather...');
     const name: string = req.name;
+    log(`Creating weather ${name}...`);
     
     createWeather(name).then(success => res.json(success)).catch(next);
 });
 
 router.post('/update-track', authenticateToken, trackIDParam, countryIDParam, shortAndFullNameParam, async (req: any, res: Response, next: NextFunction) => {
-    log('Updating track...');
     const trackID: number = req.trackID;
     const countryID: number = req.countryID;
     const shortName: string = req.shortName;
     const fullName: string = req.fullName;
+    log(`Updating track ${trackID}...`);
     
     updateTrack(trackID, countryID, fullName, shortName).then(success => res.json(success)).catch(next);
 });
 
 router.post('/create-track', authenticateToken, countryIDParam, shortAndFullNameParam, async (req: any, res: Response, next: NextFunction) => {
-    log('Creating track...');
     const countryID: number = req.countryID;
     const shortName: string = req.shortName;
     const fullName: string = req.fullName;
+    log(`Creating track ${shortName}...`);
     
     createTrack(countryID, fullName, shortName).then(success => res.json(success)).catch(next);
 });
 
 router.post('/update-country', authenticateToken, countryIDParam, shortAndFullNameParam, async (req: any, res: Response, next: NextFunction) => {
-    log('Updating country...');
     const countryID: number = req.countryID;
     const shortName: string = req.shortName;
     const fullName: string = req.fullName;
+    log(`Updating country ${countryID}...`);
     
     updateCountry(countryID, fullName, shortName).then(success => res.json(success)).catch(next);
 });
 
 router.post('/create-country', authenticateToken, shortAndFullNameParam, async (req: any, res: Response, next: NextFunction) => {
-    log('Creating country...');
     const shortName: string = req.shortName;
     const fullName: string = req.fullName;
+    log(`Creating country ${shortName}...`);
     
     createCountry(fullName, shortName).then(success => res.json(success)).catch(next);
 });
@@ -254,7 +261,6 @@ router.post('/update-config',
         tyreIDParam, 
         customSetupParam,
         async (req: any, res: Response, next: NextFunction) => {
-    log('Updating config...');
     const configID: number = req.configID;
     const description: string = req.description;
     const gameID: number = req.gameID;
@@ -263,6 +269,7 @@ router.post('/update-config',
     const weatherID: number = req.weatherID;
     const tyreID: number = req.tyreID;
     const customSetup: boolean = req.customSetup;
+    log(`Updating config ${configID}...`);
 
     updateConfig(configID, description, gameID, trackID, carID, weatherID, tyreID, customSetup).then(success => res.json(success)).catch(next);
 });
@@ -277,7 +284,6 @@ router.post('/create-config',
         tyreIDParam, 
         customSetupParam,
         async (req: any, res: Response, next: NextFunction) => {
-    log('Creating config...');
     const description: string = req.description;
     const gameID: number = req.gameID;
     const trackID: number = req.trackID;
@@ -285,6 +291,7 @@ router.post('/create-config',
     const weatherID: number = req.weatherID;
     const tyreID: number = req.tyreID;
     const customSetup: boolean = req.customSetup;
+    log(`Creating config ${description}...`);
 
     createConfig(description, gameID, trackID, carID, weatherID, tyreID, customSetup).then(success => res.json(success)).catch(next);
 });
@@ -320,18 +327,6 @@ async function getDBConnection(): Promise<sql.Connection> {
         });
         
         conn.connect();
-    });
-}
-
-async function getUserTimes(userID: number): Promise<TimeSummary[]> {
-    return new Promise((resolve, reject) => {
-        const query = "SELECT * FROM GetUserTimes(@UserID) ORDER BY Time ASC";
-        const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
-            if(err) reject(err);
-        });
-        req.on('error', err => { reject(err) });
-        req.addParameter('UserID', sql.TYPES.Int, userID);
-        resolve(getTimes(req));
     });
 }
 
@@ -545,6 +540,49 @@ async function getCountries(): Promise<Country[]> {
     });
 }
 
+async function getAuthenticRecord(trackID: number): Promise<AuthenticTrackRecord | null> {
+    return new Promise((resolve, reject) => {
+        let trackRecord: AuthenticTrackRecord | null = null;
+        const query = "SELECT * FROM GetAuthenticTrackRecord(@TrackID)";
+        const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
+            if(err) reject(err);
+        });
+
+
+        req.addParameter('TrackID', sql.TYPES.Int, trackID);
+
+        getDBConnection()
+        .then(conn => {
+            conn.execSql(req);
+            req.on('error', err => { reject(err) });
+            req.on('row', cols => {
+                const data: any = {};
+                cols.map(col => { data[col.metadata.colName] = col.value });
+                const dbTime: DBTime = parseIntoInterface(data, _TIME_);
+                const dbClass: DBClass = parseIntoInterface(data, _CLASS_, 'Class');
+                const dbDriver: DBDriver = parseIntoInterface(data, _DRIVER_, 'Driver');
+                const dbConfig: DBConfig = parseIntoInterface(data, _CONFIG_, 'Config');
+                const dbDriverCountry: DBCountry = parseIntoInterface(data, _COUNTRY_, 'DriverCountry');
+                const dbGame: DBGame = parseIntoInterface(data, _GAME_, 'Game');
+                const dbTrack: DBTrack = parseIntoInterface(data, _TRACK_, 'Track');
+                const dbCar: DBCar = parseIntoInterface(data, _CAR_, 'Car');
+                const dbWeather: DBWeather = parseIntoInterface(data, _WEATHER_, 'Weather');
+                const dbTyre: DBTyre = parseIntoInterface(data, _TYRE_, 'Tyre');
+                const dbCountry: DBCountry = parseIntoInterface(data, _COUNTRY_, 'Country');
+
+                trackRecord = {
+                    driver: dbToDriver(dbDriver, dbDriverCountry),
+                    class: dbToClass(dbClass),
+                    timeSummary: dbToTimeSummary(dbTime, dbConfig, true),
+                    config: dbToConfig(dbConfig, dbGame, dbTrack, dbCar, dbWeather, dbTyre, dbCountry)
+                }
+            });
+            req.on('requestCompleted', () => { resolve(trackRecord) });
+        })
+        .catch(reject);
+    });
+}
+
 async function getRecords(): Promise<LapRecord[]> {
     return new Promise((resolve, reject) => {
         const records: LapRecord[] = [];
@@ -569,16 +607,18 @@ async function getRecords(): Promise<LapRecord[]> {
                 const dbCountry: DBCountry = parseIntoInterface(data, _COUNTRY_, 'Country');
 
                 const config: Config = dbToConfig(dbConfig, dbGame, dbTrack, dbCar, dbWeather, dbTyre, dbCountry);
-                const time: Time = {
+                const timeSummary: TimeSummary = {
                   id: dbTime.ID,
                   time: dbTime.Time,
                   millis: dbTime.Millis,
                   username: dbTime.Username,
-                  config: config,
-                  valid: dbTime.Valid  
+                  weather: config.weather.name,
+                  valid: dbTime.Valid,
+                  customSetup: config.customSetup,
+                  authentic: false
                 };
 
-                records.push({ config: config, time: time });
+                records.push({ config: config, timeSummary: timeSummary });
             });
             req.on('requestCompleted', () => { resolve(records) });
         })
@@ -596,18 +636,50 @@ async function getTrackSummary(shortName: string): Promise<TrackSummary> {
         resolve({
             track: track,
             times: times
-        })
+        });
     });
 }
 
-async function getUserSummary(username: string): Promise<TimeSummary[]> {
+async function getUserSummary(username: string): Promise<TrackSummary[]> {
     return new Promise(async (resolve, reject) => {
         const user: User | null = await getUserFromUsername(username);
-        if(user == null) 
+        if(user == null)
             return reject(new Error("User not found"));
+        
+        const trackSummaries: TrackSummary[] = [];
+        const trackSummariesMap: Map<number, TimeSummary[]> = new Map();
+        const tracks: Track[] = [];
+        const query = "SELECT * FROM GetUserTimes(@UserID) ORDER BY Time ASC";
 
-        const times: TimeSummary[] = await getUserTimes(user.id);
-        resolve(times)
+        const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
+            if(err) reject(err);
+        });
+        req.addParameter('UserID', sql.TYPES.Int, user.id);
+        
+        getDBConnection()
+        .then(conn => {
+            conn.execSql(req);
+            req.on('error', err => { reject(err) });
+            req.on('row', cols => {
+                const data: any = {};
+                cols.map(col => { data[col.metadata.colName] = col.value });
+                const dbTime: DBTime = parseIntoInterface(data, _TIME_);
+                const dbConfig: DBConfig = parseIntoInterface(data, _CONFIG_, 'Config');
+                const dbTrack: DBTrack = parseIntoInterface(data, _TRACK_, 'Track');
+                const dbCountry: DBCountry = parseIntoInterface(data, _COUNTRY_, 'Country');
+
+                const track: Track = dbToTrack(dbTrack, dbCountry);
+                tracks.push(track);
+                const timeSummary: TimeSummary = dbToTimeSummary(dbTime, dbConfig, false);
+
+                trackSummariesMap.set(track.id, (trackSummariesMap.get(track.id) || []).concat(timeSummary));
+            });
+            req.on('requestCompleted', () => { 
+                trackSummariesMap.forEach((times, trackID) => trackSummaries.push({ track: tracks.find(track => track.id === trackID)!, times: times })); 
+                resolve(trackSummaries);
+            });
+        })
+        .catch(reject);
     });
 }
 
@@ -623,7 +695,7 @@ async function getTimes(req: sql.Request): Promise<TimeSummary[]> {
                 const dbTime: DBTime = parseIntoInterface(data, _TIME_);
                 const dbConfig: DBConfig = parseIntoInterface(data, _CONFIG_, 'Config');
                 
-                times.push(dbToTimeSummary(dbTime, dbConfig));
+                times.push(dbToTimeSummary(dbTime, dbConfig, false));
             });
             req.on('error', err => { reject(err) });
             req.on('requestCompleted', () => { resolve(times) });
@@ -1244,7 +1316,7 @@ function dbToTime(dbTime: DBTime, dbConfig: DBConfig, dbGame: DBGame, dbTrack: D
     }
 }
 
-function dbToTimeSummary(dbTime: DBTime, dbConfig: DBConfig): TimeSummary {
+function dbToTimeSummary(dbTime: DBTime, dbConfig: DBConfig, authentic: boolean): TimeSummary {
     return {
         id: dbTime.ID,
         time: dbTime.Time,
@@ -1252,7 +1324,25 @@ function dbToTimeSummary(dbTime: DBTime, dbConfig: DBConfig): TimeSummary {
         username: dbTime.Username,
         weather: dbTime.Weather,
         valid: dbTime.Valid,
-        customSetup: dbConfig.CustomSetup
+        customSetup: dbConfig.CustomSetup,
+        authentic: authentic
+    }
+}
+
+function dbToDriver(dbDriver: DBDriver, dbCountry: DBCountry): Driver {
+    return {
+        firstName: dbDriver.FirstName,
+        lastName: dbDriver.LastName,
+        shortName: dbDriver.ShortName,
+        number: dbDriver.Number,
+        country: dbToCountry(dbCountry)
+    }
+}
+
+function dbToClass(dbClass: DBClass): Class {
+    return {
+        id: dbClass.ID,
+        name: dbClass.Name
     }
 }
 

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Time, Config } from '@shared/api';
+import { Config } from '@shared/api';
+import { TimeSummary } from '@shared/dataStructures';
 
 @Component({
   selector: 'app-record-entry',
@@ -8,7 +9,8 @@ import { Time, Config } from '@shared/api';
 })
 export class RecordEntryComponent implements OnInit {
   @Input() config: Config | null = null;
-  @Input() time: Time | null = null;
+  @Input() timeSummary: TimeSummary | null = null;
+  @Input() authentic: boolean = false;
   
   constructor() { }
 

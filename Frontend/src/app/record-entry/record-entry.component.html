@@ -1,11 +1,11 @@
-<div *ngIf="config && time" class="recordContainer">
-    <div id="username">{{ time.username }}</div>
-    <div>{{ config.game.name }}</div>
+<div *ngIf="config && timeSummary" class="recordContainer" [class.authentic]="authentic">
+    <div id="username">{{ timeSummary.username }}</div>
+    <div id="game">{{ config.game.name }}</div>
     <div>{{ config.car.shortName }}</div>
     <div>{{ config.weather.name }}</div>
     <div>{{ config.tyre.shortName }}</div>
     <div>{{ config.customSetup ? 'Custom' : 'Default' }}</div>
-    <div id="time">{{time.time | time}}</div>
-    <div id="valid" [class.invalid]="!time.valid"></div>
+    <div id="time">{{timeSummary.time | time}}</div>
+    <div id="valid" [class.invalid]="!timeSummary.valid"></div>
 </div>
 

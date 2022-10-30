@@ -1,4 +1,4 @@
-<div *ngIf="time" class="entry">
+<div *ngIf="time" class="entry" [class.authentic]="time.authentic">
     <div id="position">{{position}}</div>
     <div id="user">{{time.username}}</div>
     <div class="timeContainer">

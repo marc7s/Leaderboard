@@ -1,4 +1,4 @@
-import { Config, Time, Track } from "./api";
+import { Class, Config, Driver, Track } from "./api";
 
 export interface TimeSummary {
     id: number,
@@ -7,7 +7,8 @@ export interface TimeSummary {
     username: string,
     weather: string,
     valid: boolean,
-    customSetup: boolean
+    customSetup: boolean,
+    authentic: boolean
 }
 
 export interface TrackSummary {
@@ -24,7 +25,18 @@ export interface Leaderboard {
 
 export interface LapRecord {
     config: Config,
-    time: Time
+    timeSummary: TimeSummary,
+    authentic?: {
+        driver: Driver,
+        class: Class
+    }
+}
+
+export interface AuthenticTrackRecord {
+    driver: Driver,
+    class: Class,
+    timeSummary: TimeSummary,
+    config: Config
 }
 
 export interface Pair {

@@ -57,7 +57,8 @@ export class AddTimeComponent implements OnInit {
           username: this.username ?? '',
           weather: '',
           valid: !this.invalid,
-          customSetup: this.customSetup
+          customSetup: this.customSetup,
+          authentic: false
         }
       ];
     } else {
