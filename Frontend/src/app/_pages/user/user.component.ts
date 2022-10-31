@@ -11,6 +11,7 @@ import { Split } from 'src/split';
 })
 export class UserComponent implements OnInit {
 
+  numberOfRecords: number = 0;
   username: string = '';
   trackSummaries: TrackSummary[] = [];
   splits: Split[] = [Split.Weather, Split.Valid];
@@ -22,6 +23,11 @@ export class UserComponent implements OnInit {
         // Grab the username from the first time if it exists
         this.username = trackSummaries.length > 0 ? trackSummaries[0].times[0].username : paramUsername;
         this.trackSummaries = trackSummaries;
+
+        this.api.getNumberOfRecordsFromUsername(paramUsername).subscribe(numberOfRecords => {
+          if(numberOfRecords != null)
+            this.numberOfRecords = numberOfRecords;
+        });
       });
     });
    }

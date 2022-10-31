@@ -1,8 +1,7 @@
 @import 'mixins'
 
 .title
-    font-size: x-large
-    margin-bottom: 1rem
+    @include edit-title
 
 .configs
     @include box
@@ -12,7 +11,7 @@
     background-color: var(--main-blue-lighter)
 
 .box
-    font-size: large
+    @include font-size-5
 
 .timeForm
     @include box

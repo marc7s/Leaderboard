@@ -1,6 +1,19 @@
+@import 'mixins'
 .mat-select-container
+    @include input
+    @include padding-1
     background-color: white
-    line-height: var(--input-font-size)
-    padding: 1px 2px
     .mat-select-value
         color: white
+
+.mat-select-container.x-small
+    @include input('x-small')
+
+.mat-select-container.small
+    @include input('small')
+
+.mat-select-container.medium
+    @include input('medium')
+
+.mat-select-container.large
+    @include input('large')

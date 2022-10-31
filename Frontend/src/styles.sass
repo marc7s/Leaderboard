@@ -1,4 +1,5 @@
 @import 'mat-override'
+@import 'mixins'
     
 :root
     --main-green: rgb(73, 130, 1)
@@ -12,11 +13,17 @@
     --main-font-wide: "F1 Wide", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"
     --main-font-black: "F1 Black", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"
     --time-font: "Time", "Courier", monospace
-    --input-font-size: 2rem
 
 body
     background-color: #202020
     color: white
+
+h1
+    @include font-size-3
+
+h2
+    @include font-size-6
+    
 
 @font-face
     font-family: "Time"

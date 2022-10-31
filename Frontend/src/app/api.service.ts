@@ -224,6 +224,17 @@ export class ApiService {
     return this.post(config);
   }
 
+  getNumberOfRecordsFromUsername(username: string): Observable<number | null> {
+    const config = {
+      relativePath: 'db/get-number-of-records',
+      waitFor: true,
+      payload: {
+        name: username
+      }
+    };
+    return this.post(config);
+  }
+
   addTimeWithConfig(configID: number, userID: number, time: string, valid: boolean): Observable<boolean> {
     const config = {
       relativePath: 'db/add-time',

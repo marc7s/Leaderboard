@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Optional, Output, SimpleChanges
 import { MatOption } from '@angular/material/core';
 import { MatSelect } from '@angular/material/select';
 import { OptionNumber, OptionString } from 'src/app/option';
+import { Size } from 'src/styleSettings';
 
 @Component({
   selector: 'app-input-field-select',
@@ -11,7 +12,7 @@ import { OptionNumber, OptionString } from 'src/app/option';
 export class InputFieldSelectComponent implements OnInit {
 
   @Input() fontSize: string = 'inherit';
-  @Input() width: string = '20rem';
+  @Input() width: Size = Size.Medium;
 
   @Input() optionsNumber: OptionNumber[] = [];
   @Input() optionsString: OptionString[] = [];

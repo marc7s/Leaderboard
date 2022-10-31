@@ -102,6 +102,13 @@ router.post('/get-authentic-track-record', trackIDParam, async (req: any, res: R
     getAuthenticRecord(trackID).then(record => res.json(record)).catch(next);
 });
 
+router.post('/get-number-of-records', nameParam, async (req: any, res: Response, next: NextFunction) => {
+    const username: string = req.name;
+    log(`Getting authentic record for user ${username}...`);
+    
+    getNumberOfRecordsFromUsername(username).then(numberOfRecords => res.json(numberOfRecords)).catch(next);
+});
+
 router.post('/add-time', authenticateToken, timeParam, userIDParam, validParam, addTimeParam, async (req: any, res: Response, next: NextFunction) => {
     const userID: number = req.userID;
     const time: string = req.time;
@@ -578,6 +585,33 @@ async function getAuthenticRecord(trackID: number): Promise<AuthenticTrackRecord
                 }
             });
             req.on('requestCompleted', () => { resolve(trackRecord) });
+        })
+        .catch(reject);
+    });
+}
+
+async function getNumberOfRecordsFromUsername(username: string): Promise<number | null> {
+    return new Promise((resolve, reject) => {
+        let numberOfRecords: number | null = null;
+        const query = "SELECT * FROM GetNumberOfRecordsFromUsername(@Username)";
+        const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
+            if(err) reject(err);
+        });
+
+
+        req.addParameter('Username', sql.TYPES.VarChar, username);
+
+        getDBConnection()
+        .then(conn => {
+            conn.execSql(req);
+            req.on('error', err => { reject(err) });
+            req.on('row', cols => {
+                const data: any = {};
+                cols.map(col => { data[col.metadata.colName] = col.value });
+                if('NumberOfRecords' in data) 
+                    numberOfRecords = data.NumberOfRecords;
+            });
+            req.on('requestCompleted', () => { resolve(numberOfRecords) });
         })
         .catch(reject);
     });

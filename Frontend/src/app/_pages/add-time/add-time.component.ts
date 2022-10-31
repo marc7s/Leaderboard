@@ -3,6 +3,7 @@ import { Config } from '@shared/api';
 import { TimeSummary } from '@shared/dataStructures';
 import { ApiService } from 'src/app/api.service';
 import { OptionNumber } from 'src/app/option';
+import { Size } from 'src/styleSettings';
 
 @Component({
   selector: 'app-add-time',
@@ -10,6 +11,8 @@ import { OptionNumber } from 'src/app/option';
   styleUrls: ['./add-time.component.sass']
 })
 export class AddTimeComponent implements OnInit {
+  Large: Size = Size.Large;
+  
   configID: number | null = null;
   configOptions: OptionNumber[] = [];
   configs: Config[] = [];

@@ -1,6 +1,6 @@
 @mixin box
+    @include padding-5
     background-color: var(--main-dark)
-    padding: 2rem
     border-radius: 1rem
 
 $mobile: 600px
@@ -130,3 +130,87 @@ $desktop: 1200px
         font-size: 1rem
     @media (min-width: $tablet)
         font-size: 1.3rem
+
+
+@mixin input($width: 'medium')
+    @include font-size-5
+    @media (max-width: $mobile)
+        line-height: 1.5rem
+        @if $width == 'x-small'
+            width: 5rem
+        @else if $width == 'small'
+            width: 8rem
+        @else if $width == 'medium'
+            width: 15rem
+        @else if $width == 'large'
+            width: 17rem
+    @media (min-width: $mobile) and (max-width: $tablet)
+        line-height: 1.7rem
+        @if $width == 'x-small'
+            width: 7rem
+        @else if $width == 'small'
+            width: 13rem
+        @else if $width == 'medium'
+            width: 16rem
+        @else if $width == 'large'
+            width: 20rem
+    @media (min-width: $tablet)
+        line-height: 1.9rem
+        @if $width == 'x-small'
+            width: 10rem
+        @else if $width == 'small'
+            width: 20rem
+        @else if $width == 'medium'
+            width: 30rem
+        @else if $width == 'large'
+            width: 40rem
+
+@mixin card($size: 'medium')
+    @include font-size-5
+    @include margin-1
+    @media (max-width: $mobile)
+        padding: 0.4rem 0.8rem
+        @if $size == 'x-small'
+            height: 1rem
+            width: 5rem
+        @else if $size == 'small'
+            height: 1rem
+            width: 6rem
+        @else if $size == 'medium'
+            height: 2rem
+            width: 9rem
+        @else if $size == 'large'
+            height: 2.5rem
+            width: 12rem
+    @media (min-width: $mobile) and (max-width: $tablet)
+        padding: 0.6rem 1.2rem
+        @if $size == 'x-small'
+            height: 1rem
+            width: 5rem
+        @else if $size == 'small'
+            height: 1rem
+            width: 6rem
+        @else if $size == 'medium'
+            height: 2rem
+            width: 9rem
+        @else if $size == 'large'
+            height: 3rem
+            width: 12rem
+    @media (min-width: $tablet)
+        padding: 0.9rem 1.4rem
+        @if $size == 'x-small'
+            height: 1rem
+            width: 5rem
+        @else if $size == 'small'
+            height: 1rem
+            width: 6rem
+        @else if $size == 'medium'
+            height: 2rem
+            width: 9rem
+        @else if $size == 'large'
+            height: 3rem
+            width: 12rem
+
+@mixin edit-title
+    @include font-size-3
+    margin-bottom: 1rem

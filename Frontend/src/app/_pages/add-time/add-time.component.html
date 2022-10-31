@@ -3,7 +3,7 @@
     <app-input-field-select 
         class="input"
         fontSize="small"
-        width="30rem"
+        [width]="Large"
         placeholder="Config" 
         (optionNumberChange)="selectConfig()" 
         [(valueNumber)]="configID" 

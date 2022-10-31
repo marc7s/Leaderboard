@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Config } from '@shared/api';
 import { ApiService } from 'src/app/api.service';
 import { OptionNumber } from 'src/app/option';
+import { Size } from 'src/styleSettings';
 
 @Component({
   selector: 'app-edit-configs',
@@ -9,6 +10,8 @@ import { OptionNumber } from 'src/app/option';
   styleUrls: ['./edit-configs.component.sass']
 })
 export class EditConfigsComponent implements OnInit {
+
+  Large: Size = Size.Large;
 
   configID: number | null = null;
   configOptions: OptionNumber[] = [];

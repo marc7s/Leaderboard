@@ -1,5 +1,10 @@
 <ng-container *ngIf="trackSummaries; else default">
-    <app-highlight>{{username}}</app-highlight>
+    <app-highlight>
+        <div class="user">
+            <h1>{{username}}</h1>
+            <h2 *ngIf="numberOfRecords > 0">{{numberOfRecords}}x Record Holder</h2>
+        </div>
+    </app-highlight>
     <ng-container *ngFor="let trackSummary of trackSummaries">
         <app-leaderboard [times]="trackSummary.times" [title]="trackSummary.track.shortName" class="trackSummary"></app-leaderboard>
     </ng-container>
