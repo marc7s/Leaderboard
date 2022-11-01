@@ -54,4 +54,8 @@ export class RecordsComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  getA2C(trackName: string): string {
+    return this.tracks.find(track => track.shortName === trackName)?.alpha2Code.toLowerCase() ?? "";
+  }
 }

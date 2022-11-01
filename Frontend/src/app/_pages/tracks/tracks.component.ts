@@ -4,6 +4,7 @@ import { ApiService } from 'src/app/api.service';
 
 interface TrackAndLink {
   name: string;
+  alpha2Code: string;
   link: string;
 };
 
@@ -18,7 +19,8 @@ export class TracksComponent implements OnInit {
 
   constructor(private api: ApiService) { 
     this.api.getTracks().subscribe(tracks => {
-      this.tracks = tracks.map(track => {return { name: track.shortName, link: encodeURI(track.shortName) }});
+      console.log(tracks);
+      this.tracks = tracks.map(track => {return { name: track.shortName, alpha2Code: track.alpha2Code.toLowerCase(), link: encodeURI(track.shortName) }});
     });
   }
 

@@ -16,6 +16,7 @@ export class EditCountriesComponent implements OnInit {
 
   shortName: string | null = null;
   fullName: string | null = null;
+  alpha2Code: string | null = null;
 
   constructor(private api: ApiService) { 
     this.setup();
@@ -35,6 +36,7 @@ export class EditCountriesComponent implements OnInit {
     this.countryID = null;
     this.shortName = null;
     this.fullName = null;
+    this.alpha2Code = null;
   }
 
   selectCountry(): void {
@@ -43,18 +45,19 @@ export class EditCountriesComponent implements OnInit {
       this.countryID = country.id;
       this.shortName = country.shortName;
       this.fullName = country.fullName;
+      this.alpha2Code = country.alpha2Code;
     }
   }
 
   save(): void {
-    if(this.shortName && this.fullName) {
+    if(this.shortName && this.fullName && this.alpha2Code) {
       if(this.countryID) {
-        this.api.updateCountry(this.countryID, this.shortName, this.fullName).subscribe(() => {
+        this.api.updateCountry(this.countryID, this.shortName, this.fullName, this.alpha2Code).subscribe(() => {
           this.clear();
           this.setup();
         });
       } else {
-        this.api.createCountry(this.shortName, this.fullName).subscribe(() => {
+        this.api.createCountry(this.shortName, this.fullName, this.alpha2Code).subscribe(() => {
           this.clear();
           this.setup();
         });

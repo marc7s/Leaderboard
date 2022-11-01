@@ -1,5 +1,5 @@
 <div class="container">
     <ng-container *ngFor="let track of tracks">
-        <app-card [routerLink]="['/track/' + track.link]">{{ track.name }}</app-card>
+        <app-card [routerLink]="['/track/' + track.link]">{{ track.name }}<span class="fi fi-{{track.alpha2Code}}"></span></app-card>
     </ng-container>
 </div>

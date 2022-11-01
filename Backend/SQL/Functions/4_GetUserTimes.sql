@@ -19,7 +19,8 @@ SELECT
 	w.Name AS Weather,
 	c.CustomSetup AS ConfigCustomSetup,
 	countries.FullName AS CountryFullName,
-	countries.ShortName AS CountryShortName
+	countries.ShortName AS CountryShortName,
+	countries.Alpha2Code AS CountryAlpha2Code
 FROM Times t
 INNER JOIN Users u ON t.UserID = u.ID
 INNER JOIN Configs c ON t.ConfigID = c.ID

@@ -24,6 +24,12 @@
         placeholder="Short name" 
         [(text)]="shortName">
     </app-input-field-text>
+
+    <app-input-field-text 
+        class="input" 
+        placeholder="Alpha 2 code" 
+        [(text)]="alpha2Code">
+    </app-input-field-text>
 </div>
 
-<app-card class="save" (click)="save()" [disabled]="!shortName || !fullName">{{ !countryID ? 'Add' : 'Update' }} country</app-card>
+<app-card class="save" (click)="save()" [disabled]="!shortName || !fullName || !alpha2Code">{{ !countryID ? 'Add' : 'Update' }} country</app-card>

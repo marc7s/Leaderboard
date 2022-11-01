@@ -69,13 +69,15 @@ export interface DBTyre {
 export interface Country {
     id: number,
     fullName: string,
-    shortName: string
+    shortName: string,
+    alpha2Code: string
 }
 
 export interface DBCountry {
     ID: number,
     FullName: string,
     ShortName: string,
+    Alpha2Code: string,
     AddedAt: Date
 }
 
@@ -83,6 +85,7 @@ export interface Track {
     id: number,
     fullName: string,
     shortName: string,
+    alpha2Code: string,
     country: Country
 }
 

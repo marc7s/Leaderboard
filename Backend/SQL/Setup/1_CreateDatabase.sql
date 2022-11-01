@@ -49,6 +49,7 @@ CREATE TABLE Countries(
     ID int IDENTITY(1, 1) NOT NULL PRIMARY KEY,
     FullName nvarchar(255) NOT NULL UNIQUE,
     ShortName nvarchar(255) NOT NULL UNIQUE,
+    Alpha2Code nvarchar(2) NOT NULL UNIQUE,
     AddedAt datetime NOT NULL DEFAULT GETDATE()
 );
 

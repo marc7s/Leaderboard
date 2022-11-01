@@ -4,7 +4,7 @@ dotenv.config({path: __dirname + '../.env'});
 import express, { Response, NextFunction, Router } from 'express';
 import * as sql from 'tedious';
 import { randomBytes } from 'crypto';
-import { timeParam, timeIDParam, loginParam, shortNameParam, validParam, customSetupParam, addTimeParam, carIDParam, gameIDParam, shortAndFullNameParam, nameParam, tyreIDParam, weatherIDParam, trackIDParam, countryIDParam, userIDParam, configIDParam, descriptionParam } from './validations';
+import { timeParam, timeIDParam, loginParam, shortNameParam, validParam, customSetupParam, addTimeParam, carIDParam, gameIDParam, shortAndFullNameParam, nameParam, tyreIDParam, weatherIDParam, trackIDParam, countryIDParam, userIDParam, configIDParam, descriptionParam, alpha2CodeParam } from './validations';
 import { AuthenticationError, DatabaseConnectionError, JwtToken, JwtTokenBody } from '../utils';
 import { Token, User, Time, DBTime, Config, DBConfig, DBGame, DBWeather, DBTrack, DBCar, Game, DBCountry, Country, Track, Car, Weather, Login, Tyre, DBTyre, DBUser, DBDriver, Driver, DBClass, Class } from '@shared/api';
 
@@ -240,21 +240,23 @@ router.post('/create-track', authenticateToken, countryIDParam, shortAndFullName
     createTrack(countryID, fullName, shortName).then(success => res.json(success)).catch(next);
 });
 
-router.post('/update-country', authenticateToken, countryIDParam, shortAndFullNameParam, async (req: any, res: Response, next: NextFunction) => {
+router.post('/update-country', authenticateToken, countryIDParam, shortAndFullNameParam, alpha2CodeParam, async (req: any, res: Response, next: NextFunction) => {
     const countryID: number = req.countryID;
     const shortName: string = req.shortName;
     const fullName: string = req.fullName;
+    const alpha2Code: string = req.alpha2Code;
     log(`Updating country ${countryID}...`);
     
-    updateCountry(countryID, fullName, shortName).then(success => res.json(success)).catch(next);
+    updateCountry(countryID, fullName, shortName, alpha2Code).then(success => res.json(success)).catch(next);
 });
 
-router.post('/create-country', authenticateToken, shortAndFullNameParam, async (req: any, res: Response, next: NextFunction) => {
+router.post('/create-country', authenticateToken, shortAndFullNameParam, alpha2CodeParam, async (req: any, res: Response, next: NextFunction) => {
     const shortName: string = req.shortName;
     const fullName: string = req.fullName;
+    const alpha2Code: string = req.alpha2Code;
     log(`Creating country ${shortName}...`);
     
-    createCountry(fullName, shortName).then(success => res.json(success)).catch(next);
+    createCountry(fullName, shortName, alpha2Code).then(success => res.json(success)).catch(next);
 });
 
 router.post('/update-config', 
@@ -1074,11 +1076,11 @@ async function createTrack(countryID: number, fullName: string, shortName: strin
     });
 }
 
-async function updateCountry(countryID: number, newFullName: string, newShortName: string): Promise<boolean> {
+async function updateCountry(countryID: number, newFullName: string, newShortName: string, alpha2Code: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
         getDBConnection()
         .then(conn => {
-            const query = "EXECUTE UpdateCountry @CountryID, @NewFullName, @NewShortName";
+            const query = "EXECUTE UpdateCountry @CountryID, @NewFullName, @NewShortName, @Alpha2Code";
             const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
                 if(err) reject(err);
             });
@@ -1086,6 +1088,7 @@ async function updateCountry(countryID: number, newFullName: string, newShortNam
             req.addParameter('CountryID', sql.TYPES.Int, countryID);
             req.addParameter('NewShortName', sql.TYPES.VarChar, newShortName);
             req.addParameter('NewFullName', sql.TYPES.VarChar, newFullName);
+            req.addParameter('Alpha2Code', sql.TYPES.VarChar, alpha2Code);
 
             conn.execSql(req);
             req.on('error', err => { reject(err) });
@@ -1095,17 +1098,18 @@ async function updateCountry(countryID: number, newFullName: string, newShortNam
     });
 }
 
-async function createCountry(fullName: string, shortName: string): Promise<boolean> {
+async function createCountry(fullName: string, shortName: string, alpha2Code: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
         getDBConnection()
         .then(conn => {
-            const query = "EXECUTE AddCountry @FullName, @ShortName";
+            const query = "EXECUTE AddCountry @FullName, @ShortName, @Alpha2Code";
             const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
                 if(err) reject(err);
             });
 
             req.addParameter('ShortName', sql.TYPES.VarChar, shortName);
             req.addParameter('FullName', sql.TYPES.VarChar, fullName);
+            req.addParameter('Alpha2Code', sql.TYPES.VarChar, alpha2Code);
 
             conn.execSql(req);
             req.on('error', err => { reject(err) });
@@ -1290,7 +1294,8 @@ function dbToCountry(dbCountry: DBCountry): Country {
     return {
         id: dbCountry.ID,
         fullName: dbCountry.FullName,
-        shortName: dbCountry.ShortName
+        shortName: dbCountry.ShortName,
+        alpha2Code: dbCountry.Alpha2Code
     }
 }
 
@@ -1299,6 +1304,7 @@ function dbToTrack(dbTrack: DBTrack, dbCountry: DBCountry): Track {
         id: dbTrack.ID,
         fullName: dbTrack.FullName,
         shortName: dbTrack.ShortName,
+        alpha2Code: dbCountry.Alpha2Code,
         country: dbToCountry(dbCountry)
     }
 }

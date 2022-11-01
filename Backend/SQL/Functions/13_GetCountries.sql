@@ -6,5 +6,6 @@ SELECT
 	ID,
 	FullName,
     ShortName,
+	Alpha2Code,
 	AddedAt
 FROM Countries

@@ -6,6 +6,7 @@ function isValidTime(time: any){return time === time.toString()}
 function isValidShortName(shortName: any){return shortName === shortName.toString()}
 function isValidID(id: any){return Number.isInteger(id)}
 function isValidString(string: any){return string === string.toString()}
+function isValidAlpha2Code(string: any){return isValidString(string) && string.length === 2}
 
 function missing(arr: any) : boolean {
     return Array.isArray(arr) ? arr.some(val => val === MISSING) : arr === MISSING;
@@ -179,6 +180,15 @@ export async function descriptionParam(req: any, res: Response, next: NextFuncti
     if(check !== null) return next(check);
 
     req.description = description;
+    next();
+}
+
+export async function alpha2CodeParam(req: any, res: Response, next: NextFunction): Promise<void> {
+    const alpha2Code = req.body.alpha2Code ?? req.query.alpha2Code ?? MISSING;
+    const check = checkParameter(alpha2Code, 'alpha2Code', isValidAlpha2Code, 'is not a valid alpha 2 code');
+    if(check !== null) return next(check);
+
+    req.name = name;
     next();
 }
 

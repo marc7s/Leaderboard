@@ -55,6 +55,7 @@ export const _COUNTRY_: DBCountry = {
     ID: -1,
     FullName: '',
     ShortName: '',
+    Alpha2Code: '',
     AddedAt: new Date()
 }
 

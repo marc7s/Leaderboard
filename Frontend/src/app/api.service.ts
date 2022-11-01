@@ -414,26 +414,28 @@ export class ApiService {
     return this.post(config);
   }
 
-  updateCountry(countryID: number, shortName: string, fullName: string): Observable<boolean> {
+  updateCountry(countryID: number, shortName: string, fullName: string, alpha2Code: string): Observable<boolean> {
     const config = {
       relativePath: 'db/update-country',
       waitFor: true,
       payload: {
         countryID: countryID,
         shortName: shortName,
-        fullName: fullName
+        fullName: fullName,
+        alpha2Code: alpha2Code
       }
     };
     return this.post(config);
   }
 
-  createCountry(shortName: string, fullName: string): Observable<boolean> {
+  createCountry(shortName: string, fullName: string, alpha2Code: string): Observable<boolean> {
     const config = {
       relativePath: 'db/create-country',
       waitFor: true,
       payload: {
         shortName: shortName,
-        fullName: fullName
+        fullName: fullName,
+        alpha2Code
       }
     };
     return this.post(config);

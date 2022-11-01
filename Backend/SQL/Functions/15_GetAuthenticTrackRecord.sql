@@ -33,7 +33,8 @@ SELECT TOP 1
     tyres.ShortName AS TyreShortName,
     countries.ID AS CountryID,
     countries.FullName AS CountryFullName,
-    countries.ShortName AS CountryShortName
+    countries.ShortName AS CountryShortName,
+    countries.Alpha2Code AS CountryAlpha2Code
 FROM AuthenticTimes t
 INNER JOIN Configs c ON t.ConfigID = c.ID
 INNER JOIN AuthenticClasses class ON t.ClassID = class.ID

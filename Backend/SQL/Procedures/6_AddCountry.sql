@@ -1,6 +1,7 @@
 CREATE OR ALTER PROCEDURE AddCountry
     @FullName nvarchar(255),
-    @ShortName nvarchar(100)
+    @ShortName nvarchar(100),
+    @Alpha2Code nvarchar(2)
 AS
 BEGIN
     --ERROR HANDLING
@@ -16,6 +17,13 @@ BEGIN
     IF @ShortName IS NULL
     BEGIN
         RAISERROR(N'Short name not supplied', 11, 1);
+        RETURN
+    END
+
+    --CHECK ALPHA2CODE PARAM
+    IF @Alpha2Code IS NULL
+    BEGIN
+        RAISERROR(N'Alpha 2 code not supplied', 11, 1);
         RETURN
     END
 
@@ -37,7 +45,16 @@ BEGIN
         RETURN
     END
 
+    --CHECK IF ALPHA2CODE ALREADY EXISTS
+    DECLARE @Alpha2Code_db nvarchar(2)
+    SELECT @Alpha2Code_db = Alpha2Code FROM Countries WHERE Alpha2Code = @Alpha2Code
+    IF @Alpha2Code_db IS NOT NULL
+    BEGIN
+        RAISERROR(N'Alpha 2 code already exists', 11, 1);
+        RETURN
+    END
+
     --ALL GOOD, ADD COUNTRY
-    INSERT INTO Countries(FullName, ShortName) VALUES (@FullName, @ShortName);
+    INSERT INTO Countries(FullName, ShortName, Alpha2Code) VALUES (@FullName, @ShortName, @Alpha2Code);
 END
 GO

@@ -32,7 +32,8 @@ SELECT
 	tyres.ShortName AS TyreShortName,
 	countries.ID AS CountryID,
 	countries.FullName AS CountryFullName,
-	countries.ShortName AS CountryShortName
+	countries.ShortName AS CountryShortName,
+	countries.Alpha2Code AS CountryAlpha2Code
 FROM (
 	SELECT ID, Time, Millis, UserID, ConfigID, Valid, ROW_NUMBER() OVER (PARTITION BY ConfigID, Valid ORDER BY Time ASC) TimeRank FROM Times
 ) times
