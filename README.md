@@ -38,6 +38,6 @@ crypto.randomBytes(128).toString('hex');
 2. Run `npm run dev` to start the frontend. It should give post the link to the local development site in the console once it has finished building the app
 
 ## Running it in production
-Once you got the dev environment working, it should be as simple as running `npm run prod` inside the `Backend` directory. The process should start using `pm2` once it has finished building.
+Once you got the dev environment working, it should be as simple as running `npm run prod` inside the `Backend` directory. The process should start using `pm2` once it has finished building. If you want to connect to the SQL Express instance from a different computer, you need to open up port 1433 (if that is what you chose when following the `SQL Connection` guide.) in the firewall, both for TCP and UDP. You should also allow outbound traffic through port 1433 over TCP so in total three firewall rules should be enough.
 
 For the frontend, you should once again run `npm run prod` but this time inside the `Frontend` directory. Once done, either copy the contents of the `dist` directory to your web server, or if you built it on the host, you could point the web server to the `dist` folder. Once the Angular app is built, it is a static bundled app and does not need a process running it as the app is run client-site, the server just needs to provide the clients with the static files from the `dist` folder.
