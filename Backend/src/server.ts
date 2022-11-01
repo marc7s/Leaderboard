@@ -49,10 +49,11 @@ app.listen(process.env.port, () => {
 });
 
 function sendError(res: Response, statusCode: number, message: string, errorDetails?: Error) {
-    let payload: ErrorMessage = {
+    const payload: ErrorMessage = {
         status: 'ERROR',
         errorMessage: message
     };
+    console.error(payload);
     if(!errorDetails)
         return res.status(statusCode).send(payload);
 
