@@ -1076,11 +1076,11 @@ async function createTrack(countryID: number, fullName: string, shortName: strin
     });
 }
 
-async function updateCountry(countryID: number, newFullName: string, newShortName: string, alpha2Code: string): Promise<boolean> {
+async function updateCountry(countryID: number, newFullName: string, newShortName: string, newAlpha2Code: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
         getDBConnection()
         .then(conn => {
-            const query = "EXECUTE UpdateCountry @CountryID, @NewFullName, @NewShortName, @Alpha2Code";
+            const query = "EXECUTE UpdateCountry @CountryID, @NewFullName, @NewShortName, @NewAlpha2Code";
             const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
                 if(err) reject(err);
             });
@@ -1088,7 +1088,7 @@ async function updateCountry(countryID: number, newFullName: string, newShortNam
             req.addParameter('CountryID', sql.TYPES.Int, countryID);
             req.addParameter('NewShortName', sql.TYPES.VarChar, newShortName);
             req.addParameter('NewFullName', sql.TYPES.VarChar, newFullName);
-            req.addParameter('Alpha2Code', sql.TYPES.VarChar, alpha2Code);
+            req.addParameter('NewAlpha2Code', sql.TYPES.VarChar, newAlpha2Code);
 
             conn.execSql(req);
             req.on('error', err => { reject(err) });
