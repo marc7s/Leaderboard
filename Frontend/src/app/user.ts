@@ -5,6 +5,6 @@ export enum UserPipeType {
     FullName
 }
 
-export function getUserNameFromDriver(driver: Driver): string {
+export function getUsernameFromDriver(driver: Driver): string {
     return `${driver.firstName[0]}. ${driver.lastName}`;
 }

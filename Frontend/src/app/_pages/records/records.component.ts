@@ -3,7 +3,7 @@ import { Track } from '@shared/api';
 import { LapRecord } from '@shared/dataStructures';
 import { ApiService } from 'src/app/api.service';
 import { lapRecordSorting } from 'src/app/sorting-functions';
-import { getUserNameFromDriver } from 'src/app/user';
+import { getUsernameFromDriver } from 'src/app/user';
 
 @Component({
   selector: 'app-records',
@@ -29,8 +29,15 @@ export class RecordsComponent implements OnInit {
 
       this.tracks.forEach((track: Track) => {
         this.api.getAuthenticTrackRecord(track.id).subscribe(trackRecord => {
-          if(trackRecord == null)
+          // If no authentic record exists, just sort the lap records
+          if(trackRecord == null){ 
+            this.trackRecords.set(
+              track.shortName, 
+              (this.trackRecords.get(track.shortName) ?? []).sort(lapRecordSorting)
+            );
             return;
+          }
+            
           const authenticRecord: LapRecord = {
             config: trackRecord.config,
             timeSummary: trackRecord.timeSummary,
@@ -40,7 +47,7 @@ export class RecordsComponent implements OnInit {
             }
           };
 
-          authenticRecord.timeSummary.username = getUserNameFromDriver(trackRecord.driver);
+          authenticRecord.timeSummary.username = getUsernameFromDriver(trackRecord.driver);
 
           // Add the authentic record to the list of records and sort the times
           this.trackRecords.set(
