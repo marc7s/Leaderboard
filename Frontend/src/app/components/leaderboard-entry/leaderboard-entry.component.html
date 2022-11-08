@@ -1,9 +1,8 @@
 <div *ngIf="time" class="entry" [class.authentic]="time.authentic">
     <div id="position">{{position}}</div>
     <div id="user">{{time.username}}</div>
-    <div class="timeContainer">
-        <div id="time">{{time.time | time}}</div>
-        <div id="customSetup" [class.customSetup]="time.customSetup"></div>
-        <div id="valid" [class.invalid]="!time.valid"></div>
-    </div>
+    <div id="car">{{time.car}}</div>
+    <div id="time">{{time.time | time}}</div>
+    <div id="custom" [class.customSetup]="time.customSetup"></div>
+    <div id="valid" [class.invalid]="!time.valid"></div>
 </div>

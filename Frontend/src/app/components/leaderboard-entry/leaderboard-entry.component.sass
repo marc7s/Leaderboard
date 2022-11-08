@@ -2,45 +2,64 @@
     
 .entry
     @include font-size-6
-    display: flex
-    flex-direction: row
-    justify-content: flex-start
-    align-items: center
-    background-color: #808080
+    @include padding-1
     color: white
-    padding: 0.3rem
-    margin: 0.3rem 0
     width: 100%
-
-    .timeContainer
-        display: flex
-        flex-direction: row
-        margin-left: auto
     
-    #time
-        margin: 0 0.5rem
-        font-family: var(--time-font)
-        font-weight: bolder
-        letter-spacing: -0.07rem
-        margin-top: 0.1rem
     #position
+        font-weight: bold
         min-width: 2rem
+        color: moccasin
 
-    #valid, #customSetup
+    #valid, #custom
         min-width: 2rem
         min-height: 1.2rem
+        background-size: contain
+        background-position: center
+        background-repeat: no-repeat
+    
     #valid.invalid
         background-image: url(~src/assets/img/BlackAndWhiteFlag.png)
-        background-size: contain
-        background-position: center
-        background-repeat: no-repeat
 
-    #customSetup.customSetup
+    #custom.customSetup
         background-image: url(~src/assets/img/CustomSetup.png)
-        background-size: contain
-        background-position: center
-        background-repeat: no-repeat
 
-.authentic
-    #user
-        color: deepskyblue
+.authentic #user
+    color: deepskyblue
+
+@media (min-width: 1000px)
+    .entry
+        margin-bottom: 0.5rem
+        display: grid
+        grid-auto-flow: column
+        $position: 2rem
+        $username: 12rem
+        $car: 15rem
+        $time: 7.5rem
+        $custom: 2rem
+        $valid: 2rem
+        grid-template-columns: $position $username $car $time $custom $valid
+
+@media (max-width: 1000px)
+    .entry
+        background-color: #808080
+        border-radius: 1rem
+        max-width: 40rem
+        margin-bottom: 1rem
+        div
+            text-align: center
+        #position
+            @include font-size-5
+            width: 100%
+            margin: 0.5rem
+        div:not(#position, #time, #valid, #custom)
+            min-width: 8rem
+            margin: 0.5rem
+            display: inline-block
+            width: 40%
+        #time
+            font-size: 1.2rem
+            margin: 0.5rem 0
+        #valid, #custom
+            min-height: 1.5rem
+            margin: 0 0.5rem

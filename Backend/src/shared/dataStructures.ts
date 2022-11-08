@@ -5,6 +5,7 @@ export interface TimeSummary {
     time: string,
     millis: number,
     username: string,
+    car: string,
     weather: string,
     valid: boolean,
     customSetup: boolean,
