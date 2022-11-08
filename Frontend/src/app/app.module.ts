@@ -43,6 +43,7 @@ import { EditTyresComponent } from './_pages/edit-tyres/edit-tyres.component';
 import { EditTracksComponent } from './_pages/edit-tracks/edit-tracks.component';
 import { EditConfigsComponent } from './_pages/edit-configs/edit-configs.component';
 import { EditCountriesComponent } from './_pages/edit-countries/edit-countries.component';
+import { TimeDiffPipe } from './time-diff.pipe';
 
 const materialModules = [
   MatAutocompleteModule,
@@ -84,7 +85,8 @@ const materialModules = [
     EditTyresComponent,
     EditTracksComponent,
     EditConfigsComponent,
-    EditCountriesComponent
+    EditCountriesComponent,
+    TimeDiffPipe
   ],
   imports: [
     BrowserModule,

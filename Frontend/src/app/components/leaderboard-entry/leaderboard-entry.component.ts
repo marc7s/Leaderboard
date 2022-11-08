@@ -8,6 +8,7 @@ import { TimeSummary } from '@shared/dataStructures';
 })
 export class LeaderboardEntryComponent implements OnInit {
   @Input() time: TimeSummary | null = null;
+  @Input() timeComparison: TimeSummary | null = null;
   @Input() position: number | null = null;
   
   constructor() { }

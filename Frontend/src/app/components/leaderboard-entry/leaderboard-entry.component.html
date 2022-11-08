@@ -1,8 +1,9 @@
 <div *ngIf="time" class="entry" [class.authentic]="time.authentic">
-    <div id="position">{{position}}</div>
+    <div id="position" class="row">{{position}}</div>
     <div id="user">{{time.username}}</div>
     <div id="car">{{time.car}}</div>
-    <div id="time">{{time.time | time}}</div>
+    <div id="time" class="row">{{time.time | time}}</div>
+    <div id="diff" class="row">{{time.millis | timeDiff: timeComparison?.millis}}</div>
     <div id="custom" [class.customSetup]="time.customSetup"></div>
     <div id="valid" [class.invalid]="!time.valid"></div>
 </div>
