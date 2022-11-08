@@ -15,13 +15,16 @@ interface TrackAndLink {
 })
 export class TracksComponent implements OnInit {
 
-  tracks: TrackAndLink[] = [];
+  private tracks: TrackAndLink[] = [];
 
   constructor(private api: ApiService) { 
     this.api.getTracks().subscribe(tracks => {
-      console.log(tracks);
       this.tracks = tracks.map(track => {return { name: track.shortName, alpha2Code: track.alpha2Code.toLowerCase(), link: encodeURI(track.shortName) }});
     });
+  }
+
+  getTracks(): TrackAndLink[] {
+    return this.tracks.sort((a, b) => a.name.localeCompare(b.name));
   }
 
   ngOnInit(): void {

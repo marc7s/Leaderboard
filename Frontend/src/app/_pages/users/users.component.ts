@@ -16,13 +16,17 @@ interface UserAndLink {
 
 export class UsersComponent implements OnInit {
 
-  users: UserAndLink[] = [];
+  private users: UserAndLink[] = [];
 
   constructor(private api: ApiService) { 
     this.api.getUsers().subscribe(users => {
       const usersAndLinks: UserAndLink[] = users.map(user => {return { username: user.username, link: encodeURI(user.username) }});
       this.users = usersAndLinks;
     });
+  }
+
+  getUsers(): UserAndLink[] {
+    return this.users.sort((a, b) => a.username.localeCompare(b.username));
   }
 
   ngOnInit(): void {
