@@ -27,3 +27,16 @@ EXEC AddTime @Time = '00:01:35.128', @UserID = 8, @ConfigID = 6, @Valid = 0; -- 
 EXEC AddTime @Time = '00:01:18.521', @UserID = 1, @ConfigID = 7, @Valid = 1; -- Marcus
 EXEC AddTime @Time = '00:01:17.933', @UserID = 1, @ConfigID = 7, @Valid = 1; -- Marcus
 EXEC AddTime @Time = '00:01:16.881', @UserID = 1, @ConfigID = 7, @Valid = 1; -- Marcus
+-- 2022-11-06 Zandvoort
+EXEC AddTime @Time = '00:01:12.709', @UserID = 1, @ConfigID = 8, @Valid = 1; -- Marcus
+-- 2022-11-06 Mexico
+EXEC AddTime @Time = '00:01:16.748', @UserID = 1, @ConfigID = 9, @Valid = 1; -- Marcus
+EXEC AddTime @Time = '00:01:16.230', @UserID = 1, @ConfigID = 9, @Valid = 1; -- Marcus
+EXEC AddTime @Time = '00:01:16.161', @UserID = 1, @ConfigID = 9, @Valid = 1; -- Marcus
+EXEC AddTime @Time = '00:01:15.756', @UserID = 1, @ConfigID = 9, @Valid = 1; -- Marcus
+-- 2022-11-08 Monza
+EXEC AddTime @Time = '00:01:22.235', @UserID = 1, @ConfigID = 10, @Valid = 1; -- Marcus
+EXEC AddTime @Time = '00:01:22.074', @UserID = 1, @ConfigID = 10, @Valid = 1; -- Marcus
+EXEC AddTime @Time = '00:01:22.008', @UserID = 1, @ConfigID = 10, @Valid = 1; -- Marcus
+EXEC AddTime @Time = '00:01:21.695', @UserID = 1, @ConfigID = 10, @Valid = 1; -- Marcus
+EXEC AddTime @Time = '00:01:21.382', @UserID = 1, @ConfigID = 10, @Valid = 1; -- Marcus
