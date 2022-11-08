@@ -1,13 +1,14 @@
 <ng-container *ngIf="track; else default">
-    <app-highlight [size]="Large">
+    <div class="pageTitle">
         <div class="trackInfo">
             <div id="name">{{track.shortName}}</div>
-            <div>{{track.country.shortName}}</div>
+            <div id="country">{{track.country.shortName}}<span class="fi fi-{{track.country.alpha2Code}}"></span></div>
         </div>
-    </app-highlight>
+    </div>
+
     <app-leaderboard [times]="times" [splits]="splits"></app-leaderboard>
 </ng-container>
 
 <ng-template #default>
-    <app-highlight>N/A</app-highlight>
+    <div class="pageTitle">Unknown track</div>
 </ng-template>

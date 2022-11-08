@@ -85,7 +85,6 @@ export interface Track {
     id: number,
     fullName: string,
     shortName: string,
-    alpha2Code: string,
     country: Country
 }
 

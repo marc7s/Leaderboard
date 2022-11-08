@@ -1,29 +1,32 @@
-<div class="box">
-    <div class="title">Existing tyres</div>
-
-    <app-input-field-select 
-        class="input" 
-        placeholder="Tyres" 
-        (optionChange)="selectTyre()"
-        [(value)]="tyreID" 
-        [options]="tyreOptions">
-    </app-input-field-select>
-    <app-card (click)="clear()" [disabled]="!tyreID">Clear</app-card>
+<div class="pageTitle">Edit tyres</div>
+<div class="container">
+    <div class="box">
+        <div class="title">Existing tyres</div>
+    
+        <app-input-field-select 
+            class="input" 
+            placeholder="Tyres" 
+            (optionChange)="selectTyre()"
+            [(value)]="tyreID" 
+            [options]="tyreOptions">
+        </app-input-field-select>
+        <app-card (click)="clear()" [disabled]="!tyreID">Clear</app-card>
+    </div>
+    
+    <div class="box">
+        <div class="title">{{ !tyreID ? 'Add' : 'Edit' }} tyre</div>
+        <app-input-field-text 
+            class="input" 
+            placeholder="Full name" 
+            [(text)]="fullName">
+        </app-input-field-text>
+    
+        <app-input-field-text 
+            class="input" 
+            placeholder="Short name" 
+            [(text)]="shortName">
+        </app-input-field-text>
+    </div>
+    
+    <app-card class="save" (click)="save()" [disabled]="!shortName || !fullName">{{ !tyreID ? 'Add' : 'Update' }} tyre</app-card>
 </div>
-
-<div class="box">
-    <div class="title">{{ !tyreID ? 'Add' : 'Edit' }} tyre</div>
-    <app-input-field-text 
-        class="input" 
-        placeholder="Full name" 
-        [(text)]="fullName">
-    </app-input-field-text>
-
-    <app-input-field-text 
-        class="input" 
-        placeholder="Short name" 
-        [(text)]="shortName">
-    </app-input-field-text>
-</div>
-
-<app-card class="save" (click)="save()" [disabled]="!shortName || !fullName">{{ !tyreID ? 'Add' : 'Update' }} tyre</app-card>

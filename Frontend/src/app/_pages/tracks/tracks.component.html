@@ -1,3 +1,4 @@
+<div class="pageTitle">Tracks</div>
 <div class="container">
     <ng-container *ngFor="let track of getTracks()">
         <app-card [routerLink]="['/track/' + track.link]">{{ track.name }}<span class="fi fi-{{track.alpha2Code}}"></span></app-card>

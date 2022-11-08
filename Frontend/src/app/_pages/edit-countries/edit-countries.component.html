@@ -1,35 +1,38 @@
-<div class="box">
-    <div class="title">Existing countries</div>
-
-    <app-input-field-select 
-        class="input" 
-        placeholder="Countries" 
-        (optionChange)="selectCountry()"
-        [(value)]="countryID" 
-        [options]="countryOptions">
-    </app-input-field-select>
-    <app-card (click)="clear()" [disabled]="!countryID">Clear</app-card>
+<div class="pageTitle">Edit countries</div>
+<div class="container">
+    <div class="box">
+        <div class="title">Existing countries</div>
+    
+        <app-input-field-select 
+            class="input" 
+            placeholder="Countries" 
+            (optionChange)="selectCountry()"
+            [(value)]="countryID" 
+            [options]="countryOptions">
+        </app-input-field-select>
+        <app-card (click)="clear()" [disabled]="!countryID">Clear</app-card>
+    </div>
+    
+    <div class="box">
+        <div class="title">{{ !countryID ? 'Add' : 'Edit' }} country</div>
+        <app-input-field-text 
+            class="input" 
+            placeholder="Full name" 
+            [(text)]="fullName">
+        </app-input-field-text>
+    
+        <app-input-field-text 
+            class="input" 
+            placeholder="Short name" 
+            [(text)]="shortName">
+        </app-input-field-text>
+    
+        <app-input-field-text 
+            class="input" 
+            placeholder="Alpha 2 code" 
+            [(text)]="alpha2Code">
+        </app-input-field-text>
+    </div>
+    
+    <app-card class="save" (click)="save()" [disabled]="!shortName || !fullName || !alpha2Code">{{ !countryID ? 'Add' : 'Update' }} country</app-card>
 </div>
-
-<div class="box">
-    <div class="title">{{ !countryID ? 'Add' : 'Edit' }} country</div>
-    <app-input-field-text 
-        class="input" 
-        placeholder="Full name" 
-        [(text)]="fullName">
-    </app-input-field-text>
-
-    <app-input-field-text 
-        class="input" 
-        placeholder="Short name" 
-        [(text)]="shortName">
-    </app-input-field-text>
-
-    <app-input-field-text 
-        class="input" 
-        placeholder="Alpha 2 code" 
-        [(text)]="alpha2Code">
-    </app-input-field-text>
-</div>
-
-<app-card class="save" (click)="save()" [disabled]="!shortName || !fullName || !alpha2Code">{{ !countryID ? 'Add' : 'Update' }} country</app-card>

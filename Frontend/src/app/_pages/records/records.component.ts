@@ -56,6 +56,6 @@ export class RecordsComponent implements OnInit {
   }
 
   getA2C(trackName: string): string {
-    return this.tracks.find(track => track.shortName === trackName)?.alpha2Code.toLowerCase() ?? "";
+    return this.tracks.find(track => track.shortName === trackName)?.country.alpha2Code ?? "";
   }
 }

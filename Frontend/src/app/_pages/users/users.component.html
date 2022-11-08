@@ -1,3 +1,6 @@
-<ng-container *ngFor="let user of getUsers()">
-    <app-card [routerLink]="['/user/' + user.link]">{{ user.username }}</app-card>
-</ng-container>
+<div class="pageTitle">Users</div>
+<div class="container">
+    <ng-container *ngFor="let user of getUsers()">
+        <app-card [routerLink]="['/user/' + user.link]">{{ user.username }}</app-card>
+    </ng-container>
+</div>

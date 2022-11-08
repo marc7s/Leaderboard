@@ -1,100 +1,103 @@
-<div class="configs box">
-    <div class="title">Predefined configs</div>
-    <app-input-field-select 
-        class="input"
-        fontSize="small"
-        [width]="Large"
-        placeholder="Config" 
-        (optionChange)="selectConfig()" 
-        [(value)]="configID" 
-        [options]="configOptions">
-    </app-input-field-select>
-    <app-card (click)="clearConfig()" [disabled]="!configID">Clear</app-card>
-</div>
-
-<form class="timeForm box">
-    <div class="title">Config</div>
-
-    <app-input-field-select 
-        class="input" 
-        placeholder="Game" 
-        (optionChange)="update()" 
-        [(value)]="gameID" 
-        [options]="games">
-    </app-input-field-select>
-    
-    <app-input-field-select 
-        class="input" 
-        placeholder="Track" 
-        (optionChange)="update()" 
-        [(value)]="trackID" 
-        [options]="tracks">
-    </app-input-field-select>
-    
-    <app-input-field-select 
-        class="input" 
-        placeholder="Car" 
-        (optionChange)="update()" 
-        [(value)]="carID" 
-        [options]="cars">
-    </app-input-field-select>
-
-    <app-input-field-select 
-        class="input" 
-        placeholder="Weather" 
-        (optionChange)="update()" 
-        [(value)]="weatherID" 
-        [options]="weathers">
-    </app-input-field-select>
-
-    <app-input-field-select 
-        class="input" 
-        placeholder="Tyre" 
-        (optionChange)="update()" 
-        [(value)]="tyreID" 
-        [options]="tyres"
-        [keepOptionOrder]="true">
-    </app-input-field-select>
-
-    <div class="checkboxInput">
-        <input type="checkbox" [(ngModel)]="customSetup" name="customSetup" (change)="update()"> Custom Setup
+<div class="pageTitle">Add new time</div>
+<div class="container">
+    <div class="configs box">
+        <div class="title">Predefined configs</div>
+        <app-input-field-select 
+            class="input"
+            fontSize="small"
+            [width]="Large"
+            placeholder="Config" 
+            (optionChange)="selectConfig()" 
+            [(value)]="configID" 
+            [options]="configOptions">
+        </app-input-field-select>
+        <app-card (click)="clearConfig()" [disabled]="!configID">Clear</app-card>
     </div>
-</form>
-
-<div class="lap box">
-    <div class="title">Time</div>
-
-    <app-input-field-select 
-        class="input" 
-        placeholder="Driver" 
-        (optionChange)="updateUser()" 
-        [(value)]="userID" 
-        [options]="users">
-    </app-input-field-select>
-
-    <app-input-field-time 
-        class="input" 
-        placeholder="Time" 
-        [(time)]="time"
-        (change)="update()">
-    </app-input-field-time>
-
-    <div class="checkboxInputContainer">
+    
+    <form class="timeForm box">
+        <div class="title">Config</div>
+    
+        <app-input-field-select 
+            class="input" 
+            placeholder="Game" 
+            (optionChange)="update()" 
+            [(value)]="gameID" 
+            [options]="games">
+        </app-input-field-select>
+        
+        <app-input-field-select 
+            class="input" 
+            placeholder="Track" 
+            (optionChange)="update()" 
+            [(value)]="trackID" 
+            [options]="tracks">
+        </app-input-field-select>
+        
+        <app-input-field-select 
+            class="input" 
+            placeholder="Car" 
+            (optionChange)="update()" 
+            [(value)]="carID" 
+            [options]="cars">
+        </app-input-field-select>
+    
+        <app-input-field-select 
+            class="input" 
+            placeholder="Weather" 
+            (optionChange)="update()" 
+            [(value)]="weatherID" 
+            [options]="weathers">
+        </app-input-field-select>
+    
+        <app-input-field-select 
+            class="input" 
+            placeholder="Tyre" 
+            (optionChange)="update()" 
+            [(value)]="tyreID" 
+            [options]="tyres"
+            [keepOptionOrder]="true">
+        </app-input-field-select>
+    
         <div class="checkboxInput">
-            <input type="checkbox" [(ngModel)]="invalid" name="invalid" (change)="update()"> Invalid Lap Time
+            <input type="checkbox" [(ngModel)]="customSetup" name="customSetup" (change)="update()"> Custom Setup
+        </div>
+    </form>
+    
+    <div class="lap box">
+        <div class="title">Time</div>
+    
+        <app-input-field-select 
+            class="input" 
+            placeholder="Driver" 
+            (optionChange)="updateUser()" 
+            [(value)]="userID" 
+            [options]="users">
+        </app-input-field-select>
+    
+        <app-input-field-time 
+            class="input" 
+            placeholder="Time" 
+            [(time)]="time"
+            (change)="update()">
+        </app-input-field-time>
+    
+        <div class="checkboxInputContainer">
+            <div class="checkboxInput">
+                <input type="checkbox" [(ngModel)]="invalid" name="invalid" (change)="update()"> Invalid Lap Time
+            </div>
         </div>
     </div>
-</div>
-
-<div class="submitContainer">
-    <ng-container *ngIf="placeholderTimes.length > 0">
-        <app-leaderboard  [times]="placeholderTimes" title="Time Preview"></app-leaderboard>
-        <app-card (click)="addTime()">Add Time</app-card>
+    
+    <div class="submitContainer">
+        <ng-container *ngIf="placeholderTimes.length > 0">
+            <app-leaderboard  [times]="placeholderTimes" title="Time Preview"></app-leaderboard>
+            <app-card (click)="addTime()">Add Time</app-card>
+        </ng-container>
+    </div>
+    
+    <ng-container *ngIf="lastAddedTime.length > 0">
+        <div class="lastAddedTimeContainer">
+            <app-leaderboard [times]="lastAddedTime" title="Last Added Time"></app-leaderboard>
+        </div>
     </ng-container>
 </div>
-
-<ng-container *ngIf="lastAddedTime.length > 0">
-    <div class="lastAddedTimeContainer">
-        <app-leaderboard [times]="lastAddedTime" title="Last Added Time"></app-leaderboard>
-    </div>
-</ng-container>

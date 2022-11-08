@@ -5,7 +5,7 @@
 </div>
 <div class="leaderboards">
     <div class="leaderboard" *ngFor="let leaderboard of leaderboards">
-        <div class="title">{{leaderboard.name == '' ? title : leaderboard.name}}</div>
+        <div class="title">{{leaderboard.name == '' ? title : leaderboard.name}}<span *ngIf="flag" class="fi fi-{{flag}}"></span></div>
         <app-leaderboard-entry *ngFor="let time of leaderboard.times; let i = index" [time]="time" [timeComparison]="leaderboard.times[0]" [position]="i + 1"></app-leaderboard-entry>
     </div>
 </div>

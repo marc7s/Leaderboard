@@ -1,29 +1,32 @@
-<div class="box">
-    <div class="title">Existing cars</div>
-
-    <app-input-field-select 
-        class="input" 
-        placeholder="Cars" 
-        (optionChange)="selectCar()"
-        [(value)]="carID" 
-        [options]="carOptions">
-    </app-input-field-select>
-    <app-card (click)="clear()" [disabled]="!carID">Clear</app-card>
+<div class="pageTitle">Edit cars</div>
+<div class="container">
+    <div class="box">
+        <div class="title">Existing cars</div>
+    
+        <app-input-field-select 
+            class="input" 
+            placeholder="Cars" 
+            (optionChange)="selectCar()"
+            [(value)]="carID" 
+            [options]="carOptions">
+        </app-input-field-select>
+        <app-card (click)="clear()" [disabled]="!carID">Clear</app-card>
+    </div>
+    
+    <div class="box">
+        <div class="title">{{ !carID ? 'Add' : 'Edit' }} car</div>
+        <app-input-field-text 
+            class="input" 
+            placeholder="Full name" 
+            [(text)]="fullName">
+        </app-input-field-text>
+    
+        <app-input-field-text 
+            class="input" 
+            placeholder="Short name" 
+            [(text)]="shortName">
+        </app-input-field-text>
+    </div>
+    
+    <app-card class="save" (click)="save()" [disabled]="!shortName || !fullName">{{ !carID ? 'Add' : 'Update' }} car</app-card>
 </div>
-
-<div class="box">
-    <div class="title">{{ !carID ? 'Add' : 'Edit' }} car</div>
-    <app-input-field-text 
-        class="input" 
-        placeholder="Full name" 
-        [(text)]="fullName">
-    </app-input-field-text>
-
-    <app-input-field-text 
-        class="input" 
-        placeholder="Short name" 
-        [(text)]="shortName">
-    </app-input-field-text>
-</div>
-
-<app-card class="save" (click)="save()" [disabled]="!shortName || !fullName">{{ !carID ? 'Add' : 'Update' }} car</app-card>

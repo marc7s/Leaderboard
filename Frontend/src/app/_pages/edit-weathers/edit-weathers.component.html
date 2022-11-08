@@ -1,23 +1,26 @@
-<div class="box">
-    <div class="title">Existing weathers</div>
-
-    <app-input-field-select 
-        class="input" 
-        placeholder="Weathers" 
-        (optionChange)="selectWeather()"
-        [(value)]="weatherID" 
-        [options]="weatherOptions">
-    </app-input-field-select>
-    <app-card (click)="clear()" [disabled]="!weatherID">Clear</app-card>
+<div class="pageTitle">Edit weathers</div>
+<div class="container">
+    <div class="box">
+        <div class="title">Existing weathers</div>
+    
+        <app-input-field-select 
+            class="input" 
+            placeholder="Weathers" 
+            (optionChange)="selectWeather()"
+            [(value)]="weatherID" 
+            [options]="weatherOptions">
+        </app-input-field-select>
+        <app-card (click)="clear()" [disabled]="!weatherID">Clear</app-card>
+    </div>
+    
+    <div class="box">
+        <div class="title">{{ !weatherID ? 'Add' : 'Edit' }} weather</div>
+        <app-input-field-text 
+            class="input" 
+            placeholder="Name" 
+            [(text)]="name">
+        </app-input-field-text>
+    </div>
+    
+    <app-card class="save" (click)="save()" [disabled]="!name">{{ !weatherID ? 'Add' : 'Update' }} weather</app-card>
 </div>
-
-<div class="box">
-    <div class="title">{{ !weatherID ? 'Add' : 'Edit' }} weather</div>
-    <app-input-field-text 
-        class="input" 
-        placeholder="Name" 
-        [(text)]="name">
-    </app-input-field-text>
-</div>
-
-<app-card class="save" (click)="save()" [disabled]="!name">{{ !weatherID ? 'Add' : 'Update' }} weather</app-card>

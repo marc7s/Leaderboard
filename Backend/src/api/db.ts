@@ -1298,7 +1298,7 @@ function dbToCountry(dbCountry: DBCountry): Country {
         id: dbCountry.ID,
         fullName: dbCountry.FullName,
         shortName: dbCountry.ShortName,
-        alpha2Code: dbCountry.Alpha2Code
+        alpha2Code: dbCountry.Alpha2Code?.toLowerCase()
     }
 }
 
@@ -1307,7 +1307,6 @@ function dbToTrack(dbTrack: DBTrack, dbCountry: DBCountry): Track {
         id: dbTrack.ID,
         fullName: dbTrack.FullName,
         shortName: dbTrack.ShortName,
-        alpha2Code: dbCountry.Alpha2Code,
         country: dbToCountry(dbCountry)
     }
 }

@@ -1,6 +1,4 @@
-<div class="title">
-    Pages
-</div>
+<div class="pageTitle">Pages</div>
 <div class="container">
     <ng-container *ngFor="let page of pages">
         <app-card [routerLink]="[page.link]">{{ page.name }}</app-card>

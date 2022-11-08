@@ -1,23 +1,26 @@
-<div class="box">
-    <div class="title">Existing games</div>
-
-    <app-input-field-select 
-        class="input" 
-        placeholder="Games" 
-        (optionChange)="selectGame()"
-        [(value)]="gameID" 
-        [options]="gameOptions">
-    </app-input-field-select>
-    <app-card (click)="clear()" [disabled]="!gameID">Clear</app-card>
+<div class="pageTitle">Edit games</div>
+<div class="container">
+    <div class="box">
+        <div class="title">Existing games</div>
+    
+        <app-input-field-select 
+            class="input" 
+            placeholder="Games" 
+            (optionChange)="selectGame()"
+            [(value)]="gameID" 
+            [options]="gameOptions">
+        </app-input-field-select>
+        <app-card (click)="clear()" [disabled]="!gameID">Clear</app-card>
+    </div>
+    
+    <div class="box">
+        <div class="title">{{ !gameID ? 'Add' : 'Edit' }} game</div>
+        <app-input-field-text 
+            class="input" 
+            placeholder="Name" 
+            [(text)]="name">
+        </app-input-field-text>
+    </div>
+    
+    <app-card class="save" (click)="save()" [disabled]="!name">{{ !gameID ? 'Add' : 'Update' }} game</app-card>
 </div>
-
-<div class="box">
-    <div class="title">{{ !gameID ? 'Add' : 'Edit' }} game</div>
-    <app-input-field-text 
-        class="input" 
-        placeholder="Name" 
-        [(text)]="name">
-    </app-input-field-text>
-</div>
-
-<app-card class="save" (click)="save()" [disabled]="!name">{{ !gameID ? 'Add' : 'Update' }} game</app-card>

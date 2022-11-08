@@ -3,6 +3,12 @@
     background-color: var(--main-dark)
     border-radius: 1rem
 
+@mixin page-title
+    @include font-size-1
+    display: flex
+    justify-content: center
+    margin-bottom: 3rem
+
 $mobile: 600px
 $tablet: 1000px
 $desktop: 1200px
@@ -82,6 +88,14 @@ $desktop: 1200px
         padding: 1.8rem
 
 
+
+@mixin font-size-0
+    @media (max-width: $mobile)
+        font-size: 2.3rem
+    @media (min-width: $mobile) and (max-width: $tablet)
+        font-size: 3rem
+    @media (min-width: $tablet)
+        font-size: 3.5rem
 
 @mixin font-size-1
     @media (max-width: $mobile)

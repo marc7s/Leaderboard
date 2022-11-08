@@ -19,7 +19,7 @@ export class TracksComponent implements OnInit {
 
   constructor(private api: ApiService) { 
     this.api.getTracks().subscribe(tracks => {
-      this.tracks = tracks.map(track => {return { name: track.shortName, alpha2Code: track.alpha2Code.toLowerCase(), link: encodeURI(track.shortName) }});
+      this.tracks = tracks.map(track => {return { name: track.shortName, alpha2Code: track.country.alpha2Code, link: encodeURI(track.shortName) }});
     });
   }
 

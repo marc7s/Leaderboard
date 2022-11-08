@@ -1,69 +1,72 @@
-<div class="configs box">
-    <div class="title">Existing configs</div>
-    <app-input-field-select 
-        class="input"
-        fontSize="small"
-        [width]="Large"
-        placeholder="Config" 
-        (optionChange)="selectConfig()" 
-        [(value)]="configID" 
-        [options]="configOptions">
-    </app-input-field-select>
-    <app-card (click)="clear()" [disabled]="!configID">Clear</app-card>
-</div>
-
-<form class="timeForm box">
-    <div class="title">Config</div>
-
-    <app-input-field-select 
-        class="input" 
-        placeholder="Game" 
-        (optionChange)="update()"
-        [(value)]="gameID" 
-        [options]="games">
-    </app-input-field-select>
-    
-    <app-input-field-select 
-        class="input" 
-        placeholder="Track" 
-        (optionChange)="update()"
-        [(value)]="trackID" 
-        [options]="tracks">
-    </app-input-field-select>
-    
-    <app-input-field-select 
-        class="input" 
-        placeholder="Car" 
-        (optionChange)="update()"
-        [(value)]="carID" 
-        [options]="cars">
-    </app-input-field-select>
-
-    <app-input-field-select 
-        class="input" 
-        placeholder="Weather" 
-        (optionChange)="update()"
-        [(value)]="weatherID" 
-        [options]="weathers">
-    </app-input-field-select>
-
-    <app-input-field-select 
-        class="input" 
-        placeholder="Tyre" 
-        (optionChange)="update()"
-        [(value)]="tyreID" 
-        [options]="tyres">
-    </app-input-field-select>
-
-    <app-input-field-text 
-        class="input" 
-        placeholder="Description" 
-        [(text)]="description">
-    </app-input-field-text>
-
-    <div class="checkboxInput">
-        <input type="checkbox" [(ngModel)]="customSetup" name="customSetup" (optionChange)="update()"> Custom Setup
+<div class="pageTitle">Edit configs</div>
+<div class="container">
+    <div class="configs box">
+        <div class="title">Existing configs</div>
+        <app-input-field-select 
+            class="input"
+            fontSize="small"
+            [width]="Large"
+            placeholder="Config" 
+            (optionChange)="selectConfig()" 
+            [(value)]="configID" 
+            [options]="configOptions">
+        </app-input-field-select>
+        <app-card (click)="clear()" [disabled]="!configID">Clear</app-card>
     </div>
-</form>
-
-<app-card class="save" (click)="save()" [disabled]="!description || !gameID || !trackID || !carID || !weatherID || !tyreID">{{ !configID ? 'Add' : 'Update' }} config</app-card>
+    
+    <form class="timeForm box">
+        <div class="title">Config</div>
+    
+        <app-input-field-select 
+            class="input" 
+            placeholder="Game" 
+            (optionChange)="update()"
+            [(value)]="gameID" 
+            [options]="games">
+        </app-input-field-select>
+        
+        <app-input-field-select 
+            class="input" 
+            placeholder="Track" 
+            (optionChange)="update()"
+            [(value)]="trackID" 
+            [options]="tracks">
+        </app-input-field-select>
+        
+        <app-input-field-select 
+            class="input" 
+            placeholder="Car" 
+            (optionChange)="update()"
+            [(value)]="carID" 
+            [options]="cars">
+        </app-input-field-select>
+    
+        <app-input-field-select 
+            class="input" 
+            placeholder="Weather" 
+            (optionChange)="update()"
+            [(value)]="weatherID" 
+            [options]="weathers">
+        </app-input-field-select>
+    
+        <app-input-field-select 
+            class="input" 
+            placeholder="Tyre" 
+            (optionChange)="update()"
+            [(value)]="tyreID" 
+            [options]="tyres">
+        </app-input-field-select>
+    
+        <app-input-field-text 
+            class="input" 
+            placeholder="Description" 
+            [(text)]="description">
+        </app-input-field-text>
+    
+        <div class="checkboxInput">
+            <input type="checkbox" [(ngModel)]="customSetup" name="customSetup" (optionChange)="update()"> Custom Setup
+        </div>
+    </form>
+    
+    <app-card class="save" (click)="save()" [disabled]="!description || !gameID || !trackID || !carID || !weatherID || !tyreID">{{ !configID ? 'Add' : 'Update' }} config</app-card>
+</div>

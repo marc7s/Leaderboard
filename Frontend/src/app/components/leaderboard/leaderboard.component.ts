@@ -17,6 +17,7 @@ export class LeaderboardComponent implements OnInit {
   @Input() times: TimeSummary[] = [];
   @Input() splits: Split[] = [];
   @Input() title: string = 'Leaderboard';
+  @Input() flag?: string | undefined = undefined;
   splitSettings: SplitSetting[] = [];
   leaderboards: Leaderboard[] = [];
   
