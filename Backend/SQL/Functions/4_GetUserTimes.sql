@@ -21,11 +21,15 @@ SELECT
 	countries.FullName AS CountryFullName,
 	countries.ShortName AS CountryShortName,
 	countries.Alpha2Code AS CountryAlpha2Code
-FROM Times t
+FROM (
+	SELECT ID, Time, Millis, UserID, ConfigID, Valid, AddedAt, ROW_NUMBER() OVER (PARTITION BY UserID, ConfigID, Valid ORDER BY Time ASC) TimeRank FROM Times
+) t
 INNER JOIN Users u ON t.UserID = u.ID
 INNER JOIN Configs c ON t.ConfigID = c.ID
 INNER JOIN Tracks tr ON c.TrackID = tr.ID
 INNER JOIN Cars car ON c.CarID = car.ID
 INNER JOIN Weathers w ON c.WeatherID = w.ID
 INNER JOIN Countries countries ON tr.CountryID = countries.ID
-WHERE UserID = @UserID
+WHERE 
+	UserID = @UserID AND
+	TimeRank <= 3 -- Only return the top 3 times for each user, config and validity combination
