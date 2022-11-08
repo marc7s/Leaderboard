@@ -4,9 +4,9 @@
     <app-input-field-select 
         class="input" 
         placeholder="Games" 
-        (optionNumberChange)="selectGame()"
-        [(valueNumber)]="gameID" 
-        [optionsNumber]="gameOptions">
+        (optionChange)="selectGame()"
+        [(value)]="gameID" 
+        [options]="gameOptions">
     </app-input-field-select>
     <app-card (click)="clear()" [disabled]="!gameID">Clear</app-card>
 </div>

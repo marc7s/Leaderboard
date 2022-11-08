@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Config } from '@shared/api';
 import { TimeSummary } from '@shared/dataStructures';
 import { ApiService } from 'src/app/api.service';
-import { OptionNumber } from 'src/app/option';
+import { Option } from 'src/app/option';
 import { Size } from 'src/styleSettings';
 
 @Component({
@@ -14,27 +14,27 @@ export class AddTimeComponent implements OnInit {
   Large: Size = Size.Large;
   
   configID: number | null = null;
-  configOptions: OptionNumber[] = [];
+  configOptions: Option[] = [];
   configs: Config[] = [];
   
   userID: number | null = null;
   username: string | null = null;
-  users: OptionNumber[] = [];
+  users: Option[] = [];
 
   gameID: number | null = null;
-  games: OptionNumber[] = [];
+  games: Option[] = [];
   
   trackID: number | null = null;
-  tracks: OptionNumber[] = [];
+  tracks: Option[] = [];
   
   carID: number | null = null;
-  cars: OptionNumber[] = [];
+  cars: Option[] = [];
 
   weatherID: number | null = null;
-  weathers: OptionNumber[] = [];
+  weathers: Option[] = [];
 
   tyreID: number | null = null;
-  tyres: OptionNumber[] = [];
+  tyres: Option[] = [];
 
   time: string | null = null;
 

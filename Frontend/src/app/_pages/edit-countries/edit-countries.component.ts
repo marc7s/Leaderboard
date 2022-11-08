@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Country } from '@shared/api';
 import { ApiService } from 'src/app/api.service';
-import { OptionNumber } from 'src/app/option';
+import { Option } from 'src/app/option';
 
 @Component({
   selector: 'app-edit-countries',
@@ -11,7 +11,7 @@ import { OptionNumber } from 'src/app/option';
 export class EditCountriesComponent implements OnInit {
 
   countryID: number | null = null;
-  countryOptions: OptionNumber[] = [];
+  countryOptions: Option[] = [];
   countries: Country[] = [];
 
   shortName: string | null = null;

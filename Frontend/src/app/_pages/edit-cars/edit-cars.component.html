@@ -4,9 +4,9 @@
     <app-input-field-select 
         class="input" 
         placeholder="Cars" 
-        (optionNumberChange)="selectCar()"
-        [(valueNumber)]="carID" 
-        [optionsNumber]="carOptions">
+        (optionChange)="selectCar()"
+        [(value)]="carID" 
+        [options]="carOptions">
     </app-input-field-select>
     <app-card (click)="clear()" [disabled]="!carID">Clear</app-card>
 </div>

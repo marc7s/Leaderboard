@@ -1,9 +1,4 @@
-export interface OptionNumber {
+export interface Option {
     value: number,
-    display: string
-}
-
-export interface OptionString {
-    value: string,
     display: string
 }

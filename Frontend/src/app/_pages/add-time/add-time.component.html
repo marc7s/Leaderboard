@@ -5,9 +5,9 @@
         fontSize="small"
         [width]="Large"
         placeholder="Config" 
-        (optionNumberChange)="selectConfig()" 
-        [(valueNumber)]="configID" 
-        [optionsNumber]="configOptions">
+        (optionChange)="selectConfig()" 
+        [(value)]="configID" 
+        [options]="configOptions">
     </app-input-field-select>
     <app-card (click)="clearConfig()" [disabled]="!configID">Clear</app-card>
 </div>
@@ -18,41 +18,42 @@
     <app-input-field-select 
         class="input" 
         placeholder="Game" 
-        (optionNumberChange)="update()" 
-        [(valueNumber)]="gameID" 
-        [optionsNumber]="games">
+        (optionChange)="update()" 
+        [(value)]="gameID" 
+        [options]="games">
     </app-input-field-select>
     
     <app-input-field-select 
         class="input" 
         placeholder="Track" 
-        (optionNumberChange)="update()" 
-        [(valueNumber)]="trackID" 
-        [optionsNumber]="tracks">
+        (optionChange)="update()" 
+        [(value)]="trackID" 
+        [options]="tracks">
     </app-input-field-select>
     
     <app-input-field-select 
         class="input" 
         placeholder="Car" 
-        (optionNumberChange)="update()" 
-        [(valueNumber)]="carID" 
-        [optionsNumber]="cars">
+        (optionChange)="update()" 
+        [(value)]="carID" 
+        [options]="cars">
     </app-input-field-select>
 
     <app-input-field-select 
         class="input" 
         placeholder="Weather" 
-        (optionNumberChange)="update()" 
-        [(valueNumber)]="weatherID" 
-        [optionsNumber]="weathers">
+        (optionChange)="update()" 
+        [(value)]="weatherID" 
+        [options]="weathers">
     </app-input-field-select>
 
     <app-input-field-select 
         class="input" 
         placeholder="Tyre" 
-        (optionNumberChange)="update()" 
-        [(valueNumber)]="tyreID" 
-        [optionsNumber]="tyres">
+        (optionChange)="update()" 
+        [(value)]="tyreID" 
+        [options]="tyres"
+        [keepOptionOrder]="true">
     </app-input-field-select>
 
     <div class="checkboxInput">
@@ -66,9 +67,9 @@
     <app-input-field-select 
         class="input" 
         placeholder="Driver" 
-        (optionNumberChange)="updateUser()" 
-        [(valueNumber)]="userID" 
-        [optionsNumber]="users">
+        (optionChange)="updateUser()" 
+        [(value)]="userID" 
+        [options]="users">
     </app-input-field-select>
 
     <app-input-field-time 

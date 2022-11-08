@@ -4,9 +4,9 @@
     <app-input-field-select 
         class="input" 
         placeholder="Users" 
-        (optionNumberChange)="selectUser()"
-        [(valueNumber)]="userID" 
-        [optionsNumber]="userOptions">
+        (optionChange)="selectUser()"
+        [(value)]="userID" 
+        [options]="userOptions">
     </app-input-field-select>
     <app-card (click)="clear()" [disabled]="!userID">Clear</app-card>
 </div>

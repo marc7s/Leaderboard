@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Car } from '@shared/api';
 import { ApiService } from 'src/app/api.service';
-import { OptionNumber } from 'src/app/option';
+import { Option } from 'src/app/option';
 
 @Component({
   selector: 'app-edit-cars',
@@ -11,7 +11,7 @@ import { OptionNumber } from 'src/app/option';
 export class EditCarsComponent implements OnInit {
 
   carID: number | null = null;
-  carOptions: OptionNumber[] = [];
+  carOptions: Option[] = [];
   cars: Car[] = [];
 
   shortName: string | null = null;

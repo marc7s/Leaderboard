@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Optional, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatOption } from '@angular/material/core';
 import { MatSelect } from '@angular/material/select';
-import { OptionNumber, OptionString } from 'src/app/option';
+import { Option } from 'src/app/option';
 import { Size } from 'src/styleSettings';
 
 @Component({
@@ -14,44 +14,34 @@ export class InputFieldSelectComponent implements OnInit {
   @Input() fontSize: string = 'inherit';
   @Input() width: Size = Size.Medium;
 
-  @Input() optionsNumber: OptionNumber[] = [];
-  @Input() optionsString: OptionString[] = [];
+  @Input() options: Option[] = [];
   
-  @Output() optionNumberChange = new EventEmitter<OptionNumber | null>();
-  @Output() optionStringChange = new EventEmitter<OptionString | null>();
+  @Output() optionChange = new EventEmitter<Option | null>();
   
   @Input() placeholder: string = "";
 
-  @Input() valueNumber: number | null = null;
-  @Output() valueNumberChange = new EventEmitter<number | null>();
+  @Input() value: number | null = null;
+  @Output() valueChange = new EventEmitter<number | null>();
 
-  @Input() valueString: string | null = null;
-  @Output() valueStringChange = new EventEmitter<string | null>();
+  @Input() keepOptionOrder?: boolean = false;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  updateValueNumber(el: MatSelect) {
+  getOptions(): Option[] {
+    return this.keepOptionOrder ? this.options : [...this.options].sort((a: Option, b: Option) => a.display > b.display ? 1 : -1);
+  }
+
+  updateValue(el: MatSelect) {
     const parsed = parseFloat(el.value);
     const val = parsed == NaN ? null : parsed;
     const option = val == null ? null : {
       value: val,
       display: (el.selected as MatOption).viewValue
     };
-    this.valueNumberChange.emit(val);
-    this.optionNumberChange.emit(option);
+    this.valueChange.emit(val);
+    this.optionChange.emit(option);
   }
-
-  updateValueString(el: MatSelect) {
-    const val = el.value;
-    const option = {
-      value: val,
-      display: (el.selected as MatOption).viewValue
-    };
-    this.valueStringChange.emit(val);
-    this.optionStringChange.emit(option);
-  }
-
 }

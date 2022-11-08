@@ -4,9 +4,9 @@
     <app-input-field-select 
         class="input" 
         placeholder="Tracks" 
-        (optionNumberChange)="selectTrack()"
-        [(valueNumber)]="trackID" 
-        [optionsNumber]="trackOptions">
+        (optionChange)="selectTrack()"
+        [(value)]="trackID" 
+        [options]="trackOptions">
     </app-input-field-select>
     <app-card (click)="clear()" [disabled]="!trackID">Clear</app-card>
 </div>
@@ -16,8 +16,8 @@
     <app-input-field-select 
         class="input" 
         placeholder="Country" 
-        [(valueNumber)]="countryID" 
-        [optionsNumber]="countryOptions">
+        [(value)]="countryID" 
+        [options]="countryOptions">
     </app-input-field-select>
     <app-input-field-text 
         class="input" 

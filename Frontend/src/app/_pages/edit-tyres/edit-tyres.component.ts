@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Tyre } from '@shared/api';
 import { ApiService } from 'src/app/api.service';
-import { OptionNumber } from 'src/app/option';
+import { Option } from 'src/app/option';
 
 @Component({
   selector: 'app-edit-tyres',
@@ -11,7 +11,7 @@ import { OptionNumber } from 'src/app/option';
 export class EditTyresComponent implements OnInit {
 
   tyreID: number | null = null;
-  tyreOptions: OptionNumber[] = [];
+  tyreOptions: Option[] = [];
   tyres: Tyre[] = [];
 
   shortName: string | null = null;

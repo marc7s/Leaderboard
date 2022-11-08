@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Game } from '@shared/api';
 import { ApiService } from 'src/app/api.service';
-import { OptionNumber } from 'src/app/option';
+import { Option } from 'src/app/option';
 
 @Component({
   selector: 'app-edit-games',
@@ -11,7 +11,7 @@ import { OptionNumber } from 'src/app/option';
 export class EditGamesComponent implements OnInit {
 
   gameID: number | null = null;
-  gameOptions: OptionNumber[] = [];
+  gameOptions: Option[] = [];
   games: Game[] = [];
 
   name: string | null = null;

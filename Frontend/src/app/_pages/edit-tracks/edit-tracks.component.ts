@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Track } from '@shared/api';
 import { ApiService } from 'src/app/api.service';
-import { OptionNumber } from 'src/app/option';
+import { Option } from 'src/app/option';
 
 @Component({
   selector: 'app-edit-tracks',
@@ -11,11 +11,11 @@ import { OptionNumber } from 'src/app/option';
 export class EditTracksComponent implements OnInit {
 
   trackID: number | null = null;
-  trackOptions: OptionNumber[] = [];
+  trackOptions: Option[] = [];
   tracks: Track[] = [];
 
   countryID: number | null = null;
-  countryOptions: OptionNumber[] = [];
+  countryOptions: Option[] = [];
 
   shortName: string | null = null;
   fullName: string | null = null;

@@ -4,9 +4,9 @@
     <app-input-field-select 
         class="input" 
         placeholder="Countries" 
-        (optionNumberChange)="selectCountry()"
-        [(valueNumber)]="countryID" 
-        [optionsNumber]="countryOptions">
+        (optionChange)="selectCountry()"
+        [(value)]="countryID" 
+        [options]="countryOptions">
     </app-input-field-select>
     <app-card (click)="clear()" [disabled]="!countryID">Clear</app-card>
 </div>

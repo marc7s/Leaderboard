@@ -4,9 +4,9 @@
     <app-input-field-select 
         class="input" 
         placeholder="Weathers" 
-        (optionNumberChange)="selectWeather()"
-        [(valueNumber)]="weatherID" 
-        [optionsNumber]="weatherOptions">
+        (optionChange)="selectWeather()"
+        [(value)]="weatherID" 
+        [options]="weatherOptions">
     </app-input-field-select>
     <app-card (click)="clear()" [disabled]="!weatherID">Clear</app-card>
 </div>

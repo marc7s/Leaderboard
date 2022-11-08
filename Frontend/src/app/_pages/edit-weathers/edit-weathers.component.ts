@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Weather } from '@shared/api';
 import { ApiService } from 'src/app/api.service';
-import { OptionNumber } from 'src/app/option';
+import { Option } from 'src/app/option';
 
 @Component({
   selector: 'app-edit-weathers',
@@ -11,7 +11,7 @@ import { OptionNumber } from 'src/app/option';
 export class EditWeathersComponent implements OnInit {
 
   weatherID: number | null = null;
-  weatherOptions: OptionNumber[] = [];
+  weatherOptions: Option[] = [];
   weathers: Weather[] = [];
 
   name: string | null = null;
