@@ -13,6 +13,10 @@ export function log(message: string) {
     console.log(`[${new Date().toLocaleString()}] ${message}`);
 }
 
+export function logError(errorMessage: string) {
+    console.error(`[${new Date().toLocaleString()}] ${errorMessage}`);
+}
+
 app.use(cors({
     origin: app.get('env') === 'development' ? 'http://localhost:4200' : 'http://old.schagerberg.com'
 }));
@@ -53,7 +57,7 @@ function sendError(res: Response, statusCode: number, message: string, errorDeta
         status: 'ERROR',
         errorMessage: message
     };
-    console.error(payload);
+    logError(payload.errorMessage);
     if(!errorDetails)
         return res.status(statusCode).send(payload);
 
