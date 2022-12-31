@@ -37,14 +37,14 @@ export class JwtTokenBody {
 }
 
 export class AuthenticationError extends Error {
-    constructor(message: string){
+    constructor(message: string) {
         super(message);
     }
 }
 
 export class NotFoundError extends Error {
-    constructor(message: string){
-        super(message);
+    constructor(path: string) {
+        super(`Incorrect path: '${path}'`);
     }
 }
 
