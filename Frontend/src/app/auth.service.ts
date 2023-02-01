@@ -42,7 +42,7 @@ export class AuthService {
     if(exp !== null){
       const expDate: number = parseInt(exp);
 
-      if(expDate !== NaN)
+      if(!Number.isNaN(expDate))
         return Date.now() < expDate;
     }
 

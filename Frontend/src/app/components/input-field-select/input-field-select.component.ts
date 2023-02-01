@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { MatLegacyOption as MatOption } from '@angular/material/legacy-core';
-import { MatLegacySelect as MatSelect } from '@angular/material/legacy-select';
+import { MatOption } from '@angular/material/core';
+import { MatSelect } from '@angular/material/select';
 import { Option } from 'src/app/option';
 import { Size } from 'src/styleSettings';
 
@@ -36,7 +36,7 @@ export class InputFieldSelectComponent implements OnInit {
 
   updateValue(el: MatSelect) {
     const parsed = parseFloat(el.value);
-    const val = parsed == NaN ? null : parsed;
+    const val = Number.isNaN(parsed) ? null : parsed;
     const option = val == null ? null : {
       value: val,
       display: (el.selected as MatOption).viewValue

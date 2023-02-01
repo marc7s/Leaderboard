@@ -21,7 +21,6 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "baseHref" : "/Leaderboard/",
-            "deployUrl": "/Leaderboard/",
             "outputPath": "dist/leaderboard",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -132,5 +131,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
