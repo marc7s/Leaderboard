@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { MatOption } from '@angular/material/core';
-import { MatSelect } from '@angular/material/select';
+import { MatLegacyOption as MatOption } from '@angular/material/legacy-core';
+import { MatLegacySelect as MatSelect } from '@angular/material/legacy-select';
 import { Option } from 'src/app/option';
 import { Size } from 'src/styleSettings';
 
