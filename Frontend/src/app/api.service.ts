@@ -36,7 +36,7 @@ export class ApiService {
   public LOADING = this.loadingSubject.asObservable();
   private waitingList: any[] = [];
 
-  private apiEndpoint: string = isDevMode() ? 'http://localhost:5000/api/' : 'http://old.schagerberg.com:5000/api/';
+  private apiEndpoint: string = isDevMode() ? 'http://localhost:5000/api/' : 'https://leaderboard-api.schagerberg.com/';
 
   public getLocalToken(): Token | null {
     const token: string | null = localStorage.getItem('token');

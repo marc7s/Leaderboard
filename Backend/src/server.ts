@@ -19,11 +19,11 @@ export function logError(errorMessage: string) {
 }
 
 app.use(cors({
-    origin: app.get('env') === 'development' ? 'http://localhost:4200' : 'http://old.schagerberg.com'
+    origin: app.get('env') === 'development' ? 'http://localhost:4200' : 'https://leaderboard.schagerberg.com'
 }));
 
 app.use(express.json());
-app.use('/api/db', require('./api/db'));
+app.use('/db', require('./api/db'));
 
 app.get('*', (req: Request, res: Response, next: NextFunction) => {
     next(new NotFoundError(req.baseUrl + req.path));
