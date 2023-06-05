@@ -20,10 +20,10 @@ export class TrackComponent implements OnInit {
 
   track: Track | null = null;
   times: TimeSummary[] = [];
-  splits: Split[] = [Split.Weather, Split.Valid];
+  splits: Split[] = [Split.Weather, Split.Valid, Split.Game];
 
   constructor(private route: ActivatedRoute, private api: ApiService) {
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe((params: any) => {
       this.api.getTrackSummary(decodeURI(params.shortName)).subscribe(summary => {
         this.track = summary.track;
         this.times = summary.times;

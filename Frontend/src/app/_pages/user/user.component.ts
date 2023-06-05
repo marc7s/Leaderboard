@@ -14,7 +14,7 @@ export class UserComponent implements OnInit {
   numberOfRecords: number = 0;
   username: string = '';
   trackSummaries: TrackSummary[] = [];
-  splits: Split[] = [Split.Weather, Split.Valid];
+  splits: Split[] = [Split.Weather, Split.Valid, Split.Game];
 
   constructor(private route: ActivatedRoute, private api: ApiService) {
     this.route.params.subscribe((params: any) => {

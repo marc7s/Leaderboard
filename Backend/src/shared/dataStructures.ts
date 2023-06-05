@@ -5,6 +5,7 @@ export interface TimeSummary {
     time: string,
     millis: number,
     username: string,
+    game: string,
     car: string,
     weather: string,
     valid: boolean,
@@ -21,6 +22,7 @@ export interface Leaderboard {
     name: string,
     times: TimeSummary[],
     weatherCondition?: string,
+    gameCondition?: string,
     validCondition?: boolean
 }
 

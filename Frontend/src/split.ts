@@ -1,7 +1,7 @@
 export enum Split {
-    Driver,
     Weather,
-    Valid
+    Valid,
+    Game
 }
 
 export interface SplitSetting {

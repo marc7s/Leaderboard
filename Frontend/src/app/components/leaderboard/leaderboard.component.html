@@ -1,6 +1,7 @@
 <div class="splits" *ngIf="splitSettings.length > 0">
     <div id="splitBy">Split by</div>
     <app-card *ngIf="includes(ValidSplit)" [selected]="ValidSplitSetting.selected" (click)="splitBy(ValidSplit)">Valid</app-card>
+    <app-card *ngIf="includes(GameSplit)" [selected]="GameSplitSetting.selected" (click)="splitBy(GameSplit)">Game</app-card>
     <app-card *ngIf="includes(WeatherSplit)" [selected]="WeatherSplitSetting.selected" (click)="splitBy(WeatherSplit)">Weather</app-card>
 </div>
 <div class="leaderboards">

@@ -582,7 +582,7 @@ async function getAuthenticRecord(trackID: number): Promise<AuthenticTrackRecord
                 trackRecord = {
                     driver: dbToDriver(dbDriver, dbDriverCountry),
                     class: dbToClass(dbClass),
-                    timeSummary: dbToTimeSummary(dbTime, dbConfig, dbCar, true),
+                    timeSummary: dbToTimeSummary(dbTime, dbGame, dbConfig, dbCar, true),
                     config: dbToConfig(dbConfig, dbGame, dbTrack, dbCar, dbWeather, dbTyre, dbCountry)
                 }
             });
@@ -648,6 +648,7 @@ async function getRecords(): Promise<LapRecord[]> {
                   time: dbTime.Time,
                   millis: dbTime.Millis,
                   username: dbTime.Username,
+                  game: dbGame.Name,
                   car: dbCar.ShortName,
                   weather: config.weather.name,
                   valid: dbTime.Valid,
@@ -701,6 +702,7 @@ async function getUserSummary(username: string): Promise<TrackSummary[]> {
                 const data: any = {};
                 cols.map(col => { data[col.metadata.colName] = col.value });
                 const dbTime: DBTime = parseIntoInterface(data, _TIME_);
+                const dbGame: DBGame = parseIntoInterface(data, _GAME_, 'Game');
                 const dbConfig: DBConfig = parseIntoInterface(data, _CONFIG_, 'Config');
                 const dbCar: DBCar = parseIntoInterface(data, _CAR_, 'Car');
                 const dbTrack: DBTrack = parseIntoInterface(data, _TRACK_, 'Track');
@@ -708,7 +710,7 @@ async function getUserSummary(username: string): Promise<TrackSummary[]> {
 
                 const track: Track = dbToTrack(dbTrack, dbCountry);
                 tracks.push(track);
-                const timeSummary: TimeSummary = dbToTimeSummary(dbTime, dbConfig, dbCar, false);
+                const timeSummary: TimeSummary = dbToTimeSummary(dbTime, dbGame, dbConfig, dbCar, false);
 
                 trackSummariesMap.set(track.id, (trackSummariesMap.get(track.id) || []).concat(timeSummary));
             });
@@ -731,10 +733,11 @@ async function getTimes(req: sql.Request): Promise<TimeSummary[]> {
                 const data: any = {};
                 cols.map(col => { data[col.metadata.colName] = col.value });
                 const dbTime: DBTime = parseIntoInterface(data, _TIME_);
+                const dbGame: DBGame = parseIntoInterface(data, _GAME_, 'Game');
                 const dbConfig: DBConfig = parseIntoInterface(data, _CONFIG_, 'Config');
                 const dbCar: DBCar = parseIntoInterface(data, _CAR_, 'Car');
                 
-                times.push(dbToTimeSummary(dbTime, dbConfig, dbCar, false));
+                times.push(dbToTimeSummary(dbTime, dbGame, dbConfig, dbCar, false));
             });
             req.on('error', err => { reject(err) });
             req.on('requestCompleted', () => { resolve(times) });
@@ -1358,12 +1361,13 @@ function dbToTime(dbTime: DBTime, dbConfig: DBConfig, dbGame: DBGame, dbTrack: D
     }
 }
 
-function dbToTimeSummary(dbTime: DBTime, dbConfig: DBConfig, dbCar: DBCar, authentic: boolean): TimeSummary {
+function dbToTimeSummary(dbTime: DBTime, dbGame: DBGame, dbConfig: DBConfig, dbCar: DBCar, authentic: boolean): TimeSummary {
     return {
         id: dbTime.ID,
         time: dbTime.Time,
         millis: dbTime.Millis,
         username: dbTime.Username,
+        game: dbGame.Name,
         car: dbCar.ShortName,
         weather: dbTime.Weather,
         valid: dbTime.Valid,

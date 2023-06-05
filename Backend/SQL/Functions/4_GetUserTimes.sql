@@ -11,6 +11,9 @@ SELECT
 	t.Valid,
 	t.AddedAt,
 	u.Username,
+	g.ID AS GameID,
+	g.Name AS GameName,
+	g.Authentic AS GameAuthentic,
 	tr.ID AS TrackID,
 	tr.FullName AS TrackFullName,
 	tr.ShortName AS TrackShortName,
@@ -26,6 +29,7 @@ FROM (
 ) t
 INNER JOIN Users u ON t.UserID = u.ID
 INNER JOIN Configs c ON t.ConfigID = c.ID
+INNER JOIN Games g ON c.GameID = g.ID
 INNER JOIN Tracks tr ON c.TrackID = tr.ID
 INNER JOIN Cars car ON c.CarID = car.ID
 INNER JOIN Weathers w ON c.WeatherID = w.ID

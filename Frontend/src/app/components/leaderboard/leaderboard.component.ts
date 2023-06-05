@@ -10,9 +10,11 @@ import { Split, SplitSetting } from 'src/split';
 export class LeaderboardComponent implements OnInit {
   ValidSplit: Split = Split.Valid;
   WeatherSplit: Split = Split.Weather;
+  GameSplit: Split = Split.Game;
   
   ValidSplitSetting: SplitSetting = { split: this.ValidSplit, selected: false };
   WeatherSplitSetting: SplitSetting = { split: this.WeatherSplit, selected: false };
+  GameSplitSetting: SplitSetting = { split: this.GameSplit, selected: false };
 
   @Input() times: TimeSummary[] = [];
   @Input() splits: Split[] = [];
@@ -26,6 +28,7 @@ export class LeaderboardComponent implements OnInit {
   ngOnInit(): void {
     const settings: SplitSetting[] = [
       this.ValidSplitSetting,
+      this.GameSplitSetting,
       this.WeatherSplitSetting
     ];
     settings.forEach(s => {
@@ -58,6 +61,9 @@ export class LeaderboardComponent implements OnInit {
     this.splitByWeather();
     this.leaderboards = this.removeDuplicates(this.leaderboards);
 
+    this.splitByGame();
+    this.leaderboards = this.removeDuplicates(this.leaderboards);
+
     this.splitByValid();
     this.leaderboards = this.removeDuplicates(this.leaderboards);
     
@@ -72,6 +78,9 @@ export class LeaderboardComponent implements OnInit {
   filterConditions(split: Split): void {
     if(!this.selected(this.WeatherSplit) && split === this.WeatherSplit)
       this.leaderboards = this.leaderboards.filter(l => l.weatherCondition == undefined);
+
+    if(!this.selected(this.GameSplit) && split === this.GameSplit)
+      this.leaderboards = this.leaderboards.filter(l => l.gameCondition == undefined);
 
     if(!this.selected(this.ValidSplit) && split === this.ValidSplit)
       this.leaderboards = this.leaderboards.filter(l => l.validCondition == undefined);
@@ -96,10 +105,11 @@ export class LeaderboardComponent implements OnInit {
       
       weathers.forEach(w => {
         add.push({
-          name: this.getLeaderboardTitle(w, leaderboard.validCondition),
-          times: this.times.filter(t => this.checkFilter({f: t.weather, s: w}, {f: t.valid, s: leaderboard.validCondition})),
+          name: this.getLeaderboardTitle(w, leaderboard.validCondition, leaderboard.gameCondition),
+          times: this.times.filter(t => this.checkFilter({f: t.weather, s: w}, {f: t.game, s: leaderboard.gameCondition}, {f: t.valid, s: leaderboard.validCondition})),
           weatherCondition: w,
-          validCondition: leaderboard.validCondition
+          validCondition: leaderboard.validCondition,
+          gameCondition: leaderboard.gameCondition
         });
       });
       remove.push(leaderboard);
@@ -128,10 +138,11 @@ export class LeaderboardComponent implements OnInit {
 
       valids.forEach(v => {
         add.push({
-          name: this.getLeaderboardTitle(leaderboard.weatherCondition, v),
-          times: this.times.filter(t => this.checkFilter({f: t.valid, s: v}, {f: t.weather, s: leaderboard.weatherCondition})),
+          name: this.getLeaderboardTitle(leaderboard.weatherCondition, v, leaderboard.gameCondition),
+          times: this.times.filter(t => this.checkFilter({f: t.valid, s: v}, {f: t.game, s: leaderboard.gameCondition}, {f: t.weather, s: leaderboard.weatherCondition})),
           weatherCondition: leaderboard.weatherCondition,
-          validCondition: v
+          validCondition: v,
+          gameCondition: leaderboard.gameCondition
         });
       });
       remove.push(leaderboard);
@@ -142,9 +153,44 @@ export class LeaderboardComponent implements OnInit {
     this.leaderboards = this.leaderboards.concat(add);
   }
 
-  getLeaderboardTitle(weatherCondition: string | undefined, validCondition: boolean | undefined): string { 
+  splitByGame(): void {
+    if(!this.selected(this.GameSplit))
+      return;
+    
+    let add: Leaderboard[] = [];
+    const remove: Leaderboard[] = [];
+    
+    this.leaderboards.forEach(leaderboard => {
+      if(leaderboard.gameCondition !== undefined)
+        return;
+      let games: string[] = [];
+      
+      leaderboard.times.forEach(t => {
+        if(!games.includes(t.game))
+          games.push(t.game);
+      });
+
+      games.forEach(v => {
+        add.push({
+          name: this.getLeaderboardTitle(leaderboard.weatherCondition, leaderboard.validCondition, v),
+          times: this.times.filter(t => this.checkFilter({f: t.valid, s: leaderboard.validCondition}, {f: t.game, s: v}, {f: t.weather, s: leaderboard.weatherCondition})),
+          weatherCondition: leaderboard.weatherCondition,
+          validCondition: leaderboard.validCondition,
+          gameCondition: v
+        });
+      });
+      remove.push(leaderboard);
+    });
+    add = this.removeDuplicates(add);
+    
+    this.leaderboards = this.removeLeaderboards(remove);
+    this.leaderboards = this.leaderboards.concat(add);
+  }
+
+  getLeaderboardTitle(weatherCondition: string | undefined, validCondition: boolean | undefined, gameCondition: string | undefined): string { 
+    const gameText: string = gameCondition ?? '';
     const validText: string = validCondition == undefined ? '' : validCondition ? 'Valid' : 'Invalid';
-    return `${weatherCondition ?? ''} ${validText}`.trim();
+    return `${gameText} ${weatherCondition ?? ''} ${validText}`.trim();
   }
 
   removeLeaderboards(remove: Leaderboard[]): Leaderboard[] {

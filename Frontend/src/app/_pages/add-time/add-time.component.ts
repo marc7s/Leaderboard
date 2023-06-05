@@ -58,6 +58,7 @@ export class AddTimeComponent implements OnInit {
           time: `1970-01-01T00:${parsedTime}Z` ?? '',
           millis: 0,
           username: this.username ?? '',
+          game: this.games.find(g => g.value == this.gameID)!.display ?? '',
           car: this.cars.find(c => c.value == this.carID)!.display ?? '',
           weather: '',
           valid: !this.invalid,
