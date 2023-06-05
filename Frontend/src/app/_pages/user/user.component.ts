@@ -17,7 +17,7 @@ export class UserComponent implements OnInit {
   splits: Split[] = [Split.Weather, Split.Valid];
 
   constructor(private route: ActivatedRoute, private api: ApiService) {
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe((params: any) => {
       const paramUsername = decodeURI(params.username);
       this.api.getUserTimesFromUsername(paramUsername).subscribe(trackSummaries => {
         // Grab the username from the first time if it exists
