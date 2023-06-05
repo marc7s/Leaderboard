@@ -23,7 +23,7 @@ app.use(cors({
 }));
 
 app.use(express.json());
-app.use('/db', require('./api/db'));
+app.use('/api/db', require('./api/db'));
 
 app.get('*', (req: Request, res: Response, next: NextFunction) => {
     next(new NotFoundError(req.baseUrl + req.path));
