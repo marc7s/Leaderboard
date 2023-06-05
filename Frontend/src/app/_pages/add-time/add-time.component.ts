@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Config } from '@shared/api';
-import { TimeSummary } from '@shared/dataStructures';
+import { LapRecordType, TimeSummary } from '@shared/dataStructures';
 import { ApiService } from 'src/app/api.service';
 import { Option } from 'src/app/option';
 import { Size } from 'src/styleSettings';
@@ -63,7 +63,8 @@ export class AddTimeComponent implements OnInit {
           weather: '',
           valid: !this.invalid,
           customSetup: this.customSetup,
-          authentic: false
+          authentic: false,
+          record: LapRecordType.NoRecord
         }
       ];
     } else {

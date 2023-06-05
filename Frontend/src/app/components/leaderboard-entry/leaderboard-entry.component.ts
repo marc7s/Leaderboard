@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TimeSummary } from '@shared/dataStructures';
+import { LapRecordType, TimeSummary } from '@shared/dataStructures';
 
 @Component({
   selector: 'app-leaderboard-entry',
@@ -10,10 +10,16 @@ export class LeaderboardEntryComponent implements OnInit {
   @Input() time: TimeSummary | null = null;
   @Input() timeComparison: TimeSummary | null = null;
   @Input() position: number | null = null;
+
+  recordClass: string = '';
   
   constructor() { }
 
   ngOnInit(): void {
+    this.recordClass = 
+      this.time?.record === LapRecordType.Record ? 'record' 
+      : this.time?.record === LapRecordType.RecordAndBeatAuthentic ? 'recordAndBeatAuthentic' 
+      : '';
   }
 
 }

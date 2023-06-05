@@ -135,8 +135,13 @@ export interface DBTime {
     Username: string,
     ConfigID: number,
     Valid: boolean,
+    Record: number,
     Weather: string,
     AddedAt: Date
+}
+
+export interface DBRecord {
+    Record: number
 }
 
 export interface DBClass {

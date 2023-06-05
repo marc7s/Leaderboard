@@ -5,6 +5,11 @@
     @include padding-1
     color: white
     width: 100%
+
+    #positionContainer
+        display: flex
+        justify-content: center
+        align-items: center
     
     #position
         font-weight: bold
@@ -14,7 +19,7 @@
     #diff
         color: black
 
-    #valid, #custom
+    #valid, #custom, #record
         min-width: 2rem
         min-height: 1.2rem
         background-size: contain
@@ -27,6 +32,12 @@
     #custom.customSetup
         background-image: url(~src/assets/img/CustomSetup.png)
 
+    #record.record
+        background-image: url(~src/assets/img/GoldMedal.png)
+
+    #record.recordAndBeatAuthentic
+        background-image: url(~src/assets/img/BlueMedal.png)
+
 .authentic #user
     color: deepskyblue
 
@@ -36,13 +47,14 @@
         display: grid
         grid-auto-flow: column
         $position: 2.5rem
+        $record: 2rem
         $username: 12rem
         $car: 15rem
         $time: 8.5rem
         $diff: 7rem
         $custom: 2rem
         $valid: 2rem
-        grid-template-columns: $position $username $car $time $diff $custom $valid
+        grid-template-columns: ($record + $position) $username $car $time $diff $custom $valid
 
 @media (max-width: 1000px)
     .entry
@@ -56,12 +68,19 @@
         .row
             @include font-size-5
             width: 100%
-            margin: 0.5rem
+            margin: 0.5rem 0
         
         #time.row
             @include font-size-4
+
+        #record:not(.record, .recordAndBeatAuthentic)
+            min-width: 0
         
-        div:not(#position, #time, #diff, #valid, #custom)
+        #position, #record
+            width: auto
+            margin: 0
+        
+        div:not(#positionContainer, #positionContainer *, #time, #diff, #valid, #custom)
             min-width: 8rem
             margin: 0.5rem
             display: inline-block

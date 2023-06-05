@@ -1,4 +1,4 @@
-import { DBAuthenticTrackRecord, DBCar, DBClass, DBConfig, DBCountry, DBDriver, DBGame, DBTime, DBTrack, DBTyre, DBUser, DBWeather } from "@shared/api";
+import { DBAuthenticTrackRecord, DBCar, DBClass, DBConfig, DBCountry, DBDriver, DBGame, DBRecord, DBTime, DBTrack, DBTyre, DBUser, DBWeather } from "@shared/api";
 
 export const _USER_: DBUser = {
     ID: -1,
@@ -66,6 +66,7 @@ export const _TIME_: DBTime = {
     Username: '',
     ConfigID: -1,
     Valid: false,
+    Record: 0,
     Weather: '',
     AddedAt: new Date()
 }
@@ -99,4 +100,8 @@ export const _DRIVER_: DBDriver = {
 export const _CLASS_: DBClass = {
     ID: -1,
     Name: ''
+}
+
+export const _RECORD_: DBRecord = {
+    Record: 0
 }

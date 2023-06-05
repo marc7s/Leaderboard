@@ -33,7 +33,15 @@ SELECT
 	countries.ID AS CountryID,
 	countries.FullName AS CountryFullName,
 	countries.ShortName AS CountryShortName,
-	countries.Alpha2Code AS CountryAlpha2Code
+	countries.Alpha2Code AS CountryAlpha2Code,
+	(SELECT CASE WHEN EXISTS(
+		SELECT *
+			FROM AuthenticTimes at
+			INNER JOIN Configs c ON at.ConfigID = c.ID
+			WHERE 
+				c.TrackID = t.ID AND times.Millis <= at.Millis AND times.Valid = 1
+		) THEN 2 ELSE 1 END
+	) AS Record
 FROM (
 	SELECT ID, Time, Millis, UserID, ConfigID, Valid, ROW_NUMBER() OVER (PARTITION BY ConfigID, Valid ORDER BY Time ASC) TimeRank FROM Times
 ) times

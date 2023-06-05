@@ -1,5 +1,8 @@
 <div *ngIf="time" class="entry" [class.authentic]="time.authentic">
-    <div id="position" class="row">{{position}}</div>
+    <div id="positionContainer" class="row">
+        <div id="record" [class]="recordClass"></div>
+        <div id="position" class="row">{{position}}</div>
+    </div>
     <div id="user">{{time.username}}</div>
     <div id="car">{{time.car}}</div>
     <div id="time" class="row">{{time.time | time}}</div>

@@ -1,14 +1,58 @@
 CREATE OR ALTER FUNCTION GetUserTimes(@UserID int) 
-RETURNS TABLE 
+RETURNS 
+	@UserTimes
+	TABLE (
+		ID int,
+		Time time(3),
+		Millis int,
+		UserID int,
+		ConfigID int,
+		Valid bit,
+		Record tinyint,
+		AddedAt datetime,
+		Username nvarchar(255),
+		GameID int,
+		GameName nvarchar(255),
+		GameAuthentic bit,
+		TrackID int,
+		TrackFullName nvarchar(255),
+		TrackShortName nvarchar(255),
+		Weather nvarchar(255),
+		ConfigCustomSetup bit,
+		CarFullName nvarchar(255),
+		CarShortName nvarchar(100),
+		CountryFullName nvarchar(255),
+		CountryShortName nvarchar(255),
+		CountryAlpha2Code nvarchar(2)
+	)
 AS
-RETURN 
-SELECT
+BEGIN
+DECLARE @TempRecords TABLE (ID int)
+INSERT INTO @TempRecords SELECT ID FROM GetRecords();
+
+INSERT INTO @UserTimes SELECT
 	t.ID,
 	t.Time,
 	t.Millis,
 	t.UserID,
 	t.ConfigID,
 	t.Valid,
+	(
+		SELECT CASE WHEN EXISTS (
+			SELECT *
+			FROM @TempRecords
+			WHERE ID = t.ID
+		)
+		THEN 
+			CASE WHEN EXISTS(
+				SELECT *
+				FROM AuthenticTimes at
+				INNER JOIN Configs c ON at.ConfigID = c.ID
+				WHERE 
+					c.TrackID = tr.ID AND t.Millis <= at.Millis AND t.Valid = 1
+			) THEN 2 ELSE 1 END
+		ELSE 0 END
+	) AS Record,
 	t.AddedAt,
 	u.Username,
 	g.ID AS GameID,
@@ -17,10 +61,10 @@ SELECT
 	tr.ID AS TrackID,
 	tr.FullName AS TrackFullName,
 	tr.ShortName AS TrackShortName,
-	car.FullName AS CarFullName,
-	car.ShortName AS CarShortName,
 	w.Name AS Weather,
 	c.CustomSetup AS ConfigCustomSetup,
+	car.FullName AS CarFullName,
+	car.ShortName AS CarShortName,
 	countries.FullName AS CountryFullName,
 	countries.ShortName AS CountryShortName,
 	countries.Alpha2Code AS CountryAlpha2Code
@@ -37,3 +81,6 @@ INNER JOIN Countries countries ON tr.CountryID = countries.ID
 WHERE 
 	UserID = @UserID AND
 	TimeRank <= 3 -- Only return the top 3 times for each user, config and validity combination
+
+RETURN
+END

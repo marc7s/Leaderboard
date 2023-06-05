@@ -10,7 +10,14 @@ export interface TimeSummary {
     weather: string,
     valid: boolean,
     customSetup: boolean,
-    authentic: boolean
+    authentic: boolean,
+    record: LapRecordType
+}
+
+export enum LapRecordType {
+    NoRecord = 0,
+    Record = 1,
+    RecordAndBeatAuthentic = 2
 }
 
 export interface TrackSummary {

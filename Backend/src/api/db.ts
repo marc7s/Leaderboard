@@ -6,10 +6,10 @@ import * as sql from 'tedious';
 import { randomBytes } from 'crypto';
 import { timeParam, timeIDParam, loginParam, shortNameParam, validParam, customSetupParam, addTimeParam, carIDParam, gameIDParam, shortAndFullNameParam, nameParam, tyreIDParam, weatherIDParam, trackIDParam, countryIDParam, userIDParam, configIDParam, descriptionParam, alpha2CodeParam } from './validations';
 import { AuthenticationError, DatabaseConnectionError, JwtToken, JwtTokenBody } from '../utils';
-import { Token, User, Time, DBTime, Config, DBConfig, DBGame, DBWeather, DBTrack, DBCar, Game, DBCountry, Country, Track, Car, Weather, Login, Tyre, DBTyre, DBUser, DBDriver, Driver, DBClass, Class } from '@shared/api';
+import { Token, User, Time, DBTime, Config, DBConfig, DBGame, DBWeather, DBTrack, DBCar, Game, DBCountry, Country, Track, Car, Weather, Login, Tyre, DBTyre, DBUser, DBDriver, Driver, DBClass, Class, DBRecord } from '@shared/api';
 
-import { _CAR_, _CLASS_, _CONFIG_, _COUNTRY_, _DRIVER_, _GAME_, _TIME_, _TRACK_, _TYRE_, _USER_, _WEATHER_ } from './dbObjects';
-import { AuthenticTrackRecord, LapRecord, TimeSummary, TrackSummary } from '@shared/dataStructures';
+import { _CAR_, _CLASS_, _CONFIG_, _COUNTRY_, _DRIVER_, _GAME_, _RECORD_, _TIME_, _TRACK_, _TYRE_, _USER_, _WEATHER_ } from './dbObjects';
+import { AuthenticTrackRecord, LapRecord, LapRecordType, TimeSummary, TrackSummary } from '@shared/dataStructures';
 import { log } from '../server';
 
 const router: Router = express.Router();
@@ -641,6 +641,7 @@ async function getRecords(): Promise<LapRecord[]> {
                 const dbWeather: DBWeather = parseIntoInterface(data, _WEATHER_, 'Weather');
                 const dbTyre: DBTyre = parseIntoInterface(data, _TYRE_, 'Tyre');
                 const dbCountry: DBCountry = parseIntoInterface(data, _COUNTRY_, 'Country');
+                const dbRecord: DBRecord = parseIntoInterface(data, _RECORD_);
 
                 const config: Config = dbToConfig(dbConfig, dbGame, dbTrack, dbCar, dbWeather, dbTyre, dbCountry);
                 const timeSummary: TimeSummary = {
@@ -653,7 +654,8 @@ async function getRecords(): Promise<LapRecord[]> {
                   weather: config.weather.name,
                   valid: dbTime.Valid,
                   customSetup: config.customSetup,
-                  authentic: false
+                  authentic: false,
+                  record: dbToRecord(dbRecord)
                 };
 
                 records.push({ config: config, timeSummary: timeSummary });
@@ -1372,8 +1374,13 @@ function dbToTimeSummary(dbTime: DBTime, dbGame: DBGame, dbConfig: DBConfig, dbC
         weather: dbTime.Weather,
         valid: dbTime.Valid,
         customSetup: dbConfig.CustomSetup,
-        authentic: authentic
+        authentic: authentic,
+        record: dbToRecord({ Record: dbTime.Record })
     }
+}
+
+function dbToRecord(dbRecord: DBRecord): LapRecordType {
+    return dbRecord.Record as LapRecordType ?? 0 as LapRecordType;
 }
 
 function dbToDriver(dbDriver: DBDriver, dbCountry: DBCountry): Driver {
