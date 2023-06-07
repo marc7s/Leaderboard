@@ -11,6 +11,7 @@ import { Token, User, Time, DBTime, Config, DBConfig, DBGame, DBWeather, DBTrack
 import { _CAR_, _CLASS_, _CONFIG_, _COUNTRY_, _DRIVER_, _GAME_, _RECORD_, _TIME_, _TRACK_, _TYRE_, _USER_, _WEATHER_ } from './dbObjects';
 import { AuthenticTrackRecord, LapRecord, LapRecordType, TimeSummary, TrackSummary } from '@shared/dataStructures';
 import { log } from '../server';
+import { parseIntoInterface } from '../shared/utils';
 
 const router: Router = express.Router();
 
@@ -1272,16 +1273,6 @@ function decodeJwtToken(token: JwtToken) {
         else
             return new Error(e);
     }
-}
-
-function parseIntoInterface(object: any, template: any, prefix: string = ''): any {
-    let parsed: any = {};
-    for(const key of Object.keys(template)) {
-        if(Object.keys(object).includes(prefix + key)){
-            parsed[key] = object[prefix + key];
-        }
-    }
-    return parsed;
 }
 
 function dbToUser(dbUser: DBUser): User {
