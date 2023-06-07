@@ -1,0 +1,23 @@
+{
+  "name": "leaderboard-autotime",
+  "version": "1.0.0",
+  "main": "dist/server.js",
+  "scripts": {
+    "start": "node dist/server.js",
+    "dev": "set NODE_ENV=development&& nodemon src/server.ts",
+    "build": "tsc -p .",
+    "prod": "set NODE_ENV=production&& npm run build && nodemon dist/server.js"
+  },
+  "dependencies": {
+    "@racehub-io/f1-telemetry-client": "^0.2.9",
+    "@types/mssql": "^7.1.4",
+    "dotenv": "^10.0.0",
+    "module-alias": "^2.2.2",
+    "nodemon": "^2.0.22",
+    "ts-node": "^10.9.1"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.64",
+    "typescript": "^4.4.2"
+  }
+}
