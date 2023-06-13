@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ElementRef } from '@angular/core';
 import { Config } from '@shared/api';
 import { LapRecordType, TimeSummary } from '@shared/dataStructures';
 import { ApiService } from 'src/app/api.service';
@@ -36,10 +36,12 @@ export class AddTimeComponent implements OnInit {
   tyreID: number | null = null;
   tyres: Option[] = [];
 
+  setupID: number | null = null;
+  setups: Option[] = [];
+
   time: string | null = null;
 
-  @Input() customSetup: boolean = false;
-  @Output() customSetupChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @ViewChild('timeInput') timeInput!: ElementRef<Input>;
   
   @Input() invalid: boolean = false;
   @Output() invalidChange: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -51,7 +53,7 @@ export class AddTimeComponent implements OnInit {
     const parsedTime = this.time ? this.time.substring(3) : null;
     this.configID = this.findConfig()?.id ?? null;
 
-    if(parsedTime?.length == 9 && this.userID && this.gameID && this.trackID && this.carID && this.weatherID && this.tyreID) {
+    if(parsedTime?.length == 9 && this.userID && this.gameID && this.trackID && this.carID && this.weatherID && this.tyreID && this.setupID) {
       this.placeholderTimes = [
         {
           id: -1,
@@ -62,7 +64,8 @@ export class AddTimeComponent implements OnInit {
           car: this.cars.find(c => c.value == this.carID)!.display ?? '',
           weather: '',
           valid: !this.invalid,
-          customSetup: this.customSetup,
+          setupDescription: '',
+          customSetup: this.setups.find(s => s.value == this.setupID)!.data ?? false,
           authentic: false,
           record: LapRecordType.NoRecord
         }
@@ -82,8 +85,8 @@ export class AddTimeComponent implements OnInit {
     if(this.configID !== null && this.userID !== null && this.username !== null && this.time !== null) {
       await this.api.addTimeWithConfig(this.configID, this.userID, this.time, !this.invalid).toPromise();
       this.lastAddedTime = this.placeholderTimes;
-    } else if(this.userID !== null && this.gameID !== null && this.trackID !== null && this.carID !== null && this.weatherID !== null && this.tyreID !== null && this.time !== null) {
-      await this.api.addTime(this.userID, this.gameID, this.trackID, this.carID, this.weatherID, this.tyreID, this.time, this.customSetup, !this.invalid).toPromise();
+    } else if(this.userID !== null && this.gameID !== null && this.trackID !== null && this.carID !== null && this.weatherID !== null && this.tyreID !== null && this.setupID !== null && this.time !== null) {
+      await this.api.addTime(this.userID, this.gameID, this.trackID, this.carID, this.weatherID, this.tyreID, this.setupID, this.time, !this.invalid).toPromise();
       this.lastAddedTime = this.placeholderTimes;
     } else {
       console.error("Could not add time, incorrect parameters");
@@ -105,7 +108,7 @@ export class AddTimeComponent implements OnInit {
       c.car.id == this.carID && 
       c.weather.id == this.weatherID && 
       c.tyre.id == this.tyreID &&
-      c.customSetup == this.customSetup
+      c.setup.id == this.setupID
     );
   }
 
@@ -117,7 +120,7 @@ export class AddTimeComponent implements OnInit {
       this.carID = config.car.id;
       this.weatherID = config.weather.id;
       this.tyreID = config.tyre.id;
-      this.customSetup = config.customSetup;
+      this.setupID = config.setup.id;
       this.update();
     }
   }
@@ -129,7 +132,7 @@ export class AddTimeComponent implements OnInit {
     this.carID = null;
     this.weatherID = null;
     this.tyreID = null;
-    this.customSetup = false;
+    this.setupID = null;
     this.update();
   }
 
@@ -155,6 +158,9 @@ export class AddTimeComponent implements OnInit {
     });
     this.api.getTyres().subscribe(tyres => {
       this.tyres = tyres.map(t => ({ value: t.id, display: t.shortName }));
+    });
+    this.api.getSetups().subscribe(setups => {
+      this.setups = setups.map(s => ({ value: s.id, display: s.description, data: s.custom }));
     });
    }
 

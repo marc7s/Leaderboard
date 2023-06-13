@@ -70,7 +70,7 @@ export async function addTimeParam(req: any, res: Response, next: NextFunction):
         const carID = req.body.carID ?? req.query.carID ?? MISSING;
         const weatherID = req.body.weatherID ?? req.query.weatherID ?? MISSING;
         const tyreID = req.body.tyreID ?? req.query.tyreID ?? MISSING;
-        const customSetup = req.body.customSetup ?? req.query.customSetup ?? MISSING;
+        const setupID = req.body.setupID ?? req.query.setupID ?? MISSING;
 
         const checkGameID = checkParameter(gameID, 'gameID', Number.isInteger, 'is not an integer');
         if(checkGameID !== null) return next(checkGameID);
@@ -87,8 +87,8 @@ export async function addTimeParam(req: any, res: Response, next: NextFunction):
         const checkTyreID = checkParameter(tyreID, 'tyreID', Number.isInteger, 'is not an integer');
         if(checkTyreID !== null) return next(checkTyreID);
 
-        const checkCustomSetup = checkParameter(customSetup, 'customSetup', (v: any) => { return typeof v === 'boolean' }, 'is not a boolean');
-        if(checkCustomSetup !== null) return next(checkCustomSetup);
+        const checkSetupID = checkParameter(setupID, 'setupID', Number.isInteger, 'is not an integer');
+        if(checkSetupID !== null) return next(checkSetupID);
 
         // Set the parameters
         req.gameID = gameID;
@@ -96,7 +96,7 @@ export async function addTimeParam(req: any, res: Response, next: NextFunction):
         req.carID = carID;
         req.weatherID = weatherID;
         req.tyreID = tyreID;
-        req.customSetup = customSetup;
+        req.setupID = setupID;
     } else {
         // ConfigID is present so we just need to check that it is valid
         const check = checkParameter(configID, 'configID', isValidID, 'is not a valid configID');
@@ -125,6 +125,15 @@ export async function configIDParam(req: any, res: Response, next: NextFunction)
     next();
 }
 
+export async function setupIDParam(req: any, res: Response, next: NextFunction): Promise<void> {
+    const setupID = req.body.setupID ?? req.query.setupID ?? MISSING;
+    const check = checkParameter(setupID, 'setupID', isValidID, 'is not a valid setupID');
+    if(check !== null) return next(check);
+
+    req.setupID = setupID;
+    next();
+}
+
 export async function validParam(req: any, res: Response, next: NextFunction): Promise<void> {
     const valid = req.body.valid ?? req.query.valid ?? MISSING;
     const check = checkParameter(valid, 'valid', (v: any) => { return typeof v === 'boolean' }, 'is not a boolean');
@@ -134,14 +143,6 @@ export async function validParam(req: any, res: Response, next: NextFunction): P
     next();
 }
 
-export async function customSetupParam(req: any, res: Response, next: NextFunction): Promise<void> {
-    const customSetup = req.body.customSetup ?? req.query.customSetup ?? MISSING;
-    const check = checkParameter(customSetup, 'customSetup', (v: any) => { return typeof v === 'boolean' }, 'is not a boolean');
-    if(check !== null) return next(check);
-
-    req.customSetup = customSetup;
-    next();
-}
 
 export async function carIDParam(req: any, res: Response, next: NextFunction): Promise<void> {
     const carID = req.body.carID ?? req.query.carID ?? MISSING;

@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable, isDevMode } from '@angular/core';
 import { BehaviorSubject, from, Observable, of, Subject } from 'rxjs';
-import { Config, Country, Game, Token,  Track,  Tyre,  User, Weather } from '@shared/api';
+import { Config, Country, Game, Setup, Token,  Track,  Tyre,  User, Weather } from '@shared/api';
 import { finalize } from 'rxjs/operators';
 import { AuthenticTrackRecord, LapRecord, TimeSummary, TrackSummary } from '@shared/dataStructures';
 
@@ -189,6 +189,14 @@ export class ApiService {
     return this.get(config);
   }
 
+  getSetups(): Observable<Setup[]> {
+    const config = {
+      relativePath: 'db/get-setups',
+      waitFor: true
+    };
+    return this.get(config);
+  }
+
   getCountries(): Observable<Country[]> {
     const config = {
       relativePath: 'db/get-countries',
@@ -249,7 +257,7 @@ export class ApiService {
     return this.post(config);
   }
 
-  addTime(userID: number, gameID: number, trackID: number, carID: number, weatherID: number, tyreID: number, time: string, customSetup: boolean, valid: boolean): Observable<boolean> {
+  addTime(userID: number, gameID: number, trackID: number, carID: number, weatherID: number, tyreID: number, setupID: number, time: string, valid: boolean): Observable<boolean> {
     const config = {
       relativePath: 'db/add-time',
       waitFor: true,
@@ -260,8 +268,8 @@ export class ApiService {
         carID: carID,
         weatherID: weatherID,
         tyreID: tyreID,
+        setupID: setupID,
         time: time,
-        customSetup: customSetup,
         valid: valid
       }
     };

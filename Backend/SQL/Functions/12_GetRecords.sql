@@ -16,7 +16,9 @@ SELECT
 	c.CarID AS ConfigCarID,
 	c.WeatherID AS ConfigWeatherID,
 	c.TyreID AS ConfigTyreID,
-	c.CustomSetup AS ConfigCustomSetup,
+	s.ID AS SetupID,
+	st.Custom AS SetupCustom,
+	st.Description AS SetupDescription,
 	g.Name AS GameName,
 	t.ID AS TrackID,
 	t.FullName AS TrackFullName,
@@ -47,6 +49,8 @@ FROM (
 ) times
 INNER JOIN Users u ON times.UserID = u.ID
 INNER JOIN Configs c ON times.ConfigID = c.ID
+INNER JOIN Setups s ON c.SetupID = s.ID
+INNER JOIN SetupTypes st ON s.TypeID = st.ID
 INNER JOIN Games g ON c.GameID = g.ID
 INNER JOIN Tracks t ON c.TrackID = t.ID
 INNER JOIN Cars cars ON c.CarID = cars.ID

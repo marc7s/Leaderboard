@@ -1,5 +1,5 @@
-INSERT INTO Configs(Description, GameID, TrackID, CarID, WeatherID, TyreID, CustomSetup, Authentic)
-SELECT CONCAT(Games.Name, ' ', Tracks.ShortName), Games.ID, Tracks.ID, Cars.ID, Weathers.ID, Tyres.ID, 1, 1
+INSERT INTO Configs(Description, GameID, TrackID, CarID, WeatherID, TyreID, SetupID, Authentic)
+SELECT CONCAT(Games.Name, ' ', Tracks.ShortName), Games.ID, Tracks.ID, Cars.ID, Weathers.ID, Tyres.ID, 2, 1
 FROM (
     SELECT 
         'Bahrain International Circuit' AS TrackFullName, 
@@ -159,4 +159,4 @@ LEFT JOIN Configs ON
     Configs.CarID = Cars.ID AND
     WeatherID = Weathers.ID AND
     Configs.TyreID = Tyres.ID AND
-    Configs.CustomSetup = 1
+    Configs.SetupID = 2

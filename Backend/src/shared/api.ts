@@ -96,6 +96,19 @@ export interface DBTrack {
     AddedAt: Date
 }
 
+export interface Setup {
+    id: number,
+    description: string,
+    custom: boolean
+}
+
+export interface DBSetup {
+    ID: number,
+    Description: string,
+    Custom: boolean,
+    AddedAt: Date
+}
+
 export interface Config {
     id: number,
     description: string,
@@ -104,7 +117,7 @@ export interface Config {
     car: Car,
     weather: Weather,
     tyre: Tyre,
-    customSetup: boolean
+    setup: Setup
 }
 
 export interface DBConfig {
@@ -115,7 +128,7 @@ export interface DBConfig {
     CarID: number,
     WeatherID: number,
     TyreID: number,
-    CustomSetup: boolean,
+    SetupID: number,
     AddedAt: Date
 }
 
@@ -184,6 +197,7 @@ export interface DBAuthenticTrackRecord {
     CarShortName: string,
     WeatherName: string,
     TyreShortName: string,
-    CustomSetup: boolean,
+    SetupDescription: string,
+    SetupCustom: boolean,
     Valid: boolean
 }

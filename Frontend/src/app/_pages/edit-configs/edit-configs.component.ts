@@ -34,6 +34,9 @@ export class EditConfigsComponent implements OnInit {
   tyreID: number | null = null;
   tyres: Option[] = [];
 
+  setupID: number | null = null;
+  setups: Option[] = [];
+
   @Input() customSetup: boolean = false;
   @Output() customSetupChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -63,6 +66,9 @@ export class EditConfigsComponent implements OnInit {
     });
     this.api.getTyres().subscribe(tyres => {
       this.tyres = tyres.map(t => ({ value: t.id, display: t.shortName }));
+    });
+    this.api.getSetups().subscribe(setups => {
+      this.setups = setups.map(s => ({ value: s.id, display: s.description }));
     });
   }
 
@@ -95,7 +101,8 @@ export class EditConfigsComponent implements OnInit {
       this.carID = config.car.id;
       this.weatherID = config.weather.id;
       this.tyreID = config.tyre.id;
-      this.customSetup = config.customSetup;
+      this.setupID = config.setup.id;
+      this.customSetup = config.setup.custom;
     }
   }
 
@@ -106,7 +113,7 @@ export class EditConfigsComponent implements OnInit {
       c.car.id == this.carID && 
       c.weather.id == this.weatherID && 
       c.tyre.id == this.tyreID &&
-      c.customSetup == this.customSetup
+      c.setup.id == this.setupID
     );
   }
 
@@ -118,6 +125,7 @@ export class EditConfigsComponent implements OnInit {
     this.carID = null;
     this.weatherID = null;
     this.tyreID = null;
+    this.setupID = null;
     this.customSetup = false;
   }
 }

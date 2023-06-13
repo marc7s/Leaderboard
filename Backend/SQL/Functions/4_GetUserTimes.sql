@@ -18,7 +18,9 @@ RETURNS
 		TrackFullName nvarchar(255),
 		TrackShortName nvarchar(255),
 		Weather nvarchar(255),
-		ConfigCustomSetup bit,
+		SetupID int,
+		SetupCustom bit,
+		SetupDescription nvarchar(255),
 		CarFullName nvarchar(255),
 		CarShortName nvarchar(100),
 		CountryFullName nvarchar(255),
@@ -62,7 +64,9 @@ INSERT INTO @UserTimes SELECT
 	tr.FullName AS TrackFullName,
 	tr.ShortName AS TrackShortName,
 	w.Name AS Weather,
-	c.CustomSetup AS ConfigCustomSetup,
+	s.ID AS SetupID,
+	st.Custom AS SetupCustom,
+	st.Description AS SetupDescription,
 	car.FullName AS CarFullName,
 	car.ShortName AS CarShortName,
 	countries.FullName AS CountryFullName,
@@ -73,6 +77,8 @@ FROM (
 ) t
 INNER JOIN Users u ON t.UserID = u.ID
 INNER JOIN Configs c ON t.ConfigID = c.ID
+INNER JOIN Setups s ON c.SetupID = s.ID
+INNER JOIN SetupTypes st ON s.TypeID = st.ID
 INNER JOIN Games g ON c.GameID = g.ID
 INNER JOIN Tracks tr ON c.TrackID = tr.ID
 INNER JOIN Cars car ON c.CarID = car.ID
@@ -80,7 +86,7 @@ INNER JOIN Weathers w ON c.WeatherID = w.ID
 INNER JOIN Countries countries ON tr.CountryID = countries.ID
 WHERE 
 	UserID = @UserID AND
-	TimeRank <= 3 -- Only return the top 3 times for each user, config and validity combination
+	TimeRank <= 1 -- Only return the best times for each user, config and validity combination
 
 RETURN
 END

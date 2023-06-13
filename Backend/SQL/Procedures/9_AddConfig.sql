@@ -1,22 +1,14 @@
-CREATE OR ALTER PROCEDURE UpdateConfig
-    @ConfigID int,
+CREATE OR ALTER PROCEDURE AddConfig
     @Description nvarchar(255),
     @GameID int,
     @TrackID int,
     @CarID int,
     @WeatherID int,
     @TyreID int,
-    @CustomSetup bit
+    @SetupID int
 AS
 BEGIN
     --ERROR HANDLING
-
-    --CHECK CONFIGID PARAM
-    IF @ConfigID IS NULL
-    BEGIN
-        RAISERROR(N'Config ID not supplied', 11, 1);
-        RETURN
-    END
 
     --CHECK GAMEID PARAM
     IF @GameID IS NULL
@@ -53,10 +45,10 @@ BEGIN
         RETURN
     END
 
-    --CHECK CUSTOMSETUP PARAM
-    IF @CustomSetup IS NULL
+    --CHECK SETUPID PARAM
+    IF @SetupID IS NULL
     BEGIN
-        RAISERROR(N'Custom Setup not supplied', 11, 1);
+        RAISERROR(N'Setup ID not supplied', 11, 1);
         RETURN
     END
 
@@ -114,8 +106,12 @@ BEGIN
         RETURN
     END
 
-    --ALL GOOD, UPDATE CONFIG
-    UPDATE Configs SET Description = @Description, GameID = @GameID, TrackID = @TrackID, CarID = @CarID, WeatherID = @WeatherID, TyreID = @TyreID, CustomSetup = @CustomSetup WHERE ID = @ConfigID
+    --ALL GOOD, ADD CONFIG
+    DECLARE @InsertedTable TABLE(ID int)
+    INSERT INTO Configs(Description, GameID, TrackID, CarID, WeatherID, TyreID, SetupID) 
+    OUTPUT INSERTED.ID INTO @InsertedTable
+    VALUES (@Description, @GameID, @TrackID, @CarID, @WeatherID, @TyreID, @SetupID);
 
+    SELECT ID FROM @InsertedTable;
 END
 GO

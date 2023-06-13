@@ -1,14 +1,22 @@
-CREATE OR ALTER PROCEDURE AddConfig
+CREATE OR ALTER PROCEDURE UpdateConfig
+    @ConfigID int,
     @Description nvarchar(255),
     @GameID int,
     @TrackID int,
     @CarID int,
     @WeatherID int,
     @TyreID int,
-    @CustomSetup bit
+    @SetupID int
 AS
 BEGIN
     --ERROR HANDLING
+
+    --CHECK CONFIGID PARAM
+    IF @ConfigID IS NULL
+    BEGIN
+        RAISERROR(N'Config ID not supplied', 11, 1);
+        RETURN
+    END
 
     --CHECK GAMEID PARAM
     IF @GameID IS NULL
@@ -45,10 +53,10 @@ BEGIN
         RETURN
     END
 
-    --CHECK CUSTOMSETUP PARAM
-    IF @CustomSetup IS NULL
+    --CHECK SETUPID PARAM
+    IF @SetupID IS NULL
     BEGIN
-        RAISERROR(N'Custom Setup not supplied', 11, 1);
+        RAISERROR(N'Setup ID not supplied', 11, 1);
         RETURN
     END
 
@@ -97,7 +105,7 @@ BEGIN
         RETURN
     END
 
-    --CHECK THAT WEATHER EXISTS
+    --CHECK THAT TYRE EXISTS
     DECLARE @TyreID_db int
     SELECT @TyreID_db = ID FROM Tyres WHERE ID = @TyreID
     IF @TyreID_db IS NULL
@@ -106,12 +114,17 @@ BEGIN
         RETURN
     END
 
-    --ALL GOOD, ADD CONFIG
-    DECLARE @InsertedTable TABLE(ID int)
-    INSERT INTO Configs(Description, GameID, TrackID, CarID, WeatherID, TyreID, CustomSetup) 
-    OUTPUT INSERTED.ID INTO @InsertedTable
-    VALUES (@Description, @GameID, @TrackID, @CarID, @WeatherID, @TyreID, @CustomSetup);
+    --CHECK THAT SETUP EXISTS
+    DECLARE @SetupID_db int
+    SELECT @SetupID_db = ID FROM Setups WHERE ID = @SetupID
+    IF @SetupID_db IS NULL
+    BEGIN
+        RAISERROR(N'Setup does not exist', 11, 1);
+        RETURN
+    END
 
-    SELECT ID FROM @InsertedTable;
+    --ALL GOOD, UPDATE CONFIG
+    UPDATE Configs SET Description = @Description, GameID = @GameID, TrackID = @TrackID, CarID = @CarID, WeatherID = @WeatherID, TyreID = @TyreID, SetupID = @SetupID WHERE ID = @ConfigID
+
 END
 GO

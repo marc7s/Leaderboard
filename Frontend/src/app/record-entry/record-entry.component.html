@@ -4,7 +4,7 @@
     <div>{{ config.car.shortName }}</div>
     <div>{{ config.weather.name }}</div>
     <div>{{ config.tyre.shortName }}</div>
-    <div>{{ config.customSetup ? 'Custom' : 'Default' }}</div>
+    <div>{{ config.setup.description }}</div>
     <div id="time">{{timeSummary.time | time}}</div>
     <div id="valid" [class.invalid]="!timeSummary.valid"></div>
 </div>

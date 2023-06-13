@@ -57,10 +57,15 @@
             [options]="tyres"
             [keepOptionOrder]="true">
         </app-input-field-select>
-    
-        <div class="checkboxInput">
-            <input type="checkbox" [(ngModel)]="customSetup" name="customSetup" (change)="update()"> Custom Setup
-        </div>
+
+        <app-input-field-select 
+            class="input"
+            placeholder="Setup"
+            (optionChange)="update()"
+            [(value)]="setupID"
+            [options]="setups"
+            [keepOptionOrder]="true">
+        </app-input-field-select>
     </form>
     
     <div class="lap box">
@@ -78,7 +83,7 @@
             class="input" 
             placeholder="Time" 
             [(time)]="time"
-            (change)="update()">
+            (timeChange)="update()">
         </app-input-field-time>
     
         <div class="checkboxInputContainer">

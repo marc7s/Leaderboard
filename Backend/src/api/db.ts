@@ -4,11 +4,11 @@ dotenv.config({path: __dirname + '../.env'});
 import express, { Response, NextFunction, Router } from 'express';
 import * as sql from 'tedious';
 import { randomBytes } from 'crypto';
-import { timeParam, timeIDParam, loginParam, shortNameParam, validParam, customSetupParam, addTimeParam, carIDParam, gameIDParam, shortAndFullNameParam, nameParam, tyreIDParam, weatherIDParam, trackIDParam, countryIDParam, userIDParam, configIDParam, descriptionParam, alpha2CodeParam } from './validations';
+import { timeParam, timeIDParam, loginParam, shortNameParam, validParam, addTimeParam, carIDParam, gameIDParam, shortAndFullNameParam, nameParam, tyreIDParam, weatherIDParam, trackIDParam, countryIDParam, userIDParam, configIDParam, descriptionParam, alpha2CodeParam, setupIDParam } from './validations';
 import { AuthenticationError, DatabaseConnectionError, JwtToken, JwtTokenBody } from '../utils';
-import { Token, User, Time, DBTime, Config, DBConfig, DBGame, DBWeather, DBTrack, DBCar, Game, DBCountry, Country, Track, Car, Weather, Login, Tyre, DBTyre, DBUser, DBDriver, Driver, DBClass, Class, DBRecord } from '@shared/api';
+import { Token, User, Time, DBTime, Config, DBConfig, DBGame, DBWeather, DBTrack, DBCar, Game, DBCountry, Country, Track, Car, Weather, Login, Tyre, DBTyre, DBUser, DBDriver, Driver, DBClass, Class, DBRecord, DBSetup, Setup } from '@shared/api';
 
-import { _CAR_, _CLASS_, _CONFIG_, _COUNTRY_, _DRIVER_, _GAME_, _RECORD_, _TIME_, _TRACK_, _TYRE_, _USER_, _WEATHER_ } from './dbObjects';
+import { _CAR_, _CLASS_, _CONFIG_, _COUNTRY_, _DRIVER_, _GAME_, _RECORD_, _SETUP_, _TIME_, _TRACK_, _TYRE_, _USER_, _WEATHER_ } from './dbObjects';
 import { AuthenticTrackRecord, LapRecord, LapRecordType, TimeSummary, TrackSummary } from '@shared/dataStructures';
 import { log } from '../server';
 import { parseIntoInterface } from '../shared/utils';
@@ -86,6 +86,11 @@ router.get('/get-tyres', (req: any, res: Response, next: NextFunction) => {
     getTyres().then(tyres => res.json(tyres)).catch(next);
 });
 
+router.get('/get-setups', (req: any, res: Response, next: NextFunction) => {
+    log('Getting setups...');
+    getSetups().then(setups => res.json(setups)).catch(next);
+});
+
 router.get('/get-countries', (req: any, res: Response, next: NextFunction) => {
     log('Getting countries...');
     getCountries().then(countries => res.json(countries)).catch(next);
@@ -126,9 +131,9 @@ router.post('/add-time', authenticateToken, timeParam, userIDParam, validParam, 
         const carID: number = req.carID;
         const weatherID: number = req.weatherID;
         const tyreID: number = req.tyreID;
-        const customSetup: boolean = req.customSetup;
+        const setupID: number = req.setupID;
         
-        configID = await getOrAddConfig(gameID, trackID, carID, weatherID, tyreID, customSetup);
+        configID = await getOrAddConfig(gameID, trackID, carID, weatherID, tyreID, setupID);
     }
         
 
@@ -269,7 +274,7 @@ router.post('/update-config',
         carIDParam,
         weatherIDParam,
         tyreIDParam, 
-        customSetupParam,
+        setupIDParam,
         async (req: any, res: Response, next: NextFunction) => {
     const configID: number = req.configID;
     const description: string = req.description;
@@ -278,10 +283,10 @@ router.post('/update-config',
     const carID: number = req.carID;
     const weatherID: number = req.weatherID;
     const tyreID: number = req.tyreID;
-    const customSetup: boolean = req.customSetup;
+    const setupID: number = req.setupID;
     log(`Updating config ${configID}...`);
 
-    updateConfig(configID, description, gameID, trackID, carID, weatherID, tyreID, customSetup).then(success => res.json(success)).catch(next);
+    updateConfig(configID, description, gameID, trackID, carID, weatherID, tyreID, setupID).then(success => res.json(success)).catch(next);
 });
 
 router.post('/create-config', 
@@ -292,7 +297,7 @@ router.post('/create-config',
         carIDParam,
         weatherIDParam,
         tyreIDParam, 
-        customSetupParam,
+        setupIDParam,
         async (req: any, res: Response, next: NextFunction) => {
     const description: string = req.description;
     const gameID: number = req.gameID;
@@ -300,10 +305,10 @@ router.post('/create-config',
     const carID: number = req.carID;
     const weatherID: number = req.weatherID;
     const tyreID: number = req.tyreID;
-    const customSetup: boolean = req.customSetup;
+    const setupID: number = req.setupID;
     log(`Creating config ${description}...`);
 
-    createConfig(description, gameID, trackID, carID, weatherID, tyreID, customSetup).then(success => res.json(success)).catch(next);
+    createConfig(description, gameID, trackID, carID, weatherID, tyreID, setupID).then(success => res.json(success)).catch(next);
 });
 
 async function getDBConnection(): Promise<sql.Connection> {
@@ -390,6 +395,7 @@ async function getConfigs(): Promise<Config[]> {
                 const data: any = {};
                 cols.map(col => { data[col.metadata.colName] = col.value });
                 const dbConfig: DBConfig = parseIntoInterface(data, _CONFIG_);
+                const dbSetup: DBSetup = parseIntoInterface(data, _SETUP_, 'Setup');
                 const dbGame: DBGame = parseIntoInterface(data, _GAME_, 'Game');
                 const dbTrack: DBTrack = parseIntoInterface(data, _TRACK_, 'Track');
                 const dbCar: DBCar = parseIntoInterface(data, _CAR_, 'Car');
@@ -397,7 +403,7 @@ async function getConfigs(): Promise<Config[]> {
                 const dbTyre: DBTyre = parseIntoInterface(data, _TYRE_, 'Tyre');
                 const dbCountry: DBCountry = parseIntoInterface(data, _COUNTRY_, 'Country');
                 
-                configs.push(dbToConfig(dbConfig, dbGame, dbTrack, dbCar, dbWeather, dbTyre, dbCountry));
+                configs.push(dbToConfig(dbConfig, dbSetup, dbGame, dbTrack, dbCar, dbWeather, dbTyre, dbCountry));
             });
             req.on('requestCompleted', () => { resolve(configs) });
         })
@@ -526,6 +532,30 @@ async function getTyres(): Promise<Tyre[]> {
     });
 }
 
+async function getSetups(): Promise<Setup[]> {
+    return new Promise((resolve, reject) => {
+        const setups: Setup[] = [];
+        const query = "SELECT * FROM GetSetups()";
+        const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
+            if(err) reject(err);
+        });
+        getDBConnection()
+        .then(conn => {
+            conn.execSql(req);
+            req.on('error', err => { reject(err) });
+            req.on('row', cols => {
+                const data: any = {};
+                cols.map(col => { data[col.metadata.colName] = col.value });
+                const dbSetup: DBSetup = parseIntoInterface(data, _SETUP_);
+                
+                setups.push(dbToSetup(dbSetup));
+            });
+            req.on('requestCompleted', () => { resolve(setups) });
+        })
+        .catch(reject);
+    });
+}
+
 async function getCountries(): Promise<Country[]> {
     return new Promise((resolve, reject) => {
         const countries: Country[] = [];
@@ -572,6 +602,7 @@ async function getAuthenticRecord(trackID: number): Promise<AuthenticTrackRecord
                 const dbClass: DBClass = parseIntoInterface(data, _CLASS_, 'Class');
                 const dbDriver: DBDriver = parseIntoInterface(data, _DRIVER_, 'Driver');
                 const dbConfig: DBConfig = parseIntoInterface(data, _CONFIG_, 'Config');
+                const dbSetup: DBSetup = parseIntoInterface(data, _SETUP_, 'Setup');
                 const dbDriverCountry: DBCountry = parseIntoInterface(data, _COUNTRY_, 'DriverCountry');
                 const dbGame: DBGame = parseIntoInterface(data, _GAME_, 'Game');
                 const dbTrack: DBTrack = parseIntoInterface(data, _TRACK_, 'Track');
@@ -583,8 +614,8 @@ async function getAuthenticRecord(trackID: number): Promise<AuthenticTrackRecord
                 trackRecord = {
                     driver: dbToDriver(dbDriver, dbDriverCountry),
                     class: dbToClass(dbClass),
-                    timeSummary: dbToTimeSummary(dbTime, dbGame, dbConfig, dbCar, true),
-                    config: dbToConfig(dbConfig, dbGame, dbTrack, dbCar, dbWeather, dbTyre, dbCountry)
+                    timeSummary: dbToTimeSummary(dbTime, dbGame, dbConfig, dbSetup, dbCar, true),
+                    config: dbToConfig(dbConfig, dbSetup, dbGame, dbTrack, dbCar, dbWeather, dbTyre, dbCountry)
                 }
             });
             req.on('requestCompleted', () => { resolve(trackRecord) });
@@ -636,6 +667,7 @@ async function getRecords(): Promise<LapRecord[]> {
                 cols.map(col => { data[col.metadata.colName] = col.value });
                 const dbTime: DBTime = parseIntoInterface(data, _TIME_);
                 const dbConfig: DBConfig = parseIntoInterface(data, _CONFIG_, 'Config');
+                const dbSetup: DBSetup = parseIntoInterface(data, _SETUP_, 'Setup');
                 const dbGame: DBGame = parseIntoInterface(data, _GAME_, 'Game');
                 const dbTrack: DBTrack = parseIntoInterface(data, _TRACK_, 'Track');
                 const dbCar: DBCar = parseIntoInterface(data, _CAR_, 'Car');
@@ -644,7 +676,7 @@ async function getRecords(): Promise<LapRecord[]> {
                 const dbCountry: DBCountry = parseIntoInterface(data, _COUNTRY_, 'Country');
                 const dbRecord: DBRecord = parseIntoInterface(data, _RECORD_);
 
-                const config: Config = dbToConfig(dbConfig, dbGame, dbTrack, dbCar, dbWeather, dbTyre, dbCountry);
+                const config: Config = dbToConfig(dbConfig, dbSetup, dbGame, dbTrack, dbCar, dbWeather, dbTyre, dbCountry);
                 const timeSummary: TimeSummary = {
                   id: dbTime.ID,
                   time: dbTime.Time,
@@ -654,7 +686,8 @@ async function getRecords(): Promise<LapRecord[]> {
                   car: dbCar.ShortName,
                   weather: config.weather.name,
                   valid: dbTime.Valid,
-                  customSetup: config.customSetup,
+                  setupDescription: dbSetup.Description,
+                  customSetup: dbSetup.Custom,
                   authentic: false,
                   record: dbToRecord(dbRecord)
                 };
@@ -707,13 +740,14 @@ async function getUserSummary(username: string): Promise<TrackSummary[]> {
                 const dbTime: DBTime = parseIntoInterface(data, _TIME_);
                 const dbGame: DBGame = parseIntoInterface(data, _GAME_, 'Game');
                 const dbConfig: DBConfig = parseIntoInterface(data, _CONFIG_, 'Config');
+                const dbSetup: DBSetup = parseIntoInterface(data, _SETUP_, 'Setup');
                 const dbCar: DBCar = parseIntoInterface(data, _CAR_, 'Car');
                 const dbTrack: DBTrack = parseIntoInterface(data, _TRACK_, 'Track');
                 const dbCountry: DBCountry = parseIntoInterface(data, _COUNTRY_, 'Country');
 
                 const track: Track = dbToTrack(dbTrack, dbCountry);
                 tracks.push(track);
-                const timeSummary: TimeSummary = dbToTimeSummary(dbTime, dbGame, dbConfig, dbCar, false);
+                const timeSummary: TimeSummary = dbToTimeSummary(dbTime, dbGame, dbConfig, dbSetup, dbCar, false);
 
                 trackSummariesMap.set(track.id, (trackSummariesMap.get(track.id) || []).concat(timeSummary));
             });
@@ -738,9 +772,10 @@ async function getTimes(req: sql.Request): Promise<TimeSummary[]> {
                 const dbTime: DBTime = parseIntoInterface(data, _TIME_);
                 const dbGame: DBGame = parseIntoInterface(data, _GAME_, 'Game');
                 const dbConfig: DBConfig = parseIntoInterface(data, _CONFIG_, 'Config');
+                const dbSetup: DBSetup = parseIntoInterface(data, _SETUP_, 'Setup');
                 const dbCar: DBCar = parseIntoInterface(data, _CAR_, 'Car');
                 
-                times.push(dbToTimeSummary(dbTime, dbGame, dbConfig, dbCar, false));
+                times.push(dbToTimeSummary(dbTime, dbGame, dbConfig, dbSetup, dbCar, false));
             });
             req.on('error', err => { reject(err) });
             req.on('requestCompleted', () => { resolve(times) });
@@ -1128,11 +1163,11 @@ async function createCountry(fullName: string, shortName: string, alpha2Code: st
     });
 }
 
-async function updateConfig(configID: number, description: string, gameID: number, trackID: number, carID: number, weatherID: number, tyreID: number, customSetup: boolean): Promise<boolean> {
+async function updateConfig(configID: number, description: string, gameID: number, trackID: number, carID: number, weatherID: number, tyreID: number, setupID: number): Promise<boolean> {
     return new Promise((resolve, reject) => {
         getDBConnection()
         .then(conn => {
-            const query = "EXECUTE UpdateConfig @ConfigID, @Description, @GameID, @TrackID, @CarID, @WeatherID, @TyreID, @CustomSetup";
+            const query = "EXECUTE UpdateConfig @ConfigID, @Description, @GameID, @TrackID, @CarID, @WeatherID, @TyreID, @SetupID";
             const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
                 if(err) reject(err);
             });
@@ -1144,7 +1179,7 @@ async function updateConfig(configID: number, description: string, gameID: numbe
             req.addParameter('CarID', sql.TYPES.Int, carID);
             req.addParameter('WeatherID', sql.TYPES.Int, weatherID);
             req.addParameter('TyreID', sql.TYPES.Int, tyreID);
-            req.addParameter('CustomSetup', sql.TYPES.Bit, customSetup);
+            req.addParameter('SetupID', sql.TYPES.Int, setupID);
 
             conn.execSql(req);
             req.on('error', err => { reject(err) });
@@ -1154,11 +1189,11 @@ async function updateConfig(configID: number, description: string, gameID: numbe
     });
 }
 
-async function createConfig(description: string, gameID: number, trackID: number, carID: number, weatherID: number, tyreID: number, customSetup: boolean): Promise<boolean> {
+async function createConfig(description: string, gameID: number, trackID: number, carID: number, weatherID: number, tyreID: number, setupID: number): Promise<boolean> {
     return new Promise((resolve, reject) => {
         getDBConnection()
         .then(conn => {
-            const query = "EXECUTE AddConfig @Description, @GameID, @TrackID, @CarID, @WeatherID, @TyreID, @CustomSetup";
+            const query = "EXECUTE AddConfig @Description, @GameID, @TrackID, @CarID, @WeatherID, @TyreID, @SetupID";
             const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
                 if(err) reject(err);
             });
@@ -1169,7 +1204,7 @@ async function createConfig(description: string, gameID: number, trackID: number
             req.addParameter('CarID', sql.TYPES.Int, carID);
             req.addParameter('WeatherID', sql.TYPES.Int, weatherID);
             req.addParameter('TyreID', sql.TYPES.Int, tyreID);
-            req.addParameter('CustomSetup', sql.TYPES.Bit, customSetup);
+            req.addParameter('SetupID', sql.TYPES.Int, setupID);
 
             conn.execSql(req);
             req.on('error', err => { reject(err) });
@@ -1211,23 +1246,23 @@ async function login(login: Login) : Promise<User | null> {
     });
 }
 
-async function getOrAddConfig(gameID: number, trackID: number, carID: number, weatherID: number, tyreID: number, customSetup: boolean, description?: string) : Promise<number | null> {
+async function getOrAddConfig(gameID: number, trackID: number, carID: number, weatherID: number, tyreID: number, setupID: number, description?: string) : Promise<number | null> {
     return new Promise((resolve, reject) => {
         let response: number = NaN;
     
         getDBConnection().then(conn => {
-            const query = "EXECUTE GetOrAddConfig @Description, @GameID, @TrackID, @CarID, @WeatherID, @TyreID, @CustomSetup";
+            const query = "EXECUTE GetOrAddConfig @Description, @GameID, @TrackID, @CarID, @WeatherID, @TyreID, @SetupID";
             const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
                 if(err) reject(err);
             });
 
-            req.addParameter('Description', sql.TYPES.VarChar, sql.TYPES.Null);
+            req.addParameter('Description', sql.TYPES.VarChar, description ?? sql.TYPES.Null);
             req.addParameter('GameID', sql.TYPES.Int, gameID);
             req.addParameter('TrackID', sql.TYPES.Int, trackID);
             req.addParameter('CarID', sql.TYPES.Int, carID);
             req.addParameter('WeatherID', sql.TYPES.Int, weatherID);
             req.addParameter('TyreID', sql.TYPES.Int, tyreID);
-            req.addParameter('CustomSetup', sql.TYPES.Bit, customSetup);
+            req.addParameter('SetupID', sql.TYPES.Int, setupID);
             
             conn.execSql(req);
             req.on('error', err => { reject(err) });
@@ -1330,7 +1365,15 @@ function dbToTyre(dbTyre: DBTyre): Tyre {
     }
 }
 
-function dbToConfig(dbConfig: DBConfig, dbGame: DBGame, dbTrack: DBTrack, dbCar: DBCar, dbWeather: DBWeather, dbTyre: DBTyre, dbCountry: DBCountry): Config {
+function dbToSetup(dbSetup: DBSetup): Setup {
+    return {
+        id: dbSetup.ID,
+        description: dbSetup.Description,
+        custom: dbSetup.Custom
+    }
+}
+
+function dbToConfig(dbConfig: DBConfig, dbSetup: DBSetup, dbGame: DBGame, dbTrack: DBTrack, dbCar: DBCar, dbWeather: DBWeather, dbTyre: DBTyre, dbCountry: DBCountry): Config {
     return {
         id: dbConfig.ID,
         description: dbConfig.Description,
@@ -1339,22 +1382,22 @@ function dbToConfig(dbConfig: DBConfig, dbGame: DBGame, dbTrack: DBTrack, dbCar:
         car: dbToCar(dbCar),
         weather: dbToWeather(dbWeather),
         tyre: dbToTyre(dbTyre),
-        customSetup: dbConfig.CustomSetup,
+        setup: dbToSetup(dbSetup)
     }
 }
 
-function dbToTime(dbTime: DBTime, dbConfig: DBConfig, dbGame: DBGame, dbTrack: DBTrack, dbCar: DBCar, dbWeather: DBWeather, dbTyre: DBTyre, dbCountry: DBCountry): Time {
+function dbToTime(dbTime: DBTime, dbConfig: DBConfig, dbSetup: DBSetup, dbGame: DBGame, dbTrack: DBTrack, dbCar: DBCar, dbWeather: DBWeather, dbTyre: DBTyre, dbCountry: DBCountry): Time {
     return {
         id: dbTime.ID,
         time: dbTime.Time,
         millis: dbTime.Millis,
         username: dbTime.Username,
-        config: dbToConfig(dbConfig, dbGame, dbTrack, dbCar, dbWeather, dbTyre, dbCountry),
+        config: dbToConfig(dbConfig, dbSetup, dbGame, dbTrack, dbCar, dbWeather, dbTyre, dbCountry),
         valid: dbTime.Valid
     }
 }
 
-function dbToTimeSummary(dbTime: DBTime, dbGame: DBGame, dbConfig: DBConfig, dbCar: DBCar, authentic: boolean): TimeSummary {
+function dbToTimeSummary(dbTime: DBTime, dbGame: DBGame, dbConfig: DBConfig, dbSetup: DBSetup, dbCar: DBCar, authentic: boolean): TimeSummary {
     return {
         id: dbTime.ID,
         time: dbTime.Time,
@@ -1364,7 +1407,8 @@ function dbToTimeSummary(dbTime: DBTime, dbGame: DBGame, dbConfig: DBConfig, dbC
         car: dbCar.ShortName,
         weather: dbTime.Weather,
         valid: dbTime.Valid,
-        customSetup: dbConfig.CustomSetup,
+        setupDescription: dbSetup.Description,
+        customSetup: dbSetup.Custom,
         authentic: authentic,
         record: dbToRecord({ Record: dbTime.Record })
     }

@@ -1,0 +1,7 @@
+INSERT INTO SetupTypes(Description, Custom) VALUES ('Default', 0)
+INSERT INTO SetupTypes(Description, Custom) VALUES ('Custom', 1)
+INSERT INTO SetupTypes(Description, Custom) VALUES ('Maximum Downforce', 1)
+INSERT INTO SetupTypes(Description, Custom) VALUES ('Increased Downforce', 1)
+INSERT INTO SetupTypes(Description, Custom) VALUES ('Balanced Default', 0)
+INSERT INTO SetupTypes(Description, Custom) VALUES ('Increased Top Speed', 1)
+INSERT INTO SetupTypes(Description, Custom) VALUES ('Maximum Top Speed', 1)

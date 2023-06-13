@@ -1,4 +1,5 @@
 export interface Option {
     value: number,
-    display: string
+    display: string,
+    data?: any
 }

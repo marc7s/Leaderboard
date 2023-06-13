@@ -9,6 +9,7 @@ export interface TimeSummary {
     car: string,
     weather: string,
     valid: boolean,
+    setupDescription: string,
     customSetup: boolean,
     authentic: boolean,
     record: LapRecordType

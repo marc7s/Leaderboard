@@ -1,4 +1,4 @@
-import { DBAuthenticTrackRecord, DBCar, DBClass, DBConfig, DBCountry, DBDriver, DBGame, DBRecord, DBTime, DBTrack, DBTyre, DBUser, DBWeather } from "@shared/api";
+import { DBAuthenticTrackRecord, DBCar, DBClass, DBConfig, DBCountry, DBDriver, DBGame, DBRecord, DBSetup, DBTime, DBTrack, DBTyre, DBUser, DBWeather } from "@shared/api";
 
 export const _USER_: DBUser = {
     ID: -1,
@@ -13,7 +13,14 @@ export const _CONFIG_: DBConfig = {
     CarID: -1,
     WeatherID: -1,
     TyreID: -1,
-    CustomSetup: false,
+    SetupID: -1,
+    AddedAt: new Date()
+}
+
+export const _SETUP_: DBSetup = {
+    ID: -1,
+    Description: '',
+    Custom: false,
     AddedAt: new Date()
 }
 
@@ -83,7 +90,8 @@ export const _AUTHENTICTRACKRECORD_: DBAuthenticTrackRecord = {
     CarShortName: '',
     WeatherName: '',
     TyreShortName: '',
-    CustomSetup: false,
+    SetupDescription: '',
+    SetupCustom: false,
     Valid: false
 }
 

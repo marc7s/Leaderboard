@@ -61,6 +61,41 @@ CREATE TABLE Tracks(
     AddedAt datetime NOT NULL DEFAULT GETDATE()
 );
 
+CREATE TABLE SetupTypes(
+    ID int IDENTITY(1, 1) NOT NULL PRIMARY KEY,
+    Description nvarchar(255) NOT NULL UNIQUE,
+    Custom bit NOT NULL,
+    AddedAt datetime NOT NULL DEFAULT GETDATE()
+);
+
+CREATE TABLE Setups(
+    ID int IDENTITY(1, 1) NOT NULL PRIMARY KEY,
+    TypeID int FOREIGN KEY REFERENCES SetupTypes(ID),
+    FrontWing int,
+    RearWing int,
+    OnThrottle int,
+    OffThrottle int,
+    FrontCamber float,
+    RearCamber float,
+    FrontToe float,
+    RearToe float,
+    FrontSuspension int,
+    RearSuspension int,
+    FrontAntiRollBar int,
+    RearAntiRollBar int,
+    FrontSuspensionHeight int,
+    RearSuspensionHeight int,
+    BrakePressure int,
+    BrakeBias int,
+    RearLeftTyrePressure float,
+    RearRightTyrePressure float,
+    FrontLeftTyrePressure float,
+    FrontRightTyrePressure float,
+    Ballast int,
+    FuelLoad float,
+    AddedAt datetime NOT NULL DEFAULT GETDATE()
+);
+
 CREATE TABLE Configs(
     ID int IDENTITY(1, 1) NOT NULL PRIMARY KEY,
     Description nvarchar(255) DEFAULT NULL,
@@ -69,7 +104,7 @@ CREATE TABLE Configs(
     CarID int FOREIGN KEY REFERENCES Cars(ID),
     WeatherID int FOREIGN KEY REFERENCES Weathers(ID),
     TyreID int FOREIGN KEY REFERENCES Tyres(ID),
-    CustomSetup bit NOT NULL,
+    SetupID int FOREIGN KEY REFERENCES Setups(ID),
     Authentic bit NOT NULL DEFAULT 0,
     AddedAt datetime NOT NULL DEFAULT GETDATE()
 );
