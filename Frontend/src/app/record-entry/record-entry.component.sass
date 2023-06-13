@@ -15,34 +15,4 @@
 .authentic 
     #username, #game
         color: deepskyblue
-
-@media (min-width: 1000px)
-    .recordContainer
-        display: grid
-        grid-auto-flow: column
-        $game: 10rem
-        $car: 11rem
-        $weather: 4rem
-        $tyres: 7rem
-        $setup: 14rem
-        $username: 9rem
-        $time: 6rem
-        $valid: 2rem
-        grid-template-columns: $username $game $car $weather $tyres $setup $time $valid
-
-@media (max-width: 1000px)
-    .recordContainer
-        max-width: 40rem
-        margin-bottom: 2rem
-        div
-            text-align: center
-        div:not(#time, #valid)
-            margin: 0.5rem
-            display: inline-block
-            width: 40%
-        #time
-            font-size: 1.2rem
-            margin: 0.5rem 0
-        #valid
-            min-height: 1.5rem
             

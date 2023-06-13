@@ -2,6 +2,18 @@
 <div class="container">
     <div class="trackRecord" *ngFor="let lapRecords of trackRecords | keyvalue">
         <div class="track">{{ lapRecords.key }} <span class="fi fi-{{getA2C(lapRecords.key)}}"></span></div>
+        
+        <div class="recordContainer recordHeader">
+            <div>Username</div>
+            <div>Game</div>
+            <div>Car</div>
+            <div>Weather</div>
+            <div>Tyres</div>
+            <div>Setup</div>
+            <div>Time</div>
+            <div>Valid</div>
+        </div>
+        
         <div class="lapRecord" *ngFor="let record of lapRecords.value">
             <app-record-entry [config]="record.config" [timeSummary]="record.timeSummary" [authentic]="!!record.authentic"></app-record-entry>
         </div>

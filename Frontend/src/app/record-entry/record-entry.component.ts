@@ -5,7 +5,7 @@ import { TimeSummary } from '@shared/dataStructures';
 @Component({
   selector: 'app-record-entry',
   templateUrl: './record-entry.component.html',
-  styleUrls: ['./record-entry.component.sass']
+  styleUrls: ['./record-entry.component.sass', '../shared-styles/record.sass']
 })
 export class RecordEntryComponent implements OnInit {
   @Input() config: Config | null = null;

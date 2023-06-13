@@ -8,7 +8,7 @@ import { getUsernameFromDriver } from 'src/app/user';
 @Component({
   selector: 'app-records',
   templateUrl: './records.component.html',
-  styleUrls: ['./records.component.sass']
+  styleUrls: ['./records.component.sass', '../../shared-styles/record.sass']
 })
 export class RecordsComponent implements OnInit {
 

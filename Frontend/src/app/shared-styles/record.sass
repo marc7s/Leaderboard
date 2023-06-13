@@ -1,0 +1,50 @@
+@media (min-width: 1200px)
+    .recordContainer
+        display: grid
+        grid-auto-flow: column
+        $game: 10rem
+        $car: 11rem
+        $weather: 6rem
+        $tyres: 7rem
+        $setup: 14rem
+        $username: 9rem
+        $time: 6rem
+        $valid: 3rem
+        grid-template-columns: $username $game $car $weather $tyres $setup $time $valid
+
+    .recordHeader
+        $space: 0.5rem
+        text-align: center
+        font-weight: bold
+        margin-bottom: $space
+        padding-bottom: $space
+        border-bottom: 1px solid var(--main-darker)
+
+@media (max-width: 1200px)
+    .recordContainer
+        max-width: 40rem
+        div
+            text-align: center
+        div:not(#time, #valid)
+            margin: 0.5rem
+            display: inline-block
+            width: 40%
+        #time
+            font-size: 1.2rem
+            margin: 0.5rem 0
+        #valid
+            min-height: 1.5rem
+
+    .lapRecord
+        $space: 2rem
+        margin-bottom: $space
+        padding-bottom: $space
+        
+    .lapRecord:not(:last-child)
+        border-bottom: 1.5px solid var(--main-darker)
+    
+    .recordHeader
+        display: none
+    
+    .trackRecord
+        max-width: 30rem
