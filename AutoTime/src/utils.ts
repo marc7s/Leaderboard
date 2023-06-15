@@ -34,7 +34,7 @@ export function maxDifference(arr: number[]) {
 // A function that takes a lap time in milliseconds and returns a formatted string
 export function formatLapTime(lapTimeInMS: number): string {
     const date: Date = new Date(lapTimeInMS);
-    return `${pad(date.getMinutes().toString(), '0', 2)}:${pad(date.getSeconds().toString(), '0', 2)}.${pad(date.getMilliseconds().toString(), '0', 3)}`;
+    return `${pad((date.getHours() - 1).toString(), '0', 2)}:${pad(date.getMinutes().toString(), '0', 2)}:${pad(date.getSeconds().toString(), '0', 2)}.${pad(date.getMilliseconds().toString(), '0', 3)}`;
 }
 
 // Helper function that pads a string with a character to a certain length

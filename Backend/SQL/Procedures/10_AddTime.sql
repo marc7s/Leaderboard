@@ -55,7 +55,22 @@ BEGIN
 
     DECLARE @TimeConverted Time(3)
     SELECT @TimeConverted = CONVERT(Time(3), @Time)
+
+    --CHECK TIME DUPLICATE
+    DECLARE @TimeID_db int
+    SELECT @TimeID_db = ID FROM Times
+    WHERE
+        Time = @TimeConverted AND
+        UserID = @UserID_db AND
+        ConfigID = @ConfigID_db AND
+        Valid = @Valid
+    IF @TimeID_db IS NOT NULL
+    BEGIN
+        RAISERROR(N'Time already exists', 11, 1);
+        RETURN
+    END
+
     --ALL GOOD, ADD TIME
-    INSERT INTO Times(Time, Millis, UserID, ConfigID, Valid) VALUES (@TimeConverted, DATEDIFF(MILLISECOND, 0, @TimeConverted), @UserID, @ConfigID, @Valid);
+    INSERT INTO Times(Time, Millis, UserID, ConfigID, Valid, AddedManually) VALUES (@TimeConverted, DATEDIFF(MILLISECOND, 0, @TimeConverted), @UserID, @ConfigID, @Valid, 1);
 END
 GO

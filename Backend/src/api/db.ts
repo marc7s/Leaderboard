@@ -5,13 +5,14 @@ import express, { Response, NextFunction, Router } from 'express';
 import * as sql from 'tedious';
 import { randomBytes } from 'crypto';
 import { timeParam, timeIDParam, loginParam, shortNameParam, validParam, addTimeParam, carIDParam, gameIDParam, shortAndFullNameParam, nameParam, tyreIDParam, weatherIDParam, trackIDParam, countryIDParam, userIDParam, configIDParam, descriptionParam, alpha2CodeParam, setupIDParam } from './validations';
-import { AuthenticationError, DatabaseConnectionError, JwtToken, JwtTokenBody } from '../utils';
+import { AuthenticationError, JwtToken, JwtTokenBody } from '../utils';
 import { Token, User, Time, DBTime, Config, DBConfig, DBGame, DBWeather, DBTrack, DBCar, Game, DBCountry, Country, Track, Car, Weather, Login, Tyre, DBTyre, DBUser, DBDriver, Driver, DBClass, Class, DBRecord, DBSetup, Setup } from '@shared/api';
 
 import { _CAR_, _CLASS_, _CONFIG_, _COUNTRY_, _DRIVER_, _GAME_, _RECORD_, _SETUP_, _TIME_, _TRACK_, _TYRE_, _USER_, _WEATHER_ } from './dbObjects';
 import { AuthenticTrackRecord, LapRecord, LapRecordType, TimeSummary, TrackSummary } from '@shared/dataStructures';
 import { log } from '../server';
 import { parseIntoInterface } from '../shared/utils';
+import { getDBConnection } from '../shared/database';
 
 const router: Router = express.Router();
 
@@ -311,40 +312,6 @@ router.post('/create-config',
     createConfig(description, gameID, trackID, carID, weatherID, tyreID, setupID).then(success => res.json(success)).catch(next);
 });
 
-async function getDBConnection(): Promise<sql.Connection> {
-    return new Promise((resolve, reject) => {
-        const config = {
-            server:  'localhost',
-            authentication: {
-                type: 'default',
-                options: {
-                    userName: process.env.DB_LOGIN_NAME,
-                    password: process.env.DB_LOGIN_PASSWORD
-                }
-            },
-            options: {
-                database:  process.env.DB_DATABASE,
-                instanceName: 'SQLEXPRESS',
-                rowCollectionOnRequestCompletion: true,
-                trustServerCertificate: true
-            }
-          };
-    
-        const conn = new sql.Connection(config);
-    
-        conn.on('connect', (err) => {
-            if(err) {
-                console.error("Could not connect:");
-                console.error(err);
-                reject(err as sql.ConnectionError != null ? new DatabaseConnectionError() : err);
-            }
-            resolve(conn);
-        });
-        
-        conn.connect();
-    });
-}
-
 async function getTrackTimes(track: Track): Promise<TimeSummary[]> {
     return new Promise(async (resolve, reject) => {
         const query = "SELECT * FROM GetTrackTimes(@TrackID) ORDER BY Time";
@@ -364,7 +331,7 @@ async function getUsers(): Promise<User[]> {
         const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
             if(err) reject(err);
         });
-        getDBConnection()
+        getDBConnection(sql)
         .then(conn => {
             conn.execSql(req);
             req.on('error', err => { reject(err) });
@@ -387,7 +354,7 @@ async function getConfigs(): Promise<Config[]> {
         const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
             if(err) reject(err);
         });
-        getDBConnection()
+        getDBConnection(sql)
         .then(conn => {
             conn.execSql(req);
             req.on('error', err => { reject(err) });
@@ -418,7 +385,7 @@ async function getGames(): Promise<Game[]> {
         const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
             if(err) reject(err);
         });
-        getDBConnection()
+        getDBConnection(sql)
         .then(conn => {
             conn.execSql(req);
             req.on('error', err => { reject(err) });
@@ -442,7 +409,7 @@ async function getTracks(): Promise<Track[]> {
         const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
             if(err) reject(err);
         });
-        getDBConnection()
+        getDBConnection(sql)
         .then(conn => {
             conn.execSql(req);
             req.on('error', err => { reject(err) });
@@ -467,7 +434,7 @@ async function getCars(): Promise<Car[]> {
         const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
             if(err) reject(err);
         });
-        getDBConnection()
+        getDBConnection(sql)
         .then(conn => {
             conn.execSql(req);
             req.on('error', err => { reject(err) });
@@ -491,7 +458,7 @@ async function getWeathers(): Promise<Weather[]> {
         const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
             if(err) reject(err);
         });
-        getDBConnection()
+        getDBConnection(sql)
         .then(conn => {
             conn.execSql(req);
             req.on('error', err => { reject(err) });
@@ -515,7 +482,7 @@ async function getTyres(): Promise<Tyre[]> {
         const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
             if(err) reject(err);
         });
-        getDBConnection()
+        getDBConnection(sql)
         .then(conn => {
             conn.execSql(req);
             req.on('error', err => { reject(err) });
@@ -539,7 +506,7 @@ async function getSetups(): Promise<Setup[]> {
         const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
             if(err) reject(err);
         });
-        getDBConnection()
+        getDBConnection(sql)
         .then(conn => {
             conn.execSql(req);
             req.on('error', err => { reject(err) });
@@ -563,7 +530,7 @@ async function getCountries(): Promise<Country[]> {
         const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
             if(err) reject(err);
         });
-        getDBConnection()
+        getDBConnection(sql)
         .then(conn => {
             conn.execSql(req);
             req.on('error', err => { reject(err) });
@@ -591,7 +558,7 @@ async function getAuthenticRecord(trackID: number): Promise<AuthenticTrackRecord
 
         req.addParameter('TrackID', sql.TYPES.Int, trackID);
 
-        getDBConnection()
+        getDBConnection(sql)
         .then(conn => {
             conn.execSql(req);
             req.on('error', err => { reject(err) });
@@ -635,7 +602,7 @@ async function getNumberOfRecordsFromUsername(username: string): Promise<number 
 
         req.addParameter('Username', sql.TYPES.VarChar, username);
 
-        getDBConnection()
+        getDBConnection(sql)
         .then(conn => {
             conn.execSql(req);
             req.on('error', err => { reject(err) });
@@ -658,7 +625,7 @@ async function getRecords(): Promise<LapRecord[]> {
         const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
             if(err) reject(err);
         });
-        getDBConnection()
+        getDBConnection(sql)
         .then(conn => {
             conn.execSql(req);
             req.on('error', err => { reject(err) });
@@ -730,7 +697,7 @@ async function getUserSummary(username: string): Promise<TrackSummary[]> {
         });
         req.addParameter('UserID', sql.TYPES.Int, user.id);
         
-        getDBConnection()
+        getDBConnection(sql)
         .then(conn => {
             conn.execSql(req);
             req.on('error', err => { reject(err) });
@@ -763,7 +730,7 @@ async function getUserSummary(username: string): Promise<TrackSummary[]> {
 async function getTimes(req: sql.Request): Promise<TimeSummary[]> {
     return new Promise((resolve, reject) => {
         const times: TimeSummary[] = [];
-        getDBConnection()
+        getDBConnection(sql)
         .then(conn => {
             conn.execSql(req);
             req.on('row', cols => {
@@ -786,7 +753,7 @@ async function getTimes(req: sql.Request): Promise<TimeSummary[]> {
 
 async function getTrackFromShortName(shortName: string): Promise<Track | null> {
     return new Promise((resolve, reject) => {
-        getDBConnection()
+        getDBConnection(sql)
         .then(conn => {
             const query = "SELECT * FROM GetTrackFromShortName(@ShortName)";
             const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
@@ -813,7 +780,7 @@ async function getTrackFromShortName(shortName: string): Promise<Track | null> {
 
 async function getUserFromUsername(username: string): Promise<User | null> {
     return new Promise((resolve, reject) => {
-        getDBConnection()
+        getDBConnection(sql)
         .then(conn => {
             const query = "SELECT * FROM GetUserFromUsername(@Username)";
             const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
@@ -839,7 +806,7 @@ async function getUserFromUsername(username: string): Promise<User | null> {
 
 async function addTime(time: string, userID: number, configID: number, valid: boolean): Promise<boolean> {
     return new Promise((resolve, reject) => {
-        getDBConnection()
+        getDBConnection(sql)
         .then(conn => {
             const query = "EXECUTE AddTime @Time, @UserID, @ConfigID, @Valid";
             const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
@@ -861,7 +828,7 @@ async function addTime(time: string, userID: number, configID: number, valid: bo
 
 async function removeTime(timeID: number): Promise<void> {
     return new Promise((resolve, reject) => {
-        getDBConnection()
+        getDBConnection(sql)
         .then(conn => {
             const query = "EXECUTE RemoveTime @TimeID";
             const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
@@ -880,7 +847,7 @@ async function removeTime(timeID: number): Promise<void> {
 
 async function updateCar(carID: number, newFullName: string, newShortName: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
-        getDBConnection()
+        getDBConnection(sql)
         .then(conn => {
             const query = "EXECUTE UpdateCar @CarID, @NewFullName, @NewShortName";
             const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
@@ -901,7 +868,7 @@ async function updateCar(carID: number, newFullName: string, newShortName: strin
 
 async function createCar(fullName: string, shortName: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
-        getDBConnection()
+        getDBConnection(sql)
         .then(conn => {
             const query = "EXECUTE AddCar @FullName, @ShortName";
             const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
@@ -921,7 +888,7 @@ async function createCar(fullName: string, shortName: string): Promise<boolean> 
 
 async function updateGame(gameID: number, newName: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
-        getDBConnection()
+        getDBConnection(sql)
         .then(conn => {
             const query = "EXECUTE UpdateGame @GameID, @NewName";
             const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
@@ -941,7 +908,7 @@ async function updateGame(gameID: number, newName: string): Promise<boolean> {
 
 async function createGame(name: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
-        getDBConnection()
+        getDBConnection(sql)
         .then(conn => {
             const query = "EXECUTE AddGame @Name";
             const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
@@ -960,7 +927,7 @@ async function createGame(name: string): Promise<boolean> {
 
 async function updateTyre(tyreID: number, newFullName: string, newShortName: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
-        getDBConnection()
+        getDBConnection(sql)
         .then(conn => {
             const query = "EXECUTE UpdateTyre @TyreID, @NewFullName, @NewShortName";
             const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
@@ -981,7 +948,7 @@ async function updateTyre(tyreID: number, newFullName: string, newShortName: str
 
 async function createTyre(fullName: string, shortName: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
-        getDBConnection()
+        getDBConnection(sql)
         .then(conn => {
             const query = "EXECUTE AddTyre @FullName, @ShortName";
             const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
@@ -1001,7 +968,7 @@ async function createTyre(fullName: string, shortName: string): Promise<boolean>
 
 async function updateUser(userID: number, newUsername: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
-        getDBConnection()
+        getDBConnection(sql)
         .then(conn => {
             const query = "EXECUTE UpdateUser @UserID, @NewUsername";
             const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
@@ -1021,7 +988,7 @@ async function updateUser(userID: number, newUsername: string): Promise<boolean>
 
 async function createUser(username: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
-        getDBConnection()
+        getDBConnection(sql)
         .then(conn => {
             const query = "EXECUTE AddUser @Username";
             const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
@@ -1040,7 +1007,7 @@ async function createUser(username: string): Promise<boolean> {
 
 async function updateWeather(weatherID: number, newName: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
-        getDBConnection()
+        getDBConnection(sql)
         .then(conn => {
             const query = "EXECUTE UpdateWeather @WeatherID, @NewName";
             const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
@@ -1060,7 +1027,7 @@ async function updateWeather(weatherID: number, newName: string): Promise<boolea
 
 async function createWeather(name: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
-        getDBConnection()
+        getDBConnection(sql)
         .then(conn => {
             const query = "EXECUTE AddWeather @Name";
             const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
@@ -1079,7 +1046,7 @@ async function createWeather(name: string): Promise<boolean> {
 
 async function updateTrack(trackID: number, countryID: number, newFullName: string, newShortName: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
-        getDBConnection()
+        getDBConnection(sql)
         .then(conn => {
             const query = "EXECUTE UpdateTrack @TrackID, @CountryID, @NewFullName, @NewShortName";
             const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
@@ -1101,7 +1068,7 @@ async function updateTrack(trackID: number, countryID: number, newFullName: stri
 
 async function createTrack(countryID: number, fullName: string, shortName: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
-        getDBConnection()
+        getDBConnection(sql)
         .then(conn => {
             const query = "EXECUTE AddTrack @CountryID, @FullName, @ShortName";
             const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
@@ -1122,7 +1089,7 @@ async function createTrack(countryID: number, fullName: string, shortName: strin
 
 async function updateCountry(countryID: number, newFullName: string, newShortName: string, newAlpha2Code: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
-        getDBConnection()
+        getDBConnection(sql)
         .then(conn => {
             const query = "EXECUTE UpdateCountry @CountryID, @NewFullName, @NewShortName, @NewAlpha2Code";
             const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
@@ -1144,7 +1111,7 @@ async function updateCountry(countryID: number, newFullName: string, newShortNam
 
 async function createCountry(fullName: string, shortName: string, alpha2Code: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
-        getDBConnection()
+        getDBConnection(sql)
         .then(conn => {
             const query = "EXECUTE AddCountry @FullName, @ShortName, @Alpha2Code";
             const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
@@ -1165,7 +1132,7 @@ async function createCountry(fullName: string, shortName: string, alpha2Code: st
 
 async function updateConfig(configID: number, description: string, gameID: number, trackID: number, carID: number, weatherID: number, tyreID: number, setupID: number): Promise<boolean> {
     return new Promise((resolve, reject) => {
-        getDBConnection()
+        getDBConnection(sql)
         .then(conn => {
             const query = "EXECUTE UpdateConfig @ConfigID, @Description, @GameID, @TrackID, @CarID, @WeatherID, @TyreID, @SetupID";
             const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
@@ -1191,7 +1158,7 @@ async function updateConfig(configID: number, description: string, gameID: numbe
 
 async function createConfig(description: string, gameID: number, trackID: number, carID: number, weatherID: number, tyreID: number, setupID: number): Promise<boolean> {
     return new Promise((resolve, reject) => {
-        getDBConnection()
+        getDBConnection(sql)
         .then(conn => {
             const query = "EXECUTE AddConfig @Description, @GameID, @TrackID, @CarID, @WeatherID, @TyreID, @SetupID";
             const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
@@ -1217,7 +1184,7 @@ async function createConfig(description: string, gameID: number, trackID: number
 async function login(login: Login) : Promise<User | null> {
     return new Promise((resolve, reject) => {
         let response: User | null = null;
-        getDBConnection()
+        getDBConnection(sql)
         .then(conn => {
             const query = "SELECT * FROM dbo.Login(@Username, @Password)";
             const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
@@ -1250,7 +1217,7 @@ async function getOrAddConfig(gameID: number, trackID: number, carID: number, we
     return new Promise((resolve, reject) => {
         let response: number = NaN;
     
-        getDBConnection().then(conn => {
+        getDBConnection(sql).then(conn => {
             const query = "EXECUTE GetOrAddConfig @Description, @GameID, @TrackID, @CarID, @WeatherID, @TyreID, @SetupID";
             const req: sql.Request = new sql.Request(query, (err, rowCount, rows) => {
                 if(err) reject(err);

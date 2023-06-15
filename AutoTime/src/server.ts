@@ -1,6 +1,9 @@
 import 'module-alias/register';
 import * as dotenv from 'dotenv';
-dotenv.config({path: __dirname + '/../.env'});
+dotenv.config({path: __dirname + '/../../Backend/.env'});
+
+import { RequestError } from 'tedious';
+import * as fs from 'fs';
 
 import { F1TelemetryClient, constants } from "@racehub-io/f1-telemetry-client";
 const { PACKETS } = constants;
@@ -13,16 +16,75 @@ import { ATE_Driver, ATE_Nationality, ATE_Team, ATE_YourTelemetry, AT_Participan
 import { AT_CarSetupEntry, CompareCarSetups, PresetCarSetups, _AT_CAR_SETUP_ENTRY_MAP_ } from './specification/carSetupsTypes';
 
 import { maxDifference, parseEnum, parseWithMapping, formatLapTime } from './utils';
+import { GetCarFullName, GetTrackFullName, GetTyreFullName, GetWeatherFullName } from './gameToDatabase';
+import { addTime } from './db';
 
+import ADDED_TIMES_CACHE from './cache/addedTimes.json';
+
+interface CacheEntry {
+    Timestamp: number,
+    Data: any
+}
+
+class Cache {
+    private static folderPath: string = __dirname + '/cache/';
+    // Cache values for 24 hours
+    private static cacheTimeMilliSeconds: number = 1000 * 60 * 60 * 24;
+    
+    private static get AddedTimes(): CacheEntry[] {
+        return ADDED_TIMES_CACHE as CacheEntry[];
+    }
+    
+    private static UpdateTimeCache(): void {
+        for(const entry of Cache.AddedTimes) {
+            if(entry.Timestamp < Date.now() - Cache.cacheTimeMilliSeconds)
+                Cache.RemoveTime(entry.Data);
+        }
+    }
+    
+    public static AddTime(timeID: string) {
+        const times: CacheEntry[] = Cache.AddedTimes;
+        if(Cache.IncludesTime(timeID))
+            return;
+        
+        times.push({Timestamp: Date.now(), Data: timeID});
+        fs.writeFileSync(Cache.folderPath + 'addedTimes.json', JSON.stringify(times));
+    }
+    
+    private static RemoveTime(timeID: string) {
+        const times: CacheEntry[] = Cache.AddedTimes;
+        const index: number = times.findIndex(x => x.Data == timeID);
+        if(index == -1)
+            return;
+        
+        times.splice(index, 1);
+        fs.writeFileSync(Cache.folderPath + 'addedTimes.json', JSON.stringify(times));
+    }
+
+    private static _IncludesTime(timeID: string, updateCache: boolean): boolean {
+        if(updateCache)
+            Cache.UpdateTimeCache();
+        return Cache.AddedTimes.find(x => x.Data == timeID) != null;
+    }
+    
+    public static IncludesTime(timeID: string): boolean {
+        return Cache._IncludesTime(timeID, true);
+    }
+}
 
 interface LapTimeConfig {
     Game: string,
     Time: string,
-    Track: string,
-    Car: string,
-    Weather: string,
-    Tyre: string,
+    TrackName: string,
+    Track: ATE_Track,
+    TeamName: string,
+    Team: ATE_Team,
+    WeatherName: string,
+    Weather: ATE_Weather,
+    TyreName: string,
+    Tyre: ATE_VisualTyre,
     CustomSetup: boolean,
+    Setup: AT_CarSetupEntry,
     SetupName: string,
     Valid: boolean
 }
@@ -36,8 +98,10 @@ interface LapTime {
 
 interface CurrentSessionData {
     Timestamp: number,
-    Weather: string,
-    Track: string
+    WeatherName: string,
+    Weather: ATE_Weather,
+    TrackName: string,
+    Track: ATE_Track
 }
 
 interface CurrentSessionHistoryData {
@@ -45,13 +109,15 @@ interface CurrentSessionHistoryData {
     TimeSet: boolean,
     TimeID: string,
     Time: string,
-    Tyre: string,
+    TyreName: string,
+    Tyre: ATE_VisualTyre,
     Valid: boolean
 }
 
 interface CurrentParticipantData {
     Timestamp: number,
-    Team: string
+    TeamName: string,
+    Team: ATE_Team
 }
 
 interface CurrentCarSetupData {
@@ -77,7 +143,7 @@ var currentDriver: string = "UNKNOWN";
 
 function main()
 {
-    const client = new F1TelemetryClient({ port: process.env.UDP_PORT as any as number });
+    const client = new F1TelemetryClient({ port: process.env.TELEMETRY_UDP_PORT as any as number });
     
     client.on(PACKETS.session, e => parseHeader(e, handleSessionData));
     client.on(PACKETS.sessionHistory, e => parseHeader(e, handleSessionHistoryData));
@@ -117,8 +183,10 @@ function handleSessionData(header: AT_Header, data: any): void {
     // Update the current session data
     currentLap.Session = {
         Timestamp: Date.now(),
-        Weather: ATE_Weather[session.Weather],
-        Track: ATE_Track[session.Track]
+        WeatherName: ATE_Weather[session.Weather],
+        Weather: session.Weather,
+        TrackName: ATE_Track[session.Track],
+        Track: session.Track
     }
     checkCurrentTime();
 }
@@ -133,15 +201,6 @@ function handleSessionHistoryData(header: AT_Header, data: any): void {
         
         const rawLapHistoryDataList: any[] = data["m_lapHistoryData"];
         const rawTyreStintDataList: any[] = data["m_tyreStintsHistoryData"];
-
-        const currData: CurrentSessionHistoryData = {
-            Timestamp: Date.now(),
-            TimeSet: false,
-            TimeID: "",
-            Time: "",
-            Tyre: "",
-            Valid: false
-        }
         
         const rawLapHistoryData = rawLapHistoryDataList[Math.max(sessionHistory.NumLaps - 2, 0)];
         const lapHistoryEntry: AT_LapHistoryDataEntry = parseWithMapping(rawLapHistoryData, _AT_LAP_HISTORY_DATA_ENTRY_MAP_);
@@ -154,10 +213,10 @@ function handleSessionHistoryData(header: AT_Header, data: any): void {
         lapHistoryEntry.LapFlags = getLapFlags(rawLapHistoryData["m_lapValidBitFlags"]);
         lapHistoryEntry.LapTimeFormatted = formatLapTime(lapHistoryEntry.LapTimeInMS);
 
-        currData.Time = lapHistoryEntry.LapTimeFormatted;
-        currData.Valid = lapHistoryEntry.LapFlags.LapValid;
-        currData.TimeSet = true;
-        currData.TimeID = JSON.stringify(lapHistoryEntry);
+        const time: string = lapHistoryEntry.LapTimeFormatted;
+        const valid: boolean = lapHistoryEntry.LapFlags.LapValid;
+        const timeSet: boolean = true;
+        const timeID: string = JSON.stringify(lapHistoryEntry);
 
         
         // Parse the tyre data
@@ -165,16 +224,17 @@ function handleSessionHistoryData(header: AT_Header, data: any): void {
         const tyreStintEntry: AT_TyreStintDataEntry = parseWithMapping(rawTyreStintData, _AT_TYRE_STINT_DATA_ENTRY_MAP_);
         tyreStintEntry.TyreActualCompound = parseEnum(tyreStintEntry.TyreActualCompoundID, ATE_ActualTyre);
         tyreStintEntry.TyreVisualCompound = parseEnum(tyreStintEntry.TyreVisualCompoundID, ATE_VisualTyre);
-        currData.Tyre = ATE_VisualTyre[tyreStintEntry.TyreVisualCompound];
+        const tyre: ATE_VisualTyre = tyreStintEntry.TyreVisualCompound;
 
         // Update the current session history data
-        currentLap.SessionHistory = !currData.TimeSet ? undefined : {
-            Timestamp: currData.Timestamp,
+        currentLap.SessionHistory = !timeSet ? undefined : {
+            Timestamp: Date.now(),
             TimeSet: true,
-            TimeID: currData.TimeID,
-            Time: currData.Time,
-            Tyre: currData.Tyre,
-            Valid: currData.Valid,
+            TimeID: timeID,
+            Time: time,
+            TyreName: ATE_VisualTyre[tyre],
+            Tyre: tyre,
+            Valid: valid
         }
         checkCurrentTime();
     }
@@ -194,7 +254,8 @@ function handleParticipantsData(header: AT_Header, data: any): void {
     // Update the current participant data
     currentLap.Participant = {
         Timestamp: Date.now(),
-        Team: ATE_Team[participantEntry.Team]
+        TeamName: ATE_Team[participantEntry.Team],
+        Team: participantEntry.Team
     }
     checkCurrentTime();
 }
@@ -226,11 +287,16 @@ function checkCurrentTime(): void {
         const lapTimeConfig: LapTimeConfig = {
             Game: currentLap.Header.PacketFormat.toString(),
             Time: currentLap.SessionHistory.Time,
+            TrackName: currentLap.Session.TrackName,
             Track: currentLap.Session.Track,
-            Car: currentLap.Participant.Team,
+            TeamName: currentLap.Participant.TeamName,
+            Team: currentLap.Participant.Team,
+            WeatherName: currentLap.Session.WeatherName,
             Weather: currentLap.Session.Weather,
+            TyreName: currentLap.SessionHistory.TyreName,
             Tyre: currentLap.SessionHistory.Tyre,
             CustomSetup: currentLap.CarSetup.SetupName !== "Balanced Default",
+            Setup: currentLap.CarSetup.Setup,
             SetupName: currentLap.CarSetup.SetupName,
             Valid: currentLap.SessionHistory.Valid
         }
@@ -247,7 +313,26 @@ function checkCurrentTime(): void {
         }
         
         lapTimes.push(currTime);
-        console.log(lapTimes);
+        
+        const trackName: string | null = GetTrackFullName(lapTimeConfig.Track);
+        const carName: string | null = GetCarFullName(lapTimeConfig.Team);
+        const weatherName: string | null = GetWeatherFullName(lapTimeConfig.Weather);
+        const tyreName: string | null = GetTyreFullName(lapTimeConfig.Tyre);
+
+        if(trackName != null && carName != null && weatherName != null && tyreName != null && !Cache.IncludesTime(currTime.ID)) {
+            addTime(lapTimeConfig.Time, 1, "F1 2021", trackName, carName, weatherName, tyreName, lapTimeConfig.Setup, lapTimeConfig.Valid)
+                .then(() => Cache.AddTime(currTime.ID))
+                .catch(err => {
+                    if(err instanceof RequestError && err.message === 'Time already exists') {
+                        Cache.AddTime(currTime.ID);
+                        console.log('Tried to add duplicate time');
+                    }
+                    else {
+                        console.error(err);
+                    }
+                });
+        }
+            
         
         currentLap.Header = undefined;
         currentLap.Session = undefined;

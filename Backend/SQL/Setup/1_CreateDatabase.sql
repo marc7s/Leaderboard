@@ -116,6 +116,7 @@ CREATE TABLE Times(
     UserID int FOREIGN KEY REFERENCES Users(ID),
     ConfigID int FOREIGN KEY REFERENCES Configs(ID),
     Valid bit NOT NULL,
+    AddedManually bit NOT NULL,
     AddedAt datetime NOT NULL DEFAULT GETDATE()
 );
 

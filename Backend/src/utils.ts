@@ -1,4 +1,4 @@
-import { User } from '@shared/api';
+import { User } from './shared/api';
 import * as dotenv from 'dotenv';
 dotenv.config({path: __dirname + '../.env'});
 
