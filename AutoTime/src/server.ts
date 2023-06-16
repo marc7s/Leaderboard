@@ -2,8 +2,14 @@ import 'module-alias/register';
 import * as dotenv from 'dotenv';
 dotenv.config({path: __dirname + '/../../Backend/.env'});
 
+import express, { Application, Request, Response, NextFunction } from 'express';
 import { RequestError } from 'tedious';
+import { getClientIp } from 'request-ip';
 import * as fs from 'fs';
+
+import { ApiRequestMalformedError, AuthenticationError, ErrorMessage, NotFoundError, log, logError } from '../../Backend/src/shared/utils';
+import { User } from '../../Backend/src/shared/api';
+import { TimeSummary, LapRecordType } from '../../Backend/src/shared/dataStructures';
 
 import { F1TelemetryClient, constants } from "@racehub-io/f1-telemetry-client";
 const { PACKETS } = constants;
@@ -16,17 +22,21 @@ import { ATE_Driver, ATE_Nationality, ATE_Team, ATE_YourTelemetry, AT_Participan
 import { AT_CarSetupEntry, CompareCarSetups, PresetCarSetups, _AT_CAR_SETUP_ENTRY_MAP_ } from './specification/carSetupsTypes';
 
 import { maxDifference, parseEnum, parseWithMapping, formatLapTime } from './utils';
-import { GetCarFullName, GetTrackFullName, GetTyreFullName, GetWeatherFullName } from './gameToDatabase';
+import { GetCarShortName, GetTrackShortName, GetTyreShortName, GetWeatherName } from './gameToDatabase';
 import { addTime } from './db';
+
+const app: Application = express();
+const cors = require('cors');
 
 import ADDED_TIMES_CACHE from './cache/addedTimes.json';
 
 interface CacheEntry {
     Timestamp: number,
-    Data: any
+    ID: any,
+    Time: TimeSummary
 }
 
-class Cache {
+export class Cache {
     private static folderPath: string = __dirname + '/cache/';
     // Cache values for 24 hours
     private static cacheTimeMilliSeconds: number = 1000 * 60 * 60 * 24;
@@ -38,22 +48,22 @@ class Cache {
     private static UpdateTimeCache(): void {
         for(const entry of Cache.AddedTimes) {
             if(entry.Timestamp < Date.now() - Cache.cacheTimeMilliSeconds)
-                Cache.RemoveTime(entry.Data);
+                Cache.RemoveTime(entry.ID);
         }
     }
     
-    public static AddTime(timeID: string) {
+    public static AddTime(timeID: string, time: TimeSummary) {
         const times: CacheEntry[] = Cache.AddedTimes;
         if(Cache.IncludesTime(timeID))
             return;
         
-        times.push({Timestamp: Date.now(), Data: timeID});
+        times.push({Timestamp: Date.now(), ID: timeID, Time: time});
         fs.writeFileSync(Cache.folderPath + 'addedTimes.json', JSON.stringify(times));
     }
     
     private static RemoveTime(timeID: string) {
         const times: CacheEntry[] = Cache.AddedTimes;
-        const index: number = times.findIndex(x => x.Data == timeID);
+        const index: number = times.findIndex(x => x.ID == timeID);
         if(index == -1)
             return;
         
@@ -64,17 +74,31 @@ class Cache {
     private static _IncludesTime(timeID: string, updateCache: boolean): boolean {
         if(updateCache)
             Cache.UpdateTimeCache();
-        return Cache.AddedTimes.find(x => x.Data == timeID) != null;
+        return Cache.AddedTimes.find(x => x.ID == timeID) != null;
     }
     
     public static IncludesTime(timeID: string): boolean {
         return Cache._IncludesTime(timeID, true);
     }
+
+    public static GetTimeSummaries(): TimeSummary[] {
+        return Cache.AddedTimes.map(x => x.Time);
+    }
+}
+
+export function setCurrentDriver(driver: User): void {
+    log(`Current driver set to ${driver.username}`);
+    currentDriver = driver;
+}
+
+export function getCurrentDriver(): User | null {
+    return currentDriver;
 }
 
 interface LapTimeConfig {
     Game: string,
     Time: string,
+    Millis: number,
     TrackName: string,
     Track: ATE_Track,
     TeamName: string,
@@ -109,6 +133,7 @@ interface CurrentSessionHistoryData {
     TimeSet: boolean,
     TimeID: string,
     Time: string,
+    Millis: number,
     TyreName: string,
     Tyre: ATE_VisualTyre,
     Valid: boolean
@@ -139,7 +164,7 @@ main();
 const lapTimes: LapTime[] = [];
 const currentLap: CurrentLapData = {}
 const maximumAllowedTimestampDifference: number = 3000;
-var currentDriver: string = "UNKNOWN";
+var currentDriver: User | null = null;
 
 function main()
 {
@@ -151,6 +176,55 @@ function main()
     client.on(PACKETS.carSetups, e => parseHeader(e, handleCarSetupsData));
     
     client.start();
+}
+
+app.use(cors({
+    origin: app.get('env') === 'development' ? 'http://localhost:4200' : 'https://leaderboard.schagerberg.com'
+}));
+
+app.use(express.json());
+app.use('/api', require('./api'));
+
+app.get('*', (req: Request, res: Response, next: NextFunction) => {
+    next(new NotFoundError(req.baseUrl + req.path));
+});
+
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+    if(err) {
+        const requestIP = getClientIp(req) ?? 'UNKNOWN';
+        if(err instanceof AuthenticationError)
+            return sendError(res, 403, err.message, requestIP);
+        
+        if(err instanceof NotFoundError)
+            return sendError(res, 404, err.message, requestIP);
+        
+        if(err instanceof ApiRequestMalformedError)
+            return sendError(res, 406, err.message, requestIP);
+        
+        switch(err.message) {
+            case 'NoUserIDProvided': return sendError(res, 400, 'Error: Missing user ID', requestIP);
+            default: return sendError(res, 500, err.message, requestIP);
+        }
+    } else {
+        next();
+    }
+});
+
+app.listen(process.env.AUTOTIME_PORT, () => {
+    log(`Running on port ${process.env.AUTOTIME_PORT}. Environment: ${app.get('env')}`);
+});
+
+function sendError(res: Response, statusCode: number, message: string, requestIP: string, errorDetails?: Error) {
+    const payload: ErrorMessage = {
+        status: 'ERROR',
+        errorMessage: message
+    };
+    logError(`${payload.errorMessage}\nRequested by IP '${requestIP}'`);
+    if(!errorDetails)
+        return res.status(statusCode).send(payload);
+
+    payload.error = errorDetails;
+    return res.status(statusCode).send(payload);
 }
 
 // Middleware for parsing the header passed with every message
@@ -214,6 +288,7 @@ function handleSessionHistoryData(header: AT_Header, data: any): void {
         lapHistoryEntry.LapTimeFormatted = formatLapTime(lapHistoryEntry.LapTimeInMS);
 
         const time: string = lapHistoryEntry.LapTimeFormatted;
+        const millis: number = lapHistoryEntry.LapTimeInMS;
         const valid: boolean = lapHistoryEntry.LapFlags.LapValid;
         const timeSet: boolean = true;
         const timeID: string = JSON.stringify(lapHistoryEntry);
@@ -232,6 +307,7 @@ function handleSessionHistoryData(header: AT_Header, data: any): void {
             TimeSet: true,
             TimeID: timeID,
             Time: time,
+            Millis: millis,
             TyreName: ATE_VisualTyre[tyre],
             Tyre: tyre,
             Valid: valid
@@ -276,8 +352,25 @@ function handleCarSetupsData(header: AT_Header, data: any): void {
     checkCurrentTime();
 }
 
+function lapTimeToTimeSummary(lapTime: LapTime, carName: string, weatherName: string): TimeSummary {
+    return {
+        id: lapTime.Timestamp,
+        time: lapTime.Config.Time,
+        millis: lapTime.Config.Millis,
+        username: currentDriver!.username,
+        game: lapTime.Config.Game,
+        car: carName,
+        weather: weatherName,
+        valid: lapTime.Config.Valid,
+        setupDescription: lapTime.Config.SetupName,
+        customSetup: lapTime.Config.CustomSetup,
+        authentic: false,
+        record: LapRecordType.NoRecord
+    };
+}
+
 function checkCurrentTime(): void {
-    if(currentLap.Header != null && currentLap.Session != null && currentLap.SessionHistory != null && currentLap.Participant != null && currentLap.CarSetup != null) {
+    if(currentDriver != null && currentLap.Header != null && currentLap.Session != null && currentLap.SessionHistory != null && currentLap.Participant != null && currentLap.CarSetup != null) {
         const timestamps: number[] = [ currentLap.Session.Timestamp, currentLap.SessionHistory.Timestamp, currentLap.Participant.Timestamp, currentLap.CarSetup.Timestamp ];
 
         // Make sure all gathered data is from the same time
@@ -287,6 +380,7 @@ function checkCurrentTime(): void {
         const lapTimeConfig: LapTimeConfig = {
             Game: currentLap.Header.PacketFormat.toString(),
             Time: currentLap.SessionHistory.Time,
+            Millis: currentLap.SessionHistory.Millis,
             TrackName: currentLap.Session.TrackName,
             Track: currentLap.Session.Track,
             TeamName: currentLap.Participant.TeamName,
@@ -308,23 +402,26 @@ function checkCurrentTime(): void {
         const currTime: LapTime = {
             ID: currentLap.SessionHistory.TimeID,
             Timestamp: currentLap.SessionHistory.Timestamp,
-            Driver: currentDriver,
+            Driver: currentDriver.username,
             Config: lapTimeConfig
         }
         
         lapTimes.push(currTime);
         
-        const trackName: string | null = GetTrackFullName(lapTimeConfig.Track);
-        const carName: string | null = GetCarFullName(lapTimeConfig.Team);
-        const weatherName: string | null = GetWeatherFullName(lapTimeConfig.Weather);
-        const tyreName: string | null = GetTyreFullName(lapTimeConfig.Tyre);
+        const trackName: string | null = GetTrackShortName(lapTimeConfig.Track);
+        const carName: string | null = GetCarShortName(lapTimeConfig.Team);
+        const weatherName: string | null = GetWeatherName(lapTimeConfig.Weather);
+        const tyreName: string | null = GetTyreShortName(lapTimeConfig.Tyre);
+
 
         if(trackName != null && carName != null && weatherName != null && tyreName != null && !Cache.IncludesTime(currTime.ID)) {
+            const timeSummary: TimeSummary = lapTimeToTimeSummary(currTime, carName, weatherName);
+            
             addTime(lapTimeConfig.Time, 1, "F1 2021", trackName, carName, weatherName, tyreName, lapTimeConfig.Setup, lapTimeConfig.Valid)
-                .then(() => Cache.AddTime(currTime.ID))
+                .then(() => Cache.AddTime(currTime.ID, timeSummary))
                 .catch(err => {
                     if(err instanceof RequestError && err.message === 'Time already exists') {
-                        Cache.AddTime(currTime.ID);
+                        Cache.AddTime(currTime.ID, timeSummary);
                         console.log('Tried to add duplicate time');
                     }
                     else {

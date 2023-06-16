@@ -5,8 +5,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class TimePipe implements PipeTransform {
 
-  transform(time: string): unknown {
-    const t = new Date(time);
+  transform(millis: number): unknown {
+    const t = new Date(millis);
     return `${this.pad(t.getMinutes())}:${this.pad(t.getSeconds())}.${this.padM(t.getMilliseconds())}`;
   }
 

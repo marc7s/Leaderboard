@@ -263,7 +263,7 @@ BEGIN
 
     --CHECK THAT TRACK EXISTS
     DECLARE @TrackID_db int
-    SELECT @TrackID_db = ID FROM Tracks WHERE FullName = @TrackName
+    SELECT @TrackID_db = ID FROM Tracks WHERE ShortName = @TrackName
     IF @TrackID_db IS NULL
     BEGIN
         RAISERROR(N'Track does not exist', 11, 1);
@@ -272,7 +272,7 @@ BEGIN
 
     --CHECK THAT CAR EXISTS
     DECLARE @CarID_db int
-    SELECT @CarID_db = ID FROM Cars WHERE FullName = @CarName
+    SELECT @CarID_db = ID FROM Cars WHERE ShortName = @CarName
     IF @CarID_db IS NULL
     BEGIN
         RAISERROR(N'Car does not exist', 11, 1);
@@ -290,7 +290,7 @@ BEGIN
 
     --CHECK THAT TYRE EXISTS
     DECLARE @TyreID_db int
-    SELECT @TyreID_db = ID FROM Tyres WHERE FullName = @TyreName
+    SELECT @TyreID_db = ID FROM Tyres WHERE ShortName = @TyreName
     IF @TyreID_db IS NULL
     BEGIN
         RAISERROR(N'Tyre does not exist', 11, 1);

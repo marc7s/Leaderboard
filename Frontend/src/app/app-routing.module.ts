@@ -19,6 +19,7 @@ import { TrackComponent } from './_pages/track/track.component';
 import { TracksComponent } from './_pages/tracks/tracks.component';
 import { UserComponent } from './_pages/user/user.component';
 import { UsersComponent } from './_pages/users/users.component';
+import { AutoTimeDashboardComponent } from './_pages/autotime-dashboard/autotime-dashboard.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'users', component: UsersComponent },
   { path: '', canActivate: [AuthguardService], children: [
     { path: 'admin', component: AdminComponent },
+    { path: 'autotime-dashboard', component: AutoTimeDashboardComponent },
     { path: 'add-time', component: AddTimeComponent },
     { path: 'edit-cars', component: EditCarsComponent },
     { path: 'edit-configs', component: EditConfigsComponent },

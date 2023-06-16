@@ -1,7 +1,7 @@
 import * as dotenv from 'dotenv';
 dotenv.config({path: __dirname + '/../.env'});
 
-import { DatabaseConnectionError } from '../utils';
+import { DatabaseConnectionError } from '../shared/utils';
 import { Connection, ConnectionError } from 'tedious';
 
 export async function getDBConnection(sql: any): Promise<Connection> {

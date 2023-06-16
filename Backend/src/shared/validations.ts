@@ -1,7 +1,7 @@
 import { Response, NextFunction } from 'express';
-import { ApiRequestMalformedError } from '../utils';
+import { ApiRequestMalformedError } from './utils';
 
-function isValidUsername(username: string){return username === username.replace(/\W/g, '')}
+function isValidUsername(username: string){return username === username.replace(/[^a-zA-Zåäö]/g, '')}
 function isValidTime(time: any){return time === time.toString()}
 function isValidShortName(shortName: any){return shortName === shortName.toString()}
 function isValidID(id: any){return Number.isInteger(id)}
@@ -39,6 +39,16 @@ export async function userIDParam(req: any, res: Response, next: NextFunction): 
     if(check !== null) return next(check);
 
     req.userID = userID;
+    next();
+}
+
+export async function usernameParam(req: any, res: Response, next: NextFunction): Promise<void> {
+    req.username = null;
+    const username = req.body.username ?? req.query.username ?? MISSING;
+    const check = checkParameter(username, 'username', isValidUsername, 'is invalid');
+    if(check !== null) return next(check);
+
+    req.username = username;
     next();
 }
 

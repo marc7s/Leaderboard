@@ -1,13 +1,10 @@
 import * as dotenv from 'dotenv';
 dotenv.config({path: __dirname + '/../../Backend/.env'});
 
-import express, { Response, NextFunction, Router } from 'express';
 import * as sql from 'tedious';
 
 import { getDBConnection } from '../../Backend/src/shared/database';
 import { AT_CarSetupEntry } from './specification/carSetupsTypes';
-
-const router: Router = express.Router();
 
 export async function addTime(time: string, userID: number, gameName: string, trackName: string, carName: string, weatherName: string, tyreName: string, setup: AT_CarSetupEntry, valid: boolean): Promise<boolean> {
     return new Promise((resolve, reject) => {

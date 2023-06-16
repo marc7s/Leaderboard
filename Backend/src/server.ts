@@ -5,21 +5,13 @@ dotenv.config({path: __dirname + '/../.env'});
 import express, { Application, Request, Response, NextFunction } from 'express';
 import { getClientIp } from 'request-ip';
 
-import { AuthenticationError, ErrorMessage, NotFoundError, ApiRequestMalformedError } from './utils';
+import { AuthenticationError, ErrorMessage, NotFoundError, ApiRequestMalformedError, log, logError } from './shared/utils';
 
 const app: Application = express();
 const cors = require('cors');
 
-export function log(message: string) {
-    console.log(`[${new Date().toLocaleString()}] ${message}`);
-}
-
-export function logError(errorMessage: string) {
-    console.error(`[${new Date().toLocaleString()}] ${errorMessage}`);
-}
-
 app.use(cors({
-    origin: app.get('env') === 'development' ? 'http://localhost:4200' : 'https://leaderboard.schagerberg.com'
+    origin: app.get('env') === 'development' ? `http://localhost:${process.env.FRONTEND_PORT}` : 'https://leaderboard.schagerberg.com'
 }));
 
 app.use(express.json());
@@ -50,8 +42,8 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
     }
 });
 
-app.listen(process.env.port, () => {
-    log(`Running on port ${process.env.port}. Environment: ${app.get('env')}`);
+app.listen(process.env.BACKEND_PORT, () => {
+    log(`Running on port ${process.env.BACKEND_PORT}. Environment: ${app.get('env')}`);
 });
 
 function sendError(res: Response, statusCode: number, message: string, requestIP: string, errorDetails?: Error) {

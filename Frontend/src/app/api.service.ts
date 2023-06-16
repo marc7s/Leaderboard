@@ -6,6 +6,7 @@ import { finalize } from 'rxjs/operators';
 import { AuthenticTrackRecord, LapRecord, TimeSummary, TrackSummary } from '@shared/dataStructures';
 
 interface RequestConfigParam {
+  endPoint: APIEndPoint,
   relativePath: string,
   waitFor: boolean,
   params?: HttpParams,
@@ -14,12 +15,15 @@ interface RequestConfigParam {
 }
 
 interface RequestConfig {
+  endPoint: APIEndPoint,
   relativePath: string,
   waitFor: boolean,
   params: HttpParams,
   headers: HttpHeaders,
   payload: any
 }
+
+enum APIEndPoint { BACKEND, AUTOTIME };
 
 enum HttpRequestTypes { GET, POST };
 
@@ -36,7 +40,12 @@ export class ApiService {
   public LOADING = this.loadingSubject.asObservable();
   private waitingList: any[] = [];
 
-  private apiEndpoint: string = isDevMode() ? 'http://localhost:5000/api/' : 'https://leaderboard-api.schagerberg.com/api/';
+  private getEndPointUrl(endPoint: APIEndPoint): string {
+    switch (endPoint) {
+      case APIEndPoint.BACKEND: return isDevMode() ? 'http://localhost:5000/api/' : 'https://leaderboard-api.schagerberg.com/api/';
+      case APIEndPoint.AUTOTIME: return isDevMode() ? 'http://localhost:5001/api/' : 'https://leaderboard-autotime.schagerberg.com/api/';
+    }
+  }
 
   public getLocalToken(): Token | null {
     const token: string | null = localStorage.getItem('token');
@@ -61,14 +70,14 @@ export class ApiService {
   }
 
   private _get(config: RequestConfig): Observable<any> {
-    const url = new URL(config.relativePath, this.apiEndpoint);
+    const url = new URL(config.relativePath, this.getEndPointUrl(config.endPoint));
     const token: Token | null = this.getLocalToken();
     const headers = token ? config.headers.set('authorization', `Bearer ${token.jwt}`) : config.headers;
     return this.http.get(url.href, { headers: headers, params: config.params, responseType: 'json' });
   }
 
   private _post(config: RequestConfig): Observable<any> {
-    const url = new URL(config.relativePath, this.apiEndpoint);
+    const url = new URL(config.relativePath, this.getEndPointUrl(config.endPoint));
     const token: Token | null = this.getLocalToken();
     const headers = token ? config.headers.set('authorization', `Bearer ${token.jwt}`) : config.headers;
     return this.http.post(url.href, config.payload, { headers: headers.set('Content-Type', 'application/json'), params: config.params, responseType: 'json' });
@@ -76,6 +85,7 @@ export class ApiService {
 
   private request(rt: HttpRequestTypes, config: RequestConfigParam): Observable<any> {
     const requestConfig = {
+      endPoint: config.endPoint,
       relativePath: config.relativePath,
       waitFor: config.waitFor,
       params: config.params ?? new HttpParams(),
@@ -103,6 +113,7 @@ export class ApiService {
 
   getToken(username: string, password: string): Observable<Token> {
     const config = {
+      endPoint: APIEndPoint.BACKEND,
       relativePath: 'db/get-token',
       waitFor: true,
       payload: {
@@ -113,9 +124,45 @@ export class ApiService {
     return this.post(config);
   }
 
+  checkAutoTimeRunning(): Observable<User | null> {
+    const reqParams: HttpParams = new HttpParams();
+    const config = {
+      endPoint: APIEndPoint.AUTOTIME,
+      relativePath: 'ping',
+      waitFor: true,
+      params: reqParams
+    };
+    return this.get(config);
+  }
+
+  setAutoTimeCurrentUser(user: User): Observable<number> {
+    const config = {
+      endPoint: APIEndPoint.AUTOTIME,
+      relativePath: 'set-current-user',
+      waitFor: true,
+      payload: {
+        userID: user.id,
+        username: user.username
+      }
+    };
+    return this.post(config);
+  }
+
+  getAutoTimeSessionTimes(): Observable<TimeSummary[]> {
+    const reqParams: HttpParams = new HttpParams();
+    const config = {
+      endPoint: APIEndPoint.AUTOTIME,
+      relativePath: 'get-last-session-times',
+      waitFor: true,
+      params: reqParams
+    };
+    return this.get(config);
+  }
+
   getUserTimesFromUsername(username: string): Observable<TrackSummary[]> {
     const reqParams: HttpParams = new HttpParams().set('name', username);
     const config = {
+      endPoint: APIEndPoint.BACKEND,
       relativePath: 'db/get-user-times',
       waitFor: true,
       params: reqParams
@@ -126,6 +173,7 @@ export class ApiService {
   getTrackSummary(shortName: string): Observable<TrackSummary> {
     const reqParams: HttpParams = new HttpParams().set('shortName', shortName);
     const config = {
+      endPoint: APIEndPoint.BACKEND,
       relativePath: 'db/get-track-summary',
       waitFor: true,
       params: reqParams
@@ -135,6 +183,7 @@ export class ApiService {
 
   getUsers(): Observable<User[]> {
     const config = {
+      endPoint: APIEndPoint.BACKEND,
       relativePath: 'db/get-users',
       waitFor: true
     };
@@ -143,6 +192,7 @@ export class ApiService {
 
   getUserConfigs(): Observable<Config[]> {
     const config = {
+      endPoint: APIEndPoint.BACKEND,
       relativePath: 'db/get-user-configs',
       waitFor: true
     };
@@ -151,6 +201,7 @@ export class ApiService {
 
   getGames(): Observable<Game[]> {
     const config = {
+      endPoint: APIEndPoint.BACKEND,
       relativePath: 'db/get-games',
       waitFor: true
     };
@@ -159,6 +210,7 @@ export class ApiService {
 
   getTracks(): Observable<Track[]> {
     const config = {
+      endPoint: APIEndPoint.BACKEND,
       relativePath: 'db/get-tracks',
       waitFor: true
     };
@@ -167,6 +219,7 @@ export class ApiService {
 
   getCars(): Observable<Track[]> {
     const config = {
+      endPoint: APIEndPoint.BACKEND,
       relativePath: 'db/get-cars',
       waitFor: true
     };
@@ -175,6 +228,7 @@ export class ApiService {
 
   getWeathers(): Observable<Weather[]> {
     const config = {
+      endPoint: APIEndPoint.BACKEND,
       relativePath: 'db/get-weathers',
       waitFor: true
     };
@@ -183,6 +237,7 @@ export class ApiService {
 
   getTyres(): Observable<Tyre[]> {
     const config = {
+      endPoint: APIEndPoint.BACKEND,
       relativePath: 'db/get-tyres',
       waitFor: true
     };
@@ -191,6 +246,7 @@ export class ApiService {
 
   getSetups(): Observable<Setup[]> {
     const config = {
+      endPoint: APIEndPoint.BACKEND,
       relativePath: 'db/get-setups',
       waitFor: true
     };
@@ -199,6 +255,7 @@ export class ApiService {
 
   getCountries(): Observable<Country[]> {
     const config = {
+      endPoint: APIEndPoint.BACKEND,
       relativePath: 'db/get-countries',
       waitFor: true
     };
@@ -207,6 +264,7 @@ export class ApiService {
 
   getRecords(): Observable<LapRecord[]> {
     const config = {
+      endPoint: APIEndPoint.BACKEND,
       relativePath: 'db/get-records',
       waitFor: true
     };
@@ -215,6 +273,7 @@ export class ApiService {
 
   getUser(): Observable<User> {
     const config = {
+      endPoint: APIEndPoint.BACKEND,
       relativePath: 'db/me',
       waitFor: true
     };
@@ -223,6 +282,7 @@ export class ApiService {
 
   getAuthenticTrackRecord(trackID: number): Observable<AuthenticTrackRecord | null> {
     const config = {
+      endPoint: APIEndPoint.BACKEND,
       relativePath: 'db/get-authentic-track-record',
       waitFor: true,
       payload: {
@@ -234,6 +294,7 @@ export class ApiService {
 
   getNumberOfRecordsFromUsername(username: string): Observable<number | null> {
     const config = {
+      endPoint: APIEndPoint.BACKEND,
       relativePath: 'db/get-number-of-records',
       waitFor: true,
       payload: {
@@ -245,6 +306,7 @@ export class ApiService {
 
   addTimeWithConfig(configID: number, userID: number, time: string, valid: boolean): Observable<boolean> {
     const config = {
+      endPoint: APIEndPoint.BACKEND,
       relativePath: 'db/add-time',
       waitFor: true,
       payload: {
@@ -259,6 +321,7 @@ export class ApiService {
 
   addTime(userID: number, gameID: number, trackID: number, carID: number, weatherID: number, tyreID: number, setupID: number, time: string, valid: boolean): Observable<boolean> {
     const config = {
+      endPoint: APIEndPoint.BACKEND,
       relativePath: 'db/add-time',
       waitFor: true,
       payload: {
@@ -278,6 +341,7 @@ export class ApiService {
 
   updateCar(carID: number, shortName: string, fullName: string): Observable<boolean> {
     const config = {
+      endPoint: APIEndPoint.BACKEND,
       relativePath: 'db/update-car',
       waitFor: true,
       payload: {
@@ -291,6 +355,7 @@ export class ApiService {
 
   createCar(shortName: string, fullName: string): Observable<boolean> {
     const config = {
+      endPoint: APIEndPoint.BACKEND,
       relativePath: 'db/create-car',
       waitFor: true,
       payload: {
@@ -303,6 +368,7 @@ export class ApiService {
 
   updateGame(gameID: number, name: string): Observable<boolean> {
     const config = {
+      endPoint: APIEndPoint.BACKEND,
       relativePath: 'db/update-game',
       waitFor: true,
       payload: {
@@ -315,6 +381,7 @@ export class ApiService {
 
   createGame(name: string): Observable<boolean> {
     const config = {
+      endPoint: APIEndPoint.BACKEND,
       relativePath: 'db/create-game',
       waitFor: true,
       payload: {
@@ -326,6 +393,7 @@ export class ApiService {
 
   updateTyre(tyreID: number, shortName: string, fullName: string): Observable<boolean> {
     const config = {
+      endPoint: APIEndPoint.BACKEND,
       relativePath: 'db/update-tyre',
       waitFor: true,
       payload: {
@@ -339,6 +407,7 @@ export class ApiService {
 
   createTyre(shortName: string, fullName: string): Observable<boolean> {
     const config = {
+      endPoint: APIEndPoint.BACKEND,
       relativePath: 'db/create-tyre',
       waitFor: true,
       payload: {
@@ -351,6 +420,7 @@ export class ApiService {
 
   updateUser(userID: number, username: string): Observable<boolean> {
     const config = {
+      endPoint: APIEndPoint.BACKEND,
       relativePath: 'db/update-user',
       waitFor: true,
       payload: {
@@ -363,6 +433,7 @@ export class ApiService {
 
   createUser(username: string): Observable<boolean> {
     const config = {
+      endPoint: APIEndPoint.BACKEND,
       relativePath: 'db/create-user',
       waitFor: true,
       payload: {
@@ -374,6 +445,7 @@ export class ApiService {
 
   updateWeather(weatherID: number, name: string): Observable<boolean> {
     const config = {
+      endPoint: APIEndPoint.BACKEND,
       relativePath: 'db/update-weather',
       waitFor: true,
       payload: {
@@ -386,6 +458,7 @@ export class ApiService {
 
   createWeather(name: string): Observable<boolean> {
     const config = {
+      endPoint: APIEndPoint.BACKEND,
       relativePath: 'db/create-weather',
       waitFor: true,
       payload: {
@@ -397,6 +470,7 @@ export class ApiService {
 
   updateTrack(trackID: number, countryID: number, shortName: string, fullName: string): Observable<boolean> {
     const config = {
+      endPoint: APIEndPoint.BACKEND,
       relativePath: 'db/update-track',
       waitFor: true,
       payload: {
@@ -411,6 +485,7 @@ export class ApiService {
 
   createTrack(countryID: number, shortName: string, fullName: string): Observable<boolean> {
     const config = {
+      endPoint: APIEndPoint.BACKEND,
       relativePath: 'db/create-track',
       waitFor: true,
       payload: {
@@ -424,6 +499,7 @@ export class ApiService {
 
   updateCountry(countryID: number, shortName: string, fullName: string, alpha2Code: string): Observable<boolean> {
     const config = {
+      endPoint: APIEndPoint.BACKEND,
       relativePath: 'db/update-country',
       waitFor: true,
       payload: {
@@ -438,6 +514,7 @@ export class ApiService {
 
   createCountry(shortName: string, fullName: string, alpha2Code: string): Observable<boolean> {
     const config = {
+      endPoint: APIEndPoint.BACKEND,
       relativePath: 'db/create-country',
       waitFor: true,
       payload: {
@@ -451,6 +528,7 @@ export class ApiService {
 
   updateConfig(configID: number, description: string, gameID: number, trackID: number, carID: number, weatherID: number, tyreID: number, customSetup: boolean): Observable<boolean> {
     const config = {
+      endPoint: APIEndPoint.BACKEND,
       relativePath: 'db/update-config',
       waitFor: true,
       payload: {
@@ -469,6 +547,7 @@ export class ApiService {
 
   createConfig(description: string, gameID: number, trackID: number, carID: number, weatherID: number, tyreID: number, customSetup: boolean): Observable<boolean> {
     const config = {
+      endPoint: APIEndPoint.BACKEND,
       relativePath: 'db/create-config',
       waitFor: true,
       payload: {

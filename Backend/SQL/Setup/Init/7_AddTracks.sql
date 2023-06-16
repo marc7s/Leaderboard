@@ -11,7 +11,7 @@ EXEC AddTrack @CountryID = 88, @FullName = N'Hungaroring', @ShortName = N'Hungar
 EXEC AddTrack @CountryID = 19, @FullName = N'Circuit de Spa-Francorchamps', @ShortName = N'Spa';
 EXEC AddTrack @CountryID = 139, @FullName = N'Circuit Zandvoort', @ShortName = N'Zandvoort';
 EXEC AddTrack @CountryID = 97, @FullName = N'Autodromo Nazionale di Monza', @ShortName = N'Monza';
-EXEC AddTrack @CountryID = 161, @FullName = N'Sochi Autodrom', @ShortName = N'Sochi Autodrom';
+EXEC AddTrack @CountryID = 161, @FullName = N'Sochi Autodrom', @ShortName = N'Sochi';
 EXEC AddTrack @CountryID = 198, @FullName = N'Intercity Istanbul Park', @ShortName = N'Istanbul Park';
 EXEC AddTrack @CountryID = 205, @FullName = N'Circuit of the Americas', @ShortName = N'COTA';
 EXEC AddTrack @CountryID = 127, @FullName = N'Autodromo Hermanos Rodriguez', @ShortName = N'Hermanos Rodriguez';
@@ -28,4 +28,5 @@ EXEC AddTrack @CountryID = 15, @FullName = N'Short Bahrain International Circuit
 EXEC AddTrack @CountryID = 76, @FullName = N'Short Silverstone Circuit', @ShortName = N'Short Silverstone';
 EXEC AddTrack @CountryID = 205, @FullName = N'Short Circuit of the Americas', @ShortName = N'Short COTA';
 EXEC AddTrack @CountryID = 99, @FullName = N'Short Suzuka International Racing Course', @ShortName = N'Short Suzuka';
-EXEC AddTrack @CountryID = 210, @FullName = N'Hanoi Street Circuit', @ShortName = N'Hanoi Circuit';
+EXEC AddTrack @CountryID = 210, @FullName = N'Hanoi Street Circuit', @ShortName = N'Hanoi';
+EXEC AddTrack @CountryID = 36, @FullName = N'Circuit Gilles Villeneuve', @ShortName = N'Gilles Villeneuve';

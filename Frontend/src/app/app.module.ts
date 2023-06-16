@@ -35,6 +35,7 @@ import { FormsModule } from '@angular/forms';
 import { RecordsComponent } from './_pages/records/records.component';
 import { RecordEntryComponent } from './record-entry/record-entry.component';
 import { UsersComponent } from './_pages/users/users.component';
+import { AutoTimeDashboardComponent } from './_pages/autotime-dashboard/autotime-dashboard.component';
 import { EditUsersComponent } from './_pages/edit-users/edit-users.component';
 import { EditGamesComponent } from './_pages/edit-games/edit-games.component';
 import { EditCarsComponent } from './_pages/edit-cars/edit-cars.component';
@@ -78,6 +79,7 @@ const materialModules = [
     RecordsComponent,
     RecordEntryComponent,
     UsersComponent,
+    AutoTimeDashboardComponent,
     EditUsersComponent,
     EditGamesComponent,
     EditCarsComponent,

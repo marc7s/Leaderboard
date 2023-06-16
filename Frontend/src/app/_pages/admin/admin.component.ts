@@ -11,7 +11,8 @@ import { Page } from 'src/app/page';
 export class AdminComponent implements OnInit {
 
   pages: Page[] = [
-    { link: '/add-time', name: 'Add time' }, 
+    { link: '/autotime-dashboard', name: 'AutoTime Dashboard' },
+    { link: '/add-time', name: 'Add time' },
     { link: '/edit-cars', name: 'Edit cars' },
     { link: '/edit-configs', name: 'Edit configs' },
     { link: '/edit-games', name: 'Edit games' },

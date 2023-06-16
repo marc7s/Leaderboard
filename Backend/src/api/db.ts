@@ -4,13 +4,13 @@ dotenv.config({path: __dirname + '../.env'});
 import express, { Response, NextFunction, Router } from 'express';
 import * as sql from 'tedious';
 import { randomBytes } from 'crypto';
-import { timeParam, timeIDParam, loginParam, shortNameParam, validParam, addTimeParam, carIDParam, gameIDParam, shortAndFullNameParam, nameParam, tyreIDParam, weatherIDParam, trackIDParam, countryIDParam, userIDParam, configIDParam, descriptionParam, alpha2CodeParam, setupIDParam } from './validations';
-import { AuthenticationError, JwtToken, JwtTokenBody } from '../utils';
+import { timeParam, timeIDParam, loginParam, shortNameParam, validParam, addTimeParam, carIDParam, gameIDParam, shortAndFullNameParam, nameParam, tyreIDParam, weatherIDParam, trackIDParam, countryIDParam, userIDParam, configIDParam, descriptionParam, alpha2CodeParam, setupIDParam } from '../shared/validations';
+import { AuthenticationError, authenticateToken, log } from '../shared/utils';
+import { JwtToken, JwtTokenBody } from '../shared/utils';
 import { Token, User, Time, DBTime, Config, DBConfig, DBGame, DBWeather, DBTrack, DBCar, Game, DBCountry, Country, Track, Car, Weather, Login, Tyre, DBTyre, DBUser, DBDriver, Driver, DBClass, Class, DBRecord, DBSetup, Setup } from '@shared/api';
 
 import { _CAR_, _CLASS_, _CONFIG_, _COUNTRY_, _DRIVER_, _GAME_, _RECORD_, _SETUP_, _TIME_, _TRACK_, _TYRE_, _USER_, _WEATHER_ } from './dbObjects';
 import { AuthenticTrackRecord, LapRecord, LapRecordType, TimeSummary, TrackSummary } from '@shared/dataStructures';
-import { log } from '../server';
 import { parseIntoInterface } from '../shared/utils';
 import { getDBConnection } from '../shared/database';
 
@@ -1242,19 +1242,6 @@ async function getOrAddConfig(gameID: number, trackID: number, carID: number, we
             
         })
         .catch(reject);
-    });
-}
-
-async function authenticateToken(req: any, res: Response, next: NextFunction): Promise<void> {
-    const authHeader = req.headers['authorization'];
-    const token: JwtToken = authHeader && authHeader.split(' ')[1];
-    if(token == null)
-        return next(new AuthenticationError('Error: Missing access token'));
-
-    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err: any, jwtTokenBody: JwtTokenBody) => {
-        if(err) return next(new AuthenticationError('Error: Access token invalid'));
-        req.jwtTokenBody = jwtTokenBody;
-        next();
     });
 }
 
