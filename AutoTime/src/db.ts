@@ -18,7 +18,7 @@ export async function addTime(time: string, userID: number, gameName: string, tr
             tyreName: tyreName,
             valid: valid
         })
-        getDBConnection(sql)
+        getDBConnection(sql, process.env.NODE_ENV != 'production')
         .then(conn => {
             const query = "EXECUTE AddAutoTime @Time, @UserID, @GameName, @TrackName, @CarName, @WeatherName, @TyreName, "
                 + "@SetupFrontWing, @SetupRearWing, @SetupOnThrottle, @SetupOffThrottle, @SetupFrontCamber, @SetupRearCamber, "
