@@ -20,6 +20,8 @@ export class AutoTimeDashboardComponent implements OnInit {
   previousTimes: TimeSummary[] = [];
   updateSubscription?: Subscription;
   updateToggle: boolean = false;
+  isSetup = false;
+  isEditor = false;
 
   constructor(private api: ApiService) { 
     this.setup();
@@ -36,10 +38,8 @@ export class AutoTimeDashboardComponent implements OnInit {
     this.api.checkAutoTimeRunning().subscribe(user => {
       this.autoTimeRunning = true;
       this.userID = user?.id ?? null;
+      this.isSetup = true;
       this.subscribeToPreviousTimes();
-    }, error => {
-      console.error("Ping error");
-      console.error(error);
     });
     
     this.api.getUsers().subscribe(users => {
@@ -63,6 +63,10 @@ export class AutoTimeDashboardComponent implements OnInit {
       this.previousTimes = times;
       this.updateToggle = !this.updateToggle;
     });
+  }
+
+  enableEditor(): void {
+    this.isEditor = true;
   }
 
   selectUser(): void {

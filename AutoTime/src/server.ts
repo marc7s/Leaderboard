@@ -417,7 +417,7 @@ function checkCurrentTime(): void {
         if(trackName != null && carName != null && weatherName != null && tyreName != null && !Cache.IncludesTime(currTime.ID)) {
             const timeSummary: TimeSummary = lapTimeToTimeSummary(currTime, carName, weatherName);
             
-            addTime(lapTimeConfig.Time, 1, "F1 2021", trackName, carName, weatherName, tyreName, lapTimeConfig.Setup, lapTimeConfig.Valid)
+            addTime(lapTimeConfig.Time, currentDriver.id, "F1 2021", trackName, carName, weatherName, tyreName, lapTimeConfig.Setup, lapTimeConfig.Valid)
                 .then(() => Cache.AddTime(currTime.ID, timeSummary))
                 .catch(err => {
                     if(err instanceof RequestError && err.message === 'Time already exists') {

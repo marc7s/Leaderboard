@@ -1,20 +1,31 @@
 <div class="pageTitle">AutoTime Dashboard</div>
-<div class="container">
-    <div class="box currentDriverContainer">
-        <div type="checkbox" [class.toggled]="updateToggle" class="updateIcon"></div>
-        <div class="title">Current Driver</div>
-        <app-input-field-select 
-            class="currentDriver" 
-            placeholder="Driver"
-            (optionChange)="selectUser()"
-            [(value)]="userID"
-            [options]="sessionUsers">
-        </app-input-field-select>
+
+<ng-container *ngIf="isSetup; else contactingAutoTime">
+    <div class="container">
+        <div class="box currentDriverContainer" *ngIf="isEditor">
+            <div type="checkbox" [class.toggled]="updateToggle" class="updateIcon"></div>
+            <div class="title">Current Driver</div>
+            <app-input-field-select 
+                class="currentDriver" 
+                placeholder="Driver"
+                (optionChange)="selectUser()"
+                [(value)]="userID"
+                [options]="sessionUsers">
+            </app-input-field-select>
+        </div>
+        
+        <div class="box currentDriverContainer">
+            <div class="title">Session Times</div>
+            <app-leaderboard-entry *ngFor="let time of previousTimes; let i = index" [time]="time" [position]="i + 1"></app-leaderboard-entry>
+        </div>
     </div>
-    
-    <div class="box currentDriverContainer">
-        <div class="title">Session Times</div>
-        <app-leaderboard-entry *ngFor="let time of previousTimes; let i = index" [time]="time" [position]="i + 1"></app-leaderboard-entry>
+    <div class="pageNote">Only showing the last 10 times from the current session.</div>
+
+    <div *ngIf="!isEditor" class="enableEditor">
+        <app-card (click)="enableEditor()">Enable editor</app-card>
     </div>
-</div>
-<div class="pageNote">Only showing the last 10 times from the current session.</div>
+</ng-container>
+
+<ng-template #contactingAutoTime>
+    <div class="waitMessage box">Please wait, setting up connection with AutoTime...</div>
+</ng-template>

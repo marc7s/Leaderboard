@@ -22,6 +22,8 @@ export class HttpErrorInterceptor implements HttpInterceptor {
                 if (error.error instanceof Error) {
                     // A client-side or network error occurred. Handle it accordingly.
                     this.router.navigate(['error'], { state: { message: 'HTTP Error', error: error.error } });
+                } else if(error.status === 0) {
+                    this.router.navigate(['error'], { state: { message: `HTTP Backend Error: No response` } });
                 } else {
                     // The backend returned an unsuccessful response code.
                     // The response body may contain clues as to what went wrong
