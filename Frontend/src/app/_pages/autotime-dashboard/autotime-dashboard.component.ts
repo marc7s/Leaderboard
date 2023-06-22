@@ -22,6 +22,7 @@ export class AutoTimeDashboardComponent implements OnInit {
   updateToggle: boolean = false;
   isSetup = false;
   isEditor = false;
+  wakeLockSentinel: WakeLockSentinel | null = null;
 
   constructor(private api: ApiService) { 
     this.setup();
@@ -40,6 +41,7 @@ export class AutoTimeDashboardComponent implements OnInit {
       this.userID = user?.id ?? null;
       this.isSetup = true;
       this.subscribeToPreviousTimes();
+      this.acquireWakeLock();
     });
     
     this.api.getUsers().subscribe(users => {
@@ -53,6 +55,17 @@ export class AutoTimeDashboardComponent implements OnInit {
 
   ngOnDestroy() {
     this.updateSubscription?.unsubscribe();
+    this.releaseWakeLock();
+  }
+
+  async acquireWakeLock(): Promise<void> {
+    if('wakeLock' in navigator)
+      this.wakeLockSentinel = await navigator.wakeLock.request("screen");
+  }
+
+  async releaseWakeLock(): Promise<void> {
+    this.wakeLockSentinel?.release();
+    this.wakeLockSentinel = null;
   }
 
   updatePreviousTimes(): void {
