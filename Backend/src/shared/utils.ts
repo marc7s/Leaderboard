@@ -62,7 +62,7 @@ export class JwtTokenBody {
     }
 
     sign(){
-        return jwt.sign(this._toObject(), process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
+        return jwt.sign(this._toObject(), process.env.ACCESS_TOKEN_SECRET, { expiresIn: '4h' });
     }
 
     _toObject(): JwtTokenBodyObject {
