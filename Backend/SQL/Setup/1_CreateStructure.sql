@@ -1,15 +1,3 @@
-USE Master;
-GO
-
-IF NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'Leaderboard')
-  BEGIN
-    CREATE DATABASE Leaderboard;
-    END
-GO
-
-USE Leaderboard;
-GO
-
 CREATE TABLE Users(
     ID int IDENTITY(1, 1) NOT NULL PRIMARY KEY,
     Username nvarchar(255) NOT NULL UNIQUE,

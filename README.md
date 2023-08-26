@@ -31,12 +31,9 @@ crypto.randomBytes(128).toString('hex');
 
 ## Setting up the dev environment
 ### Backend
-1. Start by making sure your SQLEXPRESS instance is running. Use SSMS to connect to it and run the `1_CreateDatabase.sql` script to create the database itself and all its tables.
-2. Then, follow the `SQL Connection` guide to create a login for the backend and allow it to connect.
-3. Now it is time to add all the functions to the database. Run every script inside the `SQL/Functions` directory **in order**.
-4. Then, run every script inside the `SQL/Procedures` directory **in order**.
-5. Now it is time to add the essential and starting data. These scripts are inside the `SQL/Setup/Init` directory. You should change these scripts to suit your own starting point before running them.
-6. The database should now be ready, so run `npm run dev` to start the backend.
+1. Start by making sure your SQLEXPRESS instance is running. Use SSMS to connect to it for validating that it works
+2. Then, follow the `SQL Connection` guide to set up the database, including creating a login for the backend and allowing it to connect.
+3. The database should now be ready, so run `npm run dev` to start the backend.
 
 ### Frontend
 1. Make sure all dependencies are installed and that Angular is working. You can follow their setup guide in the Angular documentation to get up and running.

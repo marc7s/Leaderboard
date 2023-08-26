@@ -37,7 +37,6 @@ EXEC AddCountry @FullName = N'Canada', @ShortName = N'Canada', @Alpha2Code = N'C
 EXEC AddCountry @FullName = N'Cayman Islands', @ShortName = N'Cayman Islands', @Alpha2Code = N'KY';
 EXEC AddCountry @FullName = N'Central African Republic', @ShortName = N'Central African Republic', @Alpha2Code = N'CF';
 EXEC AddCountry @FullName = N'Chad', @ShortName = N'Chad', @Alpha2Code = N'TD';
-EXEC AddCountry @FullName = N'Channel Islands', @ShortName = N'Channel Islands', @Alpha2Code = N'XK';
 EXEC AddCountry @FullName = N'Chile', @ShortName = N'Chile', @Alpha2Code = N'CL';
 EXEC AddCountry @FullName = N'China', @ShortName = N'China', @Alpha2Code = N'CN';
 EXEC AddCountry @FullName = N'Colombia', @ShortName = N'Colombia', @Alpha2Code = N'CO';
