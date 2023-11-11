@@ -17,7 +17,8 @@ export async function getDBConnection(sql: any, local: boolean = true): Promise<
             },
             options: {
                 database:  process.env.DB_DATABASE,
-                instanceName: 'SQLEXPRESS',
+                port: parseInt(process.env.DB_LOCAL_PORT ?? '1433'),
+                encrypt: false,
                 rowCollectionOnRequestCompletion: true,
                 trustServerCertificate: true
             }
@@ -34,17 +35,19 @@ export async function getDBConnection(sql: any, local: boolean = true): Promise<
             },
             options: {
                 database:  process.env.DB_DATABASE,
+                port: parseInt(process.env.DB_REMOTE_PORT ?? '1433'),
                 encrypt: false,
                 rowCollectionOnRequestCompletion: true,
                 trustServerCertificate: true
             }
           };
 
-        const conn = new sql.Connection(local ? localConfig : remoteConfig);
+        const config = local ? localConfig : remoteConfig;
+        const conn = new sql.Connection(config);
 
         conn.on('connect', (err: any) => {
             if(err) {
-                console.error("Could not connect:");
+                console.error(`[${local ? 'DEV' : 'PROD'}, port ${config.options.port}] Could not connect:`);
                 console.error(err);
                 reject(err as ConnectionError != null ? new DatabaseConnectionError() : err);
             }
