@@ -1,5 +1,8 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+# Do not track environment files
+src/environments/
+
 # compiled output
 /dist
 /tmp
