@@ -1,0 +1,17 @@
+FROM node:18
+
+RUN mkdir /usr/app
+RUN mkdir /usr/app/Frontend
+RUN mkdir /usr/app/Backend
+WORKDIR /usr/app/Frontend
+
+# Install Angular
+RUN npm install -g @angular/cli
+
+# Install dependencies
+COPY Frontend/package*.json /usr/app/Frontend/
+RUN npm install
+
+# Copy the app and build it
+COPY Frontend/ /usr/app/Frontend
+COPY Backend/src/shared/ /usr/app/Backend/src/shared
