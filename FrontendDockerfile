@@ -7,7 +7,7 @@ RUN mkdir /usr/src/app/Backend
 WORKDIR /usr/src/app/Frontend
 
 # Install dependencies
-COPY Frontend/package*.json /usr/src/app/Frontend
+COPY Frontend/package*.json /usr/src/app/Frontend/
 RUN npm install
 
 # Copy the app and build it
