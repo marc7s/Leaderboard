@@ -11,7 +11,7 @@ const app: Application = express();
 const cors = require('cors');
 
 app.use(cors({
-    origin: process.env.NODE_ENV === 'development' ? `http://${process.env.FRONTEND_DEV_IP}:${process.env.FRONTEND_PORT}` : 'https://leaderboard.schagerberg.com'
+    origin: app.get('env') === 'development' ? `http://${process.env.FRONTEND_DEV_IP}:${process.env.FRONTEND_PORT}` : 'https://leaderboard.schagerberg.com'
 }));
 
 app.use(express.json());
@@ -43,7 +43,7 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
 });
 
 app.listen(process.env.BACKEND_PORT, () => {
-    log(`Running on port ${process.env.BACKEND_PORT}. Environment: ${process.env.NODE_ENV}`);
+    log(`Running on port ${process.env.BACKEND_PORT}. Environment: ${app.get('env')}`);
 });
 
 function sendError(res: Response, statusCode: number, message: string, requestIP: string, errorDetails?: Error) {
