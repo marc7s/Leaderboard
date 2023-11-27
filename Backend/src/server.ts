@@ -11,7 +11,7 @@ const app: Application = express();
 const cors = require('cors');
 
 app.use(cors({
-    origin: app.get('env') === 'development' ? `http://localhost:${process.env.FRONTEND_PORT}` : 'https://leaderboard.schagerberg.com'
+    origin: [`http://${process.env.FRONTEND_DEV_IP}:${process.env.FRONTEND_PORT}`, 'https://leaderboard.schagerberg.com']
 }));
 
 app.use(express.json());
