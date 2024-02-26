@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ElementRef } from '@angular/core';
-import { Config } from '@shared/api';
+import { Config, Setup } from '@shared/api';
 import { LapRecordType, TimeSummary } from '@shared/dataStructures';
 import { ApiService } from 'src/app/api.service';
 import { Option } from 'src/app/option';
@@ -159,8 +159,9 @@ export class AddTimeComponent implements OnInit {
     this.api.getTyres().subscribe(tyres => {
       this.tyres = tyres.map(t => ({ value: t.id, display: t.shortName }));
     });
-    this.api.getSetups().subscribe(setups => {
-      this.setups = setups.map(s => ({ value: s.id, display: s.description, data: s.custom }));
+    this.api.getSetups().subscribe((setups: Setup[]) => {
+      // Setups generated from AutoTime are named `Custom`. We do not want to offer these as options, so we filter them out
+      this.setups = setups.filter(m => m.description !== 'Custom').map(s => ({ value: s.id, display: s.description, data: s.custom }));
     });
    }
 
