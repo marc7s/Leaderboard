@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { User } from '@shared/api';
 import { Observable, of } from 'rxjs';
 import { ApiService } from './api.service';
@@ -9,7 +9,7 @@ import { UserService } from './user.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthguardService implements CanActivate {
+export class AuthguardService  {
 
   public user!: User;
 
