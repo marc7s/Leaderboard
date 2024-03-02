@@ -320,10 +320,10 @@ function main() {
 
 app.use(
   cors({
-    origin:
-      app.get('env') === 'development'
-        ? 'http://localhost:4200'
-        : 'https://leaderboard.schagerberg.com',
+    origin: [
+      `http://${process.env.FRONTEND_DEV_IP}:${process.env.FRONTEND_DEV_PORT}`,
+      'https://leaderboard.schagerberg.com',
+    ],
   })
 );
 
