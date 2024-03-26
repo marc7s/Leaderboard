@@ -1,5 +1,5 @@
 ### BUILD STAGE ###
-FROM node:18 AS build
+FROM node:20 AS build
 
 RUN mkdir /usr/app
 RUN mkdir /usr/app/Frontend
