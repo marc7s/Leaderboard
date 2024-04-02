@@ -326,13 +326,11 @@ BEGIN
     IF @SetupID_db IS NULL
     BEGIN
         --SETUP DOES NOT EXIST, CREATE IT
-        DECLARE @SetupTypeID_db int
-        SELECT @SetupTypeID_db = ID FROM SetupTypes WHERE Description = 'Custom'
         
         DECLARE @SetupTable TABLE (ID int)
-        
         INSERT INTO Setups(
-            TypeID,
+            Custom,
+            Manual,
             FrontWing,
             RearWing,
             OnThrottle,
@@ -358,7 +356,8 @@ BEGIN
         ) 
         OUTPUT INSERTED.ID INTO @SetupTable(ID)
         VALUES(
-            @SetupTypeID_db,
+            1,
+            0,
             @SetupFrontWing,
             @SetupRearWing,
             @SetupOnThrottle,

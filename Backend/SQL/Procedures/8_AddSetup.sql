@@ -1,6 +1,7 @@
 CREATE OR ALTER PROCEDURE AddSetup
-    @SetupTypeName nvarchar(255),
+    @Description nvarchar(255),
     @Custom bit,
+    @Manual bit,
     @FrontWing int,
     @RearWing int,
     @OnThrottle int,
@@ -26,25 +27,33 @@ CREATE OR ALTER PROCEDURE AddSetup
 AS
 BEGIN
     --ERROR HANDLING
-    --CHECK NAME AND CUSTOM PARAMS
-    IF @SetupTypeName IS NULL AND @Custom IS NULL
+    --CHECK CUSTOM PARAM
+    IF @Custom IS NULL
     BEGIN
-        RAISERROR(N'At least one of SetupTypeName or Custom has to be supplied', 11, 1);
+        RAISERROR(N'Custom param missing', 11, 1);
         RETURN
     END
-    
-    --FIND SETUP TYPE ID
-    DECLARE @SetupTypeID_db int
-    SELECT @SetupTypeID_db = ID FROM SetupTypes WHERE Description = @SetupTypeName
-    IF @SetupTypeName IS NULL OR @SetupTypeID_db IS NULL
+
+    --CHECK MANUAL PARAM
+    IF @Manual IS NULL
     BEGIN
-        SELECT @SetupTypeID_db = ID FROM SetupTypes WHERE Description = CASE WHEN @Custom = 1 THEN 'Custom' ELSE 'Default' END
+        RAISERROR(N'Manual param missing', 11, 1);
+        RETURN
+    END
+
+    --CHECK DESCRIPTION AND MANUAL PARAMS
+    IF @Description IS NULL AND @Manual = 1
+    BEGIN
+        RAISERROR(N'Manual setups must have a description', 11, 1);
+        RETURN
     END
 
     --ALL GOOD, ADD SETUP
     DECLARE @InsertedTable TABLE(ID int)
     INSERT INTO Setups(
-        TypeID, 
+        Description,
+        Custom,
+        Manual, 
         FrontWing, 
         RearWing, 
         OnThrottle, 
@@ -70,7 +79,9 @@ BEGIN
     )
     OUTPUT INSERTED.ID INTO @InsertedTable
     VALUES (
-        @SetupTypeID_db,
+        @Description,
+        @Custom,
+        @Manual,
         @FrontWing,
         @RearWing,
         @OnThrottle,

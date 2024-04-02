@@ -15,8 +15,8 @@ SELECT TOP 1
     d.ShortName AS DriverShortName,
     d.Number AS DriverNumber,
     s.ID AS SetupID,
-    st.Custom AS SetupCustom,
-    st.Description AS SetupDescription,
+    s.Custom AS SetupCustom,
+    s.Description AS SetupDescription,
     driverCountries.ID AS DriverCountryID,
     driverCountries.FullName AS DriverCountryFullName,
     driverCountries.ShortName AS DriverCountryShortName,
@@ -40,7 +40,6 @@ SELECT TOP 1
 FROM AuthenticTimes t
 INNER JOIN Configs c ON t.ConfigID = c.ID
 INNER JOIN Setups s ON c.SetupID = s.ID
-INNER JOIN SetupTypes st ON s.TypeID = st.ID
 INNER JOIN AuthenticClasses class ON t.ClassID = class.ID
 INNER JOIN AuthenticDrivers d ON t.DriverID = d.ID
 INNER JOIN Cars cars ON c.CarID = cars.ID

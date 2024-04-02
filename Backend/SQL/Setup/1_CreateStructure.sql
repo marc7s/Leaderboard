@@ -49,16 +49,11 @@ CREATE TABLE Tracks(
     AddedAt datetime NOT NULL DEFAULT GETDATE()
 );
 
-CREATE TABLE SetupTypes(
-    ID int IDENTITY(1, 1) NOT NULL PRIMARY KEY,
-    Description nvarchar(255) NOT NULL UNIQUE,
-    Custom bit NOT NULL,
-    AddedAt datetime NOT NULL DEFAULT GETDATE()
-);
-
 CREATE TABLE Setups(
     ID int IDENTITY(1, 1) NOT NULL PRIMARY KEY,
-    TypeID int FOREIGN KEY REFERENCES SetupTypes(ID),
+    Description nvarchar(255) DEFAULT NULL,
+    Custom bit NOT NULL,
+    Manual bit NOT NULL,
     FrontWing int,
     RearWing int,
     OnThrottle int,
@@ -83,6 +78,10 @@ CREATE TABLE Setups(
     FuelLoad float,
     AddedAt datetime NOT NULL DEFAULT GETDATE()
 );
+
+CREATE UNIQUE NONCLUSTERED INDEX idx_setups_description_notnull
+ON Setups(Description)
+WHERE Description IS NOT NULL;
 
 CREATE TABLE Configs(
     ID int IDENTITY(1, 1) NOT NULL PRIMARY KEY,

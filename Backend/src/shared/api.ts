@@ -99,13 +99,15 @@ export interface DBTrack {
 export interface Setup {
     id: number,
     description: string,
-    custom: boolean
+    custom: boolean,
+    manual: boolean
 }
 
 export interface DBSetup {
     ID: number,
     Description: string,
     Custom: boolean,
+    Manual: boolean,
     AddedAt: Date
 }
 

@@ -65,8 +65,8 @@ INSERT INTO @UserTimes SELECT
 	tr.ShortName AS TrackShortName,
 	w.Name AS Weather,
 	s.ID AS SetupID,
-	st.Custom AS SetupCustom,
-	st.Description AS SetupDescription,
+	s.Custom AS SetupCustom,
+	s.Description AS SetupDescription,
 	car.FullName AS CarFullName,
 	car.ShortName AS CarShortName,
 	countries.FullName AS CountryFullName,
@@ -78,7 +78,6 @@ FROM (
 INNER JOIN Users u ON t.UserID = u.ID
 INNER JOIN Configs c ON t.ConfigID = c.ID
 INNER JOIN Setups s ON c.SetupID = s.ID
-INNER JOIN SetupTypes st ON s.TypeID = st.ID
 INNER JOIN Games g ON c.GameID = g.ID
 INNER JOIN Tracks tr ON c.TrackID = tr.ID
 INNER JOIN Cars car ON c.CarID = car.ID

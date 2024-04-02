@@ -4,8 +4,8 @@ AS
 RETURN 
 SELECT
 	s.ID,
-	st.Description,
-	st.Custom,
+	s.Description,
+	s.Custom,
+	s.Manual,
 	s.AddedAt
 FROM Setups s
-INNER JOIN SetupTypes st ON s.TypeID = st.ID

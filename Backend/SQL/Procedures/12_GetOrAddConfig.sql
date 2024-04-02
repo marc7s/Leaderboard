@@ -12,7 +12,6 @@ BEGIN
     DECLARE @ConfigID_db int
     SELECT @ConfigID_db = c.ID FROM Configs c
     INNER JOIN Setups s ON c.SetupID = s.ID
-    INNER JOIN SetupTypes st ON s.TypeID = st.ID
     WHERE 
         c.GameID = @GameID AND
         c.TrackID = @TrackID AND

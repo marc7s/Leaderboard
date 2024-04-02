@@ -1,6 +1,7 @@
 EXEC AddSetup
-    @SetupTypeName = N'Default',
-    @Custom = NULL,
+    @Description = N'Default',
+    @Custom = 0,
+    @Manual = 1,
     @FrontWing = NULL,
     @RearWing = NULL,
     @OnThrottle = NULL,
@@ -26,8 +27,9 @@ EXEC AddSetup
 ;
 
 EXEC AddSetup
-    @SetupTypeName = N'Custom',
-    @Custom = NULL,
+    @Description = N'Custom',
+    @Custom = 1,
+    @Manual = 1,
     @FrontWing = NULL,
     @RearWing = NULL,
     @OnThrottle = NULL,
@@ -53,8 +55,9 @@ EXEC AddSetup
 ;
 
 EXEC AddSetup
-    @SetupTypeName = N'Maximum Downforce',
-    @Custom = NULL,
+    @Description = N'Maximum Downforce',
+    @Custom = 0,
+    @Manual = 1,
     @FrontWing = 11,
     @RearWing = 10,
     @OnThrottle = 80,
@@ -80,8 +83,9 @@ EXEC AddSetup
 ;
 
 EXEC AddSetup
-    @SetupTypeName = N'Increased Downforce',
-    @Custom = NULL,
+    @Description = N'Increased Downforce',
+    @Custom = 0,
+    @Manual = 1,
     @FrontWing = 8,
     @RearWing = 5,
     @OnThrottle = 90,
@@ -107,8 +111,9 @@ EXEC AddSetup
 ;
 
 EXEC AddSetup
-    @SetupTypeName = N'Balanced Default',
-    @Custom = NULL,
+    @Description = N'Balanced Default',
+    @Custom = 0,
+    @Manual = 1,
     @FrontWing = 8,
     @RearWing = 8,
     @OnThrottle = 75,
@@ -134,8 +139,9 @@ EXEC AddSetup
 ;
 
 EXEC AddSetup
-    @SetupTypeName = N'Increased Top Speed',
-    @Custom = NULL,
+    @Description = N'Increased Top Speed',
+    @Custom = 0,
+    @Manual = 1,
     @FrontWing = 7,
     @RearWing = 4,
     @OnThrottle = 90,
@@ -161,8 +167,9 @@ EXEC AddSetup
 ;
 
 EXEC AddSetup
-    @SetupTypeName = N'Maximum Top Speed',
-    @Custom = NULL,
+    @Description = N'Maximum Top Speed',
+    @Custom = 0,
+    @Manual = 1,
     @FrontWing = 5,
     @RearWing = 2,
     @OnThrottle = 100,

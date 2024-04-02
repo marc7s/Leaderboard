@@ -1323,7 +1323,8 @@ function dbToSetup(dbSetup: DBSetup): Setup {
     return {
         id: dbSetup.ID,
         description: dbSetup.Description,
-        custom: dbSetup.Custom
+        custom: dbSetup.Custom,
+        manual: dbSetup.Manual
     }
 }
 

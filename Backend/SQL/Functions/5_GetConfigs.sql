@@ -19,12 +19,11 @@ SELECT
 	tyre.FullName AS TyreFullName,
 	tyre.ShortName AS TyreShortName,
 	s.ID AS SetupID,
-	st.Description AS SetupDescription,
-	st.Custom AS SetupCustom,
+	s.Description AS SetupDescription,
+	s.Custom AS SetupCustom,
 	c.AddedAt
 FROM Configs c
 INNER JOIN Setups s ON c.SetupID = s.ID
-INNER JOIN SetupTypes st ON s.TypeID = st.ID
 INNER JOIN Games g ON c.GameID = g.ID
 INNER JOIN Tracks t ON c.TrackID = t.ID
 INNER JOIN Cars car on c.CarID = car.ID

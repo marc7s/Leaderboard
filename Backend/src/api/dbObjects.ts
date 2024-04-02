@@ -21,6 +21,7 @@ export const _SETUP_: DBSetup = {
     ID: -1,
     Description: '',
     Custom: false,
+    Manual: false,
     AddedAt: new Date()
 }
 
