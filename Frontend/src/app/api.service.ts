@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Injectable, isDevMode } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject, from, Observable, of, Subject } from 'rxjs';
 import { Config, Country, Game, Setup, Token,  Track,  Tyre,  User, Weather } from '@shared/api';
 import { finalize } from 'rxjs/operators';
@@ -43,8 +43,8 @@ export class ApiService {
 
   private getEndPointUrl(endPoint: APIEndPoint): string {
     switch (endPoint) {
-      case APIEndPoint.BACKEND: return isDevMode() ? `http://${environment.backend_ip}:5001/api/` : 'https://leaderboard-api.schagerberg.com/api/';
-      case APIEndPoint.AUTOTIME: return isDevMode() ? 'http://localhost:5002/api/' : 'https://leaderboard-autotime.schagerberg.com/api/';
+      case APIEndPoint.BACKEND: return environment.backend_endpoint;
+      case APIEndPoint.AUTOTIME: return environment.autotime_endpoint;
     }
   }
 
