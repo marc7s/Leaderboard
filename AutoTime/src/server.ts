@@ -321,7 +321,7 @@ function main() {
 app.use(
   cors({
     origin: [
-      `http://${process.env.FRONTEND_DEV_IP}:${process.env.FRONTEND_DEV_PORT}`,
+      `http://${process.env.FRONTEND_IP}:${process.env.FRONTEND_PORT}`,
       'https://leaderboard.schagerberg.com',
     ],
   })
@@ -359,9 +359,7 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
 
 app.listen(process.env.AUTOTIME_PORT, () => {
   log(
-    `Running on port ${process.env.AUTOTIME_PORT}. Environment: ${app.get(
-      'env'
-    )}`
+    `Running on port ${process.env.AUTOTIME_PORT}. Environment: ${app.get('env')}`
   );
 
   ReadyStatus.Initialize();

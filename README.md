@@ -22,7 +22,7 @@ You will need:
 1. A copy of SQL Server, this project is written for the SQLEXPRESS edition which is free to download and can be hosted locally.
 2. A `.env`-file that follows the format of `.env.example`. The access and refresh tokens should be *two different* long randomly generated strings. These tokens are used by the backend to validate the incoming requests through the JSON Web Token (JWT) standard. The tokens can for example be generated using the `crypto` library from Node.js. Below is an example to generate a 128 byte long random string through the Node.js REPL you can start by running `node`:
 ```
-require('crypto').randomBytes(128).toString('hex')
+require('crypto').randomBytes(128).toString('base64')
 ```
 3. The required dependencies. These can be installed using the package manager `npm` by running `npm install` inside the `Backend`, `AutoTime` and `Frontend` directories.
 4. Not required but definately recommended: SQL Server Management Studio (SSMS) to connect and manage your SQL Server database.
