@@ -4,9 +4,9 @@
   "main": "dist/server.js",
   "scripts": {
     "start": "node dist/server.js",
-    "dev": "set NODE_ENV=development&& set DB_USE_LOCAL=true&&nodemon --ignore src/cache/* src/server.ts",
+    "dev": "set NODE_ENV=development&& nodemon --ignore src/cache/* src/server.ts",
     "build": "tsc -p .",
-    "prod": "set NODE_ENV=production&& set DB_USE_LOCAL=false&&npm run build && nodemon --ignore src/cache/* src/server.ts"
+    "prod": "set NODE_ENV=production&& npm run build && nodemon --ignore src/cache/* src/server.ts"
   },
   "dependencies": {
     "@racehub-io/f1-telemetry-client": "^0.2.9",
