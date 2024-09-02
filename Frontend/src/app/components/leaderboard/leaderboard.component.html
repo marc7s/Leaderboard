@@ -1,0 +1,13 @@
+<div class="splits" *ngIf="splitSettings.length > 0">
+    <div id="splitBy">Split by</div>
+    <app-card *ngIf="includes(ValidSplit)" [selected]="ValidSplitSetting.selected" (click)="splitBy(ValidSplit)">Valid</app-card>
+    <app-card *ngIf="includes(GameSplit)" [selected]="GameSplitSetting.selected" (click)="splitBy(GameSplit)">Game</app-card>
+    <app-card *ngIf="includes(WeatherSplit)" [selected]="WeatherSplitSetting.selected" (click)="splitBy(WeatherSplit)">Weather</app-card>
+</div>
+<div class="leaderboards">
+    <div class="leaderboard" *ngFor="let leaderboard of leaderboards">
+        <div class="title">{{leaderboard.name == '' ? title : leaderboard.name}}<span *ngIf="flag" class="fi fi-{{flag}}"></span></div>
+        <app-leaderboard-entry *ngFor="let time of leaderboard.times; let i = index" [time]="time" [timeComparison]="leaderboard.times[0]" [position]="i + 1"></app-leaderboard-entry>
+    </div>
+</div>
+

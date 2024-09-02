@@ -1,0 +1,15 @@
+<ng-container *ngIf="track; else default">
+    <div class="pageTitle">
+        <div class="trackInfo">
+            <div id="name">{{track.shortName}}</div>
+            <div id="country">{{track.country.shortName}}<span class="fi fi-{{track.country.alpha2Code}}"></span></div>
+        </div>
+    </div>
+
+    <app-leaderboard [times]="times" [splits]="splits"></app-leaderboard>
+    <div class="pageNote">Only showing the best time for each user for every unique config-validity combination</div>
+</ng-container>
+
+<ng-template #default>
+    <div class="pageTitle">Unknown track</div>
+</ng-template>

@@ -1,0 +1,1 @@
+EXEC AddGame @Name = N'F1 2021'

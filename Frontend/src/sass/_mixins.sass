@@ -1,0 +1,240 @@
+@mixin box
+    @include padding-5
+    background-color: var(--main-dark)
+    border-radius: 1rem
+
+@mixin page-title
+    @include font-size-1
+    display: flex
+    justify-content: center
+    margin-bottom: 3rem
+
+@mixin page-note
+    @include font-size-6
+    margin: 3rem 0
+    text-align: center
+
+$mobile: 600px
+$tablet: 1000px
+$desktop: 1200px
+
+@mixin margin-1
+    @media (max-width: $mobile)
+        margin: 0.2rem
+    @media (min-width: $mobile) and (max-width: $tablet)
+        margin: 0.4rem
+    @media (min-width: $tablet)
+        margin: 0.5rem
+
+@mixin margin-2
+    @media (max-width: $mobile)
+        margin: 0.4rem
+    @media (min-width: $mobile) and (max-width: $tablet)
+        margin: 0.6rem
+    @media (min-width: $tablet)
+        margin: 0.8rem
+
+
+
+@mixin padding-1
+    @media (max-width: $mobile)
+        padding: 0.2rem
+    @media (min-width: $mobile) and (max-width: $tablet)
+        padding: 0.4rem
+    @media (min-width: $tablet)
+        padding: 0.5rem
+
+@mixin padding-2
+    @media (max-width: $mobile)
+        padding: 0.4rem
+    @media (min-width: $mobile) and (max-width: $tablet)
+        padding: 0.6rem
+    @media (min-width: $tablet)
+        padding: 0.8rem
+
+@mixin padding-3
+    @media (max-width: $mobile)
+        padding: 0.6rem
+    @media (min-width: $mobile) and (max-width: $tablet)
+        padding: 0.8rem
+    @media (min-width: $tablet)
+        padding: 1rem
+
+@mixin padding-4
+    @media (max-width: $mobile)
+        padding: 0.8rem
+    @media (min-width: $mobile) and (max-width: $tablet)
+        padding: 1rem
+    @media (min-width: $tablet)
+        padding: 1.2rem
+
+@mixin padding-5
+    @media (max-width: $mobile)
+        padding: 1rem
+    @media (min-width: $mobile) and (max-width: $tablet)
+        padding: 1.2rem
+    @media (min-width: $tablet)
+        padding: 1.4rem
+
+@mixin padding-6
+    @media (max-width: $mobile)
+        padding: 1.2rem
+    @media (min-width: $mobile) and (max-width: $tablet)
+        padding: 1.4rem
+    @media (min-width: $tablet)
+        padding: 1.6rem
+
+@mixin padding-7
+    @media (max-width: $mobile)
+        padding: 1.4rem
+    @media (min-width: $mobile) and (max-width: $tablet)
+        padding: 1.6rem
+    @media (min-width: $tablet)
+        padding: 1.8rem
+
+
+
+@mixin font-size-0
+    @media (max-width: $mobile)
+        font-size: 2.3rem
+    @media (min-width: $mobile) and (max-width: $tablet)
+        font-size: 3rem
+    @media (min-width: $tablet)
+        font-size: 3.5rem
+
+@mixin font-size-1
+    @media (max-width: $mobile)
+        font-size: 2rem
+    @media (min-width: $mobile) and (max-width: $tablet)
+        font-size: 2.5rem
+    @media (min-width: $tablet)
+        font-size: 3rem
+
+@mixin font-size-2
+    @media (max-width: $mobile)
+        font-size: 1.8rem
+    @media (min-width: $mobile) and (max-width: $tablet)
+        font-size: 2rem
+    @media (min-width: $tablet)
+        font-size: 2.2rem
+
+@mixin font-size-3
+    @media (max-width: $mobile)
+        font-size: 1.5rem
+    @media (min-width: $mobile) and (max-width: $tablet)
+        font-size: 1.7rem
+    @media (min-width: $tablet)
+        font-size: 1.9rem
+
+@mixin font-size-4
+    @media (max-width: $mobile)
+        font-size: 1.3rem
+    @media (min-width: $mobile) and (max-width: $tablet)
+        font-size: 1.5rem
+    @media (min-width: $tablet)
+        font-size: 1.7rem
+
+@mixin font-size-5
+    @media (max-width: $mobile)
+        font-size: 1rem
+    @media (min-width: $mobile) and (max-width: $tablet)
+        font-size: 1.2rem
+    @media (min-width: $tablet)
+        font-size: 1.5rem
+
+@mixin font-size-6
+    @media (max-width: $mobile)
+        font-size: 0.8rem
+    @media (min-width: $mobile) and (max-width: $tablet)
+        font-size: 1rem
+    @media (min-width: $tablet)
+        font-size: 1.3rem
+
+
+@mixin input($width: 'medium')
+    @include font-size-5
+    @media (max-width: $mobile)
+        line-height: 1.5rem
+        @if $width == 'x-small'
+            width: 5rem
+        @else if $width == 'small'
+            width: 8rem
+        @else if $width == 'medium'
+            width: 15rem
+        @else if $width == 'large'
+            width: 17rem
+    @media (min-width: $mobile) and (max-width: $tablet)
+        line-height: 1.7rem
+        @if $width == 'x-small'
+            width: 7rem
+        @else if $width == 'small'
+            width: 13rem
+        @else if $width == 'medium'
+            width: 16rem
+        @else if $width == 'large'
+            width: 20rem
+    @media (min-width: $tablet)
+        line-height: 1.9rem
+        @if $width == 'x-small'
+            width: 10rem
+        @else if $width == 'small'
+            width: 20rem
+        @else if $width == 'medium'
+            width: 30rem
+        @else if $width == 'large'
+            width: 40rem
+
+@mixin card($size: 'medium')
+    @include font-size-5
+    @include margin-1
+    @media (max-width: $mobile)
+        padding: 0.4rem 0.8rem
+        @if $size == 'x-small'
+            height: 1rem
+            width: 5rem
+        @else if $size == 'small'
+            height: 1rem
+            width: 6rem
+        @else if $size == 'medium'
+            height: 2rem
+            width: 9rem
+        @else if $size == 'large'
+            height: 2.5rem
+            width: 12rem
+    @media (min-width: $mobile) and (max-width: $tablet)
+        padding: 0.6rem 1.2rem
+        @if $size == 'x-small'
+            height: 1rem
+            width: 5rem
+        @else if $size == 'small'
+            height: 1rem
+            width: 6rem
+        @else if $size == 'medium'
+            height: 2rem
+            width: 9rem
+        @else if $size == 'large'
+            height: 3rem
+            width: 12rem
+    @media (min-width: $tablet)
+        padding: 0.9rem 1.4rem
+        @if $size == 'x-small'
+            height: 1rem
+            width: 5rem
+        @else if $size == 'small'
+            height: 1rem
+            width: 6rem
+        @else if $size == 'medium'
+            height: 2rem
+            width: 9rem
+        @else if $size == 'large'
+            height: 3rem
+            width: 12rem
+
+@mixin edit-title
+    @include font-size-3
+    margin-bottom: 1rem
+
+@mixin flex-row
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap

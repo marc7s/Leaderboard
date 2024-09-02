@@ -1,0 +1,10 @@
+CREATE OR ALTER FUNCTION GetCars() 
+RETURNS TABLE 
+AS
+RETURN 
+SELECT
+	ID,
+	FullName,
+	ShortName,
+	AddedAt
+FROM Cars

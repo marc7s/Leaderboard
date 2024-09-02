@@ -1,0 +1,59 @@
+@import 'mixins'
+    
+.card 
+    @include card
+    all: unset
+    border-radius: 4px
+    border: 1px solid #eee
+    background-color: #fafafa
+    transition: all 0.2s ease-in-out
+    cursor: pointer
+    color: black
+    display: table
+    .cardContainer
+        display: flex
+        flex-direction: row
+        justify-content: center
+        align-items: center
+        height: 100%
+
+.x-small
+    @include card('x-small')
+
+.small
+    @include card('small')
+
+.medium
+    @include card('medium')
+    
+.large
+    @include card('large')
+
+.textContent
+    margin: 5px
+    white-space: nowrap
+
+.card:not(:last-child)
+    margin-right: 0
+
+.card:hover:not(.disabled)
+    transform: translateY(-3px)
+    box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35)
+
+.card.selected:not(.disabled)
+    background-color: var(--main-green)
+    color: white
+
+.card.disabled
+    background-color: var(--main-light-grey)
+    color: white
+    cursor: not-allowed
+
+a,
+a:visited,
+a:hover
+    text-decoration: none
+
+.card:hover:not(.disabled)
+    background-color: var(--main-blue)
+    color: white

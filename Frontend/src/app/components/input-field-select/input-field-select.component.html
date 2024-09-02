@@ -1,0 +1,5 @@
+<mat-select [placeholder]="placeholder" class="mat-select-container input {{width}}" #el (selectionChange)="updateValue(el)" [ngModel]="value">
+    <mat-option *ngFor="let option of getOptions()" [value]="option.value" [style.fontSize]="fontSize">
+     {{ option.display }}
+    </mat-option>
+</mat-select>

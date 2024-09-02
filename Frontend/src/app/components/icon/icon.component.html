@@ -1,0 +1,5 @@
+<ng-container *ngIf="icon">
+    <img *ngIf="icon.type == types.Image" [src]="path" [alt]="icon.alt" [class]="[icon.size, icon.shape]">
+</ng-container>
+
+
