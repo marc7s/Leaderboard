@@ -5,8 +5,6 @@
     "start": "node dist/server.js",
     "dev": "cross-env NODE_ENV=development nodemon src/server.ts",
     "build": "tsc -p .",
-    "prod": "npm run build && npm run db:deploy && cross-env NODE_ENV=production pm2 start dist/server.js --name leaderboard-backend && pm2 logs leaderboard-backend --lines 0",
-    "stop": "pm2 stop leaderboard-backend",
     "postinstall": "prisma generate",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
@@ -23,7 +21,6 @@
     "jsonwebtoken": "^9.0.3",
     "module-alias": "^2.3.4",
     "node-fetch": "^3.3.2",
-    "pm2": "^7.1.0",
     "request-ip": "^3.3.0"
   },
   "devDependencies": {

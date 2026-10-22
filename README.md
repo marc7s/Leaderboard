@@ -69,8 +69,19 @@ If `Frontend/src/environments/environment.dev.ts` already exists, it is kept as 
 3. Run `npm run dev` to make AutoTime start gathering telemetry data. In order to change the current driver, the frontend also needs to be running with the AutoTime Dashboard page open. Note that although time data is gathered, no time will be posted unless a driver is selected.
 
 ## Running it in production
-Once you got the dev environment working, it should be as simple as running `npm run prod` inside the `Backend` directory. It builds the backend, applies any new database migrations, and starts the process using `pm2`. Back up the database by copying the database file (`Backend/data/leaderboard.db` by default), ideally while the backend is stopped.
+Production runs in Docker.
 
-For the frontend, you should once again run `npm run prod` but this time inside the `Frontend` directory. Once done, either copy the contents of the `dist` directory to your web server, or if you built it on the host, you could point the web server to the `dist` folder. Once the Angular app is built, it is a static bundled app and does not need a process running it as the app is run client-site, the server just needs to provide the clients with the static files from the `dist` folder.
+The backend image is built from `Backend/Dockerfile` (with `Backend` as the build context). On start, the container applies any new database migrations and then starts the server. The `.env` file is not included in the image, so pass the production settings when starting the container, and mount a volume for the database:
+```
+docker build -t leaderboard-backend Backend
+docker run --env-file prod.env -v leaderboard-data:/usr/app/data -p 5001:5001 leaderboard-backend
+```
+For a new database, run `npx prisma db seed` once inside the container to add the reference data and the admin. Back up the database by copying the database file (`leaderboard.db` in the data volume), ideally while the backend is stopped.
+
+The frontend image is built from `FrontendProdDockerfile`, with the repository root as the build context. It builds the Angular app and serves it with nginx on port 80. `Frontend/src/environments/environment.prod.ts` must exist when building, since it holds the backend address the app uses:
+```
+docker build -t leaderboard-frontend -f FrontendProdDockerfile .
+docker run -p 80:80 leaderboard-frontend
+```
 
 `AutoTime` is only meant to run during the driving sessions when times should be logged. Therefore the script can be started before a session starts, and then stopped when the session is done. Note that this script should be run on the computer hosting the game to be played, which might not be the same as the computer running the `Backend`. In that case, set `BACKEND_URL` and make sure the backend's port is reachable from the game computer.
