@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Track } from '@shared/api';
 import { ApiService } from 'src/app/api.service';
 
@@ -9,9 +9,11 @@ interface TrackAndLink {
 };
 
 @Component({
-  selector: 'app-tracks',
-  templateUrl: './tracks.component.html',
-  styleUrls: ['./tracks.component.sass']
+    selector: 'app-tracks',
+    templateUrl: './tracks.component.html',
+    styleUrls: ['./tracks.component.sass'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class TracksComponent implements OnInit {
 

@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Track } from '@shared/api';
 import { ApiService } from 'src/app/api.service';
 import { Option } from 'src/app/option';
 
 @Component({
-  selector: 'app-edit-tracks',
-  templateUrl: './edit-tracks.component.html',
-  styleUrls: ['./edit-tracks.component.sass']
+    selector: 'app-edit-tracks',
+    templateUrl: './edit-tracks.component.html',
+    styleUrls: ['./edit-tracks.component.sass'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class EditTracksComponent implements OnInit {
 

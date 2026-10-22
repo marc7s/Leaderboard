@@ -1,0 +1,2668 @@
+{
+ "user": [
+  {
+   "id": 1,
+   "username": "Marcus",
+   "addedAt": "2022-10-30T03:39:46.930Z"
+  },
+  {
+   "id": 2,
+   "username": "Emma",
+   "addedAt": "2022-10-30T03:39:46.977Z"
+  },
+  {
+   "id": 3,
+   "username": "Virre",
+   "addedAt": "2022-10-30T03:39:46.980Z"
+  },
+  {
+   "id": 4,
+   "username": "Bao",
+   "addedAt": "2022-10-30T03:39:46.980Z"
+  },
+  {
+   "id": 5,
+   "username": "Käl",
+   "addedAt": "2022-10-30T03:39:46.983Z"
+  },
+  {
+   "id": 6,
+   "username": "Martin",
+   "addedAt": "2022-10-30T03:39:46.987Z"
+  },
+  {
+   "id": 7,
+   "username": "Swedde",
+   "addedAt": "2022-10-30T03:39:46.987Z"
+  },
+  {
+   "id": 8,
+   "username": "Olle",
+   "addedAt": "2022-10-30T03:39:46.990Z"
+  },
+  {
+   "id": 9,
+   "username": "Freddan",
+   "addedAt": "2022-11-12T17:27:25.973Z"
+  },
+  {
+   "id": 10,
+   "username": "Wille",
+   "addedAt": "2022-11-12T18:04:59.507Z"
+  },
+  {
+   "id": 11,
+   "username": "Ferdinand",
+   "addedAt": "2023-02-03T19:37:10.360Z"
+  },
+  {
+   "id": 12,
+   "username": "KB",
+   "addedAt": "2023-06-18T19:12:47.217Z"
+  },
+  {
+   "id": 13,
+   "username": "Schagge",
+   "addedAt": "2023-07-08T20:42:54.873Z"
+  },
+  {
+   "id": 14,
+   "username": "Riya",
+   "addedAt": "2023-07-09T15:20:41.163Z"
+  }
+ ],
+ "setup": [
+  {
+   "id": 8,
+   "custom": true,
+   "manual": false,
+   "frontWing": 8,
+   "rearWing": 8,
+   "onThrottle": 75,
+   "offThrottle": 75,
+   "frontCamber": -3,
+   "rearCamber": -1.2,
+   "frontToe": 0.09,
+   "rearToe": 0.41,
+   "frontSuspension": 8,
+   "rearSuspension": 2,
+   "frontAntiRollBar": 8,
+   "rearAntiRollBar": 1,
+   "frontSuspensionHeight": 3,
+   "rearSuspensionHeight": 7,
+   "brakePressure": 95,
+   "brakeBias": 58,
+   "rearLeftTyrePressure": 23.1,
+   "rearRightTyrePressure": 23.1,
+   "frontLeftTyrePressure": 22.2,
+   "frontRightTyrePressure": 22.2,
+   "ballast": 6,
+   "fuelLoad": 9,
+   "addedAt": "2023-06-18T19:48:05.227Z"
+  },
+  {
+   "id": 9,
+   "custom": true,
+   "manual": false,
+   "frontWing": 7,
+   "rearWing": 9,
+   "onThrottle": 82,
+   "offThrottle": 60,
+   "frontCamber": -2.5,
+   "rearCamber": -1.5,
+   "frontToe": 0.08,
+   "rearToe": 0.2,
+   "frontSuspension": 1,
+   "rearSuspension": 3,
+   "frontAntiRollBar": 2,
+   "rearAntiRollBar": 11,
+   "frontSuspensionHeight": 2,
+   "rearSuspensionHeight": 7,
+   "brakePressure": 100,
+   "brakeBias": 56,
+   "rearLeftTyrePressure": 23.5,
+   "rearRightTyrePressure": 23.5,
+   "frontLeftTyrePressure": 23,
+   "frontRightTyrePressure": 23,
+   "ballast": 6,
+   "fuelLoad": 10,
+   "addedAt": "2023-06-22T21:03:18.727Z"
+  },
+  {
+   "id": 10,
+   "custom": true,
+   "manual": false,
+   "frontWing": 7,
+   "rearWing": 9,
+   "onThrottle": 82,
+   "offThrottle": 60,
+   "frontCamber": -2.5,
+   "rearCamber": -1.5,
+   "frontToe": 0.08,
+   "rearToe": 0.2,
+   "frontSuspension": 1,
+   "rearSuspension": 3,
+   "frontAntiRollBar": 2,
+   "rearAntiRollBar": 11,
+   "frontSuspensionHeight": 2,
+   "rearSuspensionHeight": 7,
+   "brakePressure": 100,
+   "brakeBias": 56,
+   "rearLeftTyrePressure": 23.5,
+   "rearRightTyrePressure": 23.5,
+   "frontLeftTyrePressure": 23,
+   "frontRightTyrePressure": 23,
+   "ballast": 6,
+   "fuelLoad": 28,
+   "addedAt": "2023-06-22T22:40:17.163Z"
+  },
+  {
+   "id": 11,
+   "custom": true,
+   "manual": false,
+   "frontWing": 8,
+   "rearWing": 10,
+   "onThrottle": 100,
+   "offThrottle": 55,
+   "frontCamber": -2.5,
+   "rearCamber": -2,
+   "frontToe": 0.07,
+   "rearToe": 0.2,
+   "frontSuspension": 1,
+   "rearSuspension": 7,
+   "frontAntiRollBar": 1,
+   "rearAntiRollBar": 7,
+   "frontSuspensionHeight": 1,
+   "rearSuspensionHeight": 7,
+   "brakePressure": 100,
+   "brakeBias": 50,
+   "rearLeftTyrePressure": 23.5,
+   "rearRightTyrePressure": 23.5,
+   "frontLeftTyrePressure": 24.2,
+   "frontRightTyrePressure": 24.2,
+   "ballast": 6,
+   "fuelLoad": 10,
+   "addedAt": "2024-02-25T21:10:38.303Z"
+  }
+ ],
+ "config": [
+  {
+   "id": 1,
+   "description": "F121 Ferrari TT Suzuka",
+   "gameId": 1,
+   "trackId": 22,
+   "carId": 3,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 5,
+   "authentic": false,
+   "addedAt": "2022-11-01T02:30:44.857Z"
+  },
+  {
+   "id": 2,
+   "description": "F121 Ferrari TT Wet Suzuka",
+   "gameId": 1,
+   "trackId": 22,
+   "carId": 3,
+   "weatherId": 2,
+   "tyreId": 5,
+   "setupId": 5,
+   "authentic": false,
+   "addedAt": "2022-11-01T02:30:44.877Z"
+  },
+  {
+   "id": 3,
+   "description": "F121 Ferrari TT Monza",
+   "gameId": 1,
+   "trackId": 13,
+   "carId": 3,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 5,
+   "authentic": false,
+   "addedAt": "2022-11-01T02:30:44.877Z"
+  },
+  {
+   "id": 4,
+   "description": "F121 Ferrari TT Wet Monza",
+   "gameId": 1,
+   "trackId": 13,
+   "carId": 3,
+   "weatherId": 2,
+   "tyreId": 5,
+   "setupId": 5,
+   "authentic": false,
+   "addedAt": "2022-11-01T02:30:44.880Z"
+  },
+  {
+   "id": 5,
+   "description": "F121 Ferrari TT Red Bull Ring",
+   "gameId": 1,
+   "trackId": 8,
+   "carId": 3,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 5,
+   "authentic": false,
+   "addedAt": "2022-11-01T02:30:44.880Z"
+  },
+  {
+   "id": 6,
+   "description": "F121 Ferrari TT Hermanos Rodriguez",
+   "gameId": 1,
+   "trackId": 17,
+   "carId": 3,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 5,
+   "authentic": false,
+   "addedAt": "2022-11-01T02:30:44.880Z"
+  },
+  {
+   "id": 7,
+   "description": "F121 Ferrari TT Custom Hermanos Rodriguez",
+   "gameId": 1,
+   "trackId": 17,
+   "carId": 3,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 2,
+   "authentic": false,
+   "addedAt": "2022-11-01T02:30:44.883Z"
+  },
+  {
+   "id": 29,
+   "gameId": 1,
+   "trackId": 12,
+   "carId": 3,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 2,
+   "authentic": false,
+   "addedAt": "2022-11-06T04:03:05.253Z"
+  },
+  {
+   "id": 30,
+   "gameId": 1,
+   "trackId": 17,
+   "carId": 1,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 2,
+   "authentic": false,
+   "addedAt": "2022-11-06T04:03:39.887Z"
+  },
+  {
+   "id": 31,
+   "gameId": 1,
+   "trackId": 13,
+   "carId": 3,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 2,
+   "authentic": false,
+   "addedAt": "2022-11-08T00:46:33.037Z"
+  },
+  {
+   "id": 32,
+   "gameId": 4,
+   "trackId": 9,
+   "carId": 11,
+   "weatherId": 1,
+   "tyreId": 6,
+   "setupId": 1,
+   "authentic": false,
+   "addedAt": "2022-11-12T17:46:04.797Z"
+  },
+  {
+   "id": 33,
+   "gameId": 1,
+   "trackId": 18,
+   "carId": 1,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 5,
+   "authentic": false,
+   "addedAt": "2022-11-12T18:06:33.970Z"
+  },
+  {
+   "id": 34,
+   "gameId": 1,
+   "trackId": 23,
+   "carId": 1,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 5,
+   "authentic": false,
+   "addedAt": "2022-11-12T19:29:27.690Z"
+  },
+  {
+   "id": 35,
+   "gameId": 1,
+   "trackId": 24,
+   "carId": 3,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 5,
+   "authentic": false,
+   "addedAt": "2023-01-28T21:31:29.497Z"
+  },
+  {
+   "id": 36,
+   "gameId": 1,
+   "trackId": 21,
+   "carId": 3,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 5,
+   "authentic": false,
+   "addedAt": "2023-02-03T20:57:26.970Z"
+  },
+  {
+   "id": 37,
+   "gameId": 1,
+   "trackId": 25,
+   "carId": 1,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 5,
+   "authentic": false,
+   "addedAt": "2023-02-03T21:21:31.977Z"
+  },
+  {
+   "id": 38,
+   "gameId": 1,
+   "trackId": 2,
+   "carId": 6,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 5,
+   "authentic": false,
+   "addedAt": "2023-02-03T21:33:02.447Z"
+  },
+  {
+   "id": 39,
+   "gameId": 1,
+   "trackId": 2,
+   "carId": 7,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 5,
+   "authentic": false,
+   "addedAt": "2023-02-03T21:36:47.687Z"
+  },
+  {
+   "id": 40,
+   "gameId": 1,
+   "trackId": 7,
+   "carId": 10,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 5,
+   "authentic": false,
+   "addedAt": "2023-02-03T22:07:03.620Z"
+  },
+  {
+   "id": 41,
+   "gameId": 1,
+   "trackId": 7,
+   "carId": 7,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 5,
+   "authentic": false,
+   "addedAt": "2023-02-03T22:12:18.123Z"
+  },
+  {
+   "id": 42,
+   "gameId": 1,
+   "trackId": 5,
+   "carId": 1,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 5,
+   "authentic": false,
+   "addedAt": "2023-05-21T22:28:02.947Z"
+  },
+  {
+   "id": 43,
+   "gameId": 1,
+   "trackId": 16,
+   "carId": 1,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 5,
+   "authentic": false,
+   "addedAt": "2023-05-21T22:43:15.783Z"
+  },
+  {
+   "id": 44,
+   "gameId": 1,
+   "trackId": 7,
+   "carId": 1,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 5,
+   "authentic": false,
+   "addedAt": "2023-05-23T19:37:00.517Z"
+  },
+  {
+   "id": 45,
+   "gameId": 1,
+   "trackId": 5,
+   "carId": 3,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 5,
+   "authentic": false,
+   "addedAt": "2023-05-23T19:54:05.457Z"
+  },
+  {
+   "id": 46,
+   "gameId": 1,
+   "trackId": 4,
+   "carId": 1,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 5,
+   "authentic": false,
+   "addedAt": "2023-06-04T19:42:55.933Z"
+  },
+  {
+   "id": 47,
+   "gameId": 1,
+   "trackId": 8,
+   "carId": 3,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 5,
+   "authentic": false,
+   "addedAt": "2023-06-17T11:20:48.863Z"
+  },
+  {
+   "id": 48,
+   "gameId": 1,
+   "trackId": 32,
+   "carId": 3,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 5,
+   "authentic": false,
+   "addedAt": "2023-06-18T19:17:39.910Z"
+  },
+  {
+   "id": 49,
+   "gameId": 1,
+   "trackId": 32,
+   "carId": 3,
+   "weatherId": 2,
+   "tyreId": 4,
+   "setupId": 8,
+   "authentic": false,
+   "addedAt": "2023-06-18T19:48:05.230Z"
+  },
+  {
+   "id": 50,
+   "gameId": 1,
+   "trackId": 32,
+   "carId": 6,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 5,
+   "authentic": false,
+   "addedAt": "2023-06-18T19:54:18.213Z"
+  },
+  {
+   "id": 51,
+   "gameId": 1,
+   "trackId": 8,
+   "carId": 7,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 5,
+   "authentic": false,
+   "addedAt": "2023-06-22T20:49:20.677Z"
+  },
+  {
+   "id": 52,
+   "gameId": 1,
+   "trackId": 8,
+   "carId": 7,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 9,
+   "authentic": false,
+   "addedAt": "2023-06-22T21:03:18.737Z"
+  },
+  {
+   "id": 53,
+   "gameId": 1,
+   "trackId": 8,
+   "carId": 7,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 10,
+   "authentic": false,
+   "addedAt": "2023-06-22T22:40:17.173Z"
+  },
+  {
+   "id": 54,
+   "gameId": 1,
+   "trackId": 9,
+   "carId": 1,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 5,
+   "authentic": false,
+   "addedAt": "2023-07-08T20:41:32.567Z"
+  },
+  {
+   "id": 55,
+   "gameId": 1,
+   "trackId": 9,
+   "carId": 6,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 5,
+   "authentic": false,
+   "addedAt": "2023-07-09T14:32:59.580Z"
+  },
+  {
+   "id": 56,
+   "gameId": 1,
+   "trackId": 9,
+   "carId": 6,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 6,
+   "authentic": false,
+   "addedAt": "2023-07-09T15:48:01.383Z"
+  },
+  {
+   "id": 57,
+   "gameId": 1,
+   "trackId": 13,
+   "carId": 1,
+   "weatherId": 2,
+   "tyreId": 5,
+   "setupId": 1,
+   "authentic": false,
+   "addedAt": "2023-11-26T16:59:25.137Z"
+  },
+  {
+   "id": 58,
+   "gameId": 1,
+   "trackId": 5,
+   "carId": 1,
+   "weatherId": 2,
+   "tyreId": 5,
+   "setupId": 1,
+   "authentic": false,
+   "addedAt": "2023-11-26T21:32:09.053Z"
+  },
+  {
+   "id": 59,
+   "gameId": 1,
+   "trackId": 5,
+   "carId": 1,
+   "weatherId": 2,
+   "tyreId": 5,
+   "setupId": 5,
+   "authentic": false,
+   "addedAt": "2023-11-26T21:35:18.570Z"
+  },
+  {
+   "id": 60,
+   "gameId": 1,
+   "trackId": 13,
+   "carId": 2,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 5,
+   "authentic": false,
+   "addedAt": "2023-11-26T21:39:29.667Z"
+  },
+  {
+   "id": 61,
+   "gameId": 1,
+   "trackId": 16,
+   "carId": 1,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 5,
+   "authentic": false,
+   "addedAt": "2023-11-26T21:40:12.907Z"
+  },
+  {
+   "id": 62,
+   "gameId": 1,
+   "trackId": 1,
+   "carId": 1,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 5,
+   "authentic": false,
+   "addedAt": "2024-02-25T20:19:48.150Z"
+  },
+  {
+   "id": 63,
+   "gameId": 1,
+   "trackId": 1,
+   "carId": 1,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 11,
+   "authentic": false,
+   "addedAt": "2024-02-25T21:10:38.307Z"
+  }
+ ],
+ "time": [
+  {
+   "id": 3,
+   "millis": 96700,
+   "userId": 3,
+   "configId": 1,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2022-11-01T02:30:49.080Z"
+  },
+  {
+   "id": 4,
+   "millis": 119700,
+   "userId": 5,
+   "configId": 1,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2022-11-01T02:30:49.083Z"
+  },
+  {
+   "id": 5,
+   "millis": 99979,
+   "userId": 6,
+   "configId": 1,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2022-11-01T02:30:49.083Z"
+  },
+  {
+   "id": 6,
+   "millis": 102220,
+   "userId": 7,
+   "configId": 1,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2022-11-01T02:30:49.087Z"
+  },
+  {
+   "id": 7,
+   "millis": 92553,
+   "userId": 1,
+   "configId": 1,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2022-11-01T02:30:49.087Z"
+  },
+  {
+   "id": 8,
+   "millis": 83013,
+   "userId": 3,
+   "configId": 3,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2022-11-01T02:30:49.090Z"
+  },
+  {
+   "id": 9,
+   "millis": 76819,
+   "userId": 3,
+   "configId": 3,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2022-11-01T02:30:49.090Z"
+  },
+  {
+   "id": 10,
+   "millis": 84862,
+   "userId": 4,
+   "configId": 3,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2022-11-01T02:30:49.090Z"
+  },
+  {
+   "id": 11,
+   "millis": 87574,
+   "userId": 5,
+   "configId": 3,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2022-11-01T02:30:49.093Z"
+  },
+  {
+   "id": 12,
+   "millis": 99000,
+   "userId": 5,
+   "configId": 3,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2022-11-01T02:30:49.093Z"
+  },
+  {
+   "id": 13,
+   "millis": 87253,
+   "userId": 6,
+   "configId": 3,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2022-11-01T02:30:49.093Z"
+  },
+  {
+   "id": 14,
+   "millis": 103999,
+   "userId": 8,
+   "configId": 5,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2022-11-01T02:30:49.093Z"
+  },
+  {
+   "id": 15,
+   "millis": 83490,
+   "userId": 8,
+   "configId": 5,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2022-11-01T02:30:49.093Z"
+  },
+  {
+   "id": 16,
+   "millis": 84942,
+   "userId": 8,
+   "configId": 5,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2022-11-01T02:30:49.097Z"
+  },
+  {
+   "id": 17,
+   "millis": 101348,
+   "userId": 8,
+   "configId": 3,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2022-11-01T02:30:49.097Z"
+  },
+  {
+   "id": 18,
+   "millis": 96484,
+   "userId": 8,
+   "configId": 3,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2022-11-01T02:30:49.097Z"
+  },
+  {
+   "id": 19,
+   "millis": 85870,
+   "userId": 8,
+   "configId": 3,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2022-11-01T02:30:49.097Z"
+  },
+  {
+   "id": 20,
+   "millis": 97828,
+   "userId": 8,
+   "configId": 3,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2022-11-01T02:30:49.097Z"
+  },
+  {
+   "id": 21,
+   "millis": 96105,
+   "userId": 8,
+   "configId": 3,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2022-11-01T02:30:49.097Z"
+  },
+  {
+   "id": 22,
+   "millis": 95128,
+   "userId": 8,
+   "configId": 6,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2022-11-01T02:30:49.100Z"
+  },
+  {
+   "id": 23,
+   "millis": 78521,
+   "userId": 1,
+   "configId": 7,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2022-11-01T02:30:49.100Z"
+  },
+  {
+   "id": 24,
+   "millis": 77933,
+   "userId": 1,
+   "configId": 7,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2022-11-01T02:30:49.100Z"
+  },
+  {
+   "id": 25,
+   "millis": 76881,
+   "userId": 1,
+   "configId": 7,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2022-11-01T02:30:49.100Z"
+  },
+  {
+   "id": 26,
+   "millis": 72709,
+   "userId": 1,
+   "configId": 29,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2022-11-06T04:03:05.323Z"
+  },
+  {
+   "id": 27,
+   "millis": 76748,
+   "userId": 1,
+   "configId": 30,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2022-11-06T04:03:39.933Z"
+  },
+  {
+   "id": 28,
+   "millis": 76230,
+   "userId": 1,
+   "configId": 30,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2022-11-06T04:03:52.220Z"
+  },
+  {
+   "id": 29,
+   "millis": 76161,
+   "userId": 1,
+   "configId": 30,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2022-11-06T04:03:59.960Z"
+  },
+  {
+   "id": 30,
+   "millis": 75756,
+   "userId": 1,
+   "configId": 30,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2022-11-06T04:04:10.323Z"
+  },
+  {
+   "id": 31,
+   "millis": 82235,
+   "userId": 1,
+   "configId": 31,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2022-11-08T00:46:33.097Z"
+  },
+  {
+   "id": 32,
+   "millis": 82074,
+   "userId": 1,
+   "configId": 31,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2022-11-08T00:46:44.730Z"
+  },
+  {
+   "id": 33,
+   "millis": 82008,
+   "userId": 1,
+   "configId": 31,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2022-11-08T00:46:56.587Z"
+  },
+  {
+   "id": 34,
+   "millis": 81695,
+   "userId": 1,
+   "configId": 31,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2022-11-08T00:47:10.143Z"
+  },
+  {
+   "id": 35,
+   "millis": 81382,
+   "userId": 1,
+   "configId": 31,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2022-11-08T00:47:16.167Z"
+  },
+  {
+   "id": 36,
+   "millis": 125630,
+   "userId": 9,
+   "configId": 32,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2022-11-12T17:46:04.850Z"
+  },
+  {
+   "id": 37,
+   "millis": 71751,
+   "userId": 10,
+   "configId": 33,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2022-11-12T18:06:34.013Z"
+  },
+  {
+   "id": 38,
+   "millis": 71047,
+   "userId": 10,
+   "configId": 33,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2022-11-12T18:08:26.873Z"
+  },
+  {
+   "id": 39,
+   "millis": 70319,
+   "userId": 10,
+   "configId": 33,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2022-11-12T18:18:40.637Z"
+  },
+  {
+   "id": 40,
+   "millis": 70791,
+   "userId": 10,
+   "configId": 33,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2022-11-12T18:21:45.683Z"
+  },
+  {
+   "id": 41,
+   "millis": 70092,
+   "userId": 10,
+   "configId": 33,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2022-11-12T18:24:48.180Z"
+  },
+  {
+   "id": 42,
+   "millis": 70070,
+   "userId": 10,
+   "configId": 33,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2022-11-12T18:28:17.897Z"
+  },
+  {
+   "id": 43,
+   "millis": 70068,
+   "userId": 9,
+   "configId": 33,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2022-11-12T18:31:45.843Z"
+  },
+  {
+   "id": 44,
+   "millis": 69262,
+   "userId": 9,
+   "configId": 33,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2022-11-12T18:47:36.790Z"
+  },
+  {
+   "id": 45,
+   "millis": 79377,
+   "userId": 9,
+   "configId": 30,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2022-11-12T18:54:11.387Z"
+  },
+  {
+   "id": 46,
+   "millis": 78810,
+   "userId": 9,
+   "configId": 30,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2022-11-12T18:55:31.463Z"
+  },
+  {
+   "id": 47,
+   "millis": 77076,
+   "userId": 9,
+   "configId": 30,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2022-11-12T19:16:44.437Z"
+  },
+  {
+   "id": 48,
+   "millis": 99670,
+   "userId": 1,
+   "configId": 34,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2022-11-12T19:29:27.740Z"
+  },
+  {
+   "id": 49,
+   "millis": 99458,
+   "userId": 1,
+   "configId": 34,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2022-11-12T20:02:37.710Z"
+  },
+  {
+   "id": 50,
+   "millis": 69271,
+   "userId": 7,
+   "configId": 5,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-01-28T20:58:08.377Z"
+  },
+  {
+   "id": 51,
+   "millis": 102854,
+   "userId": 7,
+   "configId": 1,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-01-28T21:09:13.803Z"
+  },
+  {
+   "id": 52,
+   "millis": 105764,
+   "userId": 5,
+   "configId": 1,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-01-28T21:20:33.200Z"
+  },
+  {
+   "id": 53,
+   "millis": 75879,
+   "userId": 5,
+   "configId": 5,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-01-28T21:25:10.597Z"
+  },
+  {
+   "id": 54,
+   "millis": 86360,
+   "userId": 1,
+   "configId": 35,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-01-28T21:31:29.550Z"
+  },
+  {
+   "id": 55,
+   "millis": 93310,
+   "userId": 7,
+   "configId": 35,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-01-28T21:35:38.270Z"
+  },
+  {
+   "id": 56,
+   "millis": 94611,
+   "userId": 7,
+   "configId": 35,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-01-28T21:39:05.163Z"
+  },
+  {
+   "id": 57,
+   "millis": 93038,
+   "userId": 7,
+   "configId": 35,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2023-01-28T21:41:21.653Z"
+  },
+  {
+   "id": 58,
+   "millis": 93968,
+   "userId": 7,
+   "configId": 35,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-01-28T21:45:01.967Z"
+  },
+  {
+   "id": 59,
+   "millis": 94663,
+   "userId": 5,
+   "configId": 35,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-01-28T21:49:33.080Z"
+  },
+  {
+   "id": 60,
+   "millis": 92286,
+   "userId": 5,
+   "configId": 35,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-01-28T21:58:49.407Z"
+  },
+  {
+   "id": 61,
+   "millis": 95982,
+   "userId": 8,
+   "configId": 5,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-02-03T19:31:30.770Z"
+  },
+  {
+   "id": 62,
+   "millis": 85849,
+   "userId": 8,
+   "configId": 5,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-02-03T19:33:55.690Z"
+  },
+  {
+   "id": 63,
+   "millis": 78585,
+   "userId": 11,
+   "configId": 5,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2023-02-03T19:41:05.653Z"
+  },
+  {
+   "id": 64,
+   "millis": 71612,
+   "userId": 11,
+   "configId": 5,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-02-03T19:43:53.970Z"
+  },
+  {
+   "id": 65,
+   "millis": 68518,
+   "userId": 11,
+   "configId": 5,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2023-02-03T19:48:35.110Z"
+  },
+  {
+   "id": 66,
+   "millis": 99336,
+   "userId": 8,
+   "configId": 3,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2023-02-03T20:02:28.600Z"
+  },
+  {
+   "id": 67,
+   "millis": 97455,
+   "userId": 8,
+   "configId": 3,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-02-03T20:03:51.993Z"
+  },
+  {
+   "id": 68,
+   "millis": 95063,
+   "userId": 8,
+   "configId": 3,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-02-03T20:07:34.570Z"
+  },
+  {
+   "id": 69,
+   "millis": 93840,
+   "userId": 8,
+   "configId": 3,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-02-03T20:09:07.080Z"
+  },
+  {
+   "id": 70,
+   "millis": 86000,
+   "userId": 11,
+   "configId": 3,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-02-03T20:12:13.457Z"
+  },
+  {
+   "id": 71,
+   "millis": 86118,
+   "userId": 11,
+   "configId": 3,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-02-03T20:23:24.633Z"
+  },
+  {
+   "id": 72,
+   "millis": 95150,
+   "userId": 11,
+   "configId": 1,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-02-03T20:32:41.530Z"
+  },
+  {
+   "id": 73,
+   "millis": 94525,
+   "userId": 11,
+   "configId": 1,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-02-03T20:43:17.140Z"
+  },
+  {
+   "id": 74,
+   "millis": 110958,
+   "userId": 8,
+   "configId": 36,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-02-03T20:57:27.030Z"
+  },
+  {
+   "id": 75,
+   "millis": 93184,
+   "userId": 11,
+   "configId": 36,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2023-02-03T21:03:52.713Z"
+  },
+  {
+   "id": 76,
+   "millis": 93366,
+   "userId": 11,
+   "configId": 36,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2023-02-03T21:05:28.780Z"
+  },
+  {
+   "id": 77,
+   "millis": 93259,
+   "userId": 11,
+   "configId": 36,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-02-03T21:07:33.230Z"
+  },
+  {
+   "id": 78,
+   "millis": 91110,
+   "userId": 1,
+   "configId": 36,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-02-03T21:15:10.520Z"
+  },
+  {
+   "id": 79,
+   "millis": 160776,
+   "userId": 8,
+   "configId": 37,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2023-02-03T21:21:32.027Z"
+  },
+  {
+   "id": 80,
+   "millis": 129917,
+   "userId": 8,
+   "configId": 37,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-02-03T21:28:24.623Z"
+  },
+  {
+   "id": 81,
+   "millis": 101624,
+   "userId": 8,
+   "configId": 38,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-02-03T21:33:02.490Z"
+  },
+  {
+   "id": 82,
+   "millis": 81067,
+   "userId": 11,
+   "configId": 39,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-02-03T21:36:47.730Z"
+  },
+  {
+   "id": 83,
+   "millis": 80363,
+   "userId": 11,
+   "configId": 39,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2023-02-03T21:39:09.157Z"
+  },
+  {
+   "id": 84,
+   "millis": 79161,
+   "userId": 11,
+   "configId": 39,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2023-02-03T21:48:24.833Z"
+  },
+  {
+   "id": 85,
+   "millis": 79121,
+   "userId": 11,
+   "configId": 39,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-02-03T21:49:45.063Z"
+  },
+  {
+   "id": 86,
+   "millis": 76776,
+   "userId": 1,
+   "configId": 39,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-02-03T21:59:27.603Z"
+  },
+  {
+   "id": 87,
+   "millis": 104566,
+   "userId": 8,
+   "configId": 40,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2023-02-03T22:07:03.667Z"
+  },
+  {
+   "id": 88,
+   "millis": 93939,
+   "userId": 11,
+   "configId": 41,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-02-03T22:12:18.170Z"
+  },
+  {
+   "id": 89,
+   "millis": 112407,
+   "userId": 6,
+   "configId": 39,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2023-05-21T18:28:48.663Z"
+  },
+  {
+   "id": 90,
+   "millis": 123099,
+   "userId": 6,
+   "configId": 39,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2023-05-21T18:30:50.313Z"
+  },
+  {
+   "id": 91,
+   "millis": 84829,
+   "userId": 6,
+   "configId": 39,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-05-21T18:32:19.013Z"
+  },
+  {
+   "id": 92,
+   "millis": 84390,
+   "userId": 5,
+   "configId": 39,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2023-05-21T18:37:24.117Z"
+  },
+  {
+   "id": 93,
+   "millis": 88718,
+   "userId": 7,
+   "configId": 39,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-05-21T18:42:57.453Z"
+  },
+  {
+   "id": 94,
+   "millis": 84178,
+   "userId": 7,
+   "configId": 39,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-05-21T18:45:56.290Z"
+  },
+  {
+   "id": 95,
+   "millis": 76364,
+   "userId": 1,
+   "configId": 39,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-05-21T18:57:06.760Z"
+  },
+  {
+   "id": 96,
+   "millis": 78945,
+   "userId": 6,
+   "configId": 39,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2023-05-21T19:06:43.250Z"
+  },
+  {
+   "id": 97,
+   "millis": 80213,
+   "userId": 5,
+   "configId": 39,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2023-05-21T19:13:16.403Z"
+  },
+  {
+   "id": 98,
+   "millis": 80091,
+   "userId": 5,
+   "configId": 42,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2023-05-21T22:28:03.003Z"
+  },
+  {
+   "id": 99,
+   "millis": 78736,
+   "userId": 6,
+   "configId": 42,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2023-05-21T22:34:21.583Z"
+  },
+  {
+   "id": 100,
+   "millis": 76104,
+   "userId": 6,
+   "configId": 42,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2023-05-21T22:36:27.027Z"
+  },
+  {
+   "id": 101,
+   "millis": 103222,
+   "userId": 7,
+   "configId": 43,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-05-21T22:43:15.830Z"
+  },
+  {
+   "id": 102,
+   "millis": 101155,
+   "userId": 5,
+   "configId": 43,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2023-05-21T22:50:14.813Z"
+  },
+  {
+   "id": 103,
+   "millis": 102202,
+   "userId": 6,
+   "configId": 43,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2023-05-21T22:53:47.773Z"
+  },
+  {
+   "id": 104,
+   "millis": 99830,
+   "userId": 6,
+   "configId": 43,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2023-05-21T22:58:15.740Z"
+  },
+  {
+   "id": 105,
+   "millis": 96432,
+   "userId": 5,
+   "configId": 43,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2023-05-21T23:04:56.147Z"
+  },
+  {
+   "id": 106,
+   "millis": 73660,
+   "userId": 1,
+   "configId": 44,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2023-05-23T19:37:00.573Z"
+  },
+  {
+   "id": 107,
+   "millis": 70674,
+   "userId": 1,
+   "configId": 44,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2023-05-23T19:38:29.143Z"
+  },
+  {
+   "id": 108,
+   "millis": 69925,
+   "userId": 1,
+   "configId": 44,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2023-05-23T19:39:55.930Z"
+  },
+  {
+   "id": 109,
+   "millis": 68919,
+   "userId": 1,
+   "configId": 44,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2023-05-23T19:47:16.997Z"
+  },
+  {
+   "id": 110,
+   "millis": 72510,
+   "userId": 1,
+   "configId": 45,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-05-23T19:54:05.503Z"
+  },
+  {
+   "id": 111,
+   "millis": 72430,
+   "userId": 1,
+   "configId": 45,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-05-23T20:00:11.990Z"
+  },
+  {
+   "id": 112,
+   "millis": 80659,
+   "userId": 9,
+   "configId": 46,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-06-04T19:42:55.997Z"
+  },
+  {
+   "id": 113,
+   "millis": 78909,
+   "userId": 9,
+   "configId": 46,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2023-06-04T19:44:44.917Z"
+  },
+  {
+   "id": 114,
+   "millis": 80352,
+   "userId": 9,
+   "configId": 46,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-06-04T19:47:00.100Z"
+  },
+  {
+   "id": 115,
+   "millis": 79385,
+   "userId": 9,
+   "configId": 46,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-06-04T19:49:36.503Z"
+  },
+  {
+   "id": 116,
+   "millis": 101689,
+   "userId": 2,
+   "configId": 46,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-06-04T20:07:08.423Z"
+  },
+  {
+   "id": 117,
+   "millis": 98795,
+   "userId": 2,
+   "configId": 46,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-06-04T20:08:39.293Z"
+  },
+  {
+   "id": 118,
+   "millis": 78669,
+   "userId": 1,
+   "configId": 46,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2023-06-04T20:29:26.670Z"
+  },
+  {
+   "id": 119,
+   "millis": 78721,
+   "userId": 1,
+   "configId": 46,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-06-04T20:39:57.770Z"
+  },
+  {
+   "id": 120,
+   "millis": 78416,
+   "userId": 1,
+   "configId": 46,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-06-04T20:47:03.547Z"
+  },
+  {
+   "id": 121,
+   "millis": 78011,
+   "userId": 1,
+   "configId": 47,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-06-17T11:20:48.867Z"
+  },
+  {
+   "id": 122,
+   "millis": 94057,
+   "userId": 1,
+   "configId": 47,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-06-17T11:49:17.897Z"
+  },
+  {
+   "id": 123,
+   "millis": 122633,
+   "userId": 13,
+   "configId": 48,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-06-18T19:17:39.913Z"
+  },
+  {
+   "id": 124,
+   "millis": 130930,
+   "userId": 13,
+   "configId": 48,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-06-18T19:19:50.300Z"
+  },
+  {
+   "id": 125,
+   "millis": 125454,
+   "userId": 13,
+   "configId": 48,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-06-18T19:21:55.547Z"
+  },
+  {
+   "id": 126,
+   "millis": 108311,
+   "userId": 13,
+   "configId": 48,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-06-18T19:23:44.930Z"
+  },
+  {
+   "id": 127,
+   "millis": 96584,
+   "userId": 13,
+   "configId": 48,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-06-18T19:25:20.490Z"
+  },
+  {
+   "id": 128,
+   "millis": 100777,
+   "userId": 13,
+   "configId": 48,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-06-18T19:30:06.850Z"
+  },
+  {
+   "id": 129,
+   "millis": 78651,
+   "userId": 13,
+   "configId": 48,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-06-18T19:31:55.300Z"
+  },
+  {
+   "id": 130,
+   "millis": 72883,
+   "userId": 9,
+   "configId": 48,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-06-18T19:35:06.220Z"
+  },
+  {
+   "id": 131,
+   "millis": 95363,
+   "userId": 9,
+   "configId": 49,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-06-18T19:48:05.230Z"
+  },
+  {
+   "id": 132,
+   "millis": 72119,
+   "userId": 1,
+   "configId": 50,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-06-18T19:54:18.213Z"
+  },
+  {
+   "id": 133,
+   "millis": 71924,
+   "userId": 1,
+   "configId": 50,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-06-18T19:57:18.307Z"
+  },
+  {
+   "id": 134,
+   "millis": 66345,
+   "userId": 1,
+   "configId": 51,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-06-22T20:49:20.697Z"
+  },
+  {
+   "id": 135,
+   "millis": 65977,
+   "userId": 1,
+   "configId": 51,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-06-22T20:50:26.460Z"
+  },
+  {
+   "id": 136,
+   "millis": 65159,
+   "userId": 1,
+   "configId": 51,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-06-22T20:51:31.723Z"
+  },
+  {
+   "id": 137,
+   "millis": 64932,
+   "userId": 1,
+   "configId": 51,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-06-22T20:53:40.373Z"
+  },
+  {
+   "id": 138,
+   "millis": 65445,
+   "userId": 1,
+   "configId": 52,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-06-22T21:03:18.740Z"
+  },
+  {
+   "id": 139,
+   "millis": 64594,
+   "userId": 1,
+   "configId": 52,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-06-22T21:04:23.223Z"
+  },
+  {
+   "id": 140,
+   "millis": 64871,
+   "userId": 1,
+   "configId": 52,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-06-22T21:05:28.537Z"
+  },
+  {
+   "id": 141,
+   "millis": 64612,
+   "userId": 1,
+   "configId": 52,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-06-22T21:14:50.943Z"
+  },
+  {
+   "id": 142,
+   "millis": 64538,
+   "userId": 1,
+   "configId": 52,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-06-22T21:15:56.170Z"
+  },
+  {
+   "id": 143,
+   "millis": 64512,
+   "userId": 1,
+   "configId": 52,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-06-22T21:18:55.907Z"
+  },
+  {
+   "id": 144,
+   "millis": 64809,
+   "userId": 1,
+   "configId": 52,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-06-22T21:20:01.230Z"
+  },
+  {
+   "id": 145,
+   "millis": 64562,
+   "userId": 1,
+   "configId": 52,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-06-22T21:24:00.180Z"
+  },
+  {
+   "id": 146,
+   "millis": 64202,
+   "userId": 1,
+   "configId": 52,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-06-22T21:27:58.690Z"
+  },
+  {
+   "id": 147,
+   "millis": 64174,
+   "userId": 1,
+   "configId": 52,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-06-22T21:29:03.720Z"
+  },
+  {
+   "id": 148,
+   "millis": 64921,
+   "userId": 1,
+   "configId": 52,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-06-22T21:30:08.730Z"
+  },
+  {
+   "id": 149,
+   "millis": 64751,
+   "userId": 1,
+   "configId": 52,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-06-22T21:40:04.850Z"
+  },
+  {
+   "id": 150,
+   "millis": 64869,
+   "userId": 1,
+   "configId": 52,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-06-22T21:45:52.017Z"
+  },
+  {
+   "id": 151,
+   "millis": 64646,
+   "userId": 1,
+   "configId": 52,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-06-22T21:46:57.193Z"
+  },
+  {
+   "id": 152,
+   "millis": 64666,
+   "userId": 1,
+   "configId": 52,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-06-22T21:48:01.790Z"
+  },
+  {
+   "id": 153,
+   "millis": 64606,
+   "userId": 1,
+   "configId": 52,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-06-22T21:49:31.653Z"
+  },
+  {
+   "id": 154,
+   "millis": 64704,
+   "userId": 1,
+   "configId": 52,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-06-22T21:55:35.143Z"
+  },
+  {
+   "id": 155,
+   "millis": 64952,
+   "userId": 1,
+   "configId": 52,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-06-22T21:57:05.183Z"
+  },
+  {
+   "id": 156,
+   "millis": 64412,
+   "userId": 1,
+   "configId": 52,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-06-22T21:59:00.203Z"
+  },
+  {
+   "id": 157,
+   "millis": 64602,
+   "userId": 1,
+   "configId": 52,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-06-22T22:00:05.243Z"
+  },
+  {
+   "id": 158,
+   "millis": 64394,
+   "userId": 1,
+   "configId": 52,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-06-22T22:01:07.707Z"
+  },
+  {
+   "id": 159,
+   "millis": 64416,
+   "userId": 1,
+   "configId": 52,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-06-22T22:02:12.253Z"
+  },
+  {
+   "id": 160,
+   "millis": 64622,
+   "userId": 1,
+   "configId": 52,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-06-22T22:05:21.103Z"
+  },
+  {
+   "id": 161,
+   "millis": 64479,
+   "userId": 1,
+   "configId": 52,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-06-22T22:06:25.693Z"
+  },
+  {
+   "id": 162,
+   "millis": 64244,
+   "userId": 1,
+   "configId": 52,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-06-22T22:08:25.460Z"
+  },
+  {
+   "id": 163,
+   "millis": 64467,
+   "userId": 1,
+   "configId": 52,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-06-22T22:12:31.873Z"
+  },
+  {
+   "id": 164,
+   "millis": 64552,
+   "userId": 1,
+   "configId": 52,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-06-22T22:15:21.047Z"
+  },
+  {
+   "id": 165,
+   "millis": 64617,
+   "userId": 1,
+   "configId": 52,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-06-22T22:19:08.963Z"
+  },
+  {
+   "id": 166,
+   "millis": 64516,
+   "userId": 1,
+   "configId": 52,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-06-22T22:24:23.253Z"
+  },
+  {
+   "id": 167,
+   "millis": 64263,
+   "userId": 1,
+   "configId": 52,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-06-22T22:27:12.633Z"
+  },
+  {
+   "id": 168,
+   "millis": 64756,
+   "userId": 1,
+   "configId": 52,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-06-22T22:30:31.220Z"
+  },
+  {
+   "id": 169,
+   "millis": 76422,
+   "userId": 1,
+   "configId": 52,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-06-22T22:38:52.120Z"
+  },
+  {
+   "id": 170,
+   "millis": 77776,
+   "userId": 1,
+   "configId": 53,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-06-22T22:40:17.173Z"
+  },
+  {
+   "id": 171,
+   "millis": 68066,
+   "userId": 1,
+   "configId": 53,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-06-22T22:41:24.527Z"
+  },
+  {
+   "id": 172,
+   "millis": 68698,
+   "userId": 1,
+   "configId": 53,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-06-22T22:42:33.370Z"
+  },
+  {
+   "id": 173,
+   "millis": 70100,
+   "userId": 1,
+   "configId": 53,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-06-22T22:43:43.300Z"
+  },
+  {
+   "id": 174,
+   "millis": 68793,
+   "userId": 1,
+   "configId": 53,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-06-22T22:44:57.310Z"
+  },
+  {
+   "id": 175,
+   "millis": 68044,
+   "userId": 1,
+   "configId": 53,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-06-22T22:46:04.923Z"
+  },
+  {
+   "id": 176,
+   "millis": 68342,
+   "userId": 1,
+   "configId": 53,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-06-22T22:47:12.823Z"
+  },
+  {
+   "id": 177,
+   "millis": 68710,
+   "userId": 1,
+   "configId": 53,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-06-22T22:48:22.370Z"
+  },
+  {
+   "id": 178,
+   "millis": 71940,
+   "userId": 1,
+   "configId": 53,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-06-22T22:49:34.020Z"
+  },
+  {
+   "id": 179,
+   "millis": 88448,
+   "userId": 1,
+   "configId": 53,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-06-22T22:51:02.510Z"
+  },
+  {
+   "id": 180,
+   "millis": 66600,
+   "userId": 1,
+   "configId": 53,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-06-22T22:52:08.853Z"
+  },
+  {
+   "id": 181,
+   "millis": 67695,
+   "userId": 1,
+   "configId": 53,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-06-22T22:53:17.527Z"
+  },
+  {
+   "id": 182,
+   "millis": 67276,
+   "userId": 1,
+   "configId": 53,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-06-22T22:54:23.443Z"
+  },
+  {
+   "id": 183,
+   "millis": 67190,
+   "userId": 1,
+   "configId": 53,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-06-22T22:55:32.567Z"
+  },
+  {
+   "id": 184,
+   "millis": 67260,
+   "userId": 1,
+   "configId": 53,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-06-22T22:56:38.203Z"
+  },
+  {
+   "id": 185,
+   "millis": 66647,
+   "userId": 1,
+   "configId": 53,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-06-22T22:57:45.157Z"
+  },
+  {
+   "id": 186,
+   "millis": 67154,
+   "userId": 1,
+   "configId": 53,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-06-22T22:58:52.637Z"
+  },
+  {
+   "id": 187,
+   "millis": 89251,
+   "userId": 1,
+   "configId": 54,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-07-08T20:41:32.577Z"
+  },
+  {
+   "id": 188,
+   "millis": 132317,
+   "userId": 14,
+   "configId": 54,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-07-08T20:47:16.543Z"
+  },
+  {
+   "id": 189,
+   "millis": 194438,
+   "userId": 14,
+   "configId": 54,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-07-08T20:50:30.940Z"
+  },
+  {
+   "id": 190,
+   "millis": 135496,
+   "userId": 14,
+   "configId": 54,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-07-08T20:52:46.677Z"
+  },
+  {
+   "id": 191,
+   "millis": 306427,
+   "userId": 14,
+   "configId": 54,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-07-08T20:57:53.073Z"
+  },
+  {
+   "id": 192,
+   "millis": 114912,
+   "userId": 14,
+   "configId": 54,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-07-08T20:59:48.303Z"
+  },
+  {
+   "id": 193,
+   "millis": 108082,
+   "userId": 14,
+   "configId": 54,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-07-08T21:01:36.303Z"
+  },
+  {
+   "id": 194,
+   "millis": 136985,
+   "userId": 14,
+   "configId": 54,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-07-08T21:03:53.397Z"
+  },
+  {
+   "id": 195,
+   "millis": 143976,
+   "userId": 14,
+   "configId": 54,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-07-08T21:06:16.883Z"
+  },
+  {
+   "id": 196,
+   "millis": 95182,
+   "userId": 7,
+   "configId": 55,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-07-09T14:32:59.583Z"
+  },
+  {
+   "id": 197,
+   "millis": 93913,
+   "userId": 7,
+   "configId": 55,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-07-09T14:36:05.007Z"
+  },
+  {
+   "id": 198,
+   "millis": 94174,
+   "userId": 7,
+   "configId": 55,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-07-09T14:37:39.520Z"
+  },
+  {
+   "id": 199,
+   "millis": 91802,
+   "userId": 7,
+   "configId": 55,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-07-09T14:41:36.730Z"
+  },
+  {
+   "id": 200,
+   "millis": 91396,
+   "userId": 7,
+   "configId": 55,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-07-09T14:54:05.153Z"
+  },
+  {
+   "id": 201,
+   "millis": 95747,
+   "userId": 7,
+   "configId": 55,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-07-09T14:58:57.217Z"
+  },
+  {
+   "id": 202,
+   "millis": 91592,
+   "userId": 7,
+   "configId": 55,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-07-09T15:04:07.120Z"
+  },
+  {
+   "id": 203,
+   "millis": 91971,
+   "userId": 3,
+   "configId": 55,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-07-09T15:11:59.180Z"
+  },
+  {
+   "id": 204,
+   "millis": 91328,
+   "userId": 3,
+   "configId": 55,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-07-09T15:13:31.913Z"
+  },
+  {
+   "id": 205,
+   "millis": 90765,
+   "userId": 3,
+   "configId": 55,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-07-09T15:18:33.133Z"
+  },
+  {
+   "id": 206,
+   "millis": 90444,
+   "userId": 3,
+   "configId": 55,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-07-09T15:20:03.160Z"
+  },
+  {
+   "id": 207,
+   "millis": 94402,
+   "userId": 5,
+   "configId": 55,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-07-09T15:31:58.547Z"
+  },
+  {
+   "id": 208,
+   "millis": 92326,
+   "userId": 5,
+   "configId": 55,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-07-09T15:35:05.703Z"
+  },
+  {
+   "id": 209,
+   "millis": 91523,
+   "userId": 7,
+   "configId": 55,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-07-09T15:40:18.713Z"
+  },
+  {
+   "id": 210,
+   "millis": 89993,
+   "userId": 3,
+   "configId": 56,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2023-07-09T15:48:01.390Z"
+  },
+  {
+   "id": 211,
+   "millis": 90195,
+   "userId": 3,
+   "configId": 56,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2023-07-09T15:51:31.053Z"
+  },
+  {
+   "id": 213,
+   "millis": 88141,
+   "userId": 3,
+   "configId": 59,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-11-26T21:32:09.060Z"
+  },
+  {
+   "id": 214,
+   "millis": 87282,
+   "userId": 9,
+   "configId": 59,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-11-26T21:35:18.577Z"
+  },
+  {
+   "id": 215,
+   "millis": 85606,
+   "userId": 9,
+   "configId": 59,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-11-26T21:35:31.310Z"
+  },
+  {
+   "id": 216,
+   "millis": 74613,
+   "userId": 5,
+   "configId": 60,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2023-11-26T21:39:29.673Z"
+  },
+  {
+   "id": 217,
+   "millis": 95549,
+   "userId": 1,
+   "configId": 61,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2023-11-26T21:40:12.913Z"
+  },
+  {
+   "id": 218,
+   "millis": 93087,
+   "userId": 5,
+   "configId": 61,
+   "valid": false,
+   "addedManually": true,
+   "addedAt": "2023-11-26T21:40:41.050Z"
+  },
+  {
+   "id": 219,
+   "millis": 87794,
+   "userId": 1,
+   "configId": 62,
+   "valid": true,
+   "addedManually": true,
+   "addedAt": "2024-02-25T20:19:48.163Z"
+  },
+  {
+   "id": 220,
+   "millis": 87794,
+   "userId": 1,
+   "configId": 63,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2024-02-25T21:10:38.307Z"
+  },
+  {
+   "id": 221,
+   "millis": 88535,
+   "userId": 1,
+   "configId": 63,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2024-02-25T21:21:16.257Z"
+  },
+  {
+   "id": 222,
+   "millis": 87308,
+   "userId": 1,
+   "configId": 63,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2024-02-25T21:35:19.330Z"
+  },
+  {
+   "id": 223,
+   "millis": 87249,
+   "userId": 1,
+   "configId": 63,
+   "valid": false,
+   "addedManually": false,
+   "addedAt": "2024-02-25T21:50:51.840Z"
+  },
+  {
+   "id": 224,
+   "millis": 87259,
+   "userId": 1,
+   "configId": 63,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2024-02-25T22:03:04.637Z"
+  },
+  {
+   "id": 225,
+   "millis": 87168,
+   "userId": 1,
+   "configId": 63,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2024-02-25T22:05:02.133Z"
+  },
+  {
+   "id": 226,
+   "millis": 86826,
+   "userId": 1,
+   "configId": 63,
+   "valid": true,
+   "addedManually": false,
+   "addedAt": "2024-02-25T22:24:30.500Z"
+  }
+ ]
+}

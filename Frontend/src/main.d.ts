@@ -1,1 +1,0 @@
-type WakeLockType = "screen";

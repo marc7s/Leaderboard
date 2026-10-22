@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Country } from '@shared/api';
 import { ApiService } from 'src/app/api.service';
 import { Option } from 'src/app/option';
 
 @Component({
-  selector: 'app-edit-countries',
-  templateUrl: './edit-countries.component.html',
-  styleUrls: ['./edit-countries.component.sass']
+    selector: 'app-edit-countries',
+    templateUrl: './edit-countries.component.html',
+    styleUrls: ['./edit-countries.component.sass'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class EditCountriesComponent implements OnInit {
 

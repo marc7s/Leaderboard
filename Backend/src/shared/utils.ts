@@ -2,22 +2,6 @@ import { Response, NextFunction } from 'express';
 import { User } from '../shared/api';
 const jwt = require('jsonwebtoken');
 
-export function parseIntoInterface(
-  object: any,
-  template: any,
-  prefix: string = ''
-): any {
-  let parsed: any = {};
-
-  for (const key of Object.keys(template)) {
-    if (Object.keys(object).includes(prefix + key)) {
-      parsed[key] = object[prefix + key];
-    }
-  }
-
-  return parsed;
-}
-
 export function log(message: string) {
   console.log(`[${new Date().toLocaleString()}] ${message}`);
 }

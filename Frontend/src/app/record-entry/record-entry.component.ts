@@ -1,11 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Config } from '@shared/api';
 import { TimeSummary } from '@shared/dataStructures';
 
 @Component({
-  selector: 'app-record-entry',
-  templateUrl: './record-entry.component.html',
-  styleUrls: ['./record-entry.component.sass', '../shared-styles/record.sass']
+    selector: 'app-record-entry',
+    templateUrl: './record-entry.component.html',
+    styleUrls: ['./record-entry.component.sass', '../shared-styles/record.sass'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class RecordEntryComponent implements OnInit {
   @Input() config: Config | null = null;

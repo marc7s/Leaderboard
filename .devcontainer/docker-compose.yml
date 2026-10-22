@@ -1,0 +1,22 @@
+name: leaderboard-dev
+
+services:
+  # The container you develop in. Runs the Frontend, Backend and AutoTime.
+  app:
+    image: mcr.microsoft.com/devcontainers/javascript-node:22-bookworm
+    command: sleep infinity
+    env_file: devcontainer.env
+    volumes:
+      - ..:/workspaces/Leaderboard:cached
+      # Keep node_modules inside Linux volumes, separate from any installed on the host
+      - backend-node-modules:/workspaces/Leaderboard/Backend/node_modules
+      - autotime-node-modules:/workspaces/Leaderboard/AutoTime/node_modules
+      - frontend-node-modules:/workspaces/Leaderboard/Frontend/node_modules
+    ports:
+      # Telemetry from the F1 game on the host reaches AutoTime through this port
+      - "20777:20777/udp"
+
+volumes:
+  backend-node-modules:
+  autotime-node-modules:
+  frontend-node-modules:

@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Game } from '@shared/api';
 import { ApiService } from 'src/app/api.service';
 import { Option } from 'src/app/option';
 
 @Component({
-  selector: 'app-edit-games',
-  templateUrl: './edit-games.component.html',
-  styleUrls: ['./edit-games.component.sass']
+    selector: 'app-edit-games',
+    templateUrl: './edit-games.component.html',
+    styleUrls: ['./edit-games.component.sass'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class EditGamesComponent implements OnInit {
 

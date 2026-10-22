@@ -36,8 +36,8 @@ export async function loginParam(
   res: Response,
   next: NextFunction
 ): Promise<void> {
-  const username = req.body.username ?? MISSING;
-  const password = req.body.password ?? MISSING;
+  const username = req.body?.username ?? MISSING;
+  const password = req.body?.password ?? MISSING;
   req.login = null;
 
   if (missing(username) || missing(password))
@@ -62,7 +62,7 @@ export async function userIDParam(
   next: NextFunction
 ): Promise<void> {
   req.userID = null;
-  const userID = req.body.userID ?? req.query.userID ?? MISSING;
+  const userID = req.body?.userID ?? req.query.userID ?? MISSING;
   const check = checkParameter(userID, 'userID', isValidID, 'is invalid');
   if (check !== null) return next(check);
 
@@ -76,7 +76,7 @@ export async function usernameParam(
   next: NextFunction
 ): Promise<void> {
   req.username = null;
-  const username = req.body.username ?? req.query.username ?? MISSING;
+  const username = req.body?.username ?? req.query.username ?? MISSING;
   const check = checkParameter(
     username,
     'username',
@@ -94,7 +94,7 @@ export async function shortNameParam(
   res: Response,
   next: NextFunction
 ): Promise<void> {
-  const shortName = req.body.shortName ?? req.query.shortName ?? MISSING;
+  const shortName = req.body?.shortName ?? req.query.shortName ?? MISSING;
   const check = checkParameter(
     shortName,
     'shortName',
@@ -112,7 +112,7 @@ export async function timeParam(
   res: Response,
   next: NextFunction
 ): Promise<void> {
-  const time = req.body.time ?? req.query.time ?? MISSING;
+  const time = req.body?.time ?? req.query.time ?? MISSING;
   const check = checkParameter(
     time,
     'time',
@@ -130,16 +130,16 @@ export async function addTimeParam(
   res: Response,
   next: NextFunction
 ): Promise<void> {
-  const configID = req.body.configID ?? req.configID ?? MISSING;
+  const configID = req.body?.configID ?? req.configID ?? MISSING;
 
   if (missing(configID)) {
     // No ConfigID so we need to check that all the other parameters are present
-    const gameID = req.body.gameID ?? req.query.gameID ?? MISSING;
-    const trackID = req.body.trackID ?? req.query.trackID ?? MISSING;
-    const carID = req.body.carID ?? req.query.carID ?? MISSING;
-    const weatherID = req.body.weatherID ?? req.query.weatherID ?? MISSING;
-    const tyreID = req.body.tyreID ?? req.query.tyreID ?? MISSING;
-    const setupID = req.body.setupID ?? req.query.setupID ?? MISSING;
+    const gameID = req.body?.gameID ?? req.query.gameID ?? MISSING;
+    const trackID = req.body?.trackID ?? req.query.trackID ?? MISSING;
+    const carID = req.body?.carID ?? req.query.carID ?? MISSING;
+    const weatherID = req.body?.weatherID ?? req.query.weatherID ?? MISSING;
+    const tyreID = req.body?.tyreID ?? req.query.tyreID ?? MISSING;
+    const setupID = req.body?.setupID ?? req.query.setupID ?? MISSING;
 
     const checkGameID = checkParameter(
       gameID,
@@ -216,7 +216,7 @@ export async function timeIDParam(
   res: Response,
   next: NextFunction
 ): Promise<void> {
-  const timeID = req.body.timeID ?? req.query.timeID ?? MISSING;
+  const timeID = req.body?.timeID ?? req.query.timeID ?? MISSING;
   const check = checkParameter(
     timeID,
     'timeID',
@@ -234,7 +234,7 @@ export async function configIDParam(
   res: Response,
   next: NextFunction
 ): Promise<void> {
-  const configID = req.body.configID ?? req.query.configID ?? MISSING;
+  const configID = req.body?.configID ?? req.query.configID ?? MISSING;
   const check = checkParameter(
     configID,
     'configID',
@@ -252,7 +252,7 @@ export async function setupIDParam(
   res: Response,
   next: NextFunction
 ): Promise<void> {
-  const setupID = req.body.setupID ?? req.query.setupID ?? MISSING;
+  const setupID = req.body?.setupID ?? req.query.setupID ?? MISSING;
   const check = checkParameter(
     setupID,
     'setupID',
@@ -270,7 +270,7 @@ export async function validParam(
   res: Response,
   next: NextFunction
 ): Promise<void> {
-  const valid = req.body.valid ?? req.query.valid ?? MISSING;
+  const valid = req.body?.valid ?? req.query.valid ?? MISSING;
   const check = checkParameter(
     valid,
     'valid',
@@ -290,7 +290,7 @@ export async function carIDParam(
   res: Response,
   next: NextFunction
 ): Promise<void> {
-  const carID = req.body.carID ?? req.query.carID ?? MISSING;
+  const carID = req.body?.carID ?? req.query.carID ?? MISSING;
   const check = checkParameter(
     carID,
     'carID',
@@ -308,8 +308,8 @@ export async function shortAndFullNameParam(
   res: Response,
   next: NextFunction
 ): Promise<void> {
-  const shortName = req.body.shortName ?? req.query.shortName ?? MISSING;
-  const fullName = req.body.fullName ?? req.query.fullName ?? MISSING;
+  const shortName = req.body?.shortName ?? req.query.shortName ?? MISSING;
+  const fullName = req.body?.fullName ?? req.query.fullName ?? MISSING;
   const check1 = checkParameter(
     shortName,
     'shortName',
@@ -335,7 +335,7 @@ export async function nameParam(
   res: Response,
   next: NextFunction
 ): Promise<void> {
-  const name = req.body.name ?? req.query.name ?? MISSING;
+  const name = req.body?.name ?? req.query.name ?? MISSING;
   const check = checkParameter(
     name,
     'name',
@@ -353,7 +353,7 @@ export async function descriptionParam(
   res: Response,
   next: NextFunction
 ): Promise<void> {
-  const description = req.body.description ?? req.query.description ?? MISSING;
+  const description = req.body?.description ?? req.query.description ?? MISSING;
   const check = checkParameter(
     description,
     'description',
@@ -371,7 +371,7 @@ export async function alpha2CodeParam(
   res: Response,
   next: NextFunction
 ): Promise<void> {
-  const alpha2Code = req.body.alpha2Code ?? req.query.alpha2Code ?? MISSING;
+  const alpha2Code = req.body?.alpha2Code ?? req.query.alpha2Code ?? MISSING;
   const check = checkParameter(
     alpha2Code,
     'alpha2Code',
@@ -380,7 +380,7 @@ export async function alpha2CodeParam(
   );
   if (check !== null) return next(check);
 
-  req.name = name;
+  req.alpha2Code = alpha2Code;
   next();
 }
 
@@ -389,7 +389,7 @@ export async function gameIDParam(
   res: Response,
   next: NextFunction
 ): Promise<void> {
-  const gameID = req.body.gameID ?? req.query.gameID ?? MISSING;
+  const gameID = req.body?.gameID ?? req.query.gameID ?? MISSING;
   const check = checkParameter(
     gameID,
     'gameID',
@@ -407,7 +407,7 @@ export async function tyreIDParam(
   res: Response,
   next: NextFunction
 ): Promise<void> {
-  const tyreID = req.body.tyreID ?? req.query.tyreID ?? MISSING;
+  const tyreID = req.body?.tyreID ?? req.query.tyreID ?? MISSING;
   const check = checkParameter(
     tyreID,
     'tyreID',
@@ -425,7 +425,7 @@ export async function weatherIDParam(
   res: Response,
   next: NextFunction
 ): Promise<void> {
-  const weatherID = req.body.weatherID ?? req.query.weatherID ?? MISSING;
+  const weatherID = req.body?.weatherID ?? req.query.weatherID ?? MISSING;
   const check = checkParameter(
     weatherID,
     'weatherID',
@@ -443,7 +443,7 @@ export async function trackIDParam(
   res: Response,
   next: NextFunction
 ): Promise<void> {
-  const trackID = req.body.trackID ?? req.query.trackID ?? MISSING;
+  const trackID = req.body?.trackID ?? req.query.trackID ?? MISSING;
   const check = checkParameter(
     trackID,
     'trackID',
@@ -461,7 +461,7 @@ export async function countryIDParam(
   res: Response,
   next: NextFunction
 ): Promise<void> {
-  const countryID = req.body.countryID ?? req.query.countryID ?? MISSING;
+  const countryID = req.body?.countryID ?? req.query.countryID ?? MISSING;
   const check = checkParameter(
     countryID,
     'countryID',
@@ -471,6 +471,61 @@ export async function countryIDParam(
   if (check !== null) return next(check);
 
   req.countryID = countryID;
+  next();
+}
+
+const AUTO_TIME_SETUP_FIELDS = [
+  'frontWing', 'rearWing', 'onThrottle', 'offThrottle', 'frontCamber', 'rearCamber', 'frontToe',
+  'rearToe', 'frontSuspension', 'rearSuspension', 'frontAntiRollBar', 'rearAntiRollBar',
+  'frontSuspensionHeight', 'rearSuspensionHeight', 'brakePressure', 'brakeBias',
+  'rearLeftTyrePressure', 'rearRightTyrePressure', 'frontLeftTyrePressure',
+  'frontRightTyrePressure', 'ballast', 'fuelLoad',
+];
+
+/** Checks a lap time sent by AutoTime and sets req.autoTime */
+export async function autoTimeParam(
+  req: any,
+  res: Response,
+  next: NextFunction
+): Promise<void> {
+  const body = req.body ?? {};
+  const strings = ['time', 'gameName', 'trackName', 'carName', 'weatherName', 'tyreName'];
+  for (const field of strings) {
+    const check = checkParameter(body[field] ?? MISSING, field, isValidString, 'is not a string');
+    if (check !== null) return next(check);
+  }
+  const userCheck = checkParameter(body.userID ?? MISSING, 'userID', isValidID, 'is not a valid userID');
+  if (userCheck !== null) return next(userCheck);
+  const validCheck = checkParameter(
+    body.valid ?? MISSING,
+    'valid',
+    (v: any) => typeof v === 'boolean',
+    'is not a boolean'
+  );
+  if (validCheck !== null) return next(validCheck);
+
+  const setup = body.setup ?? {};
+  for (const field of AUTO_TIME_SETUP_FIELDS) {
+    const check = checkParameter(
+      setup[field] ?? MISSING,
+      `setup.${field}`,
+      Number.isFinite,
+      'is not a number'
+    );
+    if (check !== null) return next(check);
+  }
+
+  req.autoTime = {
+    time: body.time,
+    userId: body.userID,
+    gameName: body.gameName,
+    trackName: body.trackName,
+    carName: body.carName,
+    weatherName: body.weatherName,
+    tyreName: body.tyreName,
+    setup: Object.fromEntries(AUTO_TIME_SETUP_FIELDS.map((f) => [f, setup[f]])),
+    valid: body.valid,
+  };
   next();
 }
 

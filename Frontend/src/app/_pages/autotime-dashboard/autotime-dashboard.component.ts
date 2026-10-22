@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { User } from '@shared/api';
 import { TimeSummary } from '@shared/dataStructures';
 import { Subscription, interval } from 'rxjs';
@@ -6,9 +6,11 @@ import { ApiService } from 'src/app/api.service';
 import { Option } from 'src/app/option';
 
 @Component({
-  selector: 'app-autotime-dashboard',
-  templateUrl: './autotime-dashboard.component.html',
-  styleUrls: ['./autotime-dashboard.component.sass']
+    selector: 'app-autotime-dashboard',
+    templateUrl: './autotime-dashboard.component.html',
+    styleUrls: ['./autotime-dashboard.component.sass'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class AutoTimeDashboardComponent implements OnInit {
 

@@ -1,35 +1,29 @@
 import { TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { appTestingModule } from './testing/app-testing';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule
-      ],
-      declarations: [
-        AppComponent
-      ],
-    }).compileComponents();
+    await TestBed.configureTestingModule(appTestingModule).compileComponents();
   });
 
   it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+    expect(fixture.componentInstance).toBeTruthy();
   });
 
-  it(`should have as title 'leaderboard'`, () => {
+  it(`should have 'Leaderboard' as title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('leaderboard');
+    expect(fixture.componentInstance.title).toEqual('Leaderboard');
   });
 
-  it('should render title', () => {
+  it('should render the navigation with home and profile links', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('leaderboard app is running!');
+    const home = compiled.querySelector('nav a.webpageName');
+    expect(home?.textContent).toContain('Leaderboard');
+    expect(home?.getAttribute('href')).toBe('/');
+    expect(compiled.querySelector('nav a.profile')?.getAttribute('href')).toBe('/login');
   });
 });

@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Weather } from '@shared/api';
 import { ApiService } from 'src/app/api.service';
 import { Option } from 'src/app/option';
 
 @Component({
-  selector: 'app-edit-weathers',
-  templateUrl: './edit-weathers.component.html',
-  styleUrls: ['./edit-weathers.component.sass']
+    selector: 'app-edit-weathers',
+    templateUrl: './edit-weathers.component.html',
+    styleUrls: ['./edit-weathers.component.sass'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class EditWeathersComponent implements OnInit {
 

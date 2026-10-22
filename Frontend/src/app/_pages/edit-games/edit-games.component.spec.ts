@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { appTestingModule } from '../../testing/app-testing';
 
 import { EditGamesComponent } from './edit-games.component';
 
@@ -7,9 +8,7 @@ describe('EditGamesComponent', () => {
   let fixture: ComponentFixture<EditGamesComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ EditGamesComponent ]
-    })
+    await TestBed.configureTestingModule(appTestingModule)
     .compileComponents();
   });
 

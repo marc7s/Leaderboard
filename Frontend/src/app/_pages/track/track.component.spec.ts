@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { appTestingModule } from '../../testing/app-testing';
 
 import { TrackComponent } from './track.component';
 
@@ -7,9 +8,7 @@ describe('TrackComponent', () => {
   let fixture: ComponentFixture<TrackComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ TrackComponent ]
-    })
+    await TestBed.configureTestingModule(appTestingModule)
     .compileComponents();
   });
 

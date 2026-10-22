@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TrackSummary } from '@shared/dataStructures';
 import { ApiService } from 'src/app/api.service';
@@ -6,9 +6,11 @@ import { Icon, IconShape, IconSize, IconType } from 'src/app/components/icon/ico
 import { Split } from 'src/split';
 
 @Component({
-  selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.sass']
+    selector: 'app-user',
+    templateUrl: './user.component.html',
+    styleUrls: ['./user.component.sass'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class UserComponent implements OnInit {
 

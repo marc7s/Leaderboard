@@ -1,0 +1,2 @@
+# Database backups contain user data and password hashes
+*.bak

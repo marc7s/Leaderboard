@@ -1,9 +1,0 @@
-CREATE OR ALTER FUNCTION GetWeathers() 
-RETURNS TABLE 
-AS
-RETURN 
-SELECT
-	ID,
-	Name,
-	AddedAt
-FROM Weathers

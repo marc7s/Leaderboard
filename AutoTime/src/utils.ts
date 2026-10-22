@@ -31,13 +31,14 @@ export function maxDifference(arr: number[]) {
 
 // A function that takes a lap time in milliseconds and returns a formatted string
 export function formatLapTime(lapTimeInMS: number): string {
+  // Use UTC so the result does not depend on the computer's time zone
   const date: Date = new Date(lapTimeInMS);
-  return `${pad((date.getHours() - 1).toString(), '0', 2)}:${pad(
-    date.getMinutes().toString(),
+  return `${pad(date.getUTCHours().toString(), '0', 2)}:${pad(
+    date.getUTCMinutes().toString(),
     '0',
     2
-  )}:${pad(date.getSeconds().toString(), '0', 2)}.${pad(
-    date.getMilliseconds().toString(),
+  )}:${pad(date.getUTCSeconds().toString(), '0', 2)}.${pad(
+    date.getUTCMilliseconds().toString(),
     '0',
     3
   )}`;

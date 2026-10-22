@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Track } from '@shared/api';
 import { TimeSummary } from '@shared/dataStructures';
@@ -10,9 +10,11 @@ import { Split } from 'src/split';
 import { Size } from 'src/styleSettings';
 
 @Component({
-  selector: 'app-track',
-  templateUrl: './track.component.html',
-  styleUrls: ['./track.component.sass']
+    selector: 'app-track',
+    templateUrl: './track.component.html',
+    styleUrls: ['./track.component.sass'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class TrackComponent implements OnInit {
 

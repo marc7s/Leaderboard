@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { appTestingModule } from '../../testing/app-testing';
 
 import { EditTyresComponent } from './edit-tyres.component';
 
@@ -7,9 +8,7 @@ describe('EditTyresComponent', () => {
   let fixture: ComponentFixture<EditTyresComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ EditTyresComponent ]
-    })
+    await TestBed.configureTestingModule(appTestingModule)
     .compileComponents();
   });
 

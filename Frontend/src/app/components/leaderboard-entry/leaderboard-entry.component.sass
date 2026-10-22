@@ -1,4 +1,4 @@
-@import 'mixins'
+@use 'mixins' as *
     
 .entry
     @include font-size-6
@@ -30,16 +30,16 @@
         background-repeat: no-repeat
     
     #valid.invalid
-        background-image: url(~src/assets/img/BlackAndWhiteFlag.png)
+        background-image: url(../../../assets/img/BlackAndWhiteFlag.png)
 
     #custom.customSetup
-        background-image: url(~src/assets/img/CustomSetup.png)
+        background-image: url(../../../assets/img/CustomSetup.png)
 
     #record.record
-        background-image: url(~src/assets/img/GoldMedal.png)
+        background-image: url(../../../assets/img/GoldMedal.png)
 
     #record.recordAndBeatAuthentic
-        background-image: url(~src/assets/img/BlueMedal.png)
+        background-image: url(../../../assets/img/BlueMedal.png)
 
 .authentic #user
     color: deepskyblue

@@ -1,0 +1,2529 @@
+{
+ "game": [
+  {
+   "id": 1,
+   "name": "F1 2021",
+   "authentic": false
+  },
+  {
+   "id": 2,
+   "name": "F1 2021 Season",
+   "authentic": true
+  },
+  {
+   "id": 3,
+   "name": "F1 2022 Season",
+   "authentic": true
+  },
+  {
+   "id": 4,
+   "name": "Assetto Corsa Competizione",
+   "authentic": false
+  }
+ ],
+ "car": [
+  {
+   "id": 1,
+   "fullName": "Mercedes-AMG F1 W12 E Performance",
+   "shortName": "Mercedes W12"
+  },
+  {
+   "id": 2,
+   "fullName": "Williams FW43B",
+   "shortName": "Williams FW43B"
+  },
+  {
+   "id": 3,
+   "fullName": "Ferrari SF21",
+   "shortName": "Ferrari SF21"
+  },
+  {
+   "id": 4,
+   "fullName": "Aston Martin AMR21",
+   "shortName": "Aston Martin AMR21"
+  },
+  {
+   "id": 5,
+   "fullName": "Alpine A521",
+   "shortName": "Alpine A521"
+  },
+  {
+   "id": 6,
+   "fullName": "McLaren MCL35M",
+   "shortName": "McLaren MCL35M"
+  },
+  {
+   "id": 7,
+   "fullName": "Red Bull Racing RB16B",
+   "shortName": "Red Bull RB16B"
+  },
+  {
+   "id": 8,
+   "fullName": "Alfa Romeo Racing C41",
+   "shortName": "Alfa Romeo C41"
+  },
+  {
+   "id": 9,
+   "fullName": "AlphaTauri AT02",
+   "shortName": "AlphaTauri AT02"
+  },
+  {
+   "id": 10,
+   "fullName": "Haas VF-21",
+   "shortName": "Haas VF-21"
+  },
+  {
+   "id": 11,
+   "fullName": "Porsche 991II GT3 R",
+   "shortName": "Porsche 991II GT3 R"
+  },
+  {
+   "id": 12,
+   "fullName": "Dallara F2 2018",
+   "shortName": "Dallara F2 2018"
+  },
+  {
+   "id": 13,
+   "fullName": "Racing Point RP20",
+   "shortName": "Racing Point RP20"
+  },
+  {
+   "id": 14,
+   "fullName": "Mercedes-AMG F1 W11 EQ Performance",
+   "shortName": "Mercedes W11"
+  },
+  {
+   "id": 15,
+   "fullName": "Ferrari SF1000",
+   "shortName": "Ferrari SF1000"
+  },
+  {
+   "id": 16,
+   "fullName": "Red Bull Racing RB16",
+   "shortName": "Red Bull RB16"
+  },
+  {
+   "id": 17,
+   "fullName": "Williams FW43",
+   "shortName": "Williams FW43"
+  },
+  {
+   "id": 18,
+   "fullName": "Renault R.S.20",
+   "shortName": "Renault R.S.20"
+  },
+  {
+   "id": 19,
+   "fullName": "AlphaTauri AT01",
+   "shortName": "AlphaTauri AT01"
+  },
+  {
+   "id": 20,
+   "fullName": "Haas VF-20",
+   "shortName": "Haas VF-20"
+  },
+  {
+   "id": 21,
+   "fullName": "McLaren MCL35",
+   "shortName": "McLaren MCL35"
+  },
+  {
+   "id": 22,
+   "fullName": "Alfa Romeo Racing C39",
+   "shortName": "Alfa Romeo C39"
+  }
+ ],
+ "weather": [
+  {
+   "id": 1,
+   "name": "Dry"
+  },
+  {
+   "id": 2,
+   "name": "Wet"
+  }
+ ],
+ "tyre": [
+  {
+   "id": 1,
+   "fullName": "Pirelli Soft",
+   "shortName": "Soft"
+  },
+  {
+   "id": 2,
+   "fullName": "Pirelli Medium",
+   "shortName": "Medium"
+  },
+  {
+   "id": 3,
+   "fullName": "Pirelli Hard",
+   "shortName": "Hard"
+  },
+  {
+   "id": 4,
+   "fullName": "Pirelli Cinturato",
+   "shortName": "Intermediate"
+  },
+  {
+   "id": 5,
+   "fullName": "Pirelli Full Wet",
+   "shortName": "Full Wet"
+  },
+  {
+   "id": 6,
+   "fullName": "ACC Pirelli Dry",
+   "shortName": "ACC Dry"
+  }
+ ],
+ "country": [
+  {
+   "id": 1,
+   "fullName": "Afghanistan",
+   "shortName": "Afghanistan",
+   "alpha2Code": "AF"
+  },
+  {
+   "id": 2,
+   "fullName": "Albania",
+   "shortName": "Albania",
+   "alpha2Code": "AL"
+  },
+  {
+   "id": 3,
+   "fullName": "Algeria",
+   "shortName": "Algeria",
+   "alpha2Code": "DZ"
+  },
+  {
+   "id": 4,
+   "fullName": "American Samoa",
+   "shortName": "American Samoa",
+   "alpha2Code": "AS"
+  },
+  {
+   "id": 5,
+   "fullName": "Andorra",
+   "shortName": "Andorra",
+   "alpha2Code": "AD"
+  },
+  {
+   "id": 6,
+   "fullName": "Angola",
+   "shortName": "Angola",
+   "alpha2Code": "AO"
+  },
+  {
+   "id": 7,
+   "fullName": "Antigua and Barbuda",
+   "shortName": "Antigua and Barbuda",
+   "alpha2Code": "AG"
+  },
+  {
+   "id": 8,
+   "fullName": "Argentina",
+   "shortName": "Argentina",
+   "alpha2Code": "AR"
+  },
+  {
+   "id": 9,
+   "fullName": "Armenia",
+   "shortName": "Armenia",
+   "alpha2Code": "AM"
+  },
+  {
+   "id": 10,
+   "fullName": "Aruba",
+   "shortName": "Aruba",
+   "alpha2Code": "AW"
+  },
+  {
+   "id": 11,
+   "fullName": "Australia",
+   "shortName": "Australia",
+   "alpha2Code": "AU"
+  },
+  {
+   "id": 12,
+   "fullName": "Austria",
+   "shortName": "Austria",
+   "alpha2Code": "AT"
+  },
+  {
+   "id": 13,
+   "fullName": "Azerbaijan",
+   "shortName": "Azerbaijan",
+   "alpha2Code": "AZ"
+  },
+  {
+   "id": 14,
+   "fullName": "Bahamas",
+   "shortName": "Bahamas",
+   "alpha2Code": "BS"
+  },
+  {
+   "id": 15,
+   "fullName": "Bahrain",
+   "shortName": "Bahrain",
+   "alpha2Code": "BH"
+  },
+  {
+   "id": 16,
+   "fullName": "Bangladesh",
+   "shortName": "Bangladesh",
+   "alpha2Code": "BD"
+  },
+  {
+   "id": 17,
+   "fullName": "Barbados",
+   "shortName": "Barbados",
+   "alpha2Code": "BB"
+  },
+  {
+   "id": 18,
+   "fullName": "Belarus",
+   "shortName": "Belarus",
+   "alpha2Code": "BY"
+  },
+  {
+   "id": 19,
+   "fullName": "Belgium",
+   "shortName": "Belgium",
+   "alpha2Code": "BE"
+  },
+  {
+   "id": 20,
+   "fullName": "Belize",
+   "shortName": "Belize",
+   "alpha2Code": "BZ"
+  },
+  {
+   "id": 21,
+   "fullName": "Benin",
+   "shortName": "Benin",
+   "alpha2Code": "BJ"
+  },
+  {
+   "id": 22,
+   "fullName": "Bermuda",
+   "shortName": "Bermuda",
+   "alpha2Code": "BM"
+  },
+  {
+   "id": 23,
+   "fullName": "Bhutan",
+   "shortName": "Bhutan",
+   "alpha2Code": "BT"
+  },
+  {
+   "id": 24,
+   "fullName": "Bolivia",
+   "shortName": "Bolivia",
+   "alpha2Code": "BO"
+  },
+  {
+   "id": 25,
+   "fullName": "Bosnia and Herzegovina",
+   "shortName": "Bosnia and Herzegovina",
+   "alpha2Code": "BA"
+  },
+  {
+   "id": 26,
+   "fullName": "Botswana",
+   "shortName": "Botswana",
+   "alpha2Code": "BW"
+  },
+  {
+   "id": 27,
+   "fullName": "Brazil",
+   "shortName": "Brazil",
+   "alpha2Code": "BR"
+  },
+  {
+   "id": 28,
+   "fullName": "British Virgin Islands",
+   "shortName": "British Virgin Islands",
+   "alpha2Code": "VG"
+  },
+  {
+   "id": 29,
+   "fullName": "Brunei Darussalam",
+   "shortName": "Brunei Darussalam",
+   "alpha2Code": "BN"
+  },
+  {
+   "id": 30,
+   "fullName": "Bulgaria",
+   "shortName": "Bulgaria",
+   "alpha2Code": "BG"
+  },
+  {
+   "id": 31,
+   "fullName": "Burkina Faso",
+   "shortName": "Burkina Faso",
+   "alpha2Code": "BF"
+  },
+  {
+   "id": 32,
+   "fullName": "Burundi",
+   "shortName": "Burundi",
+   "alpha2Code": "BI"
+  },
+  {
+   "id": 33,
+   "fullName": "Cabo Verde",
+   "shortName": "Cabo Verde",
+   "alpha2Code": "CV"
+  },
+  {
+   "id": 34,
+   "fullName": "Cambodia",
+   "shortName": "Cambodia",
+   "alpha2Code": "KH"
+  },
+  {
+   "id": 35,
+   "fullName": "Cameroon",
+   "shortName": "Cameroon",
+   "alpha2Code": "CM"
+  },
+  {
+   "id": 36,
+   "fullName": "Canada",
+   "shortName": "Canada",
+   "alpha2Code": "CA"
+  },
+  {
+   "id": 37,
+   "fullName": "Cayman Islands",
+   "shortName": "Cayman Islands",
+   "alpha2Code": "KY"
+  },
+  {
+   "id": 38,
+   "fullName": "Central African Republic",
+   "shortName": "Central African Republic",
+   "alpha2Code": "CF"
+  },
+  {
+   "id": 39,
+   "fullName": "Chad",
+   "shortName": "Chad",
+   "alpha2Code": "TD"
+  },
+  {
+   "id": 40,
+   "fullName": "Kosovo",
+   "shortName": "Kosovo",
+   "alpha2Code": "XK"
+  },
+  {
+   "id": 41,
+   "fullName": "Chile",
+   "shortName": "Chile",
+   "alpha2Code": "CL"
+  },
+  {
+   "id": 42,
+   "fullName": "China",
+   "shortName": "China",
+   "alpha2Code": "CN"
+  },
+  {
+   "id": 43,
+   "fullName": "Colombia",
+   "shortName": "Colombia",
+   "alpha2Code": "CO"
+  },
+  {
+   "id": 44,
+   "fullName": "Comoros",
+   "shortName": "Comoros",
+   "alpha2Code": "KM"
+  },
+  {
+   "id": 45,
+   "fullName": "Congo",
+   "shortName": "Congo",
+   "alpha2Code": "CG"
+  },
+  {
+   "id": 46,
+   "fullName": "Costa Rica",
+   "shortName": "Costa Rica",
+   "alpha2Code": "CR"
+  },
+  {
+   "id": 47,
+   "fullName": "Cote d'Ivoire",
+   "shortName": "Cote d'Ivoire",
+   "alpha2Code": "CI"
+  },
+  {
+   "id": 48,
+   "fullName": "Croatia",
+   "shortName": "Croatia",
+   "alpha2Code": "HR"
+  },
+  {
+   "id": 49,
+   "fullName": "Cuba",
+   "shortName": "Cuba",
+   "alpha2Code": "CU"
+  },
+  {
+   "id": 50,
+   "fullName": "Curacao",
+   "shortName": "Curacao",
+   "alpha2Code": "CW"
+  },
+  {
+   "id": 51,
+   "fullName": "Cyprus",
+   "shortName": "Cyprus",
+   "alpha2Code": "CY"
+  },
+  {
+   "id": 52,
+   "fullName": "Czechia",
+   "shortName": "Czechia",
+   "alpha2Code": "CZ"
+  },
+  {
+   "id": 53,
+   "fullName": "Denmark",
+   "shortName": "Denmark",
+   "alpha2Code": "DK"
+  },
+  {
+   "id": 54,
+   "fullName": "Djibouti",
+   "shortName": "Djibouti",
+   "alpha2Code": "DJ"
+  },
+  {
+   "id": 55,
+   "fullName": "Dominica",
+   "shortName": "Dominica",
+   "alpha2Code": "DM"
+  },
+  {
+   "id": 56,
+   "fullName": "Dominican Republic",
+   "shortName": "Dominican Republic",
+   "alpha2Code": "DO"
+  },
+  {
+   "id": 57,
+   "fullName": "Ecuador",
+   "shortName": "Ecuador",
+   "alpha2Code": "EC"
+  },
+  {
+   "id": 58,
+   "fullName": "Egypt",
+   "shortName": "Egypt",
+   "alpha2Code": "EG"
+  },
+  {
+   "id": 59,
+   "fullName": "El Salvador",
+   "shortName": "El Salvador",
+   "alpha2Code": "SV"
+  },
+  {
+   "id": 60,
+   "fullName": "Equatorial Guinea",
+   "shortName": "Equatorial Guinea",
+   "alpha2Code": "GQ"
+  },
+  {
+   "id": 61,
+   "fullName": "Eritrea",
+   "shortName": "Eritrea",
+   "alpha2Code": "ER"
+  },
+  {
+   "id": 62,
+   "fullName": "Estonia",
+   "shortName": "Estonia",
+   "alpha2Code": "EE"
+  },
+  {
+   "id": 63,
+   "fullName": "Eswatini",
+   "shortName": "Eswatini",
+   "alpha2Code": "SZ"
+  },
+  {
+   "id": 64,
+   "fullName": "Ethiopia",
+   "shortName": "Ethiopia",
+   "alpha2Code": "ET"
+  },
+  {
+   "id": 65,
+   "fullName": "Faroe Islands",
+   "shortName": "Faroe Islands",
+   "alpha2Code": "FO"
+  },
+  {
+   "id": 66,
+   "fullName": "Fiji",
+   "shortName": "Fiji",
+   "alpha2Code": "FJ"
+  },
+  {
+   "id": 67,
+   "fullName": "Finland",
+   "shortName": "Finland",
+   "alpha2Code": "FI"
+  },
+  {
+   "id": 68,
+   "fullName": "France",
+   "shortName": "France",
+   "alpha2Code": "FR"
+  },
+  {
+   "id": 69,
+   "fullName": "French Polynesia",
+   "shortName": "French Polynesia",
+   "alpha2Code": "PF"
+  },
+  {
+   "id": 70,
+   "fullName": "Gabon",
+   "shortName": "Gabon",
+   "alpha2Code": "GA"
+  },
+  {
+   "id": 71,
+   "fullName": "Gambia",
+   "shortName": "Gambia",
+   "alpha2Code": "GM"
+  },
+  {
+   "id": 72,
+   "fullName": "Georgia",
+   "shortName": "Georgia",
+   "alpha2Code": "GE"
+  },
+  {
+   "id": 73,
+   "fullName": "Germany",
+   "shortName": "Germany",
+   "alpha2Code": "DE"
+  },
+  {
+   "id": 74,
+   "fullName": "Ghana",
+   "shortName": "Ghana",
+   "alpha2Code": "GH"
+  },
+  {
+   "id": 75,
+   "fullName": "Gibraltar",
+   "shortName": "Gibraltar",
+   "alpha2Code": "GI"
+  },
+  {
+   "id": 76,
+   "fullName": "Great Britain",
+   "shortName": "Great Britain",
+   "alpha2Code": "GB"
+  },
+  {
+   "id": 77,
+   "fullName": "Greece",
+   "shortName": "Greece",
+   "alpha2Code": "GR"
+  },
+  {
+   "id": 78,
+   "fullName": "Greenland",
+   "shortName": "Greenland",
+   "alpha2Code": "GL"
+  },
+  {
+   "id": 79,
+   "fullName": "Grenada",
+   "shortName": "Grenada",
+   "alpha2Code": "GD"
+  },
+  {
+   "id": 80,
+   "fullName": "Guam",
+   "shortName": "Guam",
+   "alpha2Code": "GU"
+  },
+  {
+   "id": 81,
+   "fullName": "Guatemala",
+   "shortName": "Guatemala",
+   "alpha2Code": "GT"
+  },
+  {
+   "id": 82,
+   "fullName": "Guinea",
+   "shortName": "Guinea",
+   "alpha2Code": "GN"
+  },
+  {
+   "id": 83,
+   "fullName": "Guinea-Bissau",
+   "shortName": "Guinea-Bissau",
+   "alpha2Code": "GW"
+  },
+  {
+   "id": 84,
+   "fullName": "Guyana",
+   "shortName": "Guyana",
+   "alpha2Code": "GY"
+  },
+  {
+   "id": 85,
+   "fullName": "Haiti",
+   "shortName": "Haiti",
+   "alpha2Code": "HT"
+  },
+  {
+   "id": 86,
+   "fullName": "Honduras",
+   "shortName": "Honduras",
+   "alpha2Code": "HN"
+  },
+  {
+   "id": 87,
+   "fullName": "Hong Kong",
+   "shortName": "Hong Kong",
+   "alpha2Code": "HK"
+  },
+  {
+   "id": 88,
+   "fullName": "Hungary",
+   "shortName": "Hungary",
+   "alpha2Code": "HU"
+  },
+  {
+   "id": 89,
+   "fullName": "Iceland",
+   "shortName": "Iceland",
+   "alpha2Code": "IS"
+  },
+  {
+   "id": 90,
+   "fullName": "India",
+   "shortName": "India",
+   "alpha2Code": "IN"
+  },
+  {
+   "id": 91,
+   "fullName": "Indonesia",
+   "shortName": "Indonesia",
+   "alpha2Code": "ID"
+  },
+  {
+   "id": 92,
+   "fullName": "Iran",
+   "shortName": "Iran",
+   "alpha2Code": "IR"
+  },
+  {
+   "id": 93,
+   "fullName": "Iraq",
+   "shortName": "Iraq",
+   "alpha2Code": "IQ"
+  },
+  {
+   "id": 94,
+   "fullName": "Ireland",
+   "shortName": "Ireland",
+   "alpha2Code": "IE"
+  },
+  {
+   "id": 95,
+   "fullName": "Isle of Man",
+   "shortName": "Isle of Man",
+   "alpha2Code": "IM"
+  },
+  {
+   "id": 96,
+   "fullName": "Israel",
+   "shortName": "Israel",
+   "alpha2Code": "IL"
+  },
+  {
+   "id": 97,
+   "fullName": "Italy",
+   "shortName": "Italy",
+   "alpha2Code": "IT"
+  },
+  {
+   "id": 98,
+   "fullName": "Jamaica",
+   "shortName": "Jamaica",
+   "alpha2Code": "JM"
+  },
+  {
+   "id": 99,
+   "fullName": "Japan",
+   "shortName": "Japan",
+   "alpha2Code": "JP"
+  },
+  {
+   "id": 100,
+   "fullName": "Jordan",
+   "shortName": "Jordan",
+   "alpha2Code": "JO"
+  },
+  {
+   "id": 101,
+   "fullName": "Kazakhstan",
+   "shortName": "Kazakhstan",
+   "alpha2Code": "KZ"
+  },
+  {
+   "id": 102,
+   "fullName": "Kenya",
+   "shortName": "Kenya",
+   "alpha2Code": "KE"
+  },
+  {
+   "id": 103,
+   "fullName": "Kiribati",
+   "shortName": "Kiribati",
+   "alpha2Code": "KI"
+  },
+  {
+   "id": 104,
+   "fullName": "North Korea",
+   "shortName": "North Korea",
+   "alpha2Code": "KP"
+  },
+  {
+   "id": 105,
+   "fullName": "South Korea",
+   "shortName": "South Korea",
+   "alpha2Code": "KR"
+  },
+  {
+   "id": 106,
+   "fullName": "Kuwait",
+   "shortName": "Kuwait",
+   "alpha2Code": "KW"
+  },
+  {
+   "id": 107,
+   "fullName": "Kyrgyz Republic",
+   "shortName": "Kyrgyz Republic",
+   "alpha2Code": "KG"
+  },
+  {
+   "id": 108,
+   "fullName": "Lao PDR",
+   "shortName": "Lao PDR",
+   "alpha2Code": "LA"
+  },
+  {
+   "id": 109,
+   "fullName": "Latvia",
+   "shortName": "Latvia",
+   "alpha2Code": "LV"
+  },
+  {
+   "id": 110,
+   "fullName": "Lebanon",
+   "shortName": "Lebanon",
+   "alpha2Code": "LB"
+  },
+  {
+   "id": 111,
+   "fullName": "Lesotho",
+   "shortName": "Lesotho",
+   "alpha2Code": "LS"
+  },
+  {
+   "id": 112,
+   "fullName": "Liberia",
+   "shortName": "Liberia",
+   "alpha2Code": "LR"
+  },
+  {
+   "id": 113,
+   "fullName": "Libya",
+   "shortName": "Libya",
+   "alpha2Code": "LY"
+  },
+  {
+   "id": 114,
+   "fullName": "Liechtenstein",
+   "shortName": "Liechtenstein",
+   "alpha2Code": "LI"
+  },
+  {
+   "id": 115,
+   "fullName": "Lithuania",
+   "shortName": "Lithuania",
+   "alpha2Code": "LT"
+  },
+  {
+   "id": 116,
+   "fullName": "Luxembourg",
+   "shortName": "Luxembourg",
+   "alpha2Code": "LU"
+  },
+  {
+   "id": 117,
+   "fullName": "Macao",
+   "shortName": "Macao",
+   "alpha2Code": "MO"
+  },
+  {
+   "id": 118,
+   "fullName": "Madagascar",
+   "shortName": "Madagascar",
+   "alpha2Code": "MG"
+  },
+  {
+   "id": 119,
+   "fullName": "Malawi",
+   "shortName": "Malawi",
+   "alpha2Code": "MW"
+  },
+  {
+   "id": 120,
+   "fullName": "Malaysia",
+   "shortName": "Malaysia",
+   "alpha2Code": "MY"
+  },
+  {
+   "id": 121,
+   "fullName": "Maldives",
+   "shortName": "Maldives",
+   "alpha2Code": "MV"
+  },
+  {
+   "id": 122,
+   "fullName": "Mali",
+   "shortName": "Mali",
+   "alpha2Code": "ML"
+  },
+  {
+   "id": 123,
+   "fullName": "Malta",
+   "shortName": "Malta",
+   "alpha2Code": "MT"
+  },
+  {
+   "id": 124,
+   "fullName": "Marshall Islands",
+   "shortName": "Marshall Islands",
+   "alpha2Code": "MH"
+  },
+  {
+   "id": 125,
+   "fullName": "Mauritania",
+   "shortName": "Mauritania",
+   "alpha2Code": "MR"
+  },
+  {
+   "id": 126,
+   "fullName": "Mauritius",
+   "shortName": "Mauritius",
+   "alpha2Code": "MU"
+  },
+  {
+   "id": 127,
+   "fullName": "Mexico",
+   "shortName": "Mexico",
+   "alpha2Code": "MX"
+  },
+  {
+   "id": 128,
+   "fullName": "Micronesia",
+   "shortName": "Micronesia",
+   "alpha2Code": "FM"
+  },
+  {
+   "id": 129,
+   "fullName": "Moldova",
+   "shortName": "Moldova",
+   "alpha2Code": "MD"
+  },
+  {
+   "id": 130,
+   "fullName": "Monaco",
+   "shortName": "Monaco",
+   "alpha2Code": "MC"
+  },
+  {
+   "id": 131,
+   "fullName": "Mongolia",
+   "shortName": "Mongolia",
+   "alpha2Code": "MN"
+  },
+  {
+   "id": 132,
+   "fullName": "Montenegro",
+   "shortName": "Montenegro",
+   "alpha2Code": "ME"
+  },
+  {
+   "id": 133,
+   "fullName": "Morocco",
+   "shortName": "Morocco",
+   "alpha2Code": "MA"
+  },
+  {
+   "id": 134,
+   "fullName": "Mozambique",
+   "shortName": "Mozambique",
+   "alpha2Code": "MZ"
+  },
+  {
+   "id": 135,
+   "fullName": "Myanmar",
+   "shortName": "Myanmar",
+   "alpha2Code": "MM"
+  },
+  {
+   "id": 136,
+   "fullName": "Namibia",
+   "shortName": "Namibia",
+   "alpha2Code": "NA"
+  },
+  {
+   "id": 137,
+   "fullName": "Nauru",
+   "shortName": "Nauru",
+   "alpha2Code": "NR"
+  },
+  {
+   "id": 138,
+   "fullName": "Nepal",
+   "shortName": "Nepal",
+   "alpha2Code": "NP"
+  },
+  {
+   "id": 139,
+   "fullName": "Netherlands",
+   "shortName": "Netherlands",
+   "alpha2Code": "NL"
+  },
+  {
+   "id": 140,
+   "fullName": "New Caledonia",
+   "shortName": "New Caledonia",
+   "alpha2Code": "NC"
+  },
+  {
+   "id": 141,
+   "fullName": "New Zealand",
+   "shortName": "New Zealand",
+   "alpha2Code": "NZ"
+  },
+  {
+   "id": 142,
+   "fullName": "Nicaragua",
+   "shortName": "Nicaragua",
+   "alpha2Code": "NI"
+  },
+  {
+   "id": 143,
+   "fullName": "Niger",
+   "shortName": "Niger",
+   "alpha2Code": "NE"
+  },
+  {
+   "id": 144,
+   "fullName": "Nigeria",
+   "shortName": "Nigeria",
+   "alpha2Code": "NG"
+  },
+  {
+   "id": 145,
+   "fullName": "North Macedonia",
+   "shortName": "North Macedonia",
+   "alpha2Code": "MK"
+  },
+  {
+   "id": 146,
+   "fullName": "Northern Mariana Islands",
+   "shortName": "Northern Mariana Islands",
+   "alpha2Code": "MP"
+  },
+  {
+   "id": 147,
+   "fullName": "Norway",
+   "shortName": "Norway",
+   "alpha2Code": "NO"
+  },
+  {
+   "id": 148,
+   "fullName": "Oman",
+   "shortName": "Oman",
+   "alpha2Code": "OM"
+  },
+  {
+   "id": 149,
+   "fullName": "Pakistan",
+   "shortName": "Pakistan",
+   "alpha2Code": "PK"
+  },
+  {
+   "id": 150,
+   "fullName": "Palau",
+   "shortName": "Palau",
+   "alpha2Code": "PW"
+  },
+  {
+   "id": 151,
+   "fullName": "Panama",
+   "shortName": "Panama",
+   "alpha2Code": "PA"
+  },
+  {
+   "id": 152,
+   "fullName": "Papua New Guinea",
+   "shortName": "Papua New Guinea",
+   "alpha2Code": "PG"
+  },
+  {
+   "id": 153,
+   "fullName": "Paraguay",
+   "shortName": "Paraguay",
+   "alpha2Code": "PY"
+  },
+  {
+   "id": 154,
+   "fullName": "Peru",
+   "shortName": "Peru",
+   "alpha2Code": "PE"
+  },
+  {
+   "id": 155,
+   "fullName": "Philippines",
+   "shortName": "Philippines",
+   "alpha2Code": "PH"
+  },
+  {
+   "id": 156,
+   "fullName": "Poland",
+   "shortName": "Poland",
+   "alpha2Code": "PL"
+  },
+  {
+   "id": 157,
+   "fullName": "Portugal",
+   "shortName": "Portugal",
+   "alpha2Code": "PT"
+  },
+  {
+   "id": 158,
+   "fullName": "Puerto Rico",
+   "shortName": "Puerto Rico",
+   "alpha2Code": "PR"
+  },
+  {
+   "id": 159,
+   "fullName": "Qatar",
+   "shortName": "Qatar",
+   "alpha2Code": "QA"
+  },
+  {
+   "id": 160,
+   "fullName": "Romania",
+   "shortName": "Romania",
+   "alpha2Code": "RO"
+  },
+  {
+   "id": 161,
+   "fullName": "Russian Federation",
+   "shortName": "Russia",
+   "alpha2Code": "RU"
+  },
+  {
+   "id": 162,
+   "fullName": "Rwanda",
+   "shortName": "Rwanda",
+   "alpha2Code": "RW"
+  },
+  {
+   "id": 163,
+   "fullName": "Samoa",
+   "shortName": "Samoa",
+   "alpha2Code": "WS"
+  },
+  {
+   "id": 164,
+   "fullName": "San Marino",
+   "shortName": "San Marino",
+   "alpha2Code": "SM"
+  },
+  {
+   "id": 165,
+   "fullName": "Sao Tome and Principe",
+   "shortName": "Sao Tome and Principe",
+   "alpha2Code": "ST"
+  },
+  {
+   "id": 166,
+   "fullName": "Saudi Arabia",
+   "shortName": "Saudi Arabia",
+   "alpha2Code": "SA"
+  },
+  {
+   "id": 167,
+   "fullName": "Senegal",
+   "shortName": "Senegal",
+   "alpha2Code": "SN"
+  },
+  {
+   "id": 168,
+   "fullName": "Serbia",
+   "shortName": "Serbia",
+   "alpha2Code": "RS"
+  },
+  {
+   "id": 169,
+   "fullName": "Seychelles",
+   "shortName": "Seychelles",
+   "alpha2Code": "SC"
+  },
+  {
+   "id": 170,
+   "fullName": "Sierra Leone",
+   "shortName": "Sierra Leone",
+   "alpha2Code": "SL"
+  },
+  {
+   "id": 171,
+   "fullName": "Singapore",
+   "shortName": "Singapore",
+   "alpha2Code": "SG"
+  },
+  {
+   "id": 172,
+   "fullName": "Sint Maarten",
+   "shortName": "Sint Maarten",
+   "alpha2Code": "SX"
+  },
+  {
+   "id": 173,
+   "fullName": "Slovak Republic",
+   "shortName": "Slovak Republic",
+   "alpha2Code": "SK"
+  },
+  {
+   "id": 174,
+   "fullName": "Slovenia",
+   "shortName": "Slovenia",
+   "alpha2Code": "SI"
+  },
+  {
+   "id": 175,
+   "fullName": "Solomon Islands",
+   "shortName": "Solomon Islands",
+   "alpha2Code": "SB"
+  },
+  {
+   "id": 176,
+   "fullName": "Somalia",
+   "shortName": "Somalia",
+   "alpha2Code": "SO"
+  },
+  {
+   "id": 177,
+   "fullName": "South Africa",
+   "shortName": "South Africa",
+   "alpha2Code": "ZA"
+  },
+  {
+   "id": 178,
+   "fullName": "South Sudan",
+   "shortName": "South Sudan",
+   "alpha2Code": "SS"
+  },
+  {
+   "id": 179,
+   "fullName": "Spain",
+   "shortName": "Spain",
+   "alpha2Code": "ES"
+  },
+  {
+   "id": 180,
+   "fullName": "Sri Lanka",
+   "shortName": "Sri Lanka",
+   "alpha2Code": "LK"
+  },
+  {
+   "id": 181,
+   "fullName": "St. Kitts and Nevis",
+   "shortName": "St. Kitts and Nevis",
+   "alpha2Code": "KN"
+  },
+  {
+   "id": 182,
+   "fullName": "St. Lucia",
+   "shortName": "St. Lucia",
+   "alpha2Code": "LC"
+  },
+  {
+   "id": 183,
+   "fullName": "St. Martin",
+   "shortName": "St. Martin",
+   "alpha2Code": "MF"
+  },
+  {
+   "id": 184,
+   "fullName": "St. Vincent and the Grenadines",
+   "shortName": "St. Vincent and the Grenadines",
+   "alpha2Code": "VC"
+  },
+  {
+   "id": 185,
+   "fullName": "Sudan",
+   "shortName": "Sudan",
+   "alpha2Code": "SD"
+  },
+  {
+   "id": 186,
+   "fullName": "Suriname",
+   "shortName": "Suriname",
+   "alpha2Code": "SR"
+  },
+  {
+   "id": 187,
+   "fullName": "Sweden",
+   "shortName": "Sweden",
+   "alpha2Code": "SE"
+  },
+  {
+   "id": 188,
+   "fullName": "Switzerland",
+   "shortName": "Switzerland",
+   "alpha2Code": "CH"
+  },
+  {
+   "id": 189,
+   "fullName": "Syrian Arab Republic",
+   "shortName": "Syrian Arab Republic",
+   "alpha2Code": "SY"
+  },
+  {
+   "id": 190,
+   "fullName": "Tajikistan",
+   "shortName": "Tajikistan",
+   "alpha2Code": "TJ"
+  },
+  {
+   "id": 191,
+   "fullName": "Tanzania",
+   "shortName": "Tanzania",
+   "alpha2Code": "TZ"
+  },
+  {
+   "id": 192,
+   "fullName": "Thailand",
+   "shortName": "Thailand",
+   "alpha2Code": "TH"
+  },
+  {
+   "id": 193,
+   "fullName": "Timor-Leste",
+   "shortName": "Timor-Leste",
+   "alpha2Code": "TL"
+  },
+  {
+   "id": 194,
+   "fullName": "Togo",
+   "shortName": "Togo",
+   "alpha2Code": "TG"
+  },
+  {
+   "id": 195,
+   "fullName": "Tonga",
+   "shortName": "Tonga",
+   "alpha2Code": "TO"
+  },
+  {
+   "id": 196,
+   "fullName": "Trinidad and Tobago",
+   "shortName": "Trinidad and Tobago",
+   "alpha2Code": "TT"
+  },
+  {
+   "id": 197,
+   "fullName": "Tunisia",
+   "shortName": "Tunisia",
+   "alpha2Code": "TN"
+  },
+  {
+   "id": 198,
+   "fullName": "Turkey",
+   "shortName": "Turkey",
+   "alpha2Code": "TR"
+  },
+  {
+   "id": 199,
+   "fullName": "Turkmenistan",
+   "shortName": "Turkmenistan",
+   "alpha2Code": "TM"
+  },
+  {
+   "id": 200,
+   "fullName": "Turks and Caicos Islands",
+   "shortName": "Turks and Caicos Islands",
+   "alpha2Code": "TC"
+  },
+  {
+   "id": 201,
+   "fullName": "Tuvalu",
+   "shortName": "Tuvalu",
+   "alpha2Code": "TV"
+  },
+  {
+   "id": 202,
+   "fullName": "Uganda",
+   "shortName": "Uganda",
+   "alpha2Code": "UG"
+  },
+  {
+   "id": 203,
+   "fullName": "Ukraine",
+   "shortName": "Ukraine",
+   "alpha2Code": "UA"
+  },
+  {
+   "id": 204,
+   "fullName": "United Arab Emirates",
+   "shortName": "U.A.E.",
+   "alpha2Code": "AE"
+  },
+  {
+   "id": 205,
+   "fullName": "United States",
+   "shortName": "USA",
+   "alpha2Code": "US"
+  },
+  {
+   "id": 206,
+   "fullName": "Uruguay",
+   "shortName": "Uruguay",
+   "alpha2Code": "UY"
+  },
+  {
+   "id": 207,
+   "fullName": "Uzbekistan",
+   "shortName": "Uzbekistan",
+   "alpha2Code": "UZ"
+  },
+  {
+   "id": 208,
+   "fullName": "Vanuatu",
+   "shortName": "Vanuatu",
+   "alpha2Code": "VU"
+  },
+  {
+   "id": 209,
+   "fullName": "Venezuela",
+   "shortName": "Venezuela",
+   "alpha2Code": "VE"
+  },
+  {
+   "id": 210,
+   "fullName": "Vietnam",
+   "shortName": "Vietnam",
+   "alpha2Code": "VN"
+  },
+  {
+   "id": 211,
+   "fullName": "Virgin Islands",
+   "shortName": "Virgin Islands",
+   "alpha2Code": "VI"
+  },
+  {
+   "id": 212,
+   "fullName": "West Bank and Gaza",
+   "shortName": "West Bank and Gaza",
+   "alpha2Code": "GZ"
+  },
+  {
+   "id": 213,
+   "fullName": "Yemen",
+   "shortName": "Yemen",
+   "alpha2Code": "YE"
+  },
+  {
+   "id": 214,
+   "fullName": "Zambia",
+   "shortName": "Zambia",
+   "alpha2Code": "ZM"
+  },
+  {
+   "id": 215,
+   "fullName": "Zimbabwe",
+   "shortName": "Zimbabwe",
+   "alpha2Code": "ZW"
+  }
+ ],
+ "track": [
+  {
+   "id": 1,
+   "fullName": "Bahrain International Circuit",
+   "shortName": "Bahrain",
+   "countryId": 15
+  },
+  {
+   "id": 2,
+   "fullName": "Autodromo Internazionale Enzo e Dino Ferrari",
+   "shortName": "Imola",
+   "countryId": 97
+  },
+  {
+   "id": 3,
+   "fullName": "Autodromo de Algarve",
+   "shortName": "Algarve",
+   "countryId": 157
+  },
+  {
+   "id": 4,
+   "fullName": "Circuit de Catalunya",
+   "shortName": "Catalunya",
+   "countryId": 179
+  },
+  {
+   "id": 5,
+   "fullName": "Circuit de Monaco",
+   "shortName": "Monaco",
+   "countryId": 130
+  },
+  {
+   "id": 6,
+   "fullName": "Baku City Circuit",
+   "shortName": "Baku",
+   "countryId": 13
+  },
+  {
+   "id": 7,
+   "fullName": "Circuit Paul Ricard",
+   "shortName": "Paul Ricard",
+   "countryId": 68
+  },
+  {
+   "id": 8,
+   "fullName": "Red Bull Ring",
+   "shortName": "Red Bull Ring",
+   "countryId": 12
+  },
+  {
+   "id": 9,
+   "fullName": "Silverstone Circuit",
+   "shortName": "Silverstone",
+   "countryId": 76
+  },
+  {
+   "id": 10,
+   "fullName": "Hungaroring",
+   "shortName": "Hungaroring",
+   "countryId": 88
+  },
+  {
+   "id": 11,
+   "fullName": "Circuit de Spa-Francorchamps",
+   "shortName": "Spa",
+   "countryId": 19
+  },
+  {
+   "id": 12,
+   "fullName": "Circuit Zandvoort",
+   "shortName": "Zandvoort",
+   "countryId": 139
+  },
+  {
+   "id": 13,
+   "fullName": "Autodromo Nazionale di Monza",
+   "shortName": "Monza",
+   "countryId": 97
+  },
+  {
+   "id": 14,
+   "fullName": "Sochi Autodrom",
+   "shortName": "Sochi",
+   "countryId": 161
+  },
+  {
+   "id": 15,
+   "fullName": "Intercity Istanbul Park",
+   "shortName": "Istanbul Park",
+   "countryId": 198
+  },
+  {
+   "id": 16,
+   "fullName": "Circuit of the Americas",
+   "shortName": "COTA",
+   "countryId": 205
+  },
+  {
+   "id": 17,
+   "fullName": "Autodromo Hermanos Rodriguez",
+   "shortName": "Hermanos Rodriguez",
+   "countryId": 127
+  },
+  {
+   "id": 18,
+   "fullName": "Autodromo Jose Carlos Pace",
+   "shortName": "Interlagos",
+   "countryId": 27
+  },
+  {
+   "id": 19,
+   "fullName": "Losail International Circuit",
+   "shortName": "Losail",
+   "countryId": 159
+  },
+  {
+   "id": 20,
+   "fullName": "Jeddah Corniche Circuit",
+   "shortName": "Jeddah",
+   "countryId": 166
+  },
+  {
+   "id": 21,
+   "fullName": "Yas Marina Circuit",
+   "shortName": "Yas Marina",
+   "countryId": 204
+  },
+  {
+   "id": 22,
+   "fullName": "Suzuka International Racing Course",
+   "shortName": "Suzuka",
+   "countryId": 99
+  },
+  {
+   "id": 23,
+   "fullName": "Marina Bay Street Circuit",
+   "shortName": "Marina Bay",
+   "countryId": 171
+  },
+  {
+   "id": 24,
+   "fullName": "Albert Park Circuit",
+   "shortName": "Albert Park",
+   "countryId": 11
+  },
+  {
+   "id": 25,
+   "fullName": "Shanghai International Circuit",
+   "shortName": "Shanghai",
+   "countryId": 42
+  },
+  {
+   "id": 26,
+   "fullName": "Hockenheimring Baden-Würtemberg",
+   "shortName": "Hockenheimring",
+   "countryId": 73
+  },
+  {
+   "id": 27,
+   "fullName": "Short Bahrain International Circuit",
+   "shortName": "Short Bahrain",
+   "countryId": 15
+  },
+  {
+   "id": 28,
+   "fullName": "Short Silverstone Circuit",
+   "shortName": "Short Silverstone",
+   "countryId": 76
+  },
+  {
+   "id": 29,
+   "fullName": "Short Circuit of the Americas",
+   "shortName": "Short COTA",
+   "countryId": 205
+  },
+  {
+   "id": 30,
+   "fullName": "Short Suzuka International Racing Course",
+   "shortName": "Short Suzuka",
+   "countryId": 99
+  },
+  {
+   "id": 31,
+   "fullName": "Hanoi Street Circuit",
+   "shortName": "Hanoi",
+   "countryId": 210
+  },
+  {
+   "id": 32,
+   "fullName": "Circuit Gilles Villeneuve",
+   "shortName": "Gilles Villeneuve",
+   "countryId": 36
+  }
+ ],
+ "setup": [
+  {
+   "id": 1,
+   "description": "Default",
+   "custom": false,
+   "manual": true
+  },
+  {
+   "id": 2,
+   "description": "Custom",
+   "custom": true,
+   "manual": true
+  },
+  {
+   "id": 3,
+   "description": "Maximum Downforce",
+   "custom": false,
+   "manual": true,
+   "frontWing": 11,
+   "rearWing": 10,
+   "onThrottle": 80,
+   "offThrottle": 60,
+   "frontCamber": -3,
+   "rearCamber": -1.5,
+   "frontToe": 0.1,
+   "rearToe": 0.35,
+   "frontSuspension": 5,
+   "rearSuspension": 2,
+   "frontAntiRollBar": 5,
+   "rearAntiRollBar": 1,
+   "frontSuspensionHeight": 1,
+   "rearSuspensionHeight": 6,
+   "brakePressure": 100,
+   "brakeBias": 56,
+   "rearLeftTyrePressure": 20.3,
+   "rearRightTyrePressure": 21.1,
+   "frontLeftTyrePressure": 21.4,
+   "frontRightTyrePressure": 22.2,
+   "ballast": 6,
+   "fuelLoad": 10
+  },
+  {
+   "id": 4,
+   "description": "Increased Downforce",
+   "custom": false,
+   "manual": true,
+   "frontWing": 8,
+   "rearWing": 5,
+   "onThrottle": 90,
+   "offThrottle": 55,
+   "frontCamber": -3,
+   "rearCamber": -1.5,
+   "frontToe": 0.1,
+   "rearToe": 0.35,
+   "frontSuspension": 7,
+   "rearSuspension": 2,
+   "frontAntiRollBar": 5,
+   "rearAntiRollBar": 2,
+   "frontSuspensionHeight": 2,
+   "rearSuspensionHeight": 6,
+   "brakePressure": 100,
+   "brakeBias": 56,
+   "rearLeftTyrePressure": 21.9,
+   "rearRightTyrePressure": 21.9,
+   "frontLeftTyrePressure": 22.2,
+   "frontRightTyrePressure": 22.2,
+   "ballast": 6,
+   "fuelLoad": 10
+  },
+  {
+   "id": 5,
+   "description": "Balanced Default",
+   "custom": false,
+   "manual": true,
+   "frontWing": 8,
+   "rearWing": 8,
+   "onThrottle": 75,
+   "offThrottle": 75,
+   "frontCamber": -3,
+   "rearCamber": -1.2,
+   "frontToe": 0.09,
+   "rearToe": 0.41,
+   "frontSuspension": 8,
+   "rearSuspension": 2,
+   "frontAntiRollBar": 8,
+   "rearAntiRollBar": 1,
+   "frontSuspensionHeight": 3,
+   "rearSuspensionHeight": 7,
+   "brakePressure": 95,
+   "brakeBias": 58,
+   "rearLeftTyrePressure": 23.1,
+   "rearRightTyrePressure": 23.1,
+   "frontLeftTyrePressure": 22.2,
+   "frontRightTyrePressure": 22.2,
+   "ballast": 6,
+   "fuelLoad": 10
+  },
+  {
+   "id": 6,
+   "description": "Increased Top Speed",
+   "custom": false,
+   "manual": true,
+   "frontWing": 7,
+   "rearWing": 4,
+   "onThrottle": 90,
+   "offThrottle": 55,
+   "frontCamber": -3,
+   "rearCamber": -1.5,
+   "frontToe": 0.1,
+   "rearToe": 0.35,
+   "frontSuspension": 7,
+   "rearSuspension": 2,
+   "frontAntiRollBar": 5,
+   "rearAntiRollBar": 2,
+   "frontSuspensionHeight": 2,
+   "rearSuspensionHeight": 6,
+   "brakePressure": 100,
+   "brakeBias": 56,
+   "rearLeftTyrePressure": 21.5,
+   "rearRightTyrePressure": 21.5,
+   "frontLeftTyrePressure": 23,
+   "frontRightTyrePressure": 23,
+   "ballast": 6,
+   "fuelLoad": 10
+  },
+  {
+   "id": 7,
+   "description": "Maximum Top Speed",
+   "custom": false,
+   "manual": true,
+   "frontWing": 5,
+   "rearWing": 2,
+   "onThrottle": 100,
+   "offThrottle": 65,
+   "frontCamber": -2.7,
+   "rearCamber": -1.2,
+   "frontToe": 0.07,
+   "rearToe": 0.26,
+   "frontSuspension": 4,
+   "rearSuspension": 1,
+   "frontAntiRollBar": 4,
+   "rearAntiRollBar": 1,
+   "frontSuspensionHeight": 1,
+   "rearSuspensionHeight": 5,
+   "brakePressure": 100,
+   "brakeBias": 57,
+   "rearLeftTyrePressure": 22.3,
+   "rearRightTyrePressure": 23.5,
+   "frontLeftTyrePressure": 23.8,
+   "frontRightTyrePressure": 25,
+   "ballast": 6,
+   "fuelLoad": 10
+  }
+ ],
+ "config": [
+  {
+   "id": 8,
+   "description": "F1 2021 Season Algarve",
+   "gameId": 2,
+   "trackId": 3,
+   "carId": 1,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 2,
+   "authentic": true
+  },
+  {
+   "id": 9,
+   "description": "F1 2021 Season Hermanos Rodriguez",
+   "gameId": 2,
+   "trackId": 17,
+   "carId": 1,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 2,
+   "authentic": true
+  },
+  {
+   "id": 10,
+   "description": "F1 2021 Season Imola",
+   "gameId": 2,
+   "trackId": 2,
+   "carId": 1,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 2,
+   "authentic": true
+  },
+  {
+   "id": 11,
+   "description": "F1 2021 Season Interlagos",
+   "gameId": 2,
+   "trackId": 18,
+   "carId": 1,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 2,
+   "authentic": true
+  },
+  {
+   "id": 12,
+   "description": "F1 2021 Season Monza",
+   "gameId": 2,
+   "trackId": 13,
+   "carId": 1,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 2,
+   "authentic": true
+  },
+  {
+   "id": 13,
+   "description": "F1 2021 Season Bahrain",
+   "gameId": 2,
+   "trackId": 1,
+   "carId": 7,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 2,
+   "authentic": true
+  },
+  {
+   "id": 14,
+   "description": "F1 2021 Season Baku",
+   "gameId": 2,
+   "trackId": 6,
+   "carId": 3,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 2,
+   "authentic": true
+  },
+  {
+   "id": 15,
+   "description": "F1 2021 Season Catalunya",
+   "gameId": 2,
+   "trackId": 4,
+   "carId": 1,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 2,
+   "authentic": true
+  },
+  {
+   "id": 16,
+   "description": "F1 2021 Season Monaco",
+   "gameId": 2,
+   "trackId": 5,
+   "carId": 3,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 2,
+   "authentic": true
+  },
+  {
+   "id": 17,
+   "description": "F1 2021 Season Spa",
+   "gameId": 2,
+   "trackId": 11,
+   "carId": 7,
+   "weatherId": 2,
+   "tyreId": 4,
+   "setupId": 2,
+   "authentic": true
+  },
+  {
+   "id": 18,
+   "description": "F1 2021 Season COTA",
+   "gameId": 2,
+   "trackId": 16,
+   "carId": 7,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 2,
+   "authentic": true
+  },
+  {
+   "id": 19,
+   "description": "F1 2021 Season Paul Ricard",
+   "gameId": 2,
+   "trackId": 7,
+   "carId": 7,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 2,
+   "authentic": true
+  },
+  {
+   "id": 20,
+   "description": "F1 2021 Season Zandvoort",
+   "gameId": 2,
+   "trackId": 12,
+   "carId": 7,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 2,
+   "authentic": true
+  },
+  {
+   "id": 21,
+   "description": "F1 2021 Season Hungaroring",
+   "gameId": 2,
+   "trackId": 10,
+   "carId": 1,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 2,
+   "authentic": true
+  },
+  {
+   "id": 22,
+   "description": "F1 2021 Season Istanbul Park",
+   "gameId": 2,
+   "trackId": 15,
+   "carId": 1,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 2,
+   "authentic": true
+  },
+  {
+   "id": 23,
+   "description": "F1 2021 Season Jeddah",
+   "gameId": 2,
+   "trackId": 20,
+   "carId": 1,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 2,
+   "authentic": true
+  },
+  {
+   "id": 24,
+   "description": "F1 2021 Season Losail",
+   "gameId": 2,
+   "trackId": 19,
+   "carId": 1,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 2,
+   "authentic": true
+  },
+  {
+   "id": 25,
+   "description": "F1 2021 Season Red Bull Ring",
+   "gameId": 2,
+   "trackId": 8,
+   "carId": 7,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 2,
+   "authentic": true
+  },
+  {
+   "id": 26,
+   "description": "F1 2021 Season Silverstone",
+   "gameId": 2,
+   "trackId": 9,
+   "carId": 1,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 2,
+   "authentic": true
+  },
+  {
+   "id": 27,
+   "description": "F1 2021 Season Sochi Autodrom",
+   "gameId": 2,
+   "trackId": 14,
+   "carId": 6,
+   "weatherId": 2,
+   "tyreId": 1,
+   "setupId": 2,
+   "authentic": true
+  },
+  {
+   "id": 28,
+   "description": "F1 2021 Season Yas Marina",
+   "gameId": 2,
+   "trackId": 21,
+   "carId": 7,
+   "weatherId": 1,
+   "tyreId": 1,
+   "setupId": 2,
+   "authentic": true
+  }
+ ],
+ "authenticClass": [
+  {
+   "id": 1,
+   "name": "Formula 1"
+  }
+ ],
+ "authenticDriver": [
+  {
+   "id": 1,
+   "firstName": "Antonio",
+   "lastName": "Giovinazzi",
+   "shortName": "GIO",
+   "number": 99,
+   "classId": 1,
+   "countryId": 97
+  },
+  {
+   "id": 2,
+   "firstName": "Carlos",
+   "lastName": "Sainz",
+   "shortName": "SAI",
+   "number": 55,
+   "classId": 1,
+   "countryId": 179
+  },
+  {
+   "id": 3,
+   "firstName": "Charles",
+   "lastName": "Leclerc",
+   "shortName": "LEC",
+   "number": 16,
+   "classId": 1,
+   "countryId": 130
+  },
+  {
+   "id": 4,
+   "firstName": "Daniel",
+   "lastName": "Ricciardo",
+   "shortName": "RIC",
+   "number": 3,
+   "classId": 1,
+   "countryId": 11
+  },
+  {
+   "id": 5,
+   "firstName": "Esteban",
+   "lastName": "Ocon",
+   "shortName": "OCO",
+   "number": 31,
+   "classId": 1,
+   "countryId": 68
+  },
+  {
+   "id": 6,
+   "firstName": "Fernando",
+   "lastName": "Alonso",
+   "shortName": "ALO",
+   "number": 14,
+   "classId": 1,
+   "countryId": 179
+  },
+  {
+   "id": 7,
+   "firstName": "George",
+   "lastName": "Russell",
+   "shortName": "RUS",
+   "number": 63,
+   "classId": 1,
+   "countryId": 76
+  },
+  {
+   "id": 8,
+   "firstName": "Kimi",
+   "lastName": "Räikkönen",
+   "shortName": "RAI",
+   "number": 7,
+   "classId": 1,
+   "countryId": 67
+  },
+  {
+   "id": 9,
+   "firstName": "Lance",
+   "lastName": "Stroll",
+   "shortName": "STR",
+   "number": 18,
+   "classId": 1,
+   "countryId": 36
+  },
+  {
+   "id": 10,
+   "firstName": "Lando",
+   "lastName": "Norris",
+   "shortName": "NOR",
+   "number": 4,
+   "classId": 1,
+   "countryId": 76
+  },
+  {
+   "id": 11,
+   "firstName": "Lewis",
+   "lastName": "Hamilton",
+   "shortName": "HAM",
+   "number": 44,
+   "classId": 1,
+   "countryId": 76
+  },
+  {
+   "id": 12,
+   "firstName": "Max",
+   "lastName": "Verstappen",
+   "shortName": "VER",
+   "number": 1,
+   "classId": 1,
+   "countryId": 139
+  },
+  {
+   "id": 13,
+   "firstName": "Mick",
+   "lastName": "Schumacher",
+   "shortName": "MSC",
+   "number": 47,
+   "classId": 1,
+   "countryId": 73
+  },
+  {
+   "id": 14,
+   "firstName": "Nicholas",
+   "lastName": "Latifi",
+   "shortName": "LAT",
+   "number": 6,
+   "classId": 1,
+   "countryId": 36
+  },
+  {
+   "id": 15,
+   "firstName": "Nikita",
+   "lastName": "Mazepin",
+   "shortName": "MAZ",
+   "number": 9,
+   "classId": 1,
+   "countryId": 161
+  },
+  {
+   "id": 16,
+   "firstName": "Pierre",
+   "lastName": "Gasly",
+   "shortName": "GAS",
+   "number": 10,
+   "classId": 1,
+   "countryId": 68
+  },
+  {
+   "id": 17,
+   "firstName": "Robert",
+   "lastName": "Kubica",
+   "shortName": "KUB",
+   "number": 88,
+   "classId": 1,
+   "countryId": 156
+  },
+  {
+   "id": 18,
+   "firstName": "Sebastian",
+   "lastName": "Vettel",
+   "shortName": "VET",
+   "number": 5,
+   "classId": 1,
+   "countryId": 73
+  },
+  {
+   "id": 19,
+   "firstName": "Sergio",
+   "lastName": "Perez",
+   "shortName": "PER",
+   "number": 11,
+   "classId": 1,
+   "countryId": 127
+  },
+  {
+   "id": 20,
+   "firstName": "Valtteri",
+   "lastName": "Bottas",
+   "shortName": "BOT",
+   "number": 77,
+   "classId": 1,
+   "countryId": 67
+  },
+  {
+   "id": 21,
+   "firstName": "Yuki",
+   "lastName": "Tsunoda",
+   "shortName": "TSU",
+   "number": 22,
+   "classId": 1,
+   "countryId": 99
+  }
+ ],
+ "authenticTeam": [
+  {
+   "id": 1,
+   "fullName": "Alfa Romeo Racing Ferrari",
+   "shortName": "Alfa Romeo",
+   "classId": 1,
+   "countryId": 188
+  },
+  {
+   "id": 2,
+   "fullName": "AlphaTauri Honda",
+   "shortName": "AlphaTauri",
+   "classId": 1,
+   "countryId": 97
+  },
+  {
+   "id": 3,
+   "fullName": "Alpine Renault",
+   "shortName": "Alpine",
+   "classId": 1,
+   "countryId": 68
+  },
+  {
+   "id": 4,
+   "fullName": "Aston Martin Mercedes",
+   "shortName": "Aston Martin",
+   "classId": 1,
+   "countryId": 76
+  },
+  {
+   "id": 5,
+   "fullName": "Haas Ferrari",
+   "shortName": "Haas",
+   "classId": 1,
+   "countryId": 205
+  },
+  {
+   "id": 6,
+   "fullName": "McLaren Mercedes",
+   "shortName": "McLaren",
+   "classId": 1,
+   "countryId": 76
+  },
+  {
+   "id": 7,
+   "fullName": "Mercedes AMG Petronas",
+   "shortName": "Mercedes",
+   "classId": 1,
+   "countryId": 73
+  },
+  {
+   "id": 8,
+   "fullName": "Red Bull Racing Honda",
+   "shortName": "Red Bull",
+   "classId": 1,
+   "countryId": 12
+  },
+  {
+   "id": 9,
+   "fullName": "Scuderia Ferrari",
+   "shortName": "Ferrari",
+   "classId": 1,
+   "countryId": 97
+  },
+  {
+   "id": 10,
+   "fullName": "Williams Mercedes",
+   "shortName": "Williams",
+   "classId": 1,
+   "countryId": 76
+  }
+ ],
+ "authenticSeason": [
+  {
+   "id": 1,
+   "year": 2021,
+   "numberOfRaces": 22,
+   "classId": 1,
+   "driversChampionId": 12,
+   "constructorsChampionId": 7
+  },
+  {
+   "id": 2,
+   "year": 2022,
+   "numberOfRaces": 22,
+   "classId": 1,
+   "driversChampionId": 12,
+   "constructorsChampionId": 8
+  }
+ ],
+ "authenticTime": [
+  {
+   "id": 1,
+   "millis": 63720,
+   "classId": 1,
+   "driverId": 12,
+   "teamId": 8,
+   "configId": 25,
+   "valid": true
+  },
+  {
+   "id": 2,
+   "millis": 67934,
+   "classId": 1,
+   "driverId": 11,
+   "teamId": 7,
+   "configId": 11,
+   "valid": true
+  },
+  {
+   "id": 3,
+   "millis": 68885,
+   "classId": 1,
+   "driverId": 12,
+   "teamId": 8,
+   "configId": 20,
+   "valid": true
+  },
+  {
+   "id": 4,
+   "millis": 70346,
+   "classId": 1,
+   "driverId": 3,
+   "teamId": 9,
+   "configId": 16,
+   "valid": true
+  },
+  {
+   "id": 5,
+   "millis": 74411,
+   "classId": 1,
+   "driverId": 11,
+   "teamId": 7,
+   "configId": 10,
+   "valid": true
+  },
+  {
+   "id": 6,
+   "millis": 75419,
+   "classId": 1,
+   "driverId": 11,
+   "teamId": 7,
+   "configId": 21,
+   "valid": true
+  },
+  {
+   "id": 7,
+   "millis": 75875,
+   "classId": 1,
+   "driverId": 20,
+   "teamId": 7,
+   "configId": 9,
+   "valid": true
+  },
+  {
+   "id": 8,
+   "millis": 76741,
+   "classId": 1,
+   "driverId": 11,
+   "teamId": 7,
+   "configId": 15,
+   "valid": true
+  },
+  {
+   "id": 9,
+   "millis": 78348,
+   "classId": 1,
+   "driverId": 20,
+   "teamId": 7,
+   "configId": 8,
+   "valid": true
+  },
+  {
+   "id": 10,
+   "millis": 79555,
+   "classId": 1,
+   "driverId": 20,
+   "teamId": 7,
+   "configId": 12,
+   "valid": true
+  },
+  {
+   "id": 11,
+   "millis": 80827,
+   "classId": 1,
+   "driverId": 11,
+   "teamId": 7,
+   "configId": 24,
+   "valid": true
+  },
+  {
+   "id": 12,
+   "millis": 82109,
+   "classId": 1,
+   "driverId": 12,
+   "teamId": 8,
+   "configId": 28,
+   "valid": true
+  },
+  {
+   "id": 13,
+   "millis": 82868,
+   "classId": 1,
+   "driverId": 11,
+   "teamId": 7,
+   "configId": 22,
+   "valid": true
+  },
+  {
+   "id": 14,
+   "millis": 86134,
+   "classId": 1,
+   "driverId": 11,
+   "teamId": 7,
+   "configId": 26,
+   "valid": true
+  },
+  {
+   "id": 15,
+   "millis": 87511,
+   "classId": 1,
+   "driverId": 11,
+   "teamId": 7,
+   "configId": 23,
+   "valid": true
+  },
+  {
+   "id": 16,
+   "millis": 88997,
+   "classId": 1,
+   "driverId": 12,
+   "teamId": 8,
+   "configId": 13,
+   "valid": true
+  },
+  {
+   "id": 17,
+   "millis": 89990,
+   "classId": 1,
+   "driverId": 12,
+   "teamId": 8,
+   "configId": 19,
+   "valid": true
+  },
+  {
+   "id": 18,
+   "millis": 92910,
+   "classId": 1,
+   "driverId": 12,
+   "teamId": 8,
+   "configId": 18,
+   "valid": true
+  },
+  {
+   "id": 19,
+   "millis": 101218,
+   "classId": 1,
+   "driverId": 3,
+   "teamId": 9,
+   "configId": 14,
+   "valid": true
+  },
+  {
+   "id": 20,
+   "millis": 101993,
+   "classId": 1,
+   "driverId": 10,
+   "teamId": 6,
+   "configId": 27,
+   "valid": true
+  },
+  {
+   "id": 21,
+   "millis": 119765,
+   "classId": 1,
+   "driverId": 12,
+   "teamId": 8,
+   "configId": 17,
+   "valid": true
+  }
+ ]
+}

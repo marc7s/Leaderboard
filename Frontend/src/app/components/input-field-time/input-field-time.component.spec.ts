@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { appTestingModule } from '../../testing/app-testing';
 
 import { InputFieldTimeComponent } from './input-field-time.component';
 
@@ -7,9 +8,7 @@ describe('InputFieldTimeComponent', () => {
   let fixture: ComponentFixture<InputFieldTimeComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ InputFieldTimeComponent ]
-    })
+    await TestBed.configureTestingModule(appTestingModule)
     .compileComponents();
   });
 

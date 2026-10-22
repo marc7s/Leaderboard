@@ -1,0 +1,36 @@
+{
+  "name": "Leaderboard",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspaces/Leaderboard",
+  "shutdownAction": "stopCompose",
+  "remoteUser": "node",
+  "postCreateCommand": "bash .devcontainer/post-create.sh",
+  "forwardPorts": [
+    4200,
+    5001,
+    5002
+  ],
+  "portsAttributes": {
+    "4200": {
+      "label": "Frontend",
+      "onAutoForward": "openBrowser"
+    },
+    "5001": {
+      "label": "Backend API"
+    },
+    "5002": {
+      "label": "AutoTime API"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "angular.ng-template",
+        "Prisma.prisma",
+        "qwtel.sqlite-viewer",
+        "vitest.explorer"
+      ]
+    }
+  }
+}

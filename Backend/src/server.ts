@@ -1,6 +1,6 @@
 import 'module-alias/register';
 import * as dotenv from 'dotenv';
-dotenv.config({ path: __dirname + '/../.env' });
+dotenv.config({ path: __dirname + '/../.env', quiet: true });
 
 import express, { Application, Request, Response, NextFunction } from 'express';
 import { getClientIp } from 'request-ip';
@@ -29,7 +29,7 @@ app.use(
 app.use(express.json());
 app.use('/api/db', require('./api/db'));
 
-app.get('*', (req: Request, res: Response, next: NextFunction) => {
+app.get('/{*splat}', (req: Request, res: Response, next: NextFunction) => {
   next(new NotFoundError(req.baseUrl + req.path));
 });
 

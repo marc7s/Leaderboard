@@ -11,6 +11,9 @@ src/environments/*
 # Only exists if Bazel was run
 /bazel-out
 
+# Angular build cache
+/.angular/cache
+
 # dependencies
 /node_modules
 

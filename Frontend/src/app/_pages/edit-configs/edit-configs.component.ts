@@ -1,13 +1,15 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
 import { Config } from '@shared/api';
 import { ApiService } from 'src/app/api.service';
 import { Option } from 'src/app/option';
 import { Size } from 'src/styleSettings';
 
 @Component({
-  selector: 'app-edit-configs',
-  templateUrl: './edit-configs.component.html',
-  styleUrls: ['./edit-configs.component.sass']
+    selector: 'app-edit-configs',
+    templateUrl: './edit-configs.component.html',
+    styleUrls: ['./edit-configs.component.sass'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class EditConfigsComponent implements OnInit {
 

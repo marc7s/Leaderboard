@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Car } from '@shared/api';
 import { ApiService } from 'src/app/api.service';
 import { Option } from 'src/app/option';
 
 @Component({
-  selector: 'app-edit-cars',
-  templateUrl: './edit-cars.component.html',
-  styleUrls: ['./edit-cars.component.sass']
+    selector: 'app-edit-cars',
+    templateUrl: './edit-cars.component.html',
+    styleUrls: ['./edit-cars.component.sass'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class EditCarsComponent implements OnInit {
 

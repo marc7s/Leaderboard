@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { User } from '@shared/api';
 import { ApiService } from 'src/app/api.service';
 import { Option } from 'src/app/option';
 
 @Component({
-  selector: 'app-edit-users',
-  templateUrl: './edit-users.component.html',
-  styleUrls: ['./edit-users.component.sass']
+    selector: 'app-edit-users',
+    templateUrl: './edit-users.component.html',
+    styleUrls: ['./edit-users.component.sass'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class EditUsersComponent implements OnInit {
 

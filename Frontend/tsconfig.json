@@ -2,17 +2,16 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
+    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "declaration": false,
-    "downlevelIteration": true,
     "experimentalDecorators": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "importHelpers": true,
     "target": "ES2022",
     "module": "es2020",
@@ -21,11 +20,14 @@
       "dom"
     ],
     "paths": {
+      "src/*": [
+        "./src/*"
+      ],
       "@shared/*": [
-        "../Backend/src/shared/*"
+        "./../Backend/src/shared/*"
       ]
     },
-    "types": ["dom-screen-wake-lock"],
+    "types": [],
     "useDefineForClassFields": false
   },
   "angularCompilerOptions": {

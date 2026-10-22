@@ -1,10 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { LapRecordType, TimeSummary } from '@shared/dataStructures';
 
 @Component({
-  selector: 'app-leaderboard-entry',
-  templateUrl: './leaderboard-entry.component.html',
-  styleUrls: ['./leaderboard-entry.component.sass']
+    selector: 'app-leaderboard-entry',
+    templateUrl: './leaderboard-entry.component.html',
+    styleUrls: ['./leaderboard-entry.component.sass'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class LeaderboardEntryComponent implements OnInit {
   @Input() time: TimeSummary | null = null;

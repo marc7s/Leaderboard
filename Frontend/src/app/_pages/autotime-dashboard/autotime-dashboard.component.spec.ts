@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { appTestingModule } from '../../testing/app-testing';
 
 import { AutoTimeDashboardComponent } from './autotime-dashboard.component';
 
@@ -7,9 +8,7 @@ describe('AutoTimeDashboardComponent', () => {
   let fixture: ComponentFixture<AutoTimeDashboardComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ AutoTimeDashboardComponent ]
-    })
+    await TestBed.configureTestingModule(appTestingModule)
     .compileComponents();
   });
 

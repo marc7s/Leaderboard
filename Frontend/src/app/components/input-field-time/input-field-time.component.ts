@@ -1,9 +1,11 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-  selector: 'app-input-field-time',
-  templateUrl: './input-field-time.component.html',
-  styleUrls: ['./input-field-time.component.sass']
+    selector: 'app-input-field-time',
+    templateUrl: './input-field-time.component.html',
+    styleUrls: ['./input-field-time.component.sass'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class InputFieldTimeComponent implements OnInit {
 

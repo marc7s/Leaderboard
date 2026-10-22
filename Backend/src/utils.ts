@@ -1,5 +1,5 @@
 import * as dotenv from 'dotenv';
-dotenv.config({ path: __dirname + '../.env' });
+dotenv.config({ path: __dirname + '../.env', quiet: true });
 
 export function createURL(
   baseURL: string,

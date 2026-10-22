@@ -1,9 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-  selector: 'app-input-field-text',
-  templateUrl: './input-field-text.component.html',
-  styleUrls: ['./input-field-text.component.sass']
+    selector: 'app-input-field-text',
+    templateUrl: './input-field-text.component.html',
+    styleUrls: ['./input-field-text.component.sass'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class InputFieldTextComponent implements OnInit {
 

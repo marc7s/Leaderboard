@@ -1,4 +1,5 @@
-<div *ngIf="config && timeSummary" class="recordContainer" [class.authentic]="authentic">
+@if (config && timeSummary) {
+  <div class="recordContainer" [class.authentic]="authentic">
     <div id="username">{{ timeSummary.username }}</div>
     <div id="game">{{ config.game.name }}</div>
     <div>{{ config.car.shortName }}</div>
@@ -7,5 +8,6 @@
     <div>{{ config.setup.description }}</div>
     <div id="time">{{timeSummary.millis | time}}</div>
     <div id="valid" [class.invalid]="!timeSummary.valid"></div>
-</div>
+  </div>
+}
 

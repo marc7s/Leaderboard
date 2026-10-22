@@ -13,20 +13,9 @@ export interface User {
   username: string;
 }
 
-export interface DBUser {
-  ID: number;
-  Username: string;
-}
-
 export interface Game {
   id: number;
   name: string;
-}
-
-export interface DBGame {
-  ID: number;
-  Name: string;
-  AddedAt: Date;
 }
 
 export interface Car {
@@ -35,35 +24,15 @@ export interface Car {
   shortName: string;
 }
 
-export interface DBCar {
-  ID: number;
-  FullName: string;
-  ShortName: string;
-  AddedAt: Date;
-}
-
 export interface Weather {
   id: number;
   name: string;
-}
-
-export interface DBWeather {
-  ID: number;
-  Name: string;
-  AddedAt: Date;
 }
 
 export interface Tyre {
   id: number;
   fullName: string;
   shortName: string;
-}
-
-export interface DBTyre {
-  ID: number;
-  FullName: string;
-  ShortName: string;
-  AddedAt: Date;
 }
 
 export interface Country {
@@ -73,14 +42,6 @@ export interface Country {
   alpha2Code: string;
 }
 
-export interface DBCountry {
-  ID: number;
-  FullName: string;
-  ShortName: string;
-  Alpha2Code: string;
-  AddedAt: Date;
-}
-
 export interface Track {
   id: number;
   fullName: string;
@@ -88,27 +49,11 @@ export interface Track {
   country: Country;
 }
 
-export interface DBTrack {
-  ID: number;
-  FullName: string;
-  ShortName: string;
-  CountryID: number;
-  AddedAt: Date;
-}
-
 export interface Setup {
   id: number;
   description: string;
   custom: boolean;
   manual: boolean;
-}
-
-export interface DBSetup {
-  ID: number;
-  Description: string;
-  Custom: boolean;
-  Manual: boolean;
-  AddedAt: Date;
 }
 
 export interface Config {
@@ -122,18 +67,6 @@ export interface Config {
   setup: Setup;
 }
 
-export interface DBConfig {
-  ID: number;
-  Description: string;
-  GameID: number;
-  TrackID: number;
-  CarID: number;
-  WeatherID: number;
-  TyreID: number;
-  SetupID: number;
-  AddedAt: Date;
-}
-
 export interface Time {
   id: number;
   time: string;
@@ -143,40 +76,9 @@ export interface Time {
   valid: boolean;
 }
 
-export interface DBTime {
-  ID: number;
-  Time: string;
-  Millis: number;
-  Username: string;
-  ConfigID: number;
-  Valid: boolean;
-  Record: number;
-  Weather: string;
-  AddedAt: Date;
-}
-
-export interface DBRecord {
-  Record: number;
-}
-
-export interface DBClass {
-  ID: number;
-  Name: string;
-}
-
 export interface Class {
   id: number;
   name: string;
-}
-
-export interface DBDriver {
-  ID: number;
-  FirstName: string;
-  LastName: string;
-  ShortName: string;
-  Number: number;
-  ClassID: number;
-  CountryID: number;
 }
 
 export interface Driver {
@@ -185,21 +87,4 @@ export interface Driver {
   shortName: string;
   number: number;
   country: Country;
-}
-
-export interface DBAuthenticTrackRecord {
-  ID: number;
-  Time: string;
-  Millis: number;
-  ClassName: string;
-  DriverFirstName: string;
-  DriverLastName: string;
-  DriverShortName: string;
-  DriverNumber: number;
-  CarShortName: string;
-  WeatherName: string;
-  TyreShortName: string;
-  SetupDescription: string;
-  SetupCustom: boolean;
-  Valid: boolean;
 }

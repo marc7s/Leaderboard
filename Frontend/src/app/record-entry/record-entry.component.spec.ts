@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { appTestingModule } from '../testing/app-testing';
 
 import { RecordEntryComponent } from './record-entry.component';
 
@@ -7,9 +8,7 @@ describe('RecordEntryComponent', () => {
   let fixture: ComponentFixture<RecordEntryComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ RecordEntryComponent ]
-    })
+    await TestBed.configureTestingModule(appTestingModule)
     .compileComponents();
   });
 

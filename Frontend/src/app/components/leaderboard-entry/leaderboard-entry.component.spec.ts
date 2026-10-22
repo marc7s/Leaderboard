@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { appTestingModule } from '../../testing/app-testing';
 
 import { LeaderboardEntryComponent } from './leaderboard-entry.component';
 
@@ -7,9 +8,7 @@ describe('LeaderboardEntryComponent', () => {
   let fixture: ComponentFixture<LeaderboardEntryComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ LeaderboardEntryComponent ]
-    })
+    await TestBed.configureTestingModule(appTestingModule)
     .compileComponents();
   });
 

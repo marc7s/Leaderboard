@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { appTestingModule } from '../../testing/app-testing';
 
 import { InputFieldSelectComponent } from './input-field-select.component';
 
@@ -7,9 +8,7 @@ describe('InputFieldSelectComponent', () => {
   let fixture: ComponentFixture<InputFieldSelectComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ InputFieldSelectComponent ]
-    })
+    await TestBed.configureTestingModule(appTestingModule)
     .compileComponents();
   });
 

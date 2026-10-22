@@ -1,31 +1,34 @@
 <div class="pageTitle">AutoTime Dashboard</div>
 
-<ng-container *ngIf="isSetup; else contactingAutoTime">
-    <div class="container">
-        <div class="box currentDriverContainer" *ngIf="isEditor">
-            <div type="checkbox" [class.toggled]="updateToggle" class="updateIcon"></div>
-            <div class="title">Current Driver</div>
-            <app-input-field-select 
-                class="currentDriver" 
-                placeholder="Driver"
-                (optionChange)="selectUser()"
-                [(value)]="userID"
-                [options]="sessionUsers">
-            </app-input-field-select>
-        </div>
-        
-        <div class="box currentDriverContainer">
-            <div class="title">Session Times</div>
-            <app-leaderboard-entry *ngFor="let time of previousTimes; let i = index" [time]="time" [position]="i + 1"></app-leaderboard-entry>
-        </div>
+@if (isSetup) {
+  <div class="container">
+    @if (isEditor) {
+      <div class="box currentDriverContainer">
+        <div type="checkbox" [class.toggled]="updateToggle" class="updateIcon"></div>
+        <div class="title">Current Driver</div>
+        <app-input-field-select
+          class="currentDriver"
+          placeholder="Driver"
+          (optionChange)="selectUser()"
+          [(value)]="userID"
+          [options]="sessionUsers">
+        </app-input-field-select>
+      </div>
+    }
+    <div class="box currentDriverContainer">
+      <div class="title">Session Times</div>
+      @for (time of previousTimes; track time; let i = $index) {
+        <app-leaderboard-entry [time]="time" [position]="i + 1"></app-leaderboard-entry>
+      }
     </div>
-    <div class="pageNote">Only showing the last 10 times from the current session.</div>
-
-    <div *ngIf="!isEditor" class="enableEditor">
-        <app-card (click)="enableEditor()">Enable editor</app-card>
+  </div>
+  <div class="pageNote">Only showing the last 10 times from the current session.</div>
+  @if (!isEditor) {
+    <div class="enableEditor">
+      <app-card (click)="enableEditor()">Enable editor</app-card>
     </div>
-</ng-container>
+  }
+} @else {
+  <div class="waitMessage box">Please wait, setting up connection with AutoTime...</div>
+}
 
-<ng-template #contactingAutoTime>
-    <div class="waitMessage box">Please wait, setting up connection with AutoTime...</div>
-</ng-template>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Track } from '@shared/api';
 import { LapRecord } from '@shared/dataStructures';
 import { ApiService } from 'src/app/api.service';
@@ -6,9 +6,11 @@ import { lapRecordSorting } from 'src/app/sorting-functions';
 import { getUsernameFromDriver } from 'src/app/user';
 
 @Component({
-  selector: 'app-records',
-  templateUrl: './records.component.html',
-  styleUrls: ['./records.component.sass', '../../shared-styles/record.sass']
+    selector: 'app-records',
+    templateUrl: './records.component.html',
+    styleUrls: ['./records.component.sass', '../../shared-styles/record.sass'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class RecordsComponent implements OnInit {
 

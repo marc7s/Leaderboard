@@ -7,7 +7,7 @@ import { AdminComponent } from './_pages/admin/admin.component';
 import { HomeComponent } from './_pages/home/home.component';
 import { AddTimeComponent } from './_pages/add-time/add-time.component';
 import { LoginComponent } from './_pages/login/login.component';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi, withXhr } from '@angular/common/http';
 import { HttpErrorInterceptor } from './httpInterceptor';
 import { InputFieldTextComponent } from './components/input-field-text/input-field-text.component';
 import { ErrorComponent } from './_pages/error/error.component';
@@ -93,7 +93,6 @@ const materialModules = [
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
     ...materialModules,
     BrowserAnimationsModule,
     FormsModule
@@ -103,7 +102,8 @@ const materialModules = [
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,
       multi: true
-    }
+    },
+    provideHttpClient(withXhr(), withInterceptorsFromDi())
   ],
   bootstrap: [AppComponent]
 })

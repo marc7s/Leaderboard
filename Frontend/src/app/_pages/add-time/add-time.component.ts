@@ -1,14 +1,17 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ElementRef } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { Config, Setup } from '@shared/api';
 import { LapRecordType, TimeSummary } from '@shared/dataStructures';
 import { ApiService } from 'src/app/api.service';
 import { Option } from 'src/app/option';
+import { lastValueFrom } from 'rxjs';
 import { Size } from 'src/styleSettings';
 
 @Component({
-  selector: 'app-add-time',
-  templateUrl: './add-time.component.html',
-  styleUrls: ['./add-time.component.sass']
+    selector: 'app-add-time',
+    templateUrl: './add-time.component.html',
+    styleUrls: ['./add-time.component.sass'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class AddTimeComponent implements OnInit {
   Large: Size = Size.Large;
@@ -57,7 +60,7 @@ export class AddTimeComponent implements OnInit {
       this.placeholderTimes = [
         {
           id: -1,
-          time: `1970-01-01T00:${parsedTime}Z` ?? '',
+          time: `1970-01-01T00:${parsedTime}Z`,
           millis: 0,
           username: this.username ?? '',
           game: this.games.find(g => g.value == this.gameID)!.display ?? '',
@@ -83,10 +86,10 @@ export class AddTimeComponent implements OnInit {
 
   async addTime(): Promise<void> {
     if(this.configID !== null && this.userID !== null && this.username !== null && this.time !== null) {
-      await this.api.addTimeWithConfig(this.configID, this.userID, this.time, !this.invalid).toPromise();
+      await lastValueFrom(this.api.addTimeWithConfig(this.configID, this.userID, this.time, !this.invalid), { defaultValue: undefined });
       this.lastAddedTime = this.placeholderTimes;
     } else if(this.userID !== null && this.gameID !== null && this.trackID !== null && this.carID !== null && this.weatherID !== null && this.tyreID !== null && this.setupID !== null && this.time !== null) {
-      await this.api.addTime(this.userID, this.gameID, this.trackID, this.carID, this.weatherID, this.tyreID, this.setupID, this.time, !this.invalid).toPromise();
+      await lastValueFrom(this.api.addTime(this.userID, this.gameID, this.trackID, this.carID, this.weatherID, this.tyreID, this.setupID, this.time, !this.invalid), { defaultValue: undefined });
       this.lastAddedTime = this.placeholderTimes;
     } else {
       console.error("Could not add time, incorrect parameters");

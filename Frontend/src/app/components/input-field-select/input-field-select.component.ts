@@ -1,13 +1,15 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
 import { MatOption } from '@angular/material/core';
 import { MatSelect } from '@angular/material/select';
 import { Option } from 'src/app/option';
 import { Size } from 'src/styleSettings';
 
 @Component({
-  selector: 'app-input-field-select',
-  templateUrl: './input-field-select.component.html',
-  styleUrls: ['./input-field-select.component.sass']
+    selector: 'app-input-field-select',
+    templateUrl: './input-field-select.component.html',
+    styleUrls: ['./input-field-select.component.sass'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class InputFieldSelectComponent implements OnInit {
 

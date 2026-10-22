@@ -1,11 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Color } from 'src/app/color';
 import { Size } from 'src/styleSettings';
 
 @Component({
-  selector: 'app-highlight',
-  templateUrl: './highlight.component.html',
-  styleUrls: ['./highlight.component.sass']
+    selector: 'app-highlight',
+    templateUrl: './highlight.component.html',
+    styleUrls: ['./highlight.component.sass'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class HighlightComponent implements OnInit {
 

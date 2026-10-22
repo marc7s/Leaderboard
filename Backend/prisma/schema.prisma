@@ -1,0 +1,240 @@
+// Database schema for the Leaderboard.
+// After changing it, run `npm run db:migrate -- --name <change>` to create a migration.
+//
+// Text columns compare case-insensitively (COLLATE NOCASE in the migrations), as they did in
+// SQL Server. Prisma cannot express collations in the schema, so new migrations that add text
+// columns should add COLLATE NOCASE by hand.
+
+generator client {
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  moduleFormat = "cjs"
+  // Extension-less imports work both with ts-node (npm run dev) and the compiled build
+  importFileExtension = ""
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id       Int      @id @default(autoincrement())
+  username String   @unique
+  /// SHA-512 hash of the password (UTF-16LE encoded, as computed by SQL Server). Only admins have one.
+  password Bytes?
+  admin    Boolean  @default(false)
+  addedAt  DateTime @default(now())
+
+  times Time[]
+}
+
+model Game {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  /// Authentic games hold real-world lap times, e.g. a Formula 1 season
+  authentic Boolean  @default(false)
+  addedAt   DateTime @default(now())
+
+  configs Config[]
+}
+
+model Car {
+  id        Int      @id @default(autoincrement())
+  fullName  String   @unique
+  shortName String   @unique
+  addedAt   DateTime @default(now())
+
+  configs Config[]
+}
+
+model Weather {
+  id      Int      @id @default(autoincrement())
+  name    String   @unique
+  addedAt DateTime @default(now())
+
+  configs Config[]
+}
+
+model Tyre {
+  id        Int      @id @default(autoincrement())
+  fullName  String   @unique
+  shortName String   @unique
+  addedAt   DateTime @default(now())
+
+  configs Config[]
+}
+
+model Country {
+  id         Int      @id @default(autoincrement())
+  fullName   String   @unique
+  shortName  String   @unique
+  alpha2Code String   @unique
+  addedAt    DateTime @default(now())
+
+  tracks           Track[]
+  authenticDrivers AuthenticDriver[]
+  authenticTeams   AuthenticTeam[]
+}
+
+model Track {
+  id        Int      @id @default(autoincrement())
+  fullName  String   @unique
+  shortName String   @unique
+  countryId Int
+  addedAt   DateTime @default(now())
+
+  country Country  @relation(fields: [countryId], references: [id])
+  configs Config[]
+}
+
+model Setup {
+  id                     Int      @id @default(autoincrement())
+  description            String?  @unique
+  /// Custom setups were tuned by the driver, as opposed to a default setup from the game
+  custom                 Boolean
+  /// Manual setups were added by hand and must have a description. AutoTime adds the others.
+  manual                 Boolean
+  frontWing              Int?
+  rearWing               Int?
+  onThrottle             Int?
+  offThrottle            Int?
+  frontCamber            Float?
+  rearCamber             Float?
+  frontToe               Float?
+  rearToe                Float?
+  frontSuspension        Int?
+  rearSuspension         Int?
+  frontAntiRollBar       Int?
+  rearAntiRollBar        Int?
+  frontSuspensionHeight  Int?
+  rearSuspensionHeight   Int?
+  brakePressure          Int?
+  brakeBias              Int?
+  rearLeftTyrePressure   Float?
+  rearRightTyrePressure  Float?
+  frontLeftTyrePressure  Float?
+  frontRightTyrePressure Float?
+  ballast                Int?
+  fuelLoad               Float?
+  addedAt                DateTime @default(now())
+
+  configs Config[]
+}
+
+/// A combination of game, track, car, weather, tyre and setup that lap times are set in
+model Config {
+  id          Int      @id @default(autoincrement())
+  /// Optional name. Configs added by AutoTime or from the add time page have none.
+  description String?
+  gameId      Int
+  trackId     Int
+  carId       Int
+  weatherId   Int
+  tyreId      Int
+  setupId     Int
+  authentic   Boolean  @default(false)
+  addedAt     DateTime @default(now())
+
+  game           Game            @relation(fields: [gameId], references: [id])
+  track          Track           @relation(fields: [trackId], references: [id])
+  car            Car             @relation(fields: [carId], references: [id])
+  weather        Weather         @relation(fields: [weatherId], references: [id])
+  tyre           Tyre            @relation(fields: [tyreId], references: [id])
+  setup          Setup           @relation(fields: [setupId], references: [id])
+  times          Time[]
+  authenticTimes AuthenticTime[]
+
+  @@index([trackId])
+}
+
+model Time {
+  id            Int      @id @default(autoincrement())
+  /// The lap time in milliseconds
+  millis        Int
+  userId        Int
+  configId      Int
+  valid         Boolean
+  addedManually Boolean
+  addedAt       DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id])
+  config Config @relation(fields: [configId], references: [id])
+
+  @@index([userId])
+  @@index([configId])
+}
+
+/// A racing class with real-world drivers and lap times, e.g. Formula 1
+model AuthenticClass {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+
+  drivers AuthenticDriver[]
+  teams   AuthenticTeam[]
+  seasons AuthenticSeason[]
+  times   AuthenticTime[]
+}
+
+model AuthenticDriver {
+  id        Int      @id @default(autoincrement())
+  firstName String
+  lastName  String
+  shortName String
+  number    Int
+  classId   Int
+  countryId Int
+  addedAt   DateTime @default(now())
+
+  class         AuthenticClass    @relation(fields: [classId], references: [id])
+  country       Country           @relation(fields: [countryId], references: [id])
+  times         AuthenticTime[]
+  championships AuthenticSeason[]
+}
+
+model AuthenticTeam {
+  id        Int      @id @default(autoincrement())
+  fullName  String   @unique
+  shortName String   @unique
+  classId   Int
+  countryId Int
+  addedAt   DateTime @default(now())
+
+  class         AuthenticClass    @relation(fields: [classId], references: [id])
+  country       Country           @relation(fields: [countryId], references: [id])
+  times         AuthenticTime[]
+  championships AuthenticSeason[]
+}
+
+model AuthenticSeason {
+  id                     Int      @id @default(autoincrement())
+  year                   Int      @unique
+  numberOfRaces          Int
+  classId                Int
+  driversChampionId      Int?
+  constructorsChampionId Int?
+  addedAt                DateTime @default(now())
+
+  class                AuthenticClass   @relation(fields: [classId], references: [id])
+  driversChampion      AuthenticDriver? @relation(fields: [driversChampionId], references: [id])
+  constructorsChampion AuthenticTeam?   @relation(fields: [constructorsChampionId], references: [id])
+}
+
+/// A real-world lap time, used to show whether users have beaten the real drivers
+model AuthenticTime {
+  id       Int      @id @default(autoincrement())
+  /// The lap time in milliseconds
+  millis   Int
+  classId  Int
+  driverId Int
+  teamId   Int
+  configId Int
+  valid    Boolean
+  addedAt  DateTime @default(now())
+
+  class  AuthenticClass  @relation(fields: [classId], references: [id])
+  driver AuthenticDriver @relation(fields: [driverId], references: [id])
+  team   AuthenticTeam   @relation(fields: [teamId], references: [id])
+  config Config          @relation(fields: [configId], references: [id])
+
+  @@index([configId])
+}

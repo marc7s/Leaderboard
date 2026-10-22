@@ -1,9 +1,8 @@
 import 'module-alias/register';
 import * as dotenv from 'dotenv';
-dotenv.config({ path: __dirname + '/../../Backend/.env' });
+dotenv.config({ path: __dirname + '/../../Backend/.env', quiet: true });
 
 import express, { Application, Request, Response, NextFunction } from 'express';
-import { RequestError } from 'tedious';
 import { getClientIp } from 'request-ip';
 import * as fs from 'fs';
 
@@ -86,7 +85,7 @@ import {
   GetTyreShortName,
   GetWeatherName,
 } from './gameToDatabase';
-import { addTime } from './db';
+import { addTime, BackendError } from './db';
 
 const app: Application = express();
 const cors = require('cors');
@@ -330,7 +329,7 @@ app.use(
 app.use(express.json());
 app.use('/api', require('./api'));
 
-app.get('*', (req: Request, res: Response, next: NextFunction) => {
+app.get('/{*splat}', (req: Request, res: Response, next: NextFunction) => {
   next(new NotFoundError(req.baseUrl + req.path));
 });
 
@@ -674,7 +673,7 @@ function checkCurrentTime(): void {
         .then(() => Cache.AddTime(currTime.ID, timeSummary))
         .catch((err) => {
           if (
-            err instanceof RequestError &&
+            err instanceof BackendError &&
             err.message === 'Time already exists'
           ) {
             Cache.AddTime(currTime.ID, timeSummary);
