@@ -13,8 +13,9 @@ services:
       - autotime-node-modules:/workspaces/Leaderboard/AutoTime/node_modules
       - frontend-node-modules:/workspaces/Leaderboard/Frontend/node_modules
     ports:
-      # Telemetry from the F1 game on the host reaches AutoTime through this port
+      # Telemetry from F1 2021 and Dirt Rally 2.0 on the host reaches AutoTime through these ports
       - "20777:20777/udp"
+      - "20778:20778/udp"
 
 volumes:
   backend-node-modules:

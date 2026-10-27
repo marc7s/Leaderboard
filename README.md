@@ -8,7 +8,7 @@ I build this website in order to store the lap times of me and my friends racing
 It is also an intuitive dashboard where you can browse the current records to decide if you want to try and beat somebody in a specific configuration.
 
 ## AutoTime
-Since adding each time is a task in itself, needing to keep track of these parameters and always staying on top to add the times, I have added a game integration called `AutoTime`. It utilises the telemetry data that several simulator type racing games provide in order to gather this data automatically. The structure is built to support different games with a specific integration for each game needed to facilitate proper communication between the game and `AutoTime`. The first integration is with F1 2021, where the AutoTime script is run on the computer hosting the game. A separate device, such as a phone, is then used as the controller for `AutoTime`, switching the current driver as this information is not part of the game. The device can also see the current times being posted in real time, making it easy to track the current driver's progress.
+Since adding each time is a task in itself, needing to keep track of these parameters and always staying on top to add the times, I have added a game integration called `AutoTime`. It utilises the telemetry data that several simulator type racing games provide in order to gather this data automatically. The structure is built to support different games with a specific integration for each game needed to facilitate proper communication between the game and `AutoTime`. The supported games are F1 2021, Assetto Corsa Competizione, Assetto Corsa and Dirt Rally 2.0. The AutoTime script is run on the computer hosting the game. F1 2021 and Dirt Rally 2.0 send UDP telemetry that AutoTime reads directly. The Assetto Corsa games share their data through shared memory, which small Python readers in `AutoTime/python` read and send to AutoTime's API. See `AutoTime/README.md` for how to set up each game. A separate device, such as a phone, is then used as the controller for `AutoTime`, switching the current driver as this information is not part of the game. The device can also see the current times being posted in real time, making it easy to track the current driver's progress.
 
 `AutoTime` gathers a lot of information from the supported games, some of which might not be applicable for every game. It is therefore possible that some changes need to be made in order to support more games. For F1 2021, `AutoTime` collects the time, but also information such as weather, tyres, car, track and every setup setting for each lap - including tyre pressures and aero configurations.
 
@@ -49,7 +49,7 @@ The repository includes a [devcontainer](https://containers.dev) with Node.js an
 3. Run `npm run dev` in the `Backend`, `Frontend` and `AutoTime` directories, each in its own terminal. VS Code forwards the ports, so the site opens at `http://localhost:4200`.
 4. Log in as the admin user `admin` with the password `admin`.
 
-The settings used inside the container are in `.devcontainer/devcontainer.env`. They override `Backend/.env`, and use a separate database file, `Backend/data/dev.db`, so the container never touches your real data. They are for local development only. The F1 game can send telemetry to `localhost:20777` (UDP), which reaches AutoTime in the container.
+The settings used inside the container are in `.devcontainer/devcontainer.env`. They override `Backend/.env`, and use a separate database file, `Backend/data/dev.db`, so the container never touches your real data. They are for local development only. F1 2021 can send telemetry to `localhost:20777` and Dirt Rally 2.0 to `localhost:20778` (UDP), which reach AutoTime in the container. The Python readers for the Assetto Corsa games run on the Windows host and reach AutoTime at `localhost:5002`; set `ACCESS_TOKEN_SECRET` for them to the value in `devcontainer.env`.
 
 To recreate the dev database from scratch, delete `Backend/data/dev.db` and run `npm run db:deploy && npm run db:seed` in `Backend`.
 
@@ -66,7 +66,8 @@ If `Frontend/src/environments/environment.dev.ts` already exists, it is kept as 
 ### AutoTime
 1. Make sure all dependencies are installed on the computer that will host the game to automatically log the times from.
 2. `AutoTime` uses the same `.env` file as the `Backend`, since they share parts of the code. Therefore this file needs to be correctly set up in order for `AutoTime` to function. AutoTime sends lap times to the backend, so the backend must be running. If AutoTime runs on another computer than the backend, set `BACKEND_URL` to the backend's address, e.g. `http://192.168.1.10:5001`.
-3. Run `npm run dev` to make AutoTime start gathering telemetry data. In order to change the current driver, the frontend also needs to be running with the AutoTime Dashboard page open. Note that although time data is gathered, no time will be posted unless a driver is selected.
+3. Set up the game as described in `AutoTime/README.md`. For Assetto Corsa and Assetto Corsa Competizione, also start the game's Python reader.
+4. Run `npm run dev` to make AutoTime start gathering telemetry data. In order to change the current driver, the frontend also needs to be running with the AutoTime Dashboard page open. Note that although time data is gathered, no time will be posted unless a driver is selected.
 
 ## Running it in production
 Production runs in Docker.

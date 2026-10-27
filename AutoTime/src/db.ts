@@ -3,7 +3,7 @@ dotenv.config({ path: __dirname + '/../../Backend/.env', quiet: true });
 
 import { randomBytes } from 'crypto';
 import { JwtTokenBody } from '../../Backend/src/shared/utils';
-import { AT_CarSetupEntry } from './specification/carSetupsTypes';
+import type { GameLap } from './laps';
 
 /** The Backend that stores the lap times. Set BACKEND_URL when it runs on another computer. */
 const backendUrl = process.env.BACKEND_URL || `http://localhost:${process.env.BACKEND_PORT}`;
@@ -11,56 +11,51 @@ const backendUrl = process.env.BACKEND_URL || `http://localhost:${process.env.BA
 /** An error returned by the Backend, e.g. 'Time already exists' */
 export class BackendError extends Error {}
 
+/** The car setup values, for the games that send them (F1 2021) */
+export interface AutoTimeSetup {
+  frontWing: number;
+  rearWing: number;
+  onThrottle: number;
+  offThrottle: number;
+  frontCamber: number;
+  rearCamber: number;
+  frontToe: number;
+  rearToe: number;
+  frontSuspension: number;
+  rearSuspension: number;
+  frontAntiRollBar: number;
+  rearAntiRollBar: number;
+  frontSuspensionHeight: number;
+  rearSuspensionHeight: number;
+  brakePressure: number;
+  brakeBias: number;
+  rearLeftTyrePressure: number;
+  rearRightTyrePressure: number;
+  frontLeftTyrePressure: number;
+  frontRightTyrePressure: number;
+  ballast: number;
+  fuelLoad: number;
+}
+
 /**
  * Sends a lap time to the Backend. AutoTime signs its own access token with the
  * ACCESS_TOKEN_SECRET it shares with the Backend.
  */
-export async function addTime(
-  time: string,
-  userID: number,
-  gameName: string,
-  trackName: string,
-  carName: string,
-  weatherName: string,
-  tyreName: string,
-  setup: AT_CarSetupEntry,
-  valid: boolean
-): Promise<boolean> {
+export async function addTime(userID: number, time: string, lap: GameLap): Promise<boolean> {
   const body = {
     time,
     userID,
-    gameName,
-    trackName,
-    carName,
-    weatherName,
-    tyreName,
-    setup: {
-      frontWing: setup.FrontWing,
-      rearWing: setup.RearWing,
-      onThrottle: setup.OnThrottle,
-      offThrottle: setup.OffThrottle,
-      frontCamber: setup.FrontCamber,
-      rearCamber: setup.RearCamber,
-      frontToe: setup.FrontToe,
-      rearToe: setup.RearToe,
-      frontSuspension: setup.FrontSuspension,
-      rearSuspension: setup.RearSuspension,
-      frontAntiRollBar: setup.FrontAntiRollBar,
-      rearAntiRollBar: setup.RearAntiRollBar,
-      frontSuspensionHeight: setup.FrontSuspensionHeight,
-      rearSuspensionHeight: setup.RearSuspensionHeight,
-      brakePressure: setup.BrakePressure,
-      brakeBias: setup.BrakeBias,
-      rearLeftTyrePressure: setup.RearLeftTyrePressure,
-      rearRightTyrePressure: setup.RearRightTyrePressure,
-      frontLeftTyrePressure: setup.FrontLeftTyrePressure,
-      frontRightTyrePressure: setup.FrontRightTyrePressure,
-      ballast: setup.Ballast,
-      fuelLoad: setup.FuelLoad,
-    },
-    valid,
+    gameName: lap.game,
+    trackName: lap.track.name,
+    carName: lap.car.name,
+    weatherName: lap.weather,
+    tyreName: lap.tyre.name,
+    setup: lap.setup,
+    valid: lap.valid,
+    track: { fullName: lap.track.fullName, country: lap.track.country },
+    car: { fullName: lap.car.fullName },
+    tyre: { fullName: lap.tyre.fullName },
   };
-  console.log({ time, userID, gameName, trackName, carName, weatherName, tyreName, valid });
 
   const token = new JwtTokenBody(
     { id: 0, username: 'AutoTime' },

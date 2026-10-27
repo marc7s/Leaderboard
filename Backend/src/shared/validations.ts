@@ -504,15 +504,36 @@ export async function autoTimeParam(
   );
   if (validCheck !== null) return next(validCheck);
 
-  const setup = body.setup ?? {};
-  for (const field of AUTO_TIME_SETUP_FIELDS) {
-    const check = checkParameter(
-      setup[field] ?? MISSING,
-      `setup.${field}`,
-      Number.isFinite,
-      'is not a number'
-    );
-    if (check !== null) return next(check);
+  // The setup is optional, since only some games send it. If it is sent, it must be complete.
+  const setup = body.setup;
+  if (setup != null) {
+    for (const field of AUTO_TIME_SETUP_FIELDS) {
+      const check = checkParameter(
+        setup[field] ?? MISSING,
+        `setup.${field}`,
+        Number.isFinite,
+        'is not a number'
+      );
+      if (check !== null) return next(check);
+    }
+  }
+
+  // Optional details used to create a track, car or tyre the database does not have yet
+  const details: Record<string, any> = {};
+  const detailFields: Record<string, string[]> = {
+    track: ['fullName', 'country'],
+    car: ['fullName'],
+    tyre: ['fullName'],
+  };
+  for (const [part, fields] of Object.entries(detailFields)) {
+    const value = body[part];
+    if (value == null) continue;
+    for (const field of fields) {
+      if (value[field] == null) continue;
+      const check = checkParameter(value[field], `${part}.${field}`, isValidString, 'is not a string');
+      if (check !== null) return next(check);
+    }
+    details[part] = Object.fromEntries(fields.map((f) => [f, value[f] ?? undefined]));
   }
 
   req.autoTime = {
@@ -523,8 +544,9 @@ export async function autoTimeParam(
     carName: body.carName,
     weatherName: body.weatherName,
     tyreName: body.tyreName,
-    setup: Object.fromEntries(AUTO_TIME_SETUP_FIELDS.map((f) => [f, setup[f]])),
+    setup: setup == null ? undefined : Object.fromEntries(AUTO_TIME_SETUP_FIELDS.map((f) => [f, setup[f]])),
     valid: body.valid,
+    ...details,
   };
   next();
 }

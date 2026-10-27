@@ -40,8 +40,15 @@ export interface AutoTime {
   carName: string;
   weatherName: string;
   tyreName: string;
-  setup: AutoTimeSetup;
+  /** Only sent by games that report the car setup. Times without one use the 'Default' setup. */
+  setup?: AutoTimeSetup;
   valid: boolean;
+  /** Used to create the track if it does not exist. Country is an alpha-2 code or a country name. */
+  track?: { fullName?: string; country?: string };
+  /** Used to create the car if it does not exist */
+  car?: { fullName?: string };
+  /** Used to create the tyre if it does not exist */
+  tyre?: { fullName?: string };
 }
 
 interface ConfigIds {
@@ -273,24 +280,23 @@ export async function addAutoTime(autoTime: AutoTime): Promise<boolean> {
   const millis = toMillis(autoTime.time);
   await prisma.$transaction(async (tx) => {
     const user = mustExist(await tx.user.findUnique({ where: { id: autoTime.userId } }), 'User does not exist');
-    const game = mustExist(await tx.game.findUnique({ where: { name: autoTime.gameName } }), 'Game does not exist');
-    const track = mustExist(
-      await tx.track.findUnique({ where: { shortName: autoTime.trackName } }),
-      'Track does not exist'
-    );
-    const car = mustExist(await tx.car.findUnique({ where: { shortName: autoTime.carName } }), 'Car does not exist');
+    // New games, cars, tracks and tyres are created the first time AutoTime sees them
+    const game =
+      (await tx.game.findUnique({ where: { name: autoTime.gameName } })) ??
+      (await tx.game.create({ data: { name: autoTime.gameName } }));
+    const track = await findOrCreateAutoTimeTrack(tx, autoTime);
+    const car = await findOrCreateByName(tx.car, autoTime.carName, autoTime.car?.fullName);
     const weather = mustExist(
       await tx.weather.findUnique({ where: { name: autoTime.weatherName } }),
       'Weather does not exist'
     );
-    const tyre = mustExist(
-      await tx.tyre.findUnique({ where: { shortName: autoTime.tyreName } }),
-      'Tyre does not exist'
-    );
+    const tyre = await findOrCreateByName(tx.tyre, autoTime.tyreName, autoTime.tyre?.fullName);
 
-    const setup =
-      (await tx.setup.findFirst({ where: autoTime.setup, orderBy: { id: 'asc' } })) ??
-      (await tx.setup.create({ data: { custom: true, manual: false, ...autoTime.setup } }));
+    const setup = autoTime.setup
+      ? (await tx.setup.findFirst({ where: autoTime.setup, orderBy: { id: 'asc' } })) ??
+        (await tx.setup.create({ data: { custom: true, manual: false, ...autoTime.setup } }))
+      : (await tx.setup.findUnique({ where: { description: 'Default' } })) ??
+        (await tx.setup.create({ data: { description: 'Default', custom: false, manual: true } }));
 
     const ids = {
       gameId: game.id,
@@ -309,4 +315,38 @@ export async function addAutoTime(autoTime: AutoTime): Promise<boolean> {
     await insertTime(tx, millis, user.id, config.id, autoTime.valid, false);
   });
   return true;
+}
+
+/** Finds a car or tyre by its short or full name, or creates it */
+async function findOrCreateByName<T>(
+  table: {
+    findFirst(args: { where: { OR: object[] } }): Promise<T | null>;
+    create(args: { data: { shortName: string; fullName: string } }): Promise<T>;
+  },
+  shortName: string,
+  fullName: string | undefined
+): Promise<T> {
+  const names = [{ shortName }, { fullName: shortName }, ...(fullName ? [{ fullName }] : [])];
+  return (
+    (await table.findFirst({ where: { OR: names } })) ??
+    (await table.create({ data: { shortName, fullName: fullName ?? shortName } }))
+  );
+}
+
+/** Finds the track of an AutoTime lap, or creates it if AutoTime sent the country it is in */
+async function findOrCreateAutoTimeTrack(tx: Tx, autoTime: AutoTime) {
+  const shortName = autoTime.trackName;
+  const fullName = autoTime.track?.fullName;
+  const names = [{ shortName }, { fullName: shortName }, ...(fullName ? [{ fullName }] : [])];
+  const track = await tx.track.findFirst({ where: { OR: names } });
+  if (track) return track;
+
+  const country = autoTime.track?.country;
+  const countryRow = country
+    ? await tx.country.findFirst({
+        where: { OR: [{ alpha2Code: country }, { shortName: country }, { fullName: country }] },
+      })
+    : null;
+  mustExist(countryRow, `Track does not exist: ${shortName}. Add it on the Edit Tracks page.`);
+  return tx.track.create({ data: { shortName, fullName: fullName ?? shortName, countryId: countryRow!.id } });
 }
